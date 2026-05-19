@@ -24,7 +24,7 @@ COPY camply /app/camply
 
 RUN --mount=from=ghcr.io/astral-sh/uv,source=/uv,target=/bin/uv \
     --mount=type=cache,target=/root/.cache/uv \
-    uv sync --no-dev --extra all
+    uv sync --no-dev --extra all --no-editable
 
 # ---------------------------------------------------------
 # Final Runtime Stage
