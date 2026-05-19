@@ -95,7 +95,7 @@ tasks:
               --tag {{.DOCKER_REPO}}:{{.RELEASE_VERSION}} \
               --tag {{.DOCKER_REPO}}:latest \
               --file {{.ROOT_DIR}}/Dockerfile \
-              {{.CLI_ARGS | default ""}} \
+              --platform linux/amd64,linux/arm64 {{.CLI_ARGS | default ""}} \
               {{.ROOT_DIR}}
         vars:
             RELEASE_VERSION:
