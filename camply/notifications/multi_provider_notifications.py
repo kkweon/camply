@@ -54,11 +54,11 @@ class MultiNotifierProvider(BaseNotifications):
         self.providers = [SilentNotifications()]
         if isinstance(provider, str):
             provider = [prov_string.strip() for prov_string in provider.split(",")]
-        for notifier_object in provider:
+        for notifier_object in provider:  # type: ignore
             if isinstance(notifier_object, BaseNotifications):
                 notifier = notifier_object
             elif isinstance(notifier_object, str):
-                notifier = CAMPSITE_NOTIFICATIONS.get(notifier_object.lower(), None)()
+                notifier = CAMPSITE_NOTIFICATIONS.get(notifier_object.lower(), None)()  # type: ignore
             elif notifier_object is None:
                 notifier = None
             else:
@@ -66,7 +66,7 @@ class MultiNotifierProvider(BaseNotifications):
                     "You must provide a proper Notification Identifier"
                 )
             if notifier is not None and not isinstance(notifier, SilentNotifications):
-                self.providers.append(notifier)
+                self.providers.append(notifier)  # type: ignore
 
     def send_message(self, message: str, **kwargs):
         """
@@ -109,7 +109,7 @@ class MultiNotifierProvider(BaseNotifications):
                 "I hope you're watching these logs."
             )
 
-    def last_gasp(self, error: Exception) -> None:
+    def last_gasp(self, error: Exception) -> None:  # type: ignore
         """
         Make a `last gasp` notification before exiting
 

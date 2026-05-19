@@ -7,7 +7,7 @@ from abc import ABC, abstractmethod
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Type, Union
 
-import requests
+import requests  # type: ignore
 import tenacity
 from fake_useragent import UserAgent
 

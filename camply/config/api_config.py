@@ -195,7 +195,7 @@ class YellowstoneConfig(DataColumns, APIConfig):
     YELLOWSTONE_CAMPGROUND_OBJECTS: List[CampgroundFacility] = []
     for key, value in YELLOWSTONE_CAMPGROUNDS.items():
         YELLOWSTONE_CAMPGROUND_OBJECTS.append(
-            CampgroundFacility(
+            CampgroundFacility(  # type: ignore
                 recreation_area_id=YELLOWSTONE_RECREATION_AREA_ID,
                 recreation_area=YELLOWSTONE_RECREATION_AREA_FORMAL_NAME,
                 facility_name=value,

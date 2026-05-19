@@ -6,7 +6,7 @@ import base64
 import logging
 from typing import List, Optional
 
-import requests
+import requests  # type: ignore
 
 from camply.config import PushoverConfig
 from camply.containers import AvailableCampsite
@@ -24,7 +24,7 @@ class PushoverNotifications(BaseNotifications, logging.StreamHandler):
         super().__init__()
         self.session.headers.update(PushoverConfig.API_HEADERS)
         logging.StreamHandler.__init__(self)
-        self.setLevel(level=level)
+        self.setLevel(level=level)  # type: ignore
         if any([PushoverConfig.PUSH_USER is None, PushoverConfig.PUSH_USER == ""]):
             warning_message = (
                 "Pushover is not configured properly. To send pushover messages "

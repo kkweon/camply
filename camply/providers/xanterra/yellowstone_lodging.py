@@ -8,11 +8,11 @@ from json import loads
 from typing import List, Optional
 from urllib import parse
 
-import requests
+import requests  # type: ignore
 import tenacity
 from fake_useragent import UserAgent
 from pandas import DataFrame, to_datetime
-from pytz import timezone
+from pytz import timezone  # type: ignore
 
 from camply.config import STANDARD_HEADERS
 from camply.config.api_config import YellowstoneConfig
@@ -30,7 +30,7 @@ class Yellowstone(BaseProvider):
     Scanner for Lodging in Yellowstone
     """
 
-    recreation_area = RecreationArea(
+    recreation_area = RecreationArea(  # type: ignore
         recreation_area=YellowstoneConfig.YELLOWSTONE_RECREATION_AREA_FULL_NAME,
         recreation_area_id=YellowstoneConfig.YELLOWSTONE_RECREATION_AREA_ID,
         recreation_area_location="USA",
@@ -153,7 +153,10 @@ class Yellowstone(BaseProvider):
 
     @classmethod
     def _return_lodging_url(
-        cls, lodging_code: str, month: datetime, params: Optional[dict] = ""
+        cls,
+        lodging_code: str,
+        month: datetime,
+        params: Optional[dict] = "",  # type: ignore
     ) -> str:
         """
         Return a Browser Loadable URL to book from
@@ -269,7 +272,7 @@ class Yellowstone(BaseProvider):
         -------
         List[dict]
         """
-        available_room_array = []
+        available_room_array = []  # type: ignore
         availability_df = DataFrame(data=available_campsites)
         if availability_df.empty is True:
             return available_room_array
@@ -354,7 +357,7 @@ class Yellowstone(BaseProvider):
         -------
         List[dict]
         """
-        property_info_array = []
+        property_info_array = []  # type: ignore
         availability_df = DataFrame(data=available_rooms)
         if availability_df.empty is True:
             return property_info_array
@@ -450,7 +453,7 @@ class Yellowstone(BaseProvider):
         booking_nights = nights_param.get("nights")
         merged_campsites[YellowstoneConfig.BOOKING_END_DATE_COLUMN] = merged_campsites[
             YellowstoneConfig.BOOKING_DATE_COLUMN
-        ] + timedelta(days=booking_nights)
+        ] + timedelta(days=booking_nights)  # type: ignore
         merged_campsites[YellowstoneConfig.BOOKING_NIGHTS_COLUMN] = booking_nights
         final_campsites = merged_campsites.merge(
             campsite_data, on=YellowstoneConfig.FACILITY_ID_COLUMN
@@ -479,7 +482,7 @@ class Yellowstone(BaseProvider):
         """
         all_monthly_campsite_array = []
         for _, row in campsite_df.iterrows():
-            campsite = AvailableCampsite(
+            campsite = AvailableCampsite(  # type: ignore
                 campsite_id=row[YellowstoneConfig.CAMPSITE_ID_COLUMN],
                 booking_date=row[YellowstoneConfig.BOOKING_DATE_COLUMN],
                 booking_end_date=row[YellowstoneConfig.BOOKING_END_DATE_COLUMN],
@@ -520,7 +523,7 @@ class Yellowstone(BaseProvider):
             day=yellowstone_current_time.day,
         ).date()
         if today > month:
-            month = today
+            month = today  # type: ignore
         return month
 
     def find_campgrounds(self, **kwargs) -> List[CampgroundFacility]:

@@ -5,7 +5,7 @@ Generic Webhook Notifications
 import logging
 from typing import List
 
-import requests
+import requests  # type: ignore
 
 from camply.config.notification_config import WebhookConfig
 from camply.containers import AvailableCampsite

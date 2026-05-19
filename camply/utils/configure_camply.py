@@ -65,8 +65,8 @@ def generate_configuration() -> OrderedDict:
     """
     config_dict = FileConfig.DOT_CAMPLY_FIELDS.copy()
     for field, field_dict in config_dict.items():
-        default_value = field_dict["default"]
-        field_note = field_dict["notes"]
+        default_value = field_dict["default"]  # type: ignore
+        field_note = field_dict["notes"]  # type: ignore
         if field_note is not None:
             rich.print(
                 f"[bold blue]{field}:[/bold blue] "

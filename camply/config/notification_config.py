@@ -24,8 +24,8 @@ class PushoverConfig:
     PUSHOVER_DEFAULT_API_TOKEN: bytes = b"YXBqOWlzNjRrdm5zZWt3YmEyeDZxaDV0cWhxbXI5"
     API_HEADERS: dict = {"Content-Type": "application/json"}
 
-    PUSH_TOKEN: str = getenv("PUSHOVER_PUSH_TOKEN", None)
-    PUSH_USER: str = getenv("PUSHOVER_PUSH_USER", None)
+    PUSH_TOKEN: str = getenv("PUSHOVER_PUSH_TOKEN", None)  # type: ignore
+    PUSH_USER: str = getenv("PUSHOVER_PUSH_USER", None)  # type: ignore
 
 
 class AppriseConfig:
@@ -33,7 +33,7 @@ class AppriseConfig:
     Apprise Notification Config Class
     """
 
-    APPRISE_URL: str = getenv("APPRISE_URL", None)
+    APPRISE_URL: str = getenv("APPRISE_URL", None)  # type: ignore
 
 
 class EmailConfig:
@@ -131,5 +131,5 @@ class WebhookConfig:
     WEBHOOK_URL: Optional[str] = getenv("WEBHOOK_URL", None)
     DEFAULT_HEADERS: Dict[str, Any] = {"Content-Type": "application/json"}
     WEBHOOK_HEADERS: Dict[str, Any] = json.loads(
-        getenv("WEBHOOK_HEADERS", None) or "{}"
+        getenv("WEBHOOK_HEADERS", None) or "{}"  # type: ignore
     )

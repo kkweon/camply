@@ -5,7 +5,7 @@ Push Notifications via ntfy.sh
 import logging
 from typing import List
 
-import requests
+import requests  # type: ignore
 
 from camply.config import NtfyConfig
 from camply.containers import AvailableCampsite
@@ -42,7 +42,7 @@ class NtfyNotifications(BaseNotifications):
         requests.Response
         """
         response = self.session.post(
-            url=NtfyConfig.NTFY_API_ENDPOINT + NtfyConfig.NTFY_TOPIC,
+            url=NtfyConfig.NTFY_API_ENDPOINT + NtfyConfig.NTFY_TOPIC,  # type: ignore
             data=message.encode("utf-8"),
             headers={
                 "Title": kwargs.get("title", "Camply Notification"),

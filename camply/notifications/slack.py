@@ -5,7 +5,7 @@ Push Notifications via Slack
 import logging
 from typing import List
 
-import requests
+import requests  # type: ignore
 
 from camply.config import SlackConfig
 from camply.containers import AvailableCampsite
@@ -113,7 +113,7 @@ class SlackNotifications(BaseNotifications):
                 blocks.append(
                     {
                         "type": "section",
-                        "fields": fields[chunk:chunk_max],
+                        "fields": fields[chunk:chunk_max],  # type: ignore
                     }
                 )
             self.send_message(

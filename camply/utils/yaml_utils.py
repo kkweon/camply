@@ -9,7 +9,7 @@ from pathlib import Path
 from re import compile
 from typing import Any, Dict, Optional, Tuple
 
-import yaml
+import yaml  # type: ignore
 from yaml import SafeLoader, load
 
 from camply.containers.search_model import YamlSearchFile
@@ -42,7 +42,7 @@ def read_yaml(path: Optional[str] = None):
         log_path: "/var/${LOG_PATH}"
         something_else: "${AWESOME_ENV_VAR}/var/${A_SECOND_AWESOME_VAR}"
     """
-    path = os.path.abspath(path)
+    path = os.path.abspath(path)  # type: ignore
     pattern = compile(r".*?\${(\w+)}.*?")
 
     safe_loader = SafeLoader
@@ -75,7 +75,7 @@ def read_yaml(path: Optional[str] = None):
         return value
 
     safe_loader.add_constructor(tag=None, constructor=env_var_constructor)
-    with open(path) as conf_data:
+    with open(path) as conf_data:  # type: ignore
         return load(stream=conf_data, Loader=safe_loader)
 
 
@@ -99,7 +99,7 @@ def yaml_file_to_arguments(
     logger.info(f"YAML File Parsed: {Path(file_path).name}")
     yaml_model = YamlSearchFile(**yaml_search)
     if isinstance(yaml_model.provider, Enum):
-        provider = yaml_model.provider.value
+        provider = yaml_model.provider.value  # type: ignore
     else:
         provider = yaml_model.provider
     search_window = handle_search_windows(
@@ -110,7 +110,7 @@ def yaml_file_to_arguments(
         lower_mapping = {
             key.lower(): value for key, value in days_of_the_week_mapping.items()
         }
-        days_of_the_week = [lower_mapping[item.lower()] for item in days_of_the_week]
+        days_of_the_week = [lower_mapping[item.lower()] for item in days_of_the_week]  # type: ignore
     equipment = make_list(yaml_model.equipment)
     if isinstance(equipment, list):
         equipment = [tuple(equip) for equip in equipment]
@@ -136,4 +136,4 @@ def yaml_file_to_arguments(
         "search_forever": yaml_model.search_forever,
         "search_once": yaml_model.search_once,
     }
-    return provider, provider_kwargs, search_kwargs
+    return provider, provider_kwargs, search_kwargs  # type: ignore

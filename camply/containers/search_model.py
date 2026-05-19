@@ -25,7 +25,7 @@ class StrEnum(str, Enum):
     """
 
 
-ProviderEnum = StrEnum(
+ProviderEnum = StrEnum(  # type: ignore
     "ProviderEnum", {value: value for value in CAMPSITE_SEARCH_PROVIDER.keys()}
 )
 ProviderEnum.__doc__ = "Campsite Provider Names"
@@ -36,7 +36,7 @@ class YamlSearchFile(CamplyModel):
     Campsite Search Data Model
     """
 
-    provider: ProviderEnum = Field(
+    provider: ProviderEnum = Field(  # type: ignore
         description="Campsite provider", default="RecreationDotGov"
     )
     recreation_area: ArrayOrSingle = None

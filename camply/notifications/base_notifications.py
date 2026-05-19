@@ -6,7 +6,7 @@ import logging
 from abc import ABC, abstractmethod
 from typing import Dict, List, Tuple
 
-import requests
+import requests  # type: ignore
 
 from camply.config import CampsiteContainerFields
 from camply.containers import AvailableCampsite
@@ -89,8 +89,8 @@ class BaseNotifications(ABC):
                 CampsiteContainerFields.BOOKING_DATE,
                 CampsiteContainerFields.BOOKING_END_DATE,
             ]:
-                value: datetime.date
-                value: str = value.strftime("%Y-%m-%d")
+                value: datetime.date  # type: ignore
+                value: str = value.strftime("%Y-%m-%d")  # type: ignore
             elif key == CampsiteContainerFields.BOOKING_URL:
                 key = "booking_link"
             elif key == CampsiteContainerFields.PERMITTED_EQUIPMENT:

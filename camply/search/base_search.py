@@ -75,8 +75,8 @@ class BaseCampingSearch(ABC):
             Days of the week (by weekday integer) to search for.
         """
         self._verbose = kwargs.get("verbose", True)
-        self.campsite_finder: ProviderType = self.provider_class()
-        self.search_window: List[SearchWindow] = make_list(search_window)
+        self.campsite_finder: ProviderType = self.provider_class()  # type: ignore
+        self.search_window: List[SearchWindow] = make_list(search_window)  # type: ignore
         self.days_of_the_week = set(
             days_of_the_week if days_of_the_week is not None else ()
         )
@@ -103,7 +103,7 @@ class BaseCampingSearch(ABC):
         if self.offline_search_path.suffixes[-1] == ".json":
             self.offline_mode: str = "json"
         elif self.offline_search_path.suffixes[-1] in [".pkl", ".pickle"]:
-            self.offline_mode: str = "pickle"
+            self.offline_mode: str = "pickle"  # type: ignore
         else:
             raise CamplyError(
                 "You must provide a `.json` or a `.pickle` / `.pkl` file name for offline searches"
@@ -113,10 +113,10 @@ class BaseCampingSearch(ABC):
                 "Campsite search is configured to save offline: %s",
                 self.offline_search_path,
             )
-            self.campsites_found: Set[
+            self.campsites_found: Set[  # type: ignore
                 AvailableCampsite
             ] = self.load_campsites_from_file()
-            self.loaded_campsites: Set[AvailableCampsite] = self.campsites_found.copy()
+            self.loaded_campsites: Set[AvailableCampsite] = self.campsites_found.copy()  # type: ignore
         self.search_attempts: int = 0
 
     @property
@@ -294,12 +294,12 @@ class BaseCampingSearch(ABC):
         int
         """
         if polling_interval is None:
-            polling_interval = getenv(
+            polling_interval = getenv(  # type: ignore
                 "POLLING_INTERVAL", SearchConfig.RECOMMENDED_POLLING_INTERVAL
             )
-        if int(polling_interval) < SearchConfig.POLLING_INTERVAL_MINIMUM:
+        if int(polling_interval) < SearchConfig.POLLING_INTERVAL_MINIMUM:  # type: ignore
             polling_interval = SearchConfig.POLLING_INTERVAL_MINIMUM
-        polling_interval_minutes = int(round(float(polling_interval), 2))
+        polling_interval_minutes = int(round(float(polling_interval), 2))  # type: ignore
         return polling_interval_minutes
 
     def _continuous_search_retry(
@@ -510,7 +510,7 @@ class BaseCampingSearch(ABC):
             self._continuous_search_retry(
                 log=log,
                 verbose=verbose,
-                polling_interval=polling_interval,
+                polling_interval=polling_interval,  # type: ignore
                 notification_provider=notification_provider,
                 notify_first_try=notify_first_try,
                 continuous_search_attempts=continuous_search_attempts,
@@ -584,7 +584,7 @@ class BaseCampingSearch(ABC):
                 )
             except Exception as e:
                 if self.search_attempts >= 1:
-                    self.notifier.last_gasp(error=e)
+                    self.notifier.last_gasp(error=e)  # type: ignore
                 raise e
         else:
             starting_count = len(self.campsites_found)
@@ -613,7 +613,7 @@ class BaseCampingSearch(ABC):
                 date for date in window.get_date_range() if date >= current_date
             }
             search_nights.update(generated_dates)
-        search_nights: Set[datetime] = {
+        search_nights: Set[datetime] = {  # type: ignore
             x for x in search_nights if x.weekday() in self.days_of_the_week
         }
         max_nights_to_list = 2
@@ -640,7 +640,7 @@ class BaseCampingSearch(ABC):
         else:
             logger.error(SearchConfig.ERROR_MESSAGE)
             raise RuntimeError(SearchConfig.ERROR_MESSAGE)
-        return sorted(search_nights)
+        return sorted(search_nights)  # type: ignore
 
     @classmethod
     def _consolidate_campsites(
@@ -953,7 +953,7 @@ class BaseCampingSearch(ABC):
             elif self.offline_mode == "json":
                 with open(self.offline_search_path, mode="r") as file_stream:
                     campsites_dicts: List[Dict[str, Any]] = json.load(file_stream)
-                campsites: Set[AvailableCampsite] = {
+                campsites: Set[AvailableCampsite] = {  # type: ignore
                     AvailableCampsite(**json_dict) for json_dict in campsites_dicts
                 }
             if len(campsites) > 0:

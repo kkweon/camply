@@ -57,23 +57,23 @@ def handle_search_windows(
     Handle Multiple Search Windows by the CLI
     """
     if isinstance(start_date, (str, date)):
-        start_date = (start_date,)
+        start_date = (start_date,)  # type: ignore
         assert isinstance(end_date, (str, date))
-        end_date = (end_date,)
+        end_date = (end_date,)  # type: ignore
     search_windows: List[SearchWindow] = []
     for field in [start_date, end_date]:
         if field is None or (isinstance(field, (tuple, list)) and len(field) == 0):
             logger.error("Campsite searches require a `start_date` and an `end_date`")
             sys.exit(1)
-    if len(start_date) != len(end_date):
+    if len(start_date) != len(end_date):  # type: ignore
         logger.error(
             "When searching multiple date windows, you must provide the same amount "
             "of `--start-dates` as `--end-dates`"
         )
         sys.exit(1)
-    for index, date_str in enumerate(start_date):
+    for index, date_str in enumerate(start_date):  # type: ignore
         search_windows.append(
-            SearchWindow(start_date=date_str, end_date=end_date[index])
+            SearchWindow(start_date=date_str, end_date=end_date[index])  # type: ignore
         )
     if len(search_windows) == 1:
         return search_windows[0]

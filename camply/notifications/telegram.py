@@ -5,7 +5,7 @@ Push Notifications via Telegram
 import logging
 from typing import List
 
-import requests
+import requests  # type: ignore
 
 from camply.config import TelegramConfig
 from camply.containers import AvailableCampsite

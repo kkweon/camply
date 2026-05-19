@@ -5,7 +5,7 @@ Push Notifications via Pushbullet
 import logging
 from typing import List
 
-import requests
+import requests  # type: ignore
 
 from camply.config import PushbulletConfig
 from camply.containers import AvailableCampsite

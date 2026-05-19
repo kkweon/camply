@@ -67,22 +67,22 @@ class GoingToCamp(BaseProvider):
 
         if not search_string or search_string == "":
             rec_areas = RECREATION_AREAS.values()
-            log_sorted_response(rec_areas)
-            return rec_areas
+            log_sorted_response(rec_areas)  # type: ignore
+            return rec_areas  # type: ignore
 
-        rec_areas = []
+        rec_areas = []  # type: ignore
         for _, rec_area in RECREATION_AREAS.items():
             if (
                 search_string.lower() in rec_area.recreation_area.lower()
                 or search_string.lower() in rec_area.recreation_area_location.lower()
             ):
-                rec_areas.append(rec_area)
+                rec_areas.append(rec_area)  # type: ignore
 
-        log_sorted_response(rec_areas)
+        log_sorted_response(rec_areas)  # type: ignore
 
-        return rec_areas
+        return rec_areas  # type: ignore
 
-    def rec_area_lookup(self, rec_area_id: int) -> Tuple[str, RecreationArea]:
+    def rec_area_lookup(self, rec_area_id: int) -> Tuple[str, RecreationArea]:  # type: ignore
         """
         Lookup a recreation area by ID
 
@@ -137,12 +137,15 @@ class GoingToCamp(BaseProvider):
             search_string=search_string,
         )
 
-    def _get_attr_val(self, attribute, attribute_detail) -> any:
+    def _get_attr_val(self, attribute, attribute_detail) -> any:  # type: ignore
         for attr_value in attribute.get("values", []):
             for attribute_enum_detail in attribute_detail.get("values"):
                 if attribute_enum_detail["enumValue"] == attr_value:
                     return _fetch_nested_key(
-                        attribute_enum_detail, "localizedValues", 0, "displayName"
+                        attribute_enum_detail,
+                        "localizedValues",
+                        0,  # type: ignore
+                        "displayName",  # type: ignore
                     )
 
     def get_site_details(self, rec_area_id: int, resource_id: int):
@@ -167,17 +170,22 @@ class GoingToCamp(BaseProvider):
         attribute_details = self._attribute_details
 
         site_details = self._api_request(
-            rec_area_id, "SITE_DETAILS", {"resourceId": resource_id}
+            rec_area_id,
+            "SITE_DETAILS",
+            {"resourceId": resource_id},  # type: ignore
         )
         site_attributes = {}
-        for attribute in site_details["definedAttributes"]:
+        for attribute in site_details["definedAttributes"]:  # type: ignore
             attribute_detail = attribute_details[
-                f"{attribute['attributeDefinitionId']}"
+                f"{attribute['attributeDefinitionId']}"  # type: ignore
             ]
             attribute_name = _fetch_nested_key(
-                attribute_detail, "localizedValues", 0, "displayName"
+                attribute_detail,
+                "localizedValues",
+                0,  # type: ignore
+                "displayName",  # type: ignore
             )
-            attribute_value = attribute.get("value")
+            attribute_value = attribute.get("value")  # type: ignore
             attribute_values = []
             # Attribute a multi-value enum
             if not attribute_value:
@@ -189,7 +197,7 @@ class GoingToCamp(BaseProvider):
                 attribute_values.append(f"{attribute_value}")
 
             site_attributes[attribute_name] = ",".join(attribute_values)
-        site_details["site_attributes"] = site_attributes
+        site_details["site_attributes"] = site_attributes  # type: ignore
 
         return site_details
 
@@ -262,7 +270,7 @@ class GoingToCamp(BaseProvider):
         campgrounds: List[CampgroundFacility]
             Array of Matching Campsites
         """
-        rec_area_id = make_list(rec_area_id, coerce=int)[0]
+        rec_area_id = make_list(rec_area_id, coerce=int)[0]  # type: ignore
         logger.info(
             f"Retrieving Facility Information for Recreation Area ID: `{rec_area_id}`."
         )
@@ -276,16 +284,17 @@ class GoingToCamp(BaseProvider):
             sys.exit(1)
 
         self.campground_details = {}
-        api_response = self._api_request(rec_area_id, "LIST_CAMPGROUNDS")
+        api_response = self._api_request(rec_area_id, "LIST_CAMPGROUNDS")  # type: ignore
 
         filtered_facilities = self._filter_facilities_responses(
-            rec_area_id, facilities=api_response
+            rec_area_id,  # type: ignore
+            facilities=api_response,  # type: ignore
         )
 
         campgrounds = []
         # Fetch campgrounds details for all facilities
-        for camp_details in self._api_request(rec_area_id, "CAMP_DETAILS"):
-            self.campground_details[camp_details["resourceLocationId"]] = camp_details
+        for camp_details in self._api_request(rec_area_id, "CAMP_DETAILS"):  # type: ignore
+            self.campground_details[camp_details["resourceLocationId"]] = camp_details  # type: ignore
 
         # If a search string is provided, make sure every facility name contains
         # the search string
@@ -307,7 +316,7 @@ class GoingToCamp(BaseProvider):
             campground_strings = make_list(campground_id, coerce=str)
             if (
                 campground_id
-                and str(campground_facility.facility_id) in campground_strings
+                and str(campground_facility.facility_id) in campground_strings  # type: ignore
             ):
                 campgrounds.append(campground_facility)
         logger.info(f"{len(campgrounds)} Matching Campgrounds Found")
@@ -318,7 +327,7 @@ class GoingToCamp(BaseProvider):
         for hostname, recreation_area in RECREATION_AREAS.items():
             if str(recreation_area.recreation_area_id) == str(recreation_area_id):
                 return hostname
-        return None
+        return None  # type: ignore
 
     def _api_request(
         self,
@@ -367,14 +376,25 @@ class GoingToCamp(BaseProvider):
         for facil in facilities:
             try:
                 location_name = _fetch_nested_key(
-                    facil, "localizedValues", 0, "fullName"
+                    facil,
+                    "localizedValues",
+                    0,  # type: ignore
+                    "fullName",  # type: ignore
                 )
                 park_alerts = _fetch_nested_key(
-                    facil, "park_alerts", "en-US", 0, "messageTitle"
+                    facil,
+                    "park_alerts",
+                    "en-US",
+                    0,  # type: ignore
+                    "messageTitle",  # type: ignore
                 )
                 if not park_alerts:
                     park_alerts = _fetch_nested_key(
-                        facil, "park_alerts", "en-CA", 0, "messageTitle"
+                        facil,
+                        "park_alerts",
+                        "en-CA",
+                        0,  # type: ignore
+                        "messageTitle",  # type: ignore
                     )
 
                 region_name = _fetch_nested_key(facil, "region")
@@ -424,9 +444,11 @@ class GoingToCamp(BaseProvider):
         -------
         Tuple[dict, CampgroundFacility]
         """
-        self.campground_details[facility.resource_location_id]
+        self.campground_details[facility.resource_location_id]  # type: ignore
         facility.id = _fetch_nested_key(
-            self.campground_details, facility.resource_location_id, "mapId"
+            self.campground_details,
+            facility.resource_location_id,  # type: ignore
+            "mapId",  # type: ignore
         )
         if facility.region_name:
             formatted_recreation_area = (
@@ -435,22 +457,22 @@ class GoingToCamp(BaseProvider):
         else:
             formatted_recreation_area = f"{rec_area.recreation_area}"
 
-        campground_facility = CampgroundFacility(
+        campground_facility = CampgroundFacility(  # type: ignore
             facility_name=facility.resource_location_name,
             recreation_area=formatted_recreation_area,
-            facility_id=facility.resource_location_id,
+            facility_id=facility.resource_location_id,  # type: ignore
             recreation_area_id=facility.rec_area_id,
             map_id=facility.id,
         )
-        return facility, campground_facility
+        return facility, campground_facility  # type: ignore
 
-    def _find_matching_resources(self, rec_area_id: int, search_filter: Dict[str, any]):
+    def _find_matching_resources(self, rec_area_id: int, search_filter: Dict[str, any]):  # type: ignore
         results = self._api_request(rec_area_id, "MAPDATA", search_filter)
         availability_details = {
-            search_filter["mapId"]: results["resourceAvailabilities"]
+            search_filter["mapId"]: results["resourceAvailabilities"]  # type: ignore
         }
 
-        return availability_details, list(results["mapLinkAvailabilities"].keys())
+        return availability_details, list(results["mapLinkAvailabilities"].keys())  # type: ignore
 
     def list_equipment_types(self, rec_area_id: int) -> Dict[str, int]:
         """
@@ -471,25 +493,29 @@ class GoingToCamp(BaseProvider):
         equipment_types = []
         # Only allow equipment from non-group equipment category (the 0th
         # element in results)
-        for sub_category in results[0]["subEquipmentCategories"]:
+        for sub_category in results[0]["subEquipmentCategories"]:  # type: ignore
             equipment_name = _fetch_nested_key(
-                sub_category, "localizedValues", 0, "name"
+                sub_category,
+                "localizedValues",
+                0,  # type: ignore
+                "name",  # type: ignore
             )
-            equipment_id = sub_category["subEquipmentCategoryId"]
+            equipment_id = sub_category["subEquipmentCategoryId"]  # type: ignore
             equipment_types.append(
                 GoingToCampEquipment(
-                    equipment_name=equipment_name, equipment_type_id=equipment_id
+                    equipment_name=equipment_name,
+                    equipment_type_id=equipment_id,  # type: ignore
                 )
             )
 
         log_sorted_response(response_array=equipment_types)
-        return equipment_types
+        return equipment_types  # type: ignore
 
     def list_site_availability(
         self,
         campground: CampgroundFacility,
-        start_date: datetime.date,
-        end_date: datetime.date,
+        start_date: datetime.date,  # type: ignore
+        end_date: datetime.date,  # type: ignore
         equipment_type_id: Optional[str],
     ) -> List[AvailableResource]:
         """
@@ -507,8 +533,8 @@ class GoingToCamp(BaseProvider):
             "mapId": campground.map_id,
             "resourceLocationId": campground.facility_id,
             "bookingCategoryId": 0,
-            "startDate": start_date.isoformat(),
-            "endDate": end_date.isoformat(),
+            "startDate": start_date.isoformat(),  # type: ignore
+            "endDate": end_date.isoformat(),  # type: ignore
             "isReserving": True,
             "getDailyAvailability": False,
             "partySize": 1,
@@ -520,14 +546,16 @@ class GoingToCamp(BaseProvider):
             search_filter["subEquipmentCategoryId"] = equipment_type_id
 
         resources, additional_resources = self._find_matching_resources(
-            campground.recreation_area_id, search_filter
+            campground.recreation_area_id,  # type: ignore
+            search_filter,  # type: ignore
         )
 
         # Resources are often deeply nested; fetch nested resources
         for map_id in additional_resources:
             search_filter["mapId"] = map_id
             avail, _ = self._find_matching_resources(
-                campground.recreation_area_id, search_filter
+                campground.recreation_area_id,  # type: ignore
+                search_filter,  # type: ignore
             )
             resources.update(avail)
 
@@ -572,7 +600,7 @@ def _fetch_nested_key(obj: Union[dict, list, object], *keys: str) -> Any:
     _element = obj
     for key in keys:
         try:
-            _element = _element[key]
+            _element = _element[key]  # type: ignore
             if not _element:
                 _element = getattr(_element, key)
         except (KeyError, TypeError, AttributeError):

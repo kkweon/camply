@@ -6,7 +6,7 @@ from ._version import __application__, __version__
 from .config import EquipmentOptions
 from .containers import AvailableCampsite, SearchWindow
 from .providers import GoingToCamp, RecreationDotGov, Yellowstone
-from .search import SearchRecreationDotGov, SearchYellowstone
+from .search import SearchRecreationDotGov, SearchYellowstone  # type: ignore
 
 __all__ = [
     "__version__",

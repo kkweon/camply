@@ -9,7 +9,7 @@ from itertools import chain
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 import pandas as pd
-import requests
+import requests  # type: ignore
 
 from camply.config import RecreationBookingConfig, RIDBConfig
 from camply.containers import AvailableCampsite
@@ -228,8 +228,8 @@ class RecreationDotGov(RecreationDotGovBase):
                         facility_name=facility_name,
                         facility_id=facility_id,
                         booking_url=booking_url,
-                        permitted_equipment=equipment,
-                        campsite_attributes=attributes,
+                        permitted_equipment=equipment,  # type: ignore
+                        campsite_attributes=attributes,  # type: ignore
                         location=location,
                     )
                     total_campsite_availability.append(available_campsite)

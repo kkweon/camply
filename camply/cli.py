@@ -21,7 +21,7 @@ from typing import (
 
 import click
 from rich import traceback
-from rich_click import RichCommand, RichGroup, rich_click
+from rich_click import RichCommand, RichGroup, rich_click  # type: ignore
 
 from camply import Yellowstone, __application__, __version__
 from camply.config import EquipmentOptions, SearchConfig, logging_config
@@ -33,12 +33,12 @@ from camply.providers import (
     GoingToCamp,
     RecreationDotGov,
 )
-from camply.search import CAMPSITE_SEARCH_PROVIDER, BaseCampingSearch
+from camply.search import CAMPSITE_SEARCH_PROVIDER, BaseCampingSearch  # type: ignore
 from camply.utils import configure_camply, log_camply, make_list, yaml_utils
 from camply.utils.general_utils import days_of_the_week_mapping, handle_search_windows
 from camply.utils.logging_utils import log_sorted_response
 
-logging.Logger.camply = log_camply
+logging.Logger.camply = log_camply  # type: ignore
 logger = logging.getLogger(__name__)
 
 DEFAULT_CAMPLY_PROVIDER: str = RecreationDotGov.__name__
@@ -55,7 +55,7 @@ rich_click.STYLE_ERRORS_SUGGESTION = "bold red"
 rich_click.STYLE_OPTIONS_TABLE_BOX = "SIMPLE_HEAVY"
 rich_click.STYLE_COMMANDS_TABLE_BOX = "SIMPLE_HEAVY"
 if logging_config.LOG_HANDLER == "python":
-    rich_click.COLOR_SYSTEM = None
+    rich_click.COLOR_SYSTEM = None  # type: ignore
 
 try:
     from trogon import tui
@@ -89,7 +89,7 @@ provider_argument = click.option(
     "--provider",
     show_default=False,
     default=None,
-    type=click.Choice(CAMPSITE_SEARCH_PROVIDER.keys(), case_sensitive=False),
+    type=click.Choice(CAMPSITE_SEARCH_PROVIDER.keys(), case_sensitive=False),  # type: ignore
     help="Camping Search Provider. Defaults to 'RecreationDotGov'",
     metavar="TEXT",
     envvar="CAMPLY_PROVIDER",
@@ -161,7 +161,7 @@ def camply_command_line(
     visit the camply documentation at https://juftin.com/camply
     """
     set_up_logging(log_level=None if debug is False else logging.INFO)
-    logger.camply("camply, the campsite finder ⛺️")
+    logger.camply("camply, the campsite finder ⛺️")  # type: ignore
     ctx.obj = CamplyContext(debug=debug, provider=provider)
     _set_up_debug(debug=debug)
 
@@ -233,7 +233,7 @@ def equipment_types(
         sys.exit(1)
 
     if provider == GoingToCamp.__name__:
-        GoingToCamp().list_equipment_types(rec_area[0])
+        GoingToCamp().list_equipment_types(rec_area[0])  # type: ignore
     elif provider.startswith(RecreationDotGov.__name__):
         log_sorted_response(response_array=EquipmentOptions.__all_accepted_equipment__)
     else:
@@ -281,9 +281,9 @@ def recreation_areas(
     if provider == GoingToCamp.__name__:
         rec_area_finder = GoingToCamp()
     elif provider.startswith(RecreationDotGov.__name__):
-        rec_area_finder = RecreationDotGov()
+        rec_area_finder = RecreationDotGov()  # type: ignore
     else:
-        rec_area_finder = CAMPSITE_SEARCH_PROVIDER[provider]
+        rec_area_finder = CAMPSITE_SEARCH_PROVIDER[provider]  # type: ignore
     params = {}
     if state is not None:
         params.update({"state": state})
@@ -325,9 +325,9 @@ def campgrounds(
         [
             search is None,
             state is None,
-            len(rec_area) == 0,
-            len(campground) == 0,
-            len(campsite) == 0,
+            len(rec_area) == 0,  # type: ignore
+            len(campground) == 0,  # type: ignore
+            len(campsite) == 0,  # type: ignore
             provider not in [Yellowstone.__name__, GoingToCamp.__name__],
         ]
     ):
@@ -337,7 +337,7 @@ def campgrounds(
         )
         sys.exit(1)
     search_provider_class = CAMPSITE_SEARCH_PROVIDER[provider]
-    camp_finder = search_provider_class.provider_class()
+    camp_finder = search_provider_class.provider_class()  # type: ignore
     params = {}
     if state is not None:
         params.update({"state": state})
@@ -346,7 +346,7 @@ def campgrounds(
         rec_area_id=make_list(rec_area, coerce=int),
         campground_id=make_list(campground, coerce=int),
         campsite_id=make_list(campsite, coerce=int),
-        **params,
+        **params,  # type: ignore
     )
 
 
@@ -408,7 +408,7 @@ notification_kwargs = {
     "Defaults to `silent` - "
     "which just logs messages to console.",
 }
-notifications_argument = click.option("--notifications", **notification_kwargs)
+notifications_argument = click.option("--notifications", **notification_kwargs)  # type: ignore
 notify_first_try_argument = click.option(
     "--notify-first-try",
     is_flag=True,
@@ -503,7 +503,7 @@ def _get_equipment(equipment: Optional[List[str]]) -> List[Tuple[str, Optional[i
     Parse Equipment from CLI Args
     """
     equipment_list = []
-    for equipment_name, equipment_length in equipment:
+    for equipment_name, equipment_length in equipment:  # type: ignore
         try:
             equipment_length = round(float(equipment_length), 0)
             if equipment_length == 0:
@@ -561,9 +561,9 @@ def _validate_campsites(
     """
     if provider.startswith(RecreationDotGov.__name__) and all(
         [
-            len(rec_area) == 0,
-            len(campground) == 0,
-            len(campsite) == 0,
+            len(rec_area) == 0,  # type: ignore
+            len(campground) == 0,  # type: ignore
+            len(campsite) == 0,  # type: ignore
             yaml_config is None,
         ]
     ):
@@ -576,7 +576,7 @@ def _validate_campsites(
     if yaml_config is None:
         search_windows = handle_search_windows(start_date=start_date, end_date=end_date)
     else:
-        search_windows = ()
+        search_windows = ()  # type: ignore
     days_of_the_week = None
     if day is not None:
         days_of_the_week = {days_of_the_week_mapping[item] for item in day}
@@ -596,7 +596,7 @@ def _validate_campsites(
         ]
     ):
         continuous = True
-    return continuous, search_windows, days_of_the_week
+    return continuous, search_windows, days_of_the_week  # type: ignore
 
 
 def _get_provider_kwargs_from_cli(
@@ -624,37 +624,37 @@ def _get_provider_kwargs_from_cli(
     """
     Get Provider kwargs from CLI
     """
-    notifications = make_list(notifications)
+    notifications = make_list(notifications)  # type: ignore
     continuous, search_windows, days_of_the_week = _validate_campsites(
-        rec_area=rec_area,
-        campground=campground,
-        campsite=campsite,
-        start_date=start_date,
-        end_date=end_date,
-        weekends=weekends,
-        nights=nights,
-        provider=provider,
+        rec_area=rec_area,  # type: ignore
+        campground=campground,  # type: ignore
+        campsite=campsite,  # type: ignore
+        start_date=start_date,  # type: ignore
+        end_date=end_date,  # type: ignore
+        weekends=weekends,  # type: ignore
+        nights=nights,  # type: ignore
+        provider=provider,  # type: ignore
         yaml_config=yaml_config,
         continuous=continuous,
-        polling_interval=polling_interval,
-        notifications=notifications,
-        notify_first_try=notify_first_try,
-        search_forever=search_forever,
+        polling_interval=polling_interval,  # type: ignore
+        notifications=notifications,  # type: ignore
+        notify_first_try=notify_first_try,  # type: ignore
+        search_forever=search_forever,  # type: ignore
         search_once=search_once,
         day=day,
     )
     if len(notifications) == 0:
         notifications = ["silent"]
     if polling_interval is None:
-        polling_interval = SearchConfig.RECOMMENDED_POLLING_INTERVAL
+        polling_interval = SearchConfig.RECOMMENDED_POLLING_INTERVAL  # type: ignore
     if notify_first_try is None:
-        notify_first_try = False
+        notify_first_try = False  # type: ignore
     else:
-        notify_first_try = True
+        notify_first_try = True  # type: ignore
     if search_forever is None:
-        search_forever = False
+        search_forever = False  # type: ignore
     else:
-        search_forever = True
+        search_forever = True  # type: ignore
     provider_kwargs = {
         "search_window": search_windows,
         "recreation_area": make_list(rec_area),
@@ -672,7 +672,7 @@ def _get_provider_kwargs_from_cli(
         "log": True,
         "verbose": True,
         "continuous": continuous,
-        "polling_interval": float(polling_interval),
+        "polling_interval": float(polling_interval),  # type: ignore
         "notify_first_try": notify_first_try,
         "notification_provider": notifications,
         "search_forever": search_forever,
@@ -771,8 +771,8 @@ def campsites(
             yaml_config=yaml_config,
         )
     provider_class: Type[BaseCampingSearch] = CAMPSITE_SEARCH_PROVIDER[provider]
-    camping_finder: BaseCampingSearch = provider_class(**provider_kwargs)
-    camping_finder.get_matching_campsites(**search_kwargs)
+    camping_finder: BaseCampingSearch = provider_class(**provider_kwargs)  # type: ignore
+    camping_finder.get_matching_campsites(**search_kwargs)  # type: ignore
 
 
 @camply_command_line.command(cls=RichCommand)
@@ -795,12 +795,12 @@ def providers(
         logger.info(
             '    "%s":    %s',
             provider_name,
-            search_class.__doc__.strip().splitlines()[0],
+            search_class.__doc__.strip().splitlines()[0],  # type: ignore
         )
 
 
 test_notifications_kwargs = notification_kwargs.copy()
-test_notifications_kwargs["help"] = test_notifications_kwargs["help"].replace(
+test_notifications_kwargs["help"] = test_notifications_kwargs["help"].replace(  # type: ignore
     "Enables continuous searching. ", ""
 )
 test_notifications_kwargs.pop("default")
@@ -808,7 +808,7 @@ test_notifications_kwargs["required"] = True
 
 
 @camply_command_line.command(cls=RichCommand)
-@click.option("--notifications", **test_notifications_kwargs)
+@click.option("--notifications", **test_notifications_kwargs)  # type: ignore
 @debug_option
 @click.pass_obj
 def test_notifications(
