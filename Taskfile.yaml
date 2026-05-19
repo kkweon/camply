@@ -8,7 +8,7 @@ env:
     PUSHOVER_PUSH_USER: placeholder
 vars:
     SOURCE_CODE: "camply"
-    DOCKER_REPO: juftin/camply
+    DOCKER_REPO: ghcr.io/kkweon/camply
 
 tasks:
     #######################################

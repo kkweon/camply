@@ -2,12 +2,15 @@ name: docker
 
 on:
     pull_request:
+        branches:
+            - develop
         paths:
             - camply/**
             - pyproject.toml
             - .github/workflows/docker.yaml
             - Dockerfile
             - uv.lock
+
 jobs:
     docker:
         runs-on: ubuntu-latest
