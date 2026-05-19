@@ -1,9 +1,12 @@
 <div align="center">
-<a href="https://github.com/juftin/camply">
-  <img src="https://raw.githubusercontent.com/juftin/camply/main/docs/_static/camply.svg"
+<a href="https://github.com/kkweon/camply">
+  <img src="https://raw.githubusercontent.com/kkweon/camply/develop/docs/_static/camply.svg"
     width="400" height="400" alt="camply">
 </a>
 </div>
+
+> [!NOTE]
+> **Fork Notice:** This is an independently maintained fork of the original [juftin/camply](https://github.com/juftin/camply) project. It features multi-architecture Docker builds (ARM64/Raspberry Pi) and deploys exclusively to GHCR. PyPI releases are not supported.
 
 **`camply`**, the campsite finder ⛺️, is a tool to help you book a campsite online. Finding
 reservations at sold out campgrounds can be tough. That's where camply comes in. It searches
@@ -17,20 +20,17 @@ to book your spot!
 ---
 
 <p align="center">
-  <a href="https://github.com/juftin/camply"><img src="https://img.shields.io/pypi/v/camply?color=blue&label=camply" alt="PyPI"></a>
-  <a href="https://pypi.python.org/pypi/camply/"><img src="https://img.shields.io/pypi/pyversions/camply" alt="PyPI - Python Version"></a>
-  <a href="https://hub.docker.com/r/juftin/camply"><img src="https://img.shields.io/docker/v/juftin/camply?color=blue&label=docker&logo=docker" alt="Docker Image Version"></a>
-  <a href="https://github.com/juftin/camply/blob/main/LICENSE"><img src="https://img.shields.io/github/license/juftin/camply?color=blue&label=License" alt="GitHub License"></a>
-  <a href="https://github.com/juftin/camply/actions/workflows/test.yaml?query=branch%3Amain"><img src="https://github.com/juftin/camply/actions/workflows/test.yaml/badge.svg?branch=main" alt="Testing Status"></a>
+  <a href="https://github.com/kkweon/camply/blob/develop/LICENSE"><img src="https://img.shields.io/github/license/kkweon/camply?color=blue&label=License" alt="GitHub License"></a>
+  <a href="https://github.com/kkweon/camply/actions/workflows/test.yaml?query=branch%3Adevelop"><img src="https://github.com/kkweon/camply/actions/workflows/test.yaml/badge.svg?branch=develop" alt="Testing Status"></a>
   <a href="https://github.com/go-task/task"><img src="https://img.shields.io/badge/task---?message=task&logo=task&color=teal&labelColor=grey" alt="task"></a>
   <a href="https://github.com/astral-sh/uv"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json" alt="uv"></a>
   <a href="https://github.com/pre-commit/pre-commit"><img src="https://img.shields.io/badge/pre--commit-enabled-lightgreen?logo=pre-commit" alt="pre-commit"></a>
-  <a href="https://juftin.github.io/camply/"><img src="https://img.shields.io/static/v1?message=docs&color=526CFE&logo=Material+for+MkDocs&logoColor=FFFFFF&label=" alt="docs"></a>
+  <a href="https://kkweon.github.io/camply/"><img src="https://img.shields.io/static/v1?message=docs&color=526CFE&logo=Material+for+MkDocs&logoColor=FFFFFF&label=" alt="docs"></a>
   <a href="https://github.com/semantic-release/semantic-release"><img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release"></a>
   <a href="https://gitmoji.dev"><img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg" alt="Gitmoji"></a>
 </p>
 
-## [Check Out The Docs](https://juftin.com/camply/)
+## [Check Out The Docs](https://kkweon.github.io/camply/)
 
 ## Installing
 
@@ -111,12 +111,12 @@ service that lists camping and recreation inventory.
 - **`RecreationDotGovTicket`**: Searches on [Recreation.gov](https://recreation.gov) for Tickets and Tours
 - **`RecreationDotGovTimedEntry`**: Searches on [Recreation.gov](https://recreation.gov) for Timed Entries
 
-Run **`camply providers`** to list current providers and visit the [Providers](https://juftin.com/camply/providers/)
+Run **`camply providers`** to list current providers and visit the [Providers](https://kkweon.github.io/camply/providers/)
 section in the docs to learn more.
 
 ## Documentation
 
-Head over to the [camply documentation](https://juftin.com/camply/) to see what you can do!
+Head over to the [camply documentation](https://kkweon.github.io/camply/) to see what you can do!
 
 ```console
 ❯ camply --help
@@ -130,7 +130,7 @@ Head over to the [camply documentation](https://juftin.com/camply/) to see what 
  available, camply sends you a notification to book your spot!
 
 
- visit the camply documentation at https://juftin.com/camply
+ visit the camply documentation at https://kkweon.github.io/camply
 
 ╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                        │
@@ -158,7 +158,7 @@ Head over to the [camply documentation](https://juftin.com/camply/) to see what 
 ## Contributing
 
 Camply doesn't support your favorite campsite booking provider yet? Consider
-[contributing](https://juftin.com/camply/contributing/) 😉.
+[contributing](https://kkweon.github.io/camply/contributing/) 😉.
 
 <br/>
 

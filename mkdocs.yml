@@ -22,10 +22,10 @@ theme:
           toggle:
               icon: material/weather-night
               name: Switch to light mode
-repo_url: https://github.com/juftin/camply
-repo_name: camply
-edit_uri: blob/main/docs/
-site_author: juftin
+repo_url: https://github.com/kkweon/camply
+repo_name: kkweon/camply
+edit_uri: blob/develop/docs/
+site_author: kkweon
 remote_branch: gh-pages
 copyright: Copyright &copy; 2020 Justin Flannery
 extra_css: [extra.css]
@@ -41,8 +41,8 @@ nav:
     - API Documentation 🤖: reference/
     - Dependencies ♻️: dependencies.md
     - Contributing 🤝: contributing.md
-    - GitHub 🛠: https://github.com/juftin/camply
-    - Changelog 📝: https://github.com/juftin/camply/releases
+    - GitHub 🛠: https://github.com/kkweon/camply
+    - Changelog 📝: https://github.com/kkweon/camply/releases
 extra:
     generator: false
 markdown_extensions:

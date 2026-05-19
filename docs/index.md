@@ -1,11 +1,14 @@
 # camply
 
 <div align="center">
-<a href="https://github.com/juftin/camply">
-  <img src="https://raw.githubusercontent.com/juftin/camply/main/docs/_static/camply.svg"
+<a href="https://github.com/kkweon/camply">
+  <img src="https://raw.githubusercontent.com/kkweon/camply/develop/docs/_static/camply.svg"
     width="400" height="400" alt="camply">
 </a>
 </div>
+
+> [!NOTE]
+> **Fork Notice:** This is an independently maintained fork of the original [juftin/camply](https://github.com/juftin/camply) project. It features multi-architecture Docker builds (ARM64/Raspberry Pi) and deploys exclusively to GHCR. PyPI releases are not supported.
 
 **`camply`**, the campsite finder ⛺️, is a tool to help you book a campsite online. Finding
 reservations at sold out campgrounds can be tough. That's where camply comes in. It searches
@@ -18,11 +21,8 @@ to book your spot!
 
 ---
 
-[![PyPI](https://img.shields.io/pypi/v/camply?color=blue&label=⛺️camply)](https://github.com/juftin/camply)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/camply)](https://pypi.python.org/pypi/camply/)
-[![Docker Image Version](https://img.shields.io/docker/v/juftin/camply?color=blue&label=docker&logo=docker)](https://hub.docker.com/r/juftin/camply)
-[![Testing Status](https://github.com/juftin/camply/actions/workflows/test.yaml/badge.svg?branch=main)](https://github.com/juftin/camply/actions/workflows/test.yaml)
-[![GitHub License](https://img.shields.io/github/license/juftin/camply?color=blue&label=License)](https://github.com/juftin/camply/blob/main/LICENSE)
+[![Testing Status](https://github.com/kkweon/camply/actions/workflows/test.yaml/badge.svg?branch=develop)](https://github.com/kkweon/camply/actions/workflows/test.yaml)
+[![GitHub License](https://img.shields.io/github/license/kkweon/camply?color=blue&label=License)](https://github.com/kkweon/camply/blob/develop/LICENSE)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-lightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
