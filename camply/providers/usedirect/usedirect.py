@@ -67,6 +67,15 @@ class UseDirectProvider(BaseProvider, ABC):
     booking_path_params: bool = True
     booking_path: str = "Web/Default.aspx"
 
+    def get_booking_url(self, recreation_area_id: int, facility_id: int) -> str:
+        """
+        Generate the Booking URL for the Campsite
+        """
+        booking_url = f"{self.campground_url}/{self.booking_path}"
+        if self.booking_path_params is True:
+            booking_url = f"{booking_url}#!park/{recreation_area_id}/{facility_id}"
+        return booking_url
+
     @property
     @abstractmethod
     def base_url(self) -> str:
@@ -447,9 +456,10 @@ class UseDirectProvider(BaseProvider, ABC):
         facility_id = availability_response.Facility.FacilityId
         facility = self.usedirect_campgrounds[facility_id]
         recreation_area = self.usedirect_rec_areas[facility.recreation_area_id]
-        booking_url = f"{self.campground_url}/{self.booking_path}"
-        if self.booking_path_params is True:
-            booking_url = f"{booking_url}#!park/{recreation_area.recreation_area_id}/{facility_id}"
+        booking_url = self.get_booking_url(
+            recreation_area_id=recreation_area.recreation_area_id,
+            facility_id=facility_id
+        )
         if unit.UnitCategoryId is None:
             unit.UnitCategoryId = -1
         if unit.UnitTypeGroupId is None:

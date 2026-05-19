@@ -9,7 +9,7 @@ def test_debug_usedirect(cli_runner: CamplyRunner) -> None:
     """
     Debug the Camply CLI - ReserveCalifornia - UseDirect
 
-    https://reservecalifornia.com/Web/#!park/726/737
+    https://www.reservecalifornia.com/park/726/737
     """
     test_command = """
     camply \
