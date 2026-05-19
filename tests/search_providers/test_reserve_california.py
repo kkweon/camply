@@ -153,7 +153,7 @@ def test_rc_cli_campsites_nights(
     cli_status_checker(result=result, exit_code_zero=True)
     assert "Valley Oak Loop (sites 85-90)" in result.output
     assert "total sites found in month of June" in result.output
-    assert "https://www.reservecalifornia.com" in result.output
+    assert "https://www.reservecalifornia.com/park/678/1121" in result.output
 
 
 @vcr_cassette

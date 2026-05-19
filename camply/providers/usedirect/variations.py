@@ -32,6 +32,12 @@ class ReserveCalifornia(UseDirectProvider):
     state_code = "CA"
     rdr_path = ""
 
+    def get_booking_url(self, recreation_area_id: int, facility_id: int) -> str:
+        """
+        Override the Booking URL for ReserveCalifornia's modern routing
+        """
+        return f"{self.campground_url}/park/{recreation_area_id}/{facility_id}"
+
 
 class FloridaStateParks(UseDirectProvider):
     """
