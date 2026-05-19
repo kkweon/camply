@@ -3,9 +3,9 @@ Generic Webhook Notifications
 """
 
 import logging
-from typing import List
+from typing import Any, List
 
-import requests  # type: ignore
+import requests
 
 from camply.config.notification_config import WebhookConfig
 from camply.containers import AvailableCampsite
@@ -22,7 +22,7 @@ class WebhookNotifications(BaseNotifications):
 
     last_gasp: bool = False
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.webhook_url = WebhookConfig.WEBHOOK_URL
         self.webhook_headers = WebhookConfig.DEFAULT_HEADERS
@@ -39,13 +39,13 @@ class WebhookNotifications(BaseNotifications):
             logger.error(warning_message)
             raise EnvironmentError(warning_message)
 
-    def send_message(self, message: str, **kwargs) -> None:
+    def send_message(self, message: str, **kwargs: Any) -> None:
         """
         Webhooks only send campsite objects, not messages.
         """
         pass
 
-    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs) -> None:
+    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs: Any) -> None:
         """
         Send a message with a campsite object
 

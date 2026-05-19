@@ -77,7 +77,7 @@ class RecreationBookingConfig(APIConfig):
     API_MONTH_PATH: str = "month"
     API_REFERRERS: Dict[str, Any] = {"Referer": "https://www.recreation.gov/"}
 
-    CAMPSITE_UNAVAILABLE_STRINGS: list = [
+    CAMPSITE_UNAVAILABLE_STRINGS: list[Any] = [
         "Reserved",
         "Not Available",
         "Not Reservable",
@@ -132,7 +132,7 @@ class YellowstoneConfig(DataColumns, APIConfig):
     YELLOWSTONE_PROPERTY_INFO: str = (
         f"{API_BASE_PATH}/property/rooms/{YELLOWSTONE_PARK_PATH}"
     )
-    API_REFERRERS: dict = {
+    API_REFERRERS: dict[Any, Any] = {
         "Host": "webapi.xanterra.net",
         "Origin": "https://secure.yellowstonenationalparklodges.com",
         "Referer": "https://secure.yellowstonenationalparklodges.com/",
@@ -195,7 +195,7 @@ class YellowstoneConfig(DataColumns, APIConfig):
     YELLOWSTONE_CAMPGROUND_OBJECTS: List[CampgroundFacility] = []
     for key, value in YELLOWSTONE_CAMPGROUNDS.items():
         YELLOWSTONE_CAMPGROUND_OBJECTS.append(
-            CampgroundFacility(  # type: ignore
+            CampgroundFacility(
                 recreation_area_id=YELLOWSTONE_RECREATION_AREA_ID,
                 recreation_area=YELLOWSTONE_RECREATION_AREA_FORMAL_NAME,
                 facility_name=value,

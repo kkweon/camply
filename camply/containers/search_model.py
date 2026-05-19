@@ -4,7 +4,7 @@ Pydantic model for YAML files
 
 import datetime
 from enum import Enum
-from typing import List, Optional, Tuple, Union
+from typing import Any, List, Optional, Tuple, Union
 
 from pydantic import Field, validator
 
@@ -25,7 +25,7 @@ class StrEnum(str, Enum):
     """
 
 
-ProviderEnum = StrEnum(  # type: ignore
+ProviderEnum = StrEnum(
     "ProviderEnum", {value: value for value in CAMPSITE_SEARCH_PROVIDER.keys()}
 )
 ProviderEnum.__doc__ = "Campsite Provider Names"
@@ -36,7 +36,7 @@ class YamlSearchFile(CamplyModel):
     Campsite Search Data Model
     """
 
-    provider: ProviderEnum = Field(  # type: ignore
+    provider: ProviderEnum = Field(
         description="Campsite provider", default="RecreationDotGov"
     )
     recreation_area: ArrayOrSingle = None
@@ -58,7 +58,7 @@ class YamlSearchFile(CamplyModel):
     offline_search_path: Optional[str] = None
 
     @validator("provider", pre=True)
-    def validate_provider(cls, value):
+    def validate_provider(cls, value: Any) -> Any:
         """
         Validate provider
         """
@@ -71,7 +71,7 @@ class YamlSearchFile(CamplyModel):
             return value
 
     @validator("equipment", pre=True)
-    def validate_equipment(cls, value) -> ArrayOrSingleEquipment:
+    def validate_equipment(cls, value: Any) -> ArrayOrSingleEquipment:
         """
         Validate equipment
         """

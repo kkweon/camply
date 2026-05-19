@@ -452,12 +452,13 @@ class UseDirectProvider(BaseProvider, ABC):
         -------
         AvailableCampsite
         """
+        assert availability_response.Facility is not None
         start_date = datetime.fromordinal(availability_slice.Date.toordinal())
-        facility_id = availability_response.Facility.FacilityId  # type: ignore
+        facility_id = availability_response.Facility.FacilityId
         facility = self.usedirect_campgrounds[facility_id]
-        recreation_area = self.usedirect_rec_areas[facility.recreation_area_id]  # type: ignore
+        recreation_area = self.usedirect_rec_areas[int(facility.recreation_area_id)]
         booking_url = self.get_booking_url(
-            recreation_area_id=recreation_area.recreation_area_id,  # type: ignore
+            recreation_area_id=int(recreation_area.recreation_area_id),
             facility_id=facility_id,
         )
         if unit.UnitCategoryId is None:
@@ -468,17 +469,17 @@ class UseDirectProvider(BaseProvider, ABC):
         campsite_use_type = self.usedirect_unit_type_groups.get(
             unit.UnitTypeGroupId, None
         )
-        campsite = AvailableCampsite(  # type: ignore
-            campsite_id=unit.UnitId,  # type: ignore
+        campsite = AvailableCampsite(
+            campsite_id=unit.UnitId or 0,
             booking_date=start_date,
             booking_end_date=start_date + timedelta(days=1),
             booking_nights=1,
-            campsite_site_name=unit.Name,  # type: ignore
+            campsite_site_name=unit.Name or "",
             availability_status=(
                 "Available" if availability_slice.IsFree is True else "Unavailable"
             ),
             recreation_area=recreation_area.recreation_area,
-            recreation_area_id=facility.recreation_area_id,
+            recreation_area_id=int(facility.recreation_area_id),
             facility_name=facility.facility_name,
             facility_id=facility.facility_id,
             booking_url=booking_url,
@@ -486,8 +487,8 @@ class UseDirectProvider(BaseProvider, ABC):
             campsite_type=campsite_type,
             campsite_use_type=campsite_use_type,
             location=CampsiteLocation(
-                latitude=availability_response.Facility.Latitude,  # type: ignore
-                longitude=availability_response.Facility.Longitude,  # type: ignore
+                latitude=availability_response.Facility.Latitude,
+                longitude=availability_response.Facility.Longitude,
             ),
         )
         return campsite
@@ -542,14 +543,15 @@ class UseDirectProvider(BaseProvider, ABC):
             resp.raise_for_status()
             campground_metadata = resp.json()
             metadata_file.write_text(json.dumps(campground_metadata, indent=2))
-        data = UseDirectMetadata(**campground_metadata)  # type: ignore
+        assert isinstance(campground_metadata, dict)
+        data = UseDirectMetadata(**campground_metadata)
         self.usedirect_unit_categories = {
             item.UnitCategoryId: item.UnitCategoryName
-            for item in data.UnitCategories  # type: ignore
+            for item in (data.UnitCategories or [])
         }
         self.usedirect_unit_type_groups = {
             item.UnitTypesGroupId: item.UnitTypesGroupName
-            for item in data.UnitTypesGroups  # type: ignore
+            for item in (data.UnitTypesGroups or [])
         }
         return data
 
@@ -567,11 +569,14 @@ class UseDirectProvider(BaseProvider, ABC):
             url = f"{self.base_url}/{self.rdr_path}{UseDirectConfig.CITYPARK_ENDPOINT}"
             resp = self.make_http_request_retry(url=url)
             resp.raise_for_status()
-            city_park_data: Dict[str, Dict[str, Any]] = resp.json()  # type: ignore
-            metadata_file.write_text(json.dumps(city_park_data, indent=2))
+            fetched_data = resp.json()
+            assert isinstance(fetched_data, dict)
+            metadata_file.write_text(json.dumps(fetched_data, indent=2))
+            city_park_data = fetched_data
+        assert isinstance(city_park_data, dict)
         self.usedirect_city_parks: Dict[int, UseDirectCityPark] = {
             int(city_park_id): UseDirectCityPark(**city_park_json)
-            for city_park_id, city_park_json in city_park_data.items()  # type: ignore
+            for city_park_id, city_park_json in city_park_data.items()
             if city_park_json["Name"] is not None
         }
         return self.usedirect_city_parks
@@ -592,20 +597,20 @@ class UseDirectProvider(BaseProvider, ABC):
             )
             resp = self.make_http_request_retry(url=url)
             resp.raise_for_status()
-            places_data: List[Dict[str, Any]] = resp.json()  # type: ignore
+            places_data = resp.json()
+            assert isinstance(places_data, list)
             metadata_file.write_text(json.dumps(places_data, indent=2))
         places_validated = [
-            UseDirectDetailedPlace(**place_json)
-            for place_json in places_data  # type: ignore
+            UseDirectDetailedPlace(**place_json) for place_json in places_data
         ]
         places_data_validated: Dict[int, UseDirectDetailedPlace] = {
             item.PlaceId: item for item in places_validated
         }
         self.usedirect_rec_areas: Dict[int, RecreationArea] = {
-            place.PlaceId: RecreationArea(  # type: ignore
+            place.PlaceId: RecreationArea(
                 recreation_area=place.Name,
                 recreation_area_id=place.PlaceId,
-                recreation_area_location=f"{place.City.title()}, {place.State}",  # type: ignore
+                recreation_area_location=f"{(place.City or '').title()}, {place.State}",
                 description=place.Description,
             )
             for place in places_data_validated.values()
@@ -626,7 +631,8 @@ class UseDirectProvider(BaseProvider, ABC):
             url = f"{self.base_url}/{self.rdr_path}{UseDirectConfig.LIST_FACILITIES_ENDPOINT}"
             resp = self.make_http_request_retry(url=url)
             resp.raise_for_status()
-            facilities_data: List[Dict[str, Any]] = resp.json()  # type: ignore
+            facilities_data = resp.json()
+            assert isinstance(facilities_data, list)
             metadata_file.write_text(json.dumps(facilities_data, indent=2))
         if not isinstance(facilities_data, list):
             raise CamplyError("Unexpected data from %s", metadata_file)
@@ -641,7 +647,7 @@ class UseDirectProvider(BaseProvider, ABC):
         for facility in facilities_data_validated.values():
             rec_area = self.usedirect_rec_areas.get(facility.PlaceId, None)
             if rec_area is not None:
-                self.usedirect_campgrounds[facility.FacilityId] = CampgroundFacility(  # type: ignore
+                self.usedirect_campgrounds[facility.FacilityId] = CampgroundFacility(
                     facility_name=facility.Name,
                     facility_id=facility.FacilityId,
                     recreation_area_id=facility.PlaceId,
@@ -707,8 +713,10 @@ class UseDirectProvider(BaseProvider, ABC):
         campsites: Dict[int, UseDirectAvailabilityUnit] = {}
         for facility_id in facility_ids:
             found_campsites = self.get_campsites_per_facility(facility_id=facility_id)
-            campsite_dict = {item.UnitId: item for item in found_campsites}
-            campsites.update(campsite_dict)  # type: ignore
+            campsite_dict = {
+                item.UnitId: item for item in found_campsites if item.UnitId is not None
+            }
+            campsites.update(campsite_dict)
         self.usedirect_campsites.update(campsites)
         return campsites
 

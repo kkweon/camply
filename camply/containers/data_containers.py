@@ -5,7 +5,7 @@ Storage Containers for the Application
 import datetime
 import logging
 from functools import partial
-from typing import List, Optional, Tuple, Union
+from typing import Any, List, Optional, Tuple, Union
 
 from pydantic import Field, validator
 
@@ -25,7 +25,7 @@ class SearchWindow(CamplyModel):
 
     @validator("start_date")
     @classmethod
-    def start_date_must_be_in_future(cls, v):
+    def start_date_must_be_in_future(cls, v: Any) -> Any:
         """
         Validate that start_date is in the future.
 
@@ -39,7 +39,7 @@ class SearchWindow(CamplyModel):
 
     @validator("end_date")
     @classmethod
-    def end_date_must_be_in_future(cls, v):
+    def end_date_must_be_in_future(cls, v: Any) -> Any:
         """
         Validate that end_date is in the future
         """
@@ -93,7 +93,7 @@ class AvailableCampsite(CamplyModel):
     booking_end_date: datetime.datetime
     booking_nights: int
     campsite_site_name: str
-    campsite_loop_name: Optional[str]
+    campsite_loop_name: Optional[str] = None
     campsite_type: Optional[str]
     campsite_occupancy: Tuple[int, int]
     campsite_use_type: Optional[str]
@@ -105,8 +105,8 @@ class AvailableCampsite(CamplyModel):
     booking_url: str
     location: Optional[CampsiteLocation] = None
 
-    permitted_equipment: Optional[List[RecDotGovEquipment]]
-    campsite_attributes: Optional[List[RecDotGovAttribute]]
+    permitted_equipment: Optional[List[RecDotGovEquipment]] = None
+    campsite_attributes: Optional[List[RecDotGovAttribute]] = None
 
     __unhashable__ = {"permitted_equipment", "campsite_attributes", "location"}
 
@@ -120,8 +120,8 @@ class CampgroundFacility(CamplyModel):
     recreation_area: str
     facility_id: Union[int, str]
     recreation_area_id: Union[int, str]
-    map_id: Optional[int]
-    coordinates: Optional[Tuple[float, float]]
+    map_id: Optional[int] = None
+    coordinates: Optional[Tuple[float, float]] = None
 
 
 class RecreationArea(CamplyModel):
@@ -132,8 +132,8 @@ class RecreationArea(CamplyModel):
     recreation_area: str
     recreation_area_id: Union[int, str]
     recreation_area_location: str
-    coordinates: Optional[Tuple[float, float]]
-    description: Optional[str]
+    coordinates: Optional[Tuple[float, float]] = None
+    description: Optional[str] = None
 
 
 class AvailableResource(CamplyModel):

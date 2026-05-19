@@ -3,7 +3,7 @@ Recreation.gov Web Searching Utilities
 """
 
 import logging
-from typing import List, Union
+from typing import Any, List, Union
 from urllib import parse
 
 logger = logging.getLogger(__name__)
@@ -16,7 +16,7 @@ def generate_url(
     params: str = "",
     query: str = "",
     fragment: str = "",
-):
+) -> Any:
     """
     Build a URL
 
@@ -51,7 +51,7 @@ def generate_url(
     return parse.urlunparse(components=tuple(url_components.values()))
 
 
-def filter_json(json: dict, filters: Union[str, List[str]]) -> object:
+def filter_json(json: dict[Any, Any], filters: Union[str, List[str]]) -> object:
     """
     Extension Method to Dictionaries, allows easy filtering
 

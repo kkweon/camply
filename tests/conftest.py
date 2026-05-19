@@ -27,7 +27,7 @@ module_scope = pytest.fixture(scope="module")
 
 
 @pytest.fixture(autouse=True)
-def freeze_current_time():
+def freeze_current_time() -> Any:
     """
     Freeze the Current Time to April 28, 2023 at Noon
 
@@ -35,8 +35,12 @@ def freeze_current_time():
     to ensure the responses are the same across all tests.
     """
     year = 2023
-    time_of_year = [4, 28, 12, 0, 0]  # April 28th
-    frozen_time = datetime.datetime(year, *time_of_year)
+    month = 4
+    day = 28
+    hour = 12
+    minute = 0
+    second = 0
+    frozen_time = datetime.datetime(year, month, day, hour, minute, second)
     with freeze_time(frozen_time, tick=True):
         yield
 

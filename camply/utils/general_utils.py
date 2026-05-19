@@ -23,7 +23,7 @@ def is_list_like(obj: Any) -> bool:
     return isinstance(obj, (list, set, tuple))
 
 
-def make_list(obj, coerce: Optional[Callable] = None) -> Optional[List[Any]]:
+def make_list(obj: Any, coerce: Optional[Callable] = None) -> Optional[List[Any]]:
     """
     Make Anything An Iterable Instance
 
@@ -57,23 +57,23 @@ def handle_search_windows(
     Handle Multiple Search Windows by the CLI
     """
     if isinstance(start_date, (str, date)):
-        start_date = (start_date,)  # type: ignore
+        start_date = (start_date,)
         assert isinstance(end_date, (str, date))
-        end_date = (end_date,)  # type: ignore
+        end_date = (end_date,)
     search_windows: List[SearchWindow] = []
     for field in [start_date, end_date]:
         if field is None or (isinstance(field, (tuple, list)) and len(field) == 0):
             logger.error("Campsite searches require a `start_date` and an `end_date`")
             sys.exit(1)
-    if len(start_date) != len(end_date):  # type: ignore
+    if len(start_date) != len(end_date):
         logger.error(
             "When searching multiple date windows, you must provide the same amount "
             "of `--start-dates` as `--end-dates`"
         )
         sys.exit(1)
-    for index, date_str in enumerate(start_date):  # type: ignore
+    for index, date_str in enumerate(start_date):
         search_windows.append(
-            SearchWindow(start_date=date_str, end_date=end_date[index])  # type: ignore
+            SearchWindow(start_date=date_str, end_date=end_date[index])
         )
     if len(search_windows) == 1:
         return search_windows[0]

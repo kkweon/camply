@@ -25,7 +25,7 @@ class SearchYellowstone(BaseCampingSearch):
     """
 
     recreation_area = Yellowstone.recreation_area
-    provider_class = Yellowstone  # type: ignore
+    provider_class = Yellowstone
     list_campsites_supported: bool = False
 
     # noinspection PyUnusedLocal
@@ -37,7 +37,7 @@ class SearchYellowstone(BaseCampingSearch):
         nights: int = 1,
         offline_search: bool = False,
         offline_search_path: Optional[str] = None,
-        **kwargs,
+        **kwargs: Any,
     ) -> None:
         """
         Initialize with Search Parameters
@@ -69,7 +69,7 @@ class SearchYellowstone(BaseCampingSearch):
             offline_search_path=offline_search_path,
             **kwargs,
         )
-        self.campgrounds = make_list(campgrounds)  # type: ignore
+        self.campgrounds = make_list(campgrounds)
 
     def get_all_campsites(self) -> List[AvailableCampsite]:
         """
@@ -79,17 +79,17 @@ class SearchYellowstone(BaseCampingSearch):
         -------
         List[AvailableCampsite]
         """
-        all_campsites = []  # type: ignore
+        all_campsites = []
         searchable_campgrounds = self._get_searchable_campgrounds()
         this_month = datetime.now().date().replace(day=1)
         for month in self.search_months:
             if month >= this_month:
-                all_campsites += self.campsite_finder.get_monthly_campsites(  # type: ignore
+                all_campsites += self.campsite_finder.get_monthly_campsites(
                     month=month, nights=None if self.nights == 1 else self.nights
                 )
         matching_campsites = self._filter_campsites_to_campgrounds(
             campsites=all_campsites,
-            searchable_campgrounds=searchable_campgrounds,  # type: ignore
+            searchable_campgrounds=searchable_campgrounds,
         )
         campsite_df = self.campsites_to_df(campsites=matching_campsites)
         campsite_df_validated = self._filter_date_overlap(campsites=campsite_df)
@@ -161,7 +161,7 @@ class SearchYellowstone(BaseCampingSearch):
         return matching_campsites
 
     @classmethod
-    def find_recreation_areas(cls, **kwargs) -> List[RecreationArea]:
+    def find_recreation_areas(cls, **kwargs: Any) -> List[RecreationArea]:
         """
         Return the Yellowstone Recreation Area Object
         """

@@ -7,6 +7,7 @@ import sys
 from collections import OrderedDict
 from os.path import isfile
 from time import sleep
+from typing import Any
 
 import rich
 from rich.prompt import Confirm, Prompt
@@ -54,7 +55,7 @@ def check_dot_camply_file() -> bool:
         return False
 
 
-def generate_configuration() -> OrderedDict:
+def generate_configuration() -> OrderedDict[Any, Any]:
     """
     Generate the Camply Configuration Config
 
@@ -65,8 +66,10 @@ def generate_configuration() -> OrderedDict:
     """
     config_dict = FileConfig.DOT_CAMPLY_FIELDS.copy()
     for field, field_dict in config_dict.items():
-        default_value = field_dict["default"]  # type: ignore
-        field_note = field_dict["notes"]  # type: ignore
+        default_value = (
+            field_dict.get("default") if isinstance(field_dict, dict) else None
+        )
+        field_note = field_dict.get("notes") if isinstance(field_dict, dict) else None
         if field_note is not None:
             rich.print(
                 f"[bold blue]{field}:[/bold blue] "
@@ -81,7 +84,7 @@ def generate_configuration() -> OrderedDict:
     return config_dict
 
 
-def write_config_to_file(config_dict: OrderedDict) -> None:
+def write_config_to_file(config_dict: OrderedDict[Any, Any]) -> None:
     """
     Write the Configuration Object to a file
 
@@ -103,7 +106,7 @@ def write_config_to_file(config_dict: OrderedDict) -> None:
         file_object.seek(0)
 
 
-def generate_dot_camply_file():
+def generate_dot_camply_file() -> Any:
     """
     Perform the larger Dot Camply File Generation
     """

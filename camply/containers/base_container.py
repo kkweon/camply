@@ -14,7 +14,7 @@ class CamplyModel(BaseModel):
 
     __unhashable__: Set[str] = set()
 
-    def __hash__(self):
+    def __hash__(self) -> Any:
         """
         Hash Method for Pydantic BaseModels
         """

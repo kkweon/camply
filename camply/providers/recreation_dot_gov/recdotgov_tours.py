@@ -9,7 +9,7 @@ from datetime import date, datetime, time, timedelta, timezone
 from typing import Any, Dict, List, Optional, Tuple
 
 import pandas as pd
-import requests  # type: ignore
+import requests
 
 from camply.config import RecreationBookingConfig, RIDBConfig
 from camply.containers import AvailableCampsite
@@ -39,7 +39,7 @@ class RecreationDotGovTours(RecreationDotGovBase, ABC):
     api_search_result_key = "entity_id"
 
     @property
-    def activity_name(self):
+    def activity_name(self) -> Any:
         return None
 
     @property
@@ -58,7 +58,7 @@ class RecreationDotGovTours(RecreationDotGovBase, ABC):
         """
         pass
 
-    def paginate_recdotgov_campsites(  # type: ignore
+    def paginate_recdotgov_campsites(
         self, facility_id: int, equipment: Optional[List[str]] = None
     ) -> List[RecDotGovSearchResult]:
         """
@@ -134,7 +134,7 @@ class RecreationDotGovTours(RecreationDotGovBase, ABC):
         cls,
         tour_id: int,
         booking_url_vars: Dict[str, str],
-        booking_date: datetime.date,  # type: ignore
+        booking_date: datetime.date,
         campsite_metadata: pd.DataFrame,
     ) -> Dict[str, Any]:
         """
@@ -165,7 +165,7 @@ class RecreationDotGovTours(RecreationDotGovBase, ABC):
         except LookupError:
             use_type = "Time zone not available"
         return {
-            "booking_url": cls.booking_url.format(**booking_url_vars),  # type: ignore
+            "booking_url": cls.booking_url.format(**booking_url_vars),
             "booking_date": booking_date,
             "booking_end_date": booking_date + timedelta(days=1),
             "booking_nights": 1,
@@ -383,7 +383,7 @@ class RecreationDotGovDailyMixin(RecreationDotGovTours, ABC):
         now = datetime.now(timezone.utc)
         availabilities: Dict[str, Any] = {}
         for slot in availability:
-            slot_data = TourDailyAvailabilityResponse(**slot)  # type: ignore
+            slot_data = TourDailyAvailabilityResponse(**slot)
             tour_key = (slot_data.tour_date, slot_data.tour_id)
             count_keys = set(slot_data.inventory_count.keys()) & set(
                 slot_data.reservation_count.keys()
@@ -404,19 +404,19 @@ class RecreationDotGovDailyMixin(RecreationDotGovTours, ABC):
                 reservation_count = slot_data.reservation_count[count_key]
                 if inventory_count <= reservation_count:
                     continue
-                tour_data = availabilities.setdefault(tour_key, {"": slot_data})  # type: ignore
+                tour_data = availabilities.setdefault(tour_key, {"": slot_data})
                 tour_data[slot_data.tour_time] = (
                     tour_data.get(slot_data.tour_time, 0)
                     + inventory_count
                     - reservation_count
                 )
-        for tour_date, tour_id in availabilities:  # type: ignore
-            tour_data = availabilities[tour_date, tour_id]  # type: ignore
+        for tour_date, tour_id in availabilities:
+            tour_data = availabilities[tour_date, tour_id]
             slot_data = tour_data.pop("")
             fields = cls.make_campsite_availability_fields(
-                tour_id,  # type: ignore
+                tour_id,
                 vars(slot_data),
-                tour_date,  # type: ignore
+                tour_date,
                 campsite_metadata,
             )
             available_campsite = AvailableCampsite(
@@ -437,7 +437,7 @@ class RecreationDotGovDailyMixin(RecreationDotGovTours, ABC):
                 **fields,
             )
             total_campsite_availability.append(available_campsite)
-        return total_campsite_availability  # type: ignore
+        return total_campsite_availability
 
 
 class RecreationDotGovTicket(RecreationDotGovTours):

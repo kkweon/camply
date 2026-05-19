@@ -69,7 +69,7 @@ def log_sorted_response(response_array: List[Any]) -> None:
         logger.info(log_response)
 
 
-def get_emoji(obj: list) -> str:
+def get_emoji(obj: list[Any]) -> str:
     """
     Return the Right Emoji
 
@@ -88,7 +88,7 @@ def get_emoji(obj: list) -> str:
         return XMOJI
 
 
-def log_camply(self: logging.Logger, message: str, *args, **kwargs) -> None:
+def log_camply(self: logging.Logger, message: str, *args: Any, **kwargs: Any) -> None:
     """
     Custom Logging Notification Level for Pushover Logging
 

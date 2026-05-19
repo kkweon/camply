@@ -2,17 +2,29 @@
 Recreation.gov Web Searching Utilities
 """
 
+import datetime
 import json
 import logging
 import pathlib
 import pickle
 from abc import ABC, abstractmethod
-from datetime import datetime
+from datetime import datetime as dt
 from itertools import groupby, islice, tee
 from operator import itemgetter
 from os import getenv
 from time import sleep
-from typing import Any, Dict, Generator, Iterable, List, Optional, Sequence, Set, Union
+from typing import (
+    Any,
+    Dict,
+    Generator,
+    Iterable,
+    List,
+    Optional,
+    Sequence,
+    Set,
+    Type,
+    Union,
+)
 
 import pandas as pd
 import tenacity
@@ -50,7 +62,7 @@ class BaseCampingSearch(ABC):
         offline_search: bool = False,
         offline_search_path: Optional[str] = None,
         days_of_the_week: Optional[Sequence[int]] = None,
-        **kwargs,
+        **kwargs: Any,
     ) -> None:
         """
         Initialize with Search Parameters
@@ -75,8 +87,8 @@ class BaseCampingSearch(ABC):
             Days of the week (by weekday integer) to search for.
         """
         self._verbose = kwargs.get("verbose", True)
-        self.campsite_finder: ProviderType = self.provider_class()  # type: ignore
-        self.search_window: List[SearchWindow] = make_list(search_window)  # type: ignore
+        self.campsite_finder: ProviderType = self.provider_class()
+        self.search_window: List[SearchWindow] = make_list(search_window) or []
         self.days_of_the_week = set(
             days_of_the_week if days_of_the_week is not None else ()
         )
@@ -86,9 +98,9 @@ class BaseCampingSearch(ABC):
             self.days_of_the_week.add(5)
         if len(self.days_of_the_week) == 0:
             self.days_of_the_week = {0, 1, 2, 3, 4, 5, 6}
-        self._original_search_days: List[datetime] = self._get_search_days()
+        self._original_search_days: List[datetime.date] = self._get_search_days()
         self._original_search_months: List[
-            datetime
+            datetime.datetime
         ] = self.campsite_finder.get_search_months(self._original_search_days)
         self.nights = self._validate_consecutive_nights(nights=nights)
         if offline_search_path is not None:
@@ -100,11 +112,10 @@ class BaseCampingSearch(ABC):
         )
         self.campsites_found: Set[AvailableCampsite] = set()
         self.loaded_campsites: Set[AvailableCampsite] = set()
-        if self.offline_search_path.suffixes[-1] == ".json":
-            self.offline_mode: str = "json"
-        elif self.offline_search_path.suffixes[-1] in [".pkl", ".pickle"]:
-            self.offline_mode: str = "pickle"  # type: ignore
-        else:
+        self.offline_mode: str = "json"
+        if self.offline_search_path.suffixes[-1] in [".pkl", ".pickle"]:
+            self.offline_mode = "pickle"
+        elif self.offline_search_path.suffixes[-1] != ".json":
             raise CamplyError(
                 "You must provide a `.json` or a `.pickle` / `.pkl` file name for offline searches"
             )
@@ -113,27 +124,41 @@ class BaseCampingSearch(ABC):
                 "Campsite search is configured to save offline: %s",
                 self.offline_search_path,
             )
-            self.campsites_found: Set[  # type: ignore
-                AvailableCampsite
-            ] = self.load_campsites_from_file()
-            self.loaded_campsites: Set[AvailableCampsite] = self.campsites_found.copy()  # type: ignore
+            self.campsites_found = self.load_campsites_from_file()
+            self.loaded_campsites = self.campsites_found.copy()
         self.search_attempts: int = 0
 
     @property
-    def search_days(self) -> List[datetime]:
+    def search_days(self) -> List[datetime.date]:
         """
         Get the Unique Days that need to be Searched
         """
-        current_date = datetime.now().date()
+        current_date_dt = dt.now()
+        current_date = (
+            current_date_dt.date()
+            if hasattr(current_date_dt, "date")
+            else current_date_dt
+        )
         return [day for day in self._original_search_days if day >= current_date]
 
     @property
-    def search_months(self) -> List[datetime]:
+    def search_months(self) -> List[datetime.datetime]:
         """
         Get the Unique Months that need to be Searched
         """
-        current_month = datetime.now().date().replace(day=1)
-        return [day for day in self._original_search_months if day >= current_month]
+        current_month_dt = dt.now()
+        current_month = (
+            current_month_dt.date().replace(day=1)
+            if hasattr(current_month_dt, "date")
+            else current_month_dt.replace(day=1)
+        )
+
+        filtered_months = []
+        for month in self._original_search_months:
+            month_date = month.date() if hasattr(month, "date") else month
+            if month_date >= current_month:
+                filtered_months.append(month)
+        return filtered_months
 
     @abstractmethod
     def get_all_campsites(self) -> List[AvailableCampsite]:
@@ -150,25 +175,25 @@ class BaseCampingSearch(ABC):
 
     @property
     @abstractmethod
-    def provider_class(self) -> ProviderType:
+    def provider_class(self) -> Type[ProviderType]:
         """
         Provider Class Dependency Injection
         """
 
     def _get_intersection_date_overlap(
         self,
-        date: datetime,
+        date: datetime.date,
         periods: int,
-        search_days: List[datetime],
+        search_days: List[datetime.date],
     ) -> bool:
         """
         Find Date Overlap
 
         Parameters
         ----------
-        date: datetime
+        date: datetime.date
         periods: int
-        search_days: List[datetime]
+        search_days: List[datetime.date]
 
         Returns
         -------
@@ -293,14 +318,17 @@ class BaseCampingSearch(ABC):
         -------
         int
         """
+        polling_interval_val: int
         if polling_interval is None:
-            polling_interval = getenv(  # type: ignore
-                "POLLING_INTERVAL", SearchConfig.RECOMMENDED_POLLING_INTERVAL
+            polling_interval_val = int(
+                getenv("POLLING_INTERVAL", SearchConfig.RECOMMENDED_POLLING_INTERVAL)
             )
-        if int(polling_interval) < SearchConfig.POLLING_INTERVAL_MINIMUM:  # type: ignore
-            polling_interval = SearchConfig.POLLING_INTERVAL_MINIMUM
-        polling_interval_minutes = int(round(float(polling_interval), 2))  # type: ignore
-        return polling_interval_minutes
+        else:
+            polling_interval_val = polling_interval
+
+        if polling_interval_val < SearchConfig.POLLING_INTERVAL_MINIMUM:
+            polling_interval_val = SearchConfig.POLLING_INTERVAL_MINIMUM
+        return polling_interval_val
 
     def _continuous_search_retry(
         self,
@@ -469,7 +497,7 @@ class BaseCampingSearch(ABC):
         notify_first_try: bool = False,
         search_forever: bool = False,
         search_once: bool = False,
-    ):
+    ) -> Any:
         """
         Continuously Search For Campsites
 
@@ -510,7 +538,7 @@ class BaseCampingSearch(ABC):
             self._continuous_search_retry(
                 log=log,
                 verbose=verbose,
-                polling_interval=polling_interval,  # type: ignore
+                polling_interval=polling_interval_minutes,
                 notification_provider=notification_provider,
                 notify_first_try=notify_first_try,
                 continuous_search_attempts=continuous_search_attempts,
@@ -583,8 +611,8 @@ class BaseCampingSearch(ABC):
                     search_once=search_once,
                 )
             except Exception as e:
-                if self.search_attempts >= 1:
-                    self.notifier.last_gasp(error=e)  # type: ignore
+                if self.search_attempts >= 1 and self.notifier is not None:
+                    self.notifier.last_gasp(error=e)
                 raise e
         else:
             starting_count = len(self.campsites_found)
@@ -597,31 +625,38 @@ class BaseCampingSearch(ABC):
                 self.unload_campsites_to_file()
         return list(self.campsites_found)
 
-    def _get_search_days(self) -> List[datetime]:
+    def _get_search_days(self) -> List[datetime.date]:
         """
         Retrieve Specific Days to Search For
 
         Returns
         -------
-        search_days: List[datetime]
+        search_days: List[datetime.date]
             Datetime days to search for reservations
         """
-        current_date = datetime.now().date()
-        search_nights = set()
+        current_date_dt = dt.now()
+        current_date = (
+            current_date_dt.date()
+            if hasattr(current_date_dt, "date")
+            else current_date_dt
+        )
+        search_nights_set: Set[datetime.date] = set()
         for window in self.search_window:
             generated_dates = {
-                date for date in window.get_date_range() if date >= current_date
+                date_val
+                for date_val in window.get_date_range()
+                if date_val >= current_date
             }
-            search_nights.update(generated_dates)
-        search_nights: Set[datetime] = {  # type: ignore
-            x for x in search_nights if x.weekday() in self.days_of_the_week
+            search_nights_set.update(generated_dates)
+        filtered_search_nights: Set[datetime.date] = {
+            x for x in search_nights_set if x.weekday() in self.days_of_the_week
         }
         max_nights_to_list = 2
         all_nights = 7
-        if len(search_nights) > 0 and self._verbose is True:
+        if len(filtered_search_nights) > 0 and self._verbose is True:
             logger.info(
-                f"{len(search_nights)} booking nights selected for search, "
-                f"ranging from {min(search_nights)} to {max(search_nights)}"
+                f"{len(filtered_search_nights)} booking nights selected for search, "
+                f"ranging from {min(filtered_search_nights)} to {max(filtered_search_nights)}"
             )
         if 0 < len(self.days_of_the_week) <= max_nights_to_list:
             day_mapping = {value: key for key, value in days_of_the_week_base.items()}
@@ -640,7 +675,7 @@ class BaseCampingSearch(ABC):
         else:
             logger.error(SearchConfig.ERROR_MESSAGE)
             raise RuntimeError(SearchConfig.ERROR_MESSAGE)
-        return sorted(search_nights)  # type: ignore
+        return sorted(filtered_search_nights)
 
     @classmethod
     def _consolidate_campsites(
@@ -691,7 +726,9 @@ class BaseCampingSearch(ABC):
         return concat(composed_groupings, ignore_index=True)
 
     @classmethod
-    def _consecutive_subseq(cls, iterable: Iterable, length: int) -> Generator:
+    def _consecutive_subseq(
+        cls, iterable: Iterable[Any], length: int
+    ) -> Generator[Any, None, None]:
         """
         Find All Sub Sequences by length Given a List
 
@@ -870,13 +907,13 @@ class BaseCampingSearch(ABC):
         -------
         DataFrame
         """
-        booking_date: datetime
+        booking_date: datetime.date
         for booking_date, available_sites in availability_df.groupby("booking_date"):
             logger.info(
                 f"📅 {booking_date.strftime('%a, %B %d')} "
                 f"🏕  {len(available_sites)} sites"
             )
-            location_tuple: tuple
+            location_tuple: tuple[Any, ...]
             for location_tuple, campground_availability in available_sites.groupby(
                 [DataColumns.RECREATION_AREA_COLUMN, DataColumns.FACILITY_NAME_COLUMN]
             ):
@@ -944,16 +981,15 @@ class BaseCampingSearch(ABC):
         -------
         Set[AvailableCampsite]
         """
+        campsites: Set[AvailableCampsite] = set()
         if self.offline_search_path.exists():
             if self.offline_mode == "pickle":
                 with open(self.offline_search_path, mode="rb") as file_stream:
-                    campsites: Set[AvailableCampsite] = pickle.load(
-                        file=file_stream, fix_imports=True
-                    )
+                    campsites = pickle.load(file=file_stream, fix_imports=True)
             elif self.offline_mode == "json":
                 with open(self.offline_search_path, mode="r") as file_stream:
                     campsites_dicts: List[Dict[str, Any]] = json.load(file_stream)
-                campsites: Set[AvailableCampsite] = {  # type: ignore
+                campsites = {
                     AvailableCampsite(**json_dict) for json_dict in campsites_dicts
                 }
             if len(campsites) > 0:

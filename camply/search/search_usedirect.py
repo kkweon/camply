@@ -6,12 +6,13 @@ import logging
 import sys
 from abc import ABC, abstractmethod
 from datetime import timedelta
-from typing import Any, Dict, List, Optional, Type, Union
+from typing import Any, Dict, List, Optional, Type, Union, cast
 
-from dateutil.relativedelta import relativedelta  # type: ignore
+from dateutil.relativedelta import relativedelta
 
 from camply.containers import AvailableCampsite, RecreationArea, SearchWindow
 from camply.containers.data_containers import ListedCampsite
+from camply.providers.usedirect.usedirect import UseDirectProvider
 from camply.providers.usedirect.variations import (
     AlabamaStateParks,
     ArizonaStateParks,
@@ -40,7 +41,7 @@ class SearchUseDirect(BaseCampingSearch, ABC):
 
     @property
     @abstractmethod
-    def provider_class(self) -> Type[BaseCampingSearch]:  # type: ignore
+    def provider_class(self) -> Type[UseDirectProvider]:  # type: ignore
         """
         Provider Class to be used for Search
         """
@@ -53,7 +54,7 @@ class SearchUseDirect(BaseCampingSearch, ABC):
         weekends_only: bool = False,
         campgrounds: Optional[Union[List[str], str]] = None,
         nights: int = 1,
-        **kwargs,
+        **kwargs: Any,
     ) -> None:
         """
         Initialize with Search Parameters
@@ -78,11 +79,12 @@ class SearchUseDirect(BaseCampingSearch, ABC):
             nights=nights,
             **kwargs,
         )
-        self._recreation_area_ids: List[int] = make_list(recreation_area, coerce=int)  # type: ignore
-        self._campground_ids: List[int] = make_list(campgrounds, coerce=int)  # type: ignore
+        self._recreation_area_ids = make_list(recreation_area, coerce=int) or []
+        self._campground_ids = make_list(campgrounds, coerce=int) or []
         campsites = make_list(kwargs.get("campsites", []), coerce=int) or []
         if len(campsites) > 0:
-            self.campsite_finder.validate_campsites(  # type: ignore
+            finder = cast(UseDirectProvider, self.campsite_finder)
+            finder.validate_campsites(
                 campsites=campsites, facility_ids=self._campground_ids
             )
         try:
@@ -133,16 +135,17 @@ class SearchUseDirect(BaseCampingSearch, ABC):
             log_str = format_log_string(campground)
             logger.info("    %s", log_str)
         campsites_found: List[AvailableCampsite] = []
+        campsite_finder = cast(UseDirectProvider, self.campsite_finder)
         for month in self.search_months:
             for campground in self.campgrounds:
                 logger.info(
-                    f"Searching {campground.facility_name}, {campground.recreation_area} "
+                    f"Searching {campground.facility_name} "
                     f"({campground.facility_id}) for availability: "
                     f"{month.strftime('%B, %Y')}"
                 )
                 end_date = month + relativedelta(months=1) - timedelta(days=1)
-                campsites = self.campsite_finder.get_campsites(  # type: ignore
-                    campground_id=campground.facility_id,  # type: ignore
+                campsites = campsite_finder.get_campsites(
+                    campground_id=int(campground.facility_id),
                     start_date=month,
                     end_date=end_date,
                 )
@@ -162,12 +165,17 @@ class SearchUseDirect(BaseCampingSearch, ABC):
 
     @classmethod
     def find_recreation_areas(
-        cls, search_string: str, **kwargs
+        cls, search_string: str, **kwargs: Any
     ) -> List[RecreationArea]:
         """
         Return the UseDirect Recreation Areas
         """
-        rec_areas = cls.provider_class().search_for_recreation_areas(  # type: ignore
+        # We need an instance to access the property, then call the search
+        # Or instantiate the correct provider directly if this class provides it.
+        # But this is a class method. Let's create an instance to get the provider.
+        provider_type = cls.provider_class
+        provider = provider_type()
+        rec_areas = provider.search_for_recreation_areas(
             query=search_string, state=kwargs.get("state")
         )
         logger.info(f"{len(rec_areas)} Matching Recreation Areas Found")
@@ -182,15 +190,22 @@ class SearchUseDirect(BaseCampingSearch, ABC):
         -------
         List[ListedCampsite]
         """
-        if not self.campsite_finder.usedirect_campsites:  # type: ignore
-            self.campsite_finder.get_campsite_metadata(facility_ids=self.campground_ids)  # type: ignore
+        finder = cast(UseDirectProvider, self.campsite_finder)
+        if not finder.usedirect_campsites:
+            facility_ids_ints = [int(f) for f in self.campground_ids if f is not None]
+            finder.get_campsite_metadata(facility_ids=facility_ids_ints)
         sorted_campsites = sorted(
-            self.campsite_finder.usedirect_campsites.values(),  # type: ignore
-            key=lambda x: x.OrderByRaw,
+            finder.usedirect_campsites.values(),
+            key=lambda x: x.OrderByRaw if x.OrderByRaw is not None else 0,
         )
         logged_campsites = [
-            ListedCampsite(id=item.UnitId, name=item.Name, facility_id=item.FacilityId)
+            ListedCampsite(
+                id=int(item.UnitId),
+                name=item.Name or "",
+                facility_id=int(item.FacilityId),
+            )
             for item in sorted_campsites
+            if item.UnitId is not None and item.FacilityId is not None
         ]
         self.log_listed_campsites(
             campsites=logged_campsites,
@@ -204,7 +219,7 @@ class SearchReserveCalifornia(SearchUseDirect):
     Search ReserveCalifornia
     """
 
-    provider_class = ReserveCalifornia  # type: ignore
+    provider_class = ReserveCalifornia
 
 
 class SearchNorthernTerritory(SearchUseDirect):
@@ -212,7 +227,7 @@ class SearchNorthernTerritory(SearchUseDirect):
     Searches the Australian Northern Territory for Campsites
     """
 
-    provider_class = NorthernTerritory  # type: ignore
+    provider_class = NorthernTerritory
 
 
 class SearchFloridaStateParks(SearchUseDirect):
@@ -220,7 +235,7 @@ class SearchFloridaStateParks(SearchUseDirect):
     Searches on FloridaStateParks.org for Campsites
     """
 
-    provider_class = FloridaStateParks  # type: ignore
+    provider_class = FloridaStateParks
 
 
 class SearchOregonMetro(SearchUseDirect):
@@ -228,7 +243,7 @@ class SearchOregonMetro(SearchUseDirect):
     Searches on OregonMetro.gov for Campsites (Portland Metro)
     """
 
-    provider_class = OregonMetro  # type: ignore
+    provider_class = OregonMetro
 
 
 class SearchOhioStateParks(SearchUseDirect):
@@ -236,7 +251,7 @@ class SearchOhioStateParks(SearchUseDirect):
     Searches on ReserveOhio.com for Campsites
     """
 
-    provider_class = OhioStateParks  # type: ignore
+    provider_class = OhioStateParks
 
 
 class SearchVirginiaStateParks(SearchUseDirect):
@@ -244,7 +259,7 @@ class SearchVirginiaStateParks(SearchUseDirect):
     Searches on ReserveVAParks.com for Campsites
     """
 
-    provider_class = VirginiaStateParks  # type: ignore
+    provider_class = VirginiaStateParks
 
 
 class SearchArizonaStateParks(SearchUseDirect):
@@ -252,7 +267,7 @@ class SearchArizonaStateParks(SearchUseDirect):
     Searches on AZStateParks.com for Campsites
     """
 
-    provider_class = ArizonaStateParks  # type: ignore
+    provider_class = ArizonaStateParks
 
 
 class SearchMaricopaCountyParks(SearchUseDirect):
@@ -260,7 +275,7 @@ class SearchMaricopaCountyParks(SearchUseDirect):
     Searches on MaricopaCountyParks.org for Campsites (Arizona)
     """
 
-    provider_class = MaricopaCountyParks  # type: ignore
+    provider_class = MaricopaCountyParks
 
 
 class SearchMissouriStateParks(SearchUseDirect):
@@ -268,7 +283,7 @@ class SearchMissouriStateParks(SearchUseDirect):
     Searches on icampmo1.usedirect.com for Campsites
     """
 
-    provider_class = MissouriStateParks  # type: ignore
+    provider_class = MissouriStateParks
 
 
 class SearchAlabamaStateParks(SearchUseDirect):
@@ -276,7 +291,7 @@ class SearchAlabamaStateParks(SearchUseDirect):
     Searches on ReserveAlaPark.com for Campsites
     """
 
-    provider_class = AlabamaStateParks  # type: ignore
+    provider_class = AlabamaStateParks
 
 
 class SearchFairfaxCountyParks(SearchUseDirect):
@@ -284,7 +299,7 @@ class SearchFairfaxCountyParks(SearchUseDirect):
     Searches on fairfax.usedirect.com for Campsites (Virginia)
     """
 
-    provider_class = FairfaxCountyParks  # type: ignore
+    provider_class = FairfaxCountyParks
 
 
 class SearchMinnesotaStateParks(SearchUseDirect):
@@ -292,4 +307,4 @@ class SearchMinnesotaStateParks(SearchUseDirect):
     Searches on ReserveMN.usedirect.com for Campsites
     """
 
-    provider_class = MinnesotaStateParks  # type: ignore
+    provider_class = MinnesotaStateParks

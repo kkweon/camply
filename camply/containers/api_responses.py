@@ -89,7 +89,7 @@ class Date(datetime.date):
     """
 
     @classmethod
-    def __get_validators__(cls) -> Iterator:
+    def __get_validators__(cls) -> Iterator[Any]:
         """
         Generate Validators
         """
@@ -122,7 +122,7 @@ class UnawareDatetime(datetime.datetime):
     """
 
     @classmethod
-    def __get_validators__(cls) -> Iterator:
+    def __get_validators__(cls) -> Iterator[Any]:
         """
         Generate Validators
         """
@@ -155,7 +155,7 @@ class AwareDatetime(datetime.datetime):
     """
 
     @classmethod
-    def __get_validators__(cls) -> Iterator:
+    def __get_validators__(cls) -> Iterator[Any]:
         """
         Generate Validators
         """
@@ -401,7 +401,7 @@ class XantRates(CamplyModel):
     min: int
 
     @validator("start", pre=True)
-    def parse_datetime(cls, value):
+    def parse_datetime(cls, value: Any) -> Any:
         """
         Parse Poorly Formatted Date Strings
         """
@@ -431,7 +431,7 @@ class XantResortData(CamplyModel):
     availability: Dict[datetime.date, Dict[str, XantCampgroundDetails]]
 
     @validator("availability", pre=True)
-    def parse_datetime(cls, value):
+    def parse_datetime(cls, value: Any) -> Any:
         """
         Parse Poorly Formatted Date Strings
         """

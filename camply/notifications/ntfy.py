@@ -3,9 +3,9 @@ Push Notifications via ntfy.sh
 """
 
 import logging
-from typing import List
+from typing import Any, List
 
-import requests  # type: ignore
+import requests
 
 from camply.config import NtfyConfig
 from camply.containers import AvailableCampsite
@@ -19,7 +19,7 @@ class NtfyNotifications(BaseNotifications):
     Push Notifications via Ntfy
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         if any([NtfyConfig.NTFY_TOPIC is None, NtfyConfig.NTFY_TOPIC == ""]):
             warning_message = (
@@ -29,7 +29,7 @@ class NtfyNotifications(BaseNotifications):
             logger.error(warning_message)
             raise EnvironmentError(warning_message)
 
-    def send_message(self, message: str, **kwargs) -> requests.Response:
+    def send_message(self, message: str, **kwargs: Any) -> requests.Response:
         """
         Send a message via Ntfy - if environment variables are configured
 
@@ -42,7 +42,7 @@ class NtfyNotifications(BaseNotifications):
         requests.Response
         """
         response = self.session.post(
-            url=NtfyConfig.NTFY_API_ENDPOINT + NtfyConfig.NTFY_TOPIC,  # type: ignore
+            url=NtfyConfig.NTFY_API_ENDPOINT + NtfyConfig.NTFY_TOPIC,
             data=message.encode("utf-8"),
             headers={
                 "Title": kwargs.get("title", "Camply Notification"),
@@ -59,7 +59,7 @@ class NtfyNotifications(BaseNotifications):
             raise ConnectionError(response.text) from he
         return response
 
-    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs):
+    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs: Any) -> Any:
         """
         Send a message with a campsite object
 

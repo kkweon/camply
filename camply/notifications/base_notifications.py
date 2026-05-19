@@ -1,12 +1,11 @@
 """
 Push Notifications Template
 """
-import datetime
 import logging
 from abc import ABC, abstractmethod
-from typing import Dict, List, Tuple
+from typing import Any, Dict, List, Tuple
 
-import requests  # type: ignore
+import requests
 
 from camply.config import CampsiteContainerFields
 from camply.containers import AvailableCampsite
@@ -45,7 +44,7 @@ class BaseNotifications(ABC):
         return f"<{self.__class__.__name__}>"
 
     @abstractmethod
-    def send_message(self, message: str, **kwargs):
+    def send_message(self, message: str, **kwargs: Any) -> Any:
         """
         Send a message
 
@@ -59,7 +58,7 @@ class BaseNotifications(ABC):
         pass
 
     @abstractmethod
-    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs):
+    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs: Any) -> Any:
         """
         Send a message with a campsite object
 
@@ -85,12 +84,13 @@ class BaseNotifications(ABC):
             ]
         )
         for key, value in campsite.dict().items():
+            formatted_value = value
             if key in [
                 CampsiteContainerFields.BOOKING_DATE,
                 CampsiteContainerFields.BOOKING_END_DATE,
             ]:
-                value: datetime.date  # type: ignore
-                value: str = value.strftime("%Y-%m-%d")  # type: ignore
+                if hasattr(value, "strftime"):
+                    formatted_value = value.strftime("%Y-%m-%d")
             elif key == CampsiteContainerFields.BOOKING_URL:
                 key = "booking_link"
             elif key == CampsiteContainerFields.PERMITTED_EQUIPMENT:
@@ -99,10 +99,10 @@ class BaseNotifications(ABC):
                     if campsite.permitted_equipment is None
                     else campsite.permitted_equipment
                 )
-                value = "\n  - " + "\n  - ".join(
+                formatted_value = "\n  - " + "\n  - ".join(
                     {item.equipment_name for item in equipment}
                 )
             if key not in cls.ignored_notification_fields:
                 formatted_key = key.replace("_", " ").title()
-                fields[formatted_key] = value
+                fields[formatted_key] = formatted_value
         return message_title, fields

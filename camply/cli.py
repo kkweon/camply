@@ -17,11 +17,13 @@ from typing import (
     Tuple,
     Type,
     Union,
+    cast,
 )
 
 import click
+import rich_click
 from rich import traceback
-from rich_click import RichCommand, RichGroup, rich_click  # type: ignore
+from rich_click import RichCommand, RichGroup
 
 from camply import Yellowstone, __application__, __version__
 from camply.config import EquipmentOptions, SearchConfig, logging_config
@@ -33,27 +35,33 @@ from camply.providers import (
     GoingToCamp,
     RecreationDotGov,
 )
-from camply.search import CAMPSITE_SEARCH_PROVIDER, BaseCampingSearch  # type: ignore
+from camply.search import CAMPSITE_SEARCH_PROVIDER, BaseCampingSearch
 from camply.utils import configure_camply, log_camply, make_list, yaml_utils
 from camply.utils.general_utils import days_of_the_week_mapping, handle_search_windows
 from camply.utils.logging_utils import log_sorted_response
 
-logging.Logger.camply = log_camply  # type: ignore
-logger = logging.getLogger(__name__)
+
+class CamplyLogger(logging.Logger):
+    def camply(self, msg: str, *args: Any, **kwargs: Any) -> None:
+        ...
+
+
+logging.Logger.camply = log_camply
+logger = cast(CamplyLogger, logging.getLogger(__name__))
 
 DEFAULT_CAMPLY_PROVIDER: str = RecreationDotGov.__name__
 
-rich_click.STYLE_OPTION = "bold green"
-rich_click.STYLE_SWITCH = "bold blue"
-rich_click.STYLE_METAVAR = "bold red"
-rich_click.STYLE_HELPTEXT_FIRST_LINE = "bold blue"
-rich_click.STYLE_HELPTEXT = ""
-rich_click.STYLE_HEADER_TEXT = "bold green"
-rich_click.STYLE_OPTION_DEFAULT = "bold yellow"
-rich_click.STYLE_OPTION_HELP = ""
-rich_click.STYLE_ERRORS_SUGGESTION = "bold red"
-rich_click.STYLE_OPTIONS_TABLE_BOX = "SIMPLE_HEAVY"
-rich_click.STYLE_COMMANDS_TABLE_BOX = "SIMPLE_HEAVY"
+rich_click.STYLE_OPTION = "bold green"  # type: ignore
+rich_click.STYLE_SWITCH = "bold blue"  # type: ignore
+rich_click.STYLE_METAVAR = "bold red"  # type: ignore
+rich_click.STYLE_HELPTEXT_FIRST_LINE = "bold blue"  # type: ignore
+rich_click.STYLE_HELPTEXT = ""  # type: ignore
+rich_click.STYLE_HEADER_TEXT = "bold green"  # type: ignore
+rich_click.STYLE_OPTION_DEFAULT = "bold yellow"  # type: ignore
+rich_click.STYLE_OPTION_HELP = ""  # type: ignore
+rich_click.STYLE_ERRORS_SUGGESTION = "bold red"  # type: ignore
+rich_click.STYLE_OPTIONS_TABLE_BOX = "SIMPLE_HEAVY"  # type: ignore
+rich_click.STYLE_COMMANDS_TABLE_BOX = "SIMPLE_HEAVY"  # type: ignore
 if logging_config.LOG_HANDLER == "python":
     rich_click.COLOR_SYSTEM = None  # type: ignore
 
@@ -61,12 +69,12 @@ try:
     from trogon import tui
 except ImportError:
 
-    def tui(*args, **kwargs):
+    def tui(*args: Any, **kwargs: Any) -> Any:
         """
         TUI Placeholder - trogon not installed
         """
 
-        def placeholder(app: click.Group):
+        def placeholder(app: click.Group) -> Any:
             """
             Return the group in place
             """
@@ -89,7 +97,7 @@ provider_argument = click.option(
     "--provider",
     show_default=False,
     default=None,
-    type=click.Choice(CAMPSITE_SEARCH_PROVIDER.keys(), case_sensitive=False),  # type: ignore
+    type=click.Choice(list(CAMPSITE_SEARCH_PROVIDER.keys()), case_sensitive=False),
     help="Camping Search Provider. Defaults to 'RecreationDotGov'",
     metavar="TEXT",
     envvar="CAMPLY_PROVIDER",
@@ -161,7 +169,7 @@ def camply_command_line(
     visit the camply documentation at https://juftin.com/camply
     """
     set_up_logging(log_level=None if debug is False else logging.INFO)
-    logger.camply("camply, the campsite finder ⛺️")  # type: ignore
+    logger.camply("camply, the campsite finder ⛺️")
     ctx.obj = CamplyContext(debug=debug, provider=provider)
     _set_up_debug(debug=debug)
 
@@ -233,7 +241,9 @@ def equipment_types(
         sys.exit(1)
 
     if provider == GoingToCamp.__name__:
-        GoingToCamp().list_equipment_types(rec_area[0])  # type: ignore
+        rec_areas_list = make_list(rec_area)
+        if rec_areas_list and len(rec_areas_list) > 0:
+            GoingToCamp().list_equipment_types(rec_areas_list[0])
     elif provider.startswith(RecreationDotGov.__name__):
         log_sorted_response(response_array=EquipmentOptions.__all_accepted_equipment__)
     else:
@@ -278,12 +288,13 @@ def recreation_areas(
             f"{provider} does not support filtering recreation areas by state. Leave --state blank."
         )
         sys.exit(1)
+    rec_area_finder: Any
     if provider == GoingToCamp.__name__:
         rec_area_finder = GoingToCamp()
     elif provider.startswith(RecreationDotGov.__name__):
-        rec_area_finder = RecreationDotGov()  # type: ignore
+        rec_area_finder = RecreationDotGov()
     else:
-        rec_area_finder = CAMPSITE_SEARCH_PROVIDER[provider]  # type: ignore
+        rec_area_finder = CAMPSITE_SEARCH_PROVIDER[provider]
     params = {}
     if state is not None:
         params.update({"state": state})
@@ -325,9 +336,9 @@ def campgrounds(
         [
             search is None,
             state is None,
-            len(rec_area) == 0,  # type: ignore
-            len(campground) == 0,  # type: ignore
-            len(campsite) == 0,  # type: ignore
+            len(cast(List[Any], rec_area) or []) == 0,
+            len(cast(List[Any], campground) or []) == 0,
+            len(cast(List[Any], campsite) or []) == 0,
             provider not in [Yellowstone.__name__, GoingToCamp.__name__],
         ]
     ):
@@ -338,7 +349,7 @@ def campgrounds(
         sys.exit(1)
     search_provider_class = CAMPSITE_SEARCH_PROVIDER[provider]
     camp_finder = search_provider_class.provider_class()  # type: ignore
-    params = {}
+    params: Dict[str, Any] = {}
     if state is not None:
         params.update({"state": state})
     camp_finder.find_campgrounds(
@@ -346,7 +357,7 @@ def campgrounds(
         rec_area_id=make_list(rec_area, coerce=int),
         campground_id=make_list(campground, coerce=int),
         campsite_id=make_list(campsite, coerce=int),
-        **params,  # type: ignore
+        **params,
     )
 
 
@@ -502,14 +513,23 @@ def _get_equipment(equipment: Optional[List[str]]) -> List[Tuple[str, Optional[i
     """
     Parse Equipment from CLI Args
     """
-    equipment_list = []
-    for equipment_name, equipment_length in equipment:  # type: ignore
+    equipment_list: List[Tuple[str, Optional[int]]] = []
+    if not equipment:
+        return equipment_list
+    for equipment_item in equipment:
         try:
-            equipment_length = round(float(equipment_length), 0)
-            if equipment_length == 0:
-                equipment_length = None
+            equipment_name, equipment_length_str = equipment_item.split(",")
         except ValueError:
-            equipment_length = None
+            equipment_name = equipment_item
+            equipment_length_str = ""
+
+        equipment_length: Optional[int] = None
+        try:
+            equipment_length_float = round(float(equipment_length_str), 0)
+            if equipment_length_float != 0:
+                equipment_length = int(equipment_length_float)
+        except ValueError:
+            pass
         equipment_list.append((equipment_name, equipment_length))
     return equipment_list
 
@@ -561,9 +581,9 @@ def _validate_campsites(
     """
     if provider.startswith(RecreationDotGov.__name__) and all(
         [
-            len(rec_area) == 0,  # type: ignore
-            len(campground) == 0,  # type: ignore
-            len(campsite) == 0,  # type: ignore
+            len(cast(List[Any], rec_area) or []) == 0,
+            len(cast(List[Any], campground) or []) == 0,
+            len(cast(List[Any], campsite) or []) == 0,
             yaml_config is None,
         ]
     ):
@@ -573,11 +593,16 @@ def _validate_campsites(
             "parameters."
         )
         sys.exit(1)
+    search_windows_list: List[SearchWindow]
     if yaml_config is None:
-        search_windows = handle_search_windows(start_date=start_date, end_date=end_date)
+        windows = handle_search_windows(start_date=start_date, end_date=end_date)
+        if not isinstance(windows, list):
+            search_windows_list = [windows]
+        else:
+            search_windows_list = windows
     else:
-        search_windows = ()  # type: ignore
-    days_of_the_week = None
+        search_windows_list = []
+    days_of_the_week: set[int] = set()
     if day is not None:
         days_of_the_week = {days_of_the_week_mapping[item] for item in day}
     if search_once is True and (continuous is True or search_forever is not None):
@@ -596,7 +621,7 @@ def _validate_campsites(
         ]
     ):
         continuous = True
-    return continuous, search_windows, days_of_the_week  # type: ignore
+    return continuous, search_windows_list, days_of_the_week
 
 
 def _get_provider_kwargs_from_cli(
@@ -672,7 +697,9 @@ def _get_provider_kwargs_from_cli(
         "log": True,
         "verbose": True,
         "continuous": continuous,
-        "polling_interval": float(polling_interval),  # type: ignore
+        "polling_interval": float(
+            polling_interval or SearchConfig.RECOMMENDED_POLLING_INTERVAL
+        ),
         "notify_first_try": notify_first_try,
         "notification_provider": notifications,
         "search_forever": search_forever,
@@ -795,12 +822,12 @@ def providers(
         logger.info(
             '    "%s":    %s',
             provider_name,
-            search_class.__doc__.strip().splitlines()[0],  # type: ignore
+            (search_class.__doc__ or "").strip().splitlines()[0],
         )
 
 
 test_notifications_kwargs = notification_kwargs.copy()
-test_notifications_kwargs["help"] = test_notifications_kwargs["help"].replace(  # type: ignore
+test_notifications_kwargs["help"] = str(test_notifications_kwargs["help"]).replace(
     "Enables continuous searching. ", ""
 )
 test_notifications_kwargs.pop("default")
@@ -875,7 +902,7 @@ def list_campsites(
     camp_search.list_campsite_units()
 
 
-def cli():
+def cli() -> Any:
     """
     Camply Command Line Utility Wrapper
     """

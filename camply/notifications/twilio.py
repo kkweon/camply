@@ -3,7 +3,7 @@ Push Notifications via Twilio
 """
 
 import logging
-from typing import List
+from typing import Any, List
 
 from camply.config import TwilioConfig
 from camply.containers import AvailableCampsite
@@ -18,7 +18,7 @@ class TwilioNotifications(BaseNotifications):
     Push Notifications via Twilio
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         try:
             from twilio.rest import Client
@@ -48,7 +48,7 @@ class TwilioNotifications(BaseNotifications):
             "Twilio: will notify these phone numbers: " + ", ".join(self.phone_nums)
         )
 
-    def send_message(self, message: str, **kwargs):
+    def send_message(self, message: str, **kwargs: Any) -> Any:
         """
         Send a message via Twilio - if environment variables are configured
 
@@ -61,7 +61,7 @@ class TwilioNotifications(BaseNotifications):
                 to=phone_num, from_=TwilioConfig.SOURCE_NUMBER, body=message
             )
 
-    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs):
+    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs: Any) -> Any:
         """
         Send a message with a campsite object
 

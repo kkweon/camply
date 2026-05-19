@@ -3,9 +3,9 @@ Push Notifications via Pushbullet
 """
 
 import logging
-from typing import List
+from typing import Any, List
 
-import requests  # type: ignore
+import requests
 
 from camply.config import PushbulletConfig
 from camply.containers import AvailableCampsite
@@ -19,7 +19,7 @@ class PushbulletNotifications(BaseNotifications):
     Push Notifications via PushBullet
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         pushbullet_headers = PushbulletConfig.API_HEADERS.copy()
         pushbullet_headers.update({"Access-Token": PushbulletConfig.API_TOKEN})
@@ -33,7 +33,7 @@ class PushbulletNotifications(BaseNotifications):
             logger.error(warning_message)
             raise EnvironmentError(warning_message)
 
-    def send_message(self, message: str, **kwargs) -> requests.Response:
+    def send_message(self, message: str, **kwargs: Any) -> requests.Response:
         """
         Send a message via PushBullet - if environment variables are configured
 
@@ -65,7 +65,7 @@ class PushbulletNotifications(BaseNotifications):
             raise ConnectionError(response.text) from he
         return response
 
-    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs):
+    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs: Any) -> Any:
         """
         Send a message with a campsite object
 

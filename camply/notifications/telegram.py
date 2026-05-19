@@ -3,9 +3,9 @@ Push Notifications via Telegram
 """
 
 import logging
-from typing import List
+from typing import Any, List
 
-import requests  # type: ignore
+import requests
 
 from camply.config import TelegramConfig
 from camply.containers import AvailableCampsite
@@ -19,7 +19,7 @@ class TelegramNotifications(BaseNotifications):
     Push Notifications via Telegram
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.session.headers.update(TelegramConfig.API_HEADERS)
         if any(
@@ -38,7 +38,9 @@ class TelegramNotifications(BaseNotifications):
             logger.error(warning_message)
             raise EnvironmentError(warning_message)
 
-    def send_message(self, message: str, escaped=False, **kwargs) -> requests.Response:
+    def send_message(
+        self, message: str, escaped: Any = False, **kwargs: Any
+    ) -> requests.Response:
         """
         Send a message via Telegram - if environment variables are configured
 
@@ -104,7 +106,7 @@ class TelegramNotifications(BaseNotifications):
             message = message.replace(f, f"\\{f}")
         return message
 
-    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs):
+    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs: Any) -> Any:
         """
         Send a message with a campsite object
 

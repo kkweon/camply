@@ -4,7 +4,7 @@ Push Notifications via Pushover
 import logging
 from email.message import EmailMessage
 from smtplib import SMTP_SSL
-from typing import List
+from typing import Any, List
 
 from camply.config import EmailConfig
 from camply.containers import AvailableCampsite
@@ -26,7 +26,7 @@ class EmailNotifications(BaseNotifications):
     email_smtp_server = EmailConfig.EMAIL_SMTP_SERVER
     email_smtp_server_port = EmailConfig.EMAIL_SMTP_PORT
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Data Validation
 
@@ -66,7 +66,7 @@ class EmailNotifications(BaseNotifications):
         )
         _email_server.quit()
 
-    def send_message(self, message: str, **kwargs) -> None:
+    def send_message(self, message: str, **kwargs: Any) -> None:
         """
         Send a message via Email
 
@@ -98,7 +98,7 @@ class EmailNotifications(BaseNotifications):
         logger.info("Email sent successfully")
         email_server.quit()
 
-    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs) -> None:
+    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs: Any) -> None:
         """
         Send a message with a campsite object
 

@@ -6,7 +6,7 @@ import logging
 from abc import ABC
 from random import uniform
 from time import sleep
-from typing import List, Optional, Tuple, Union
+from typing import Any, List, Optional, Tuple, Union, cast
 
 import pandas as pd
 
@@ -49,7 +49,7 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
         equipment: Optional[List[Tuple[str, Optional[int]]]] = None,
         offline_search: bool = False,
         offline_search_path: Optional[str] = None,
-        **kwargs,
+        **kwargs: Any,
     ) -> None:
         """
         Initialize with Search Parameters
@@ -110,7 +110,9 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
         self.campgrounds = self._get_searchable_campgrounds()
         self.campsite_metadata: Optional[pd.DataFrame] = None
         self.equipment: List[Tuple[str, Optional[int]]] = []
-        self.equipment = self._get_searchable_equipment(equipment=equipment)  # type: ignore
+        _equipment_result = self._get_searchable_equipment(equipment=equipment)
+        if _equipment_result:
+            self.equipment = _equipment_result
 
     def _get_searchable_campgrounds(self) -> List[CampgroundFacility]:
         """
@@ -124,8 +126,8 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
         searchable_campgrounds: List[CampgroundFacility]
             List of searchable campground IDs
         """
-        if self.campsites not in [(), [], None]:
-            self.campsites = [int(campsite_id) for campsite_id in self.campsites]  # type: ignore
+        if self.campsites not in [(), [], None] and self.campsites is not None:
+            self.campsites = [int(campsite_id) for campsite_id in self.campsites]
             searchable_campgrounds = self._get_campgrounds_by_campsite_id()
         elif self._campground_object not in [(), [], None]:
             searchable_campgrounds = self._get_campgrounds_by_campground_id()
@@ -221,11 +223,14 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
             List of searchable campground IDs
         """
         facilities = []
-        for rec_area in self._recreation_area_id:  # type: ignore
-            campground_array = self.campsite_finder.find_facilities_per_recreation_area(
-                rec_area_id=rec_area
-            )
-            facilities += campground_array
+        if self._recreation_area_id is not None:
+            for rec_area in self._recreation_area_id:
+                campground_array = (
+                    self.campsite_finder.find_facilities_per_recreation_area(
+                        rec_area_id=rec_area
+                    )
+                )
+                facilities += campground_array
         return facilities
 
     def get_all_campsites(self) -> List[AvailableCampsite]:
@@ -245,7 +250,11 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
         if self.campsite_metadata is None:
             self.campsite_metadata = (
                 self.campsite_finder.get_internal_campsite_metadata(
-                    facility_ids=[facil.facility_id for facil in self.campgrounds]  # type: ignore
+                    facility_ids=[
+                        int(facil.facility_id)
+                        for facil in self.campgrounds
+                        if facil.facility_id is not None
+                    ]
                 )
             )
             logger.info(
@@ -259,15 +268,22 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
                     f"{month.strftime('%B, %Y')}"
                 )
                 availabilities = self.campsite_finder.get_recdotgov_data(
-                    campground_id=campground.facility_id,  # type: ignore
-                    month=month,  # type: ignore
+                    campground_id=int(campground.facility_id)
+                    if campground.facility_id
+                    else 0,
+                    month=month,
                 )
+                availabilities_dict = cast(dict[str, Any], availabilities)
                 campsites = self.campsite_finder.process_campsite_availability(
-                    availability=availabilities,  # type: ignore
+                    availability=availabilities_dict,
                     recreation_area=campground.recreation_area,
-                    recreation_area_id=campground.recreation_area_id,  # type: ignore
+                    recreation_area_id=int(campground.recreation_area_id)
+                    if campground.recreation_area_id
+                    else 0,
                     facility_name=campground.facility_name,
-                    facility_id=campground.facility_id,  # type: ignore
+                    facility_id=int(campground.facility_id)
+                    if campground.facility_id
+                    else 0,
                     month=month,
                     campsite_metadata=self.campsite_metadata,
                 )
@@ -280,12 +296,12 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
                     campsites = [
                         campsite_obj
                         for campsite_obj in campsites
-                        if int(campsite_obj.campsite_id) in self.campsites  # type: ignore
+                        if int(campsite_obj.campsite_id) in self.campsites
                     ]
                 found_campsites += campsites
                 if index + 1 < len(self.campgrounds):
                     sleep(round(uniform(*RecreationBookingConfig.RATE_LIMITING), 2))
-        campsite_df = self.campsites_to_df(campsites=found_campsites)  # type: ignore
+        campsite_df = self.campsites_to_df(campsites=found_campsites)
         campsite_df_validated = self._filter_date_overlap(campsites=campsite_df)
         compiled_campsite_df = self._consolidate_campsites(
             campsite_df=campsite_df_validated, nights=self.nights
@@ -362,8 +378,8 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
         if isinstance(campsites[0], RecDotGovCampsite):
             return [
                 ListedCampsite(
-                    id=item.campsite_id,  # type: ignore
-                    facility_id=item.asset_id,  # type: ignore
+                    id=item.campsite_id,
+                    facility_id=item.asset_id,
                     name=item.name,
                 )
                 for item in campsites
@@ -371,8 +387,8 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
         elif isinstance(campsites[0], RecDotGovSearchResult):
             return [
                 ListedCampsite(
-                    id=item.entity_id,  # type: ignore
-                    facility_id=item.parent_id,  # type: ignore
+                    id=item.entity_id,
+                    facility_id=item.parent_id,
                     name=item.name,
                 )
                 for item in campsites
@@ -391,7 +407,7 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
         List[ListedCampsite]
         """
         recdotgov_campsites = self.campsite_finder.get_internal_campsites(
-            facility_ids=[item.facility_id for item in self.campgrounds]  # type: ignore
+            facility_ids=[item.facility_id for item in self.campgrounds]
         )
         listable_campsites = self._get_listable_campsites(campsites=recdotgov_campsites)
         self.log_listed_campsites(
@@ -406,7 +422,7 @@ class SearchRecreationDotGov(SearchRecreationDotGovBase):
     Searches on Recreation.gov for Campsites (default provider)
     """
 
-    provider_class = RecreationDotGov  # type: ignore
+    provider_class = RecreationDotGov
 
 
 class SearchRecreationDotGovDailyTicket(SearchRecreationDotGovBase):
@@ -414,7 +430,7 @@ class SearchRecreationDotGovDailyTicket(SearchRecreationDotGovBase):
     Searches on Recreation.gov for Tickets and Tours (Daily)
     """
 
-    provider_class = RecreationDotGovDailyTicket  # type: ignore
+    provider_class = RecreationDotGovDailyTicket
     accepted_equipment = EquipmentConfig.TIMESTAMP_EQUIPMENT
 
 
@@ -423,7 +439,7 @@ class SearchRecreationDotGovDailyTimedEntry(SearchRecreationDotGovBase):
     Searches on Recreation.gov for Timed Entries (Daily)
     """
 
-    provider_class = RecreationDotGovDailyTimedEntry  # type: ignore
+    provider_class = RecreationDotGovDailyTimedEntry
     accepted_equipment = EquipmentConfig.TIMESTAMP_EQUIPMENT
 
 
@@ -432,7 +448,7 @@ class SearchRecreationDotGovTicket(SearchRecreationDotGovBase):
     Searches on Recreation.gov for Tickets and Tours
     """
 
-    provider_class = RecreationDotGovTicket  # type: ignore
+    provider_class = RecreationDotGovTicket
 
 
 class SearchRecreationDotGovTimedEntry(SearchRecreationDotGovBase):
@@ -440,4 +456,4 @@ class SearchRecreationDotGovTimedEntry(SearchRecreationDotGovBase):
     Searches on Recreation.gov for Timed Entries
     """
 
-    provider_class = RecreationDotGovTimedEntry  # type: ignore
+    provider_class = RecreationDotGovTimedEntry

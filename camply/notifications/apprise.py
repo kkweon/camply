@@ -3,7 +3,7 @@ Push Notifications via Apprise
 """
 
 import logging
-from typing import List
+from typing import Any, List
 
 from camply.config import AppriseConfig
 from camply.containers import AvailableCampsite
@@ -18,7 +18,7 @@ class AppriseNotifications(BaseNotifications):
     Push Notifications via Apprise
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         try:
             import apprise
@@ -43,7 +43,7 @@ class AppriseNotifications(BaseNotifications):
         self.client.add(AppriseConfig.APPRISE_URL)
         logger.info("Apprise: will notify specified URL")
 
-    def send_message(self, message: str, **kwargs):
+    def send_message(self, message: str, **kwargs: Any) -> Any:
         """
         Send a message via Apprise - if environment variables are configured
 
@@ -56,7 +56,7 @@ class AppriseNotifications(BaseNotifications):
             title="Camply Notification",
         )
 
-    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs):
+    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs: Any) -> Any:
         """
         Send a message with a campsite object
 

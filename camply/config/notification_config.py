@@ -22,10 +22,10 @@ class PushoverConfig:
 
     PUSHOVER_API_ENDPOINT: str = "https://api.pushover.net/1/messages.json"
     PUSHOVER_DEFAULT_API_TOKEN: bytes = b"YXBqOWlzNjRrdm5zZWt3YmEyeDZxaDV0cWhxbXI5"
-    API_HEADERS: dict = {"Content-Type": "application/json"}
+    API_HEADERS: dict[Any, Any] = {"Content-Type": "application/json"}
 
-    PUSH_TOKEN: str = getenv("PUSHOVER_PUSH_TOKEN", None)  # type: ignore
-    PUSH_USER: str = getenv("PUSHOVER_PUSH_USER", None)  # type: ignore
+    PUSH_TOKEN: str = getenv("PUSHOVER_PUSH_TOKEN", "")
+    PUSH_USER: str = getenv("PUSHOVER_PUSH_USER", "")
 
 
 class AppriseConfig:
@@ -33,7 +33,7 @@ class AppriseConfig:
     Apprise Notification Config Class
     """
 
-    APPRISE_URL: str = getenv("APPRISE_URL", None)  # type: ignore
+    APPRISE_URL: str = getenv("APPRISE_URL", "")
 
 
 class EmailConfig:
@@ -41,15 +41,15 @@ class EmailConfig:
     Email Notification Config Class
     """
 
-    EMAIL_TO_ADDRESS: Optional[str] = getenv("EMAIL_TO_ADDRESS", None)
+    EMAIL_TO_ADDRESS: Optional[str] = getenv("EMAIL_TO_ADDRESS", "")
     DEFAULT_FROM_ADDRESS: str = "camply@juftin.com"
     EMAIL_FROM_ADDRESS: str = getenv("EMAIL_FROM_ADDRESS", DEFAULT_FROM_ADDRESS)
     DEFAULT_SUBJECT_LINE: str = "Camply Notification"
     EMAIL_SUBJECT_LINE: str = getenv("EMAIL_SUBJECT_LINE", DEFAULT_SUBJECT_LINE)
     DEFAULT_SMTP_SERVER: str = "smtp.gmail.com"
     EMAIL_SMTP_SERVER: str = getenv("EMAIL_SMTP_SERVER", DEFAULT_SMTP_SERVER)
-    EMAIL_USERNAME: Optional[str] = getenv("EMAIL_USERNAME", None)
-    EMAIL_PASSWORD: Optional[str] = getenv("EMAIL_PASSWORD", None)
+    EMAIL_USERNAME: Optional[str] = getenv("EMAIL_USERNAME", "")
+    EMAIL_PASSWORD: Optional[str] = getenv("EMAIL_PASSWORD", "")
     DEFAULT_SMTP_PORT: int = 465
     EMAIL_SMTP_PORT: int = int(getenv("EMAIL_SMTP_PORT", DEFAULT_SMTP_PORT))
 
@@ -72,7 +72,7 @@ class NtfyConfig:
     """
 
     NTFY_API_ENDPOINT: str = "https://ntfy.sh/"
-    NTFY_TOPIC = getenv("NTFY_TOPIC", None)
+    NTFY_TOPIC = getenv("NTFY_TOPIC", "")
 
 
 class PushbulletConfig:
@@ -81,9 +81,9 @@ class PushbulletConfig:
     """
 
     PUSHBULLET_API_ENDPOINT: str = "https://api.pushbullet.com/v2/pushes"
-    API_HEADERS: dict = {"Content-Type": "application/json"}
+    API_HEADERS: dict[Any, Any] = {"Content-Type": "application/json"}
 
-    API_TOKEN = getenv("PUSHBULLET_API_TOKEN", None)
+    API_TOKEN = getenv("PUSHBULLET_API_TOKEN", "")
 
 
 class TwilioConfig:
@@ -91,11 +91,11 @@ class TwilioConfig:
     Twilio Notification Config Class
     """
 
-    ACCOUNT_SID = getenv("TWILIO_ACCOUNT_SID", None)
-    AUTH_TOKEN = getenv("TWILIO_AUTH_TOKEN", None)
-    SOURCE_NUMBER = getenv("TWILIO_SOURCE_NUMBER", None)
+    ACCOUNT_SID = getenv("TWILIO_ACCOUNT_SID", "")
+    AUTH_TOKEN = getenv("TWILIO_AUTH_TOKEN", "")
+    SOURCE_NUMBER = getenv("TWILIO_SOURCE_NUMBER", "")
     # comma separated set of phone numbers
-    DEST_NUMBERS = getenv("TWILIO_DEST_NUMBERS", None)
+    DEST_NUMBERS = getenv("TWILIO_DEST_NUMBERS", "")
 
 
 class SlackConfig:
@@ -103,7 +103,7 @@ class SlackConfig:
     Slack Notification Config Class
     """
 
-    SLACK_WEBHOOK: Optional[str] = getenv("SLACK_WEBHOOK", None)
+    SLACK_WEBHOOK: Optional[str] = getenv("SLACK_WEBHOOK", "")
 
 
 class TelegramConfig:
@@ -111,12 +111,12 @@ class TelegramConfig:
     Telegram Notification Config Class
     """
 
-    BOT_TOKEN = getenv("TELEGRAM_BOT_TOKEN", None)
-    CHAT_ID = getenv("TELEGRAM_CHAT_ID", None)
+    BOT_TOKEN = getenv("TELEGRAM_BOT_TOKEN", "")
+    CHAT_ID = getenv("TELEGRAM_CHAT_ID", "")
 
     API_ENDPOINT: str = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
-    API_HEADERS: dict = {"Content-Type": "application/json"}
-    API_CONTENT: dict = {
+    API_HEADERS: dict[Any, Any] = {"Content-Type": "application/json"}
+    API_CONTENT: dict[Any, Any] = {
         "chat_id": CHAT_ID,
         "parse_mode": "MarkdownV2",
         "disable_web_page_preview": "true",
@@ -128,8 +128,6 @@ class WebhookConfig:
     Webhook Notification Config Class
     """
 
-    WEBHOOK_URL: Optional[str] = getenv("WEBHOOK_URL", None)
+    WEBHOOK_URL: Optional[str] = getenv("WEBHOOK_URL", "")
     DEFAULT_HEADERS: Dict[str, Any] = {"Content-Type": "application/json"}
-    WEBHOOK_HEADERS: Dict[str, Any] = json.loads(
-        getenv("WEBHOOK_HEADERS", None) or "{}"  # type: ignore
-    )
+    WEBHOOK_HEADERS: Dict[str, Any] = json.loads(getenv("WEBHOOK_HEADERS", "") or "{}")

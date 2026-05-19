@@ -4,7 +4,7 @@ Default Notifier: Silent + Extras
 
 import datetime
 import logging
-from typing import Dict, List, Type, Union
+from typing import Any, Dict, List, Type, Union
 
 from camply.containers import AvailableCampsite
 from camply.notifications.apprise import AppriseNotifications
@@ -40,7 +40,9 @@ class MultiNotifierProvider(BaseNotifications):
     Notifications Supported from Multiple Providers
     """
 
-    def __init__(self, provider: Union[str, List[str], BaseNotifications, None]):
+    def __init__(
+        self, provider: Union[str, List[str], BaseNotifications, None]
+    ) -> None:
         """
         Initialize with a Notifier Class Object, a string or list of strings
 
@@ -54,11 +56,11 @@ class MultiNotifierProvider(BaseNotifications):
         self.providers = [SilentNotifications()]
         if isinstance(provider, str):
             provider = [prov_string.strip() for prov_string in provider.split(",")]
-        for notifier_object in provider:  # type: ignore
+        for notifier_object in provider:
             if isinstance(notifier_object, BaseNotifications):
                 notifier = notifier_object
             elif isinstance(notifier_object, str):
-                notifier = CAMPSITE_NOTIFICATIONS.get(notifier_object.lower(), None)()  # type: ignore
+                notifier = CAMPSITE_NOTIFICATIONS.get(notifier_object.lower(), None)()
             elif notifier_object is None:
                 notifier = None
             else:
@@ -66,9 +68,9 @@ class MultiNotifierProvider(BaseNotifications):
                     "You must provide a proper Notification Identifier"
                 )
             if notifier is not None and not isinstance(notifier, SilentNotifications):
-                self.providers.append(notifier)  # type: ignore
+                self.providers.append(notifier)
 
-    def send_message(self, message: str, **kwargs):
+    def send_message(self, message: str, **kwargs: Any) -> Any:
         """
         Send a message
 
@@ -82,7 +84,7 @@ class MultiNotifierProvider(BaseNotifications):
         for provider in self.providers:
             provider.send_message(message=message, **kwargs)
 
-    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs):
+    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs: Any) -> Any:
         """
         Send a message with a campsite object
 
@@ -109,7 +111,7 @@ class MultiNotifierProvider(BaseNotifications):
                 "I hope you're watching these logs."
             )
 
-    def last_gasp(self, error: Exception) -> None:  # type: ignore
+    def last_gasp(self, error: Exception) -> None:
         """
         Make a `last gasp` notification before exiting
 

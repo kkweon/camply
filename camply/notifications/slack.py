@@ -3,9 +3,9 @@ Push Notifications via Slack
 """
 
 import logging
-from typing import List
+from typing import Any, List
 
-import requests  # type: ignore
+import requests
 
 from camply.config import SlackConfig
 from camply.containers import AvailableCampsite
@@ -19,7 +19,7 @@ class SlackNotifications(BaseNotifications):
     Push Notifications via Slack
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.session.headers.update({"Content-Type": "application/json"})
         if any([SlackConfig.SLACK_WEBHOOK is None, SlackConfig.SLACK_WEBHOOK == ""]):
@@ -31,7 +31,7 @@ class SlackNotifications(BaseNotifications):
             logger.error(warning_message)
             raise EnvironmentError(warning_message)
 
-    def send_message(self, message: str, **kwargs) -> requests.Response:
+    def send_message(self, message: str, **kwargs: Any) -> requests.Response:
         """
         Send a message via Slack - if environment variables are configured.
 
@@ -66,7 +66,7 @@ class SlackNotifications(BaseNotifications):
             raise ConnectionError(response.text) from he
         return response
 
-    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs):
+    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs: Any) -> Any:
         """
         Send a message with a campsite object
 
@@ -113,7 +113,7 @@ class SlackNotifications(BaseNotifications):
                 blocks.append(
                     {
                         "type": "section",
-                        "fields": fields[chunk:chunk_max],  # type: ignore
+                        "fields": fields[chunk:chunk_max],
                     }
                 )
             self.send_message(

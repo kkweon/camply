@@ -65,33 +65,8 @@ Documentation = "https://github.com/juftin/camply#readme"
 Issues = "https://github.com/juftin/camply/issues"
 Source = "https://github.com/juftin/camply"
 
-[dependency-groups]
-dev = [
-  # Testing
-  "pytest~=7.3.1",
-  "pytest-cov~=4.0.0",
-  "pytest-mock~=3.10.0",
-  "pytest-vcr~=1.0.2",
-  "pytest-xdist~=3.2.1",
-  "freezegun~=1.5.5",
-  # Linting
-  "mypy>=1.6.1",
-  "ruff~=0.1.7"
-]
-docs = [
-  "markdown-callouts",
-  "markdown-exec",
-  "mkdocs",
-  "mkdocs-click",
-  "mkdocs-exclude-search",
-  "mkdocs-gen-files",
-  "mkdocs-literate-nav",
-  "mkdocs-material",
-  "mkdocs-section-index",
-  "mkdocstrings",
-  "mkdocstrings-python",
-  "pymdown-extensions"
-]
+[[tool.uv.index]]
+url = "https://pypi.org/simple"
 
 [tool.coverage.paths]
 camply = ["camply", "*/camply/camply"]
@@ -110,14 +85,14 @@ parallel = true
 source_pkgs = ["camply"]
 
 [tool.mypy]
-check_untyped_defs = false
-disallow_any_generics = false
-disallow_untyped_defs = false
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_untyped_defs = true
 follow_imports = "silent"
 ignore_missing_imports = true
 no_implicit_reexport = true
 warn_redundant_casts = true
-warn_unused_ignores = false
+warn_unused_ignores = true
 
 [tool.pytest.ini_options]
 addopts = [
@@ -172,3 +147,36 @@ known-first-party = ["camply"]
 
 [tool.ruff.pydocstyle]
 convention = "numpy"
+
+[dependency-groups]
+dev = [
+  # Testing
+  "pytest~=7.3.1",
+  "pytest-cov~=4.0.0",
+  "pytest-mock~=3.10.0",
+  "pytest-vcr~=1.0.2",
+  "pytest-xdist~=3.2.1",
+  "freezegun~=1.5.5",
+  # Linting
+  "mypy>=1.6.1",
+  "ruff~=0.1.7",
+  "types-requests>=2.32.4.20260107",
+  "types-python-dateutil>=2.9.0.20260124",
+  "types-pytz>=2025.2.0.20251108",
+  "types-pyyaml>=6.0.12.20250915",
+  "libcst>=1.8.5"
+]
+docs = [
+  "markdown-callouts",
+  "markdown-exec",
+  "mkdocs",
+  "mkdocs-click",
+  "mkdocs-exclude-search",
+  "mkdocs-gen-files",
+  "mkdocs-literate-nav",
+  "mkdocs-material",
+  "mkdocs-section-index",
+  "mkdocstrings",
+  "mkdocstrings-python",
+  "pymdown-extensions"
+]

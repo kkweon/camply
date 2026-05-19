@@ -4,9 +4,9 @@ Push Notifications via Pushover
 
 import base64
 import logging
-from typing import List, Optional
+from typing import Any, List, Optional
 
-import requests  # type: ignore
+import requests
 
 from camply.config import PushoverConfig
 from camply.containers import AvailableCampsite
@@ -20,11 +20,11 @@ class PushoverNotifications(BaseNotifications, logging.StreamHandler):
     Push Notifications via Pushover + a Logging Handler
     """
 
-    def __init__(self, level: Optional[int] = logging.INFO):
+    def __init__(self, level: Optional[int] = logging.INFO) -> None:
         super().__init__()
         self.session.headers.update(PushoverConfig.API_HEADERS)
         logging.StreamHandler.__init__(self)
-        self.setLevel(level=level)  # type: ignore
+        self.setLevel(level=level)
         if any([PushoverConfig.PUSH_USER is None, PushoverConfig.PUSH_USER == ""]):
             warning_message = (
                 "Pushover is not configured properly. To send pushover messages "
@@ -40,7 +40,7 @@ class PushoverNotifications(BaseNotifications, logging.StreamHandler):
                 PushoverConfig.PUSHOVER_DEFAULT_API_TOKEN
             ).decode("utf-8")
 
-    def send_message(self, message: str, **kwargs) -> requests.Response:
+    def send_message(self, message: str, **kwargs: Any) -> requests.Response:
         """
         Send a message via Pushover - if environment variables are configured
 
@@ -71,7 +71,7 @@ class PushoverNotifications(BaseNotifications, logging.StreamHandler):
             raise ConnectionError(response.text) from he
         return response
 
-    def emit(self, record: logging.LogRecord):
+    def emit(self, record: logging.LogRecord) -> Any:
         """
         Produce a logging record
 
@@ -86,7 +86,7 @@ class PushoverNotifications(BaseNotifications, logging.StreamHandler):
         title = f"Pushover {record.levelname.title()} Message"
         self.send_message(message=log_formatted_message, title=title)
 
-    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs):
+    def send_campsites(self, campsites: List[AvailableCampsite], **kwargs: Any) -> Any:
         """
         Send a message with a campsite object
 

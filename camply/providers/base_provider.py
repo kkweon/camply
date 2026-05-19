@@ -7,7 +7,7 @@ from abc import ABC, abstractmethod
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Type, Union
 
-import requests  # type: ignore
+import requests
 import tenacity
 from fake_useragent import UserAgent
 
@@ -68,7 +68,7 @@ class BaseProvider(ABC):
         561,  # Unauthorized
     ]
 
-    def __repr__(self):
+    def __repr__(self) -> Any:
         """
         String Representation
 
@@ -78,7 +78,7 @@ class BaseProvider(ABC):
         """
         return f"<{self.__class__.__name__}>"
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Initialize with a session
         """
@@ -90,7 +90,7 @@ class BaseProvider(ABC):
         self.json_headers.update({"Content-Type": "application/json"})
 
     @classmethod
-    def get_search_months(cls, search_days) -> List[datetime]:
+    def get_search_months(cls, search_days: Any) -> List[datetime]:
         """
         Get the Unique Months that need to be Searched
 
