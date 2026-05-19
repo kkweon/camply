@@ -19,7 +19,8 @@
         [
             "@semantic-release/exec",
             {
-                "prepareCmd": "uv version ${nextRelease.version} && uv build"
+                "prepareCmd": "uv version ${nextRelease.version} && uv build && task docs -- build",
+                "publishCmd": "task publish RELEASE_VERSION=${nextRelease.version} CI=true"
             }
         ],
         [
