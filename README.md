@@ -155,6 +155,20 @@ Head over to the [camply documentation](https://kkweon.github.io/camply/) to see
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
+## Docker Usage
+
+`camply` provides an official Docker image published to `ghcr.io/kkweon/camply:latest`. The image provides the `camply` CLI directly as its entrypoint, meaning you can pass arguments just like the local executable.
+
+You can mount your personal `.camply` configuration file into the container (so it picks up your Pushover or Telegram credentials) using a volume mount:
+
+```bash
+docker run --rm -it \
+  -v ~/.camply:/home/camply/.camply \
+  ghcr.io/kkweon/camply:latest campsites --campground 232450 --start-date 2026-06-01 --end-date 2026-06-14 --notifications pushover
+```
+
+**Note on Image Size**: The image size sits around ~300MB. This is completely expected! `camply` leverages `pandas` and `numpy` under the hood to perform complex continuous availability groupings, scheduling slices, and tabular dataframe merging to handle the massive JSON payloads returned by Recreation.gov efficiently.
+
 ## Contributing
 
 Camply doesn't support your favorite campsite booking provider yet? Consider
