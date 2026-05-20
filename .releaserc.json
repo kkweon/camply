@@ -1,5 +1,6 @@
 {
     "branches": [
+        "develop",
         "main",
         "master",
         "next",
