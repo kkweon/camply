@@ -33,6 +33,7 @@ tasks:
               vars:
                   UV_PYTHON: "{{.UV_PYTHON}}"
                   CLI_ARGS: --quiet
+            - task: check
         env:
             GITHUB_TOKEN: placeholder
             UV_PYTHON: "{{.UV_PYTHON}}"

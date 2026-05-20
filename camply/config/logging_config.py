@@ -4,28 +4,33 @@ Dynamic Logging Configuration
 
 import datetime
 import logging
+import time
 from os import getenv
 from typing import Optional, Tuple, Union
 
 from rich.logging import RichHandler
+from rich.text import Text
 from zoneinfo import ZoneInfo
 
 LOG_HANDLER = getenv("CAMPLY_LOG_HANDLER", "rich").lower()
 
 
-def _la_time_converter(formatter: logging.Formatter, timestamp: float):
+def _la_time_converter(
+    formatter: logging.Formatter, timestamp: float
+) -> time.struct_time:
     return datetime.datetime.fromtimestamp(
         timestamp, tz=ZoneInfo("America/Los_Angeles")
     ).timetuple()
 
 
-def _rich_la_time_formatter(dt: datetime.datetime) -> str:
-    return dt.astimezone(ZoneInfo("America/Los_Angeles")).strftime(
+def _rich_la_time_formatter(dt: datetime.datetime) -> Text:
+    formatted_time = dt.astimezone(ZoneInfo("America/Los_Angeles")).strftime(
         "[%Y-%m-%d %H:%M:%S]"
     )
+    return Text(formatted_time)
 
 
-logging.Formatter.converter = _la_time_converter
+logging.Formatter.converter = _la_time_converter  # type: ignore[assignment]
 
 
 def get_log_handler(

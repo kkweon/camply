@@ -51,7 +51,7 @@ class SearchUseDirect(BaseCampingSearch, ABC):
 
     @classmethod
     def get_provider_class(cls) -> Type[UseDirectProvider]:
-        return cls.provider_class
+        return cls.provider_class  # type: ignore[return-value]
 
     def __init__(
         self,
@@ -89,8 +89,7 @@ class SearchUseDirect(BaseCampingSearch, ABC):
         self._campground_ids = make_list(campgrounds, coerce=int) or []
         campsites = make_list(kwargs.get("campsites", []), coerce=int) or []
         if len(campsites) > 0:
-            finder = self.campsite_finder
-            finder.validate_campsites(
+            self.campsite_finder.validate_campsites(
                 campsites=campsites, facility_ids=self._campground_ids
             )
         try:
@@ -141,7 +140,6 @@ class SearchUseDirect(BaseCampingSearch, ABC):
             log_str = format_log_string(campground)
             logger.info("    %s", log_str)
         campsites_found: List[AvailableCampsite] = []
-        campsite_finder = self.campsite_finder
         for month in self.search_months:
             for campground in self.campgrounds:
                 logger.info(
@@ -150,7 +148,7 @@ class SearchUseDirect(BaseCampingSearch, ABC):
                     f"{month.strftime('%B, %Y')}"
                 )
                 end_date = month + relativedelta(months=1) - timedelta(days=1)
-                campsites = campsite_finder.get_campsites(
+                campsites = self.campsite_finder.get_campsites(
                     campground_id=int(campground.facility_id),
                     start_date=month,
                     end_date=end_date,
@@ -197,12 +195,11 @@ class SearchUseDirect(BaseCampingSearch, ABC):
         -------
         List[ListedCampsite]
         """
-        finder = self.campsite_finder
-        if not finder.usedirect_campsites:
+        if not self.campsite_finder.usedirect_campsites:
             facility_ids_ints = [int(f) for f in self.campground_ids if f is not None]
-            finder.get_campsite_metadata(facility_ids=facility_ids_ints)
+            self.campsite_finder.get_campsite_metadata(facility_ids=facility_ids_ints)
         sorted_campsites = sorted(
-            finder.usedirect_campsites.values(),
+            self.campsite_finder.usedirect_campsites.values(),
             key=lambda x: x.OrderByRaw if x.OrderByRaw is not None else 0,
         )
         logged_campsites = [
