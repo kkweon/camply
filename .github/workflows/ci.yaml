@@ -93,7 +93,7 @@ jobs:
 
             - name: Semantic Release
               env:
-                  GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   npm install -g semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/exec semantic-release-gitmoji @semantic-release/github
                   npx semantic-release
