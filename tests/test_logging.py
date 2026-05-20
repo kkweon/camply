@@ -1,4 +1,5 @@
 import logging
+import os
 from unittest.mock import patch
 
 from rich.logging import RichHandler
@@ -6,13 +7,22 @@ from rich.logging import RichHandler
 from camply.config.logging_config import set_up_logging
 
 
+@patch.dict(
+    os.environ, {"PYTEST_CURRENT_TEST": "", "CAMPLY_LOG_HANDLER": "rich"}, clear=False
+)
 def test_rich_logging_format():
     # Remove any existing handlers
     logging.root.handlers = []
 
+    # Unset PYTEST_CURRENT_TEST temporarily to bypass pytest fallback
+    os.environ.pop("PYTEST_CURRENT_TEST", None)
+
+    import camply.config.logging_config
+
+    camply.config.logging_config.LOG_HANDLER = "rich"
+
     with patch("camply.config.logging_config.getenv") as mock_getenv:
         # Mock getenv to ensure we use 'rich' handler and not 'python'
-        # (PYTEST_CURRENT_TEST can sometimes force python handler)
         def mock_env(key, default=None):
             if key == "PYTEST_CURRENT_TEST":
                 return None

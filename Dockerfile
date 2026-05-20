@@ -37,7 +37,6 @@ COPY --from=builder /app/.venv /app/.venv
 # Set up path so the virtual environment is used automatically
 ENV PATH="/app/.venv/bin:${PATH}"
 ENV HOME=/home/camply
-ENV CAMPLY_LOG_HANDLER="PYTHON"
 
 RUN mkdir -p ${HOME}
 WORKDIR ${HOME}
