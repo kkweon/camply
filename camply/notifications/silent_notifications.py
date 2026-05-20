@@ -48,7 +48,7 @@ class SilentNotifications(BaseNotifications):
                     f"{campsite.booking_date.strftime('%Y-%m-%d')} - "
                     f"{campsite.booking_end_date.strftime('%Y-%m-%d')}"
                 ),
-                campsite.campsite_type,
+                campsite.campsite_type or "",
                 campsite.campsite_site_name,
                 campsite.recreation_area,
                 campsite.facility_name,

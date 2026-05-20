@@ -113,6 +113,9 @@ filterwarnings = [
 ]
 
 [tool.ruff]
+target-version = "py38"
+
+[tool.ruff.lint]
 ignore = [
   "E501",  # line too long
   "PLR0913",  # Too many arguments to function call
@@ -133,19 +136,18 @@ select = [
   "RUF",  # ruff
   "C90"  # mccabe
 ]
-target-version = "py38"
 
-[tool.ruff.flake8-tidy-imports]
+[tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-first-party = ["camply"]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 # Tests can use magic values, assertions, and relative imports
 "tests/**/*" = ["PLR2004", "S101", "TID252"]
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "numpy"
 
 [dependency-groups]

@@ -59,8 +59,8 @@ class RecreationDotGovTours(RecreationDotGovBase, ABC):
         pass
 
     def paginate_recdotgov_campsites(
-        self, facility_id: int, equipment: Optional[List[str]] = None
-    ) -> List[RecDotGovSearchResult]:
+        self, facility_id: Any, equipment: Optional[List[str]] = None
+    ) -> List[Any]:
         """
         Paginate through the RecDotGov Campsite Metadata
         """
@@ -134,7 +134,7 @@ class RecreationDotGovTours(RecreationDotGovBase, ABC):
         cls,
         tour_id: int,
         booking_url_vars: Dict[str, str],
-        booking_date: datetime.date,
+        booking_date: date,
         campsite_metadata: pd.DataFrame,
     ) -> Dict[str, Any]:
         """
@@ -144,7 +144,7 @@ class RecreationDotGovTours(RecreationDotGovBase, ABC):
         ----------
         tour_id: int
         booking_url_vars: Dict[str, str]
-        booking_date: datetime.date
+        booking_date: date
         campsite_metadata: pd.DataFrame
 
         Returns
@@ -165,7 +165,7 @@ class RecreationDotGovTours(RecreationDotGovBase, ABC):
         except LookupError:
             use_type = "Time zone not available"
         return {
-            "booking_url": cls.booking_url.format(**booking_url_vars),
+            "booking_url": str(cls.booking_url).format(**booking_url_vars),
             "booking_date": booking_date,
             "booking_end_date": booking_date + timedelta(days=1),
             "booking_nights": 1,
@@ -379,14 +379,21 @@ class RecreationDotGovDailyMixin(RecreationDotGovTours, ABC):
         total_campsite_availability: List[Optional[AvailableCampsite]]
             Any monthly availabilities
         """
-        total_campsite_availability: List[AvailableCampsite] = []
+        total_campsite_availability: List[Optional[AvailableCampsite]] = []
         now = datetime.now(timezone.utc)
-        availabilities: Dict[str, Any] = {}
+        availabilities: Dict[Tuple[date, int], Dict[str, Any]] = {}
         for slot in availability:
-            slot_data = TourDailyAvailabilityResponse(**slot)
+            if not isinstance(slot, dict):
+                continue
+            slot_data_dict = slot
+            slot_data = TourDailyAvailabilityResponse(**slot_data_dict)
             tour_key = (slot_data.tour_date, slot_data.tour_id)
-            count_keys = set(slot_data.inventory_count.keys()) & set(
+            count_keys = set(
+                slot_data.inventory_count.keys() if slot_data.inventory_count else []
+            ) & set(
                 slot_data.reservation_count.keys()
+                if slot_data.reservation_count
+                else []
             )
             for count_key in count_keys:
                 window = None

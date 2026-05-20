@@ -78,7 +78,14 @@ class SearchGoingToCamp(BaseCampingSearch):
             **kwargs,
         )
 
-        self._recreation_area_id = self._validate_rec_area(recreation_area)
+        if isinstance(recreation_area, list):
+            rec_area_val = recreation_area[0]
+        else:
+            rec_area_val = recreation_area
+
+        if rec_area_val is None:
+            raise RuntimeError("Recreation area is required")
+        self._recreation_area_id = self._validate_rec_area(rec_area_val)
         self._campgrounds = campgrounds
         self.weekends_only = weekends_only
         assert (
@@ -102,12 +109,16 @@ class SearchGoingToCamp(BaseCampingSearch):
         if recreation_area in [(), [], None]:
             logger.error("At least one --rec-area must be provided")
             sys.exit(1)
-        if is_list_like(recreation_area) is True and len(recreation_area) > 1:
-            logger.error(
-                "Going To Camp only allows a single recreation area to be searched at a time"
-            )
-            sys.exit(1)
-        return int(make_list(recreation_area)[0])
+        if is_list_like(recreation_area) is True:
+            rec_area_list = make_list(recreation_area)
+            if rec_area_list and len(rec_area_list) > 1:
+                logger.error(
+                    "Going To Camp only allows a single recreation area to be searched at a time"
+                )
+                sys.exit(1)
+            if rec_area_list:
+                return int(rec_area_list[0])
+        return int(recreation_area)
 
     @classmethod
     def _validate_equipment(cls, equipment_id: Optional[int], rec_area: int) -> Any:
@@ -160,7 +171,7 @@ class SearchGoingToCamp(BaseCampingSearch):
                     ) = self.campsite_finder.rec_area_lookup(
                         rec_area_id=self._recreation_area_id
                     )
-                    booking_url = self.campsite_finder.get_reservation_link(
+                    reservation_url = self.campsite_finder.get_reservation_link(
                         rec_area_domain_name,
                         resource_location_id=campground.facility_id,
                         map_id=site.map_id,
@@ -202,7 +213,7 @@ class SearchGoingToCamp(BaseCampingSearch):
                             recreation_area_id=self._recreation_area_id,
                             facility_name=campground.facility_name,
                             facility_id=campground.facility_id,
-                            booking_url=booking_url,
+                            booking_url=reservation_url,
                         )
                     )
 
@@ -224,7 +235,7 @@ class SearchGoingToCamp(BaseCampingSearch):
             )
             sys.exit(1)
 
-        if self.campsites not in [(), [], None]:
+        if self.campsites not in [(), [], None] and isinstance(self.campsites, list):
             self.campsites = [int(campsite_id) for campsite_id in self.campsites]
             return self._get_campgrounds_by_campsite_id()
 
@@ -240,12 +251,12 @@ class SearchGoingToCamp(BaseCampingSearch):
         """
         if self._campgrounds not in [(), [], None]:
             return self.campsite_finder.find_campgrounds(
-                rec_area_id=self._recreation_area_id,
-                campground_id=self._campgrounds,
+                rec_area_id=make_list(self._recreation_area_id, coerce=int),
+                campground_id=make_list(self._campgrounds, coerce=int),
             )
 
         return self.campsite_finder.find_campgrounds(
-            rec_area_id=self._recreation_area_id,
+            rec_area_id=make_list(self._recreation_area_id, coerce=int),
         )
 
     def list_campsite_units(self) -> Any:

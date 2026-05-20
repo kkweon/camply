@@ -326,8 +326,9 @@ class BaseCampingSearch(ABC):
         else:
             polling_interval_val = polling_interval
 
-        if polling_interval_val < SearchConfig.POLLING_INTERVAL_MINIMUM:
-            polling_interval_val = SearchConfig.POLLING_INTERVAL_MINIMUM
+        polling_interval_val = max(
+            polling_interval_val, SearchConfig.POLLING_INTERVAL_MINIMUM
+        )
         return polling_interval_val
 
     def _continuous_search_retry(
@@ -612,7 +613,8 @@ class BaseCampingSearch(ABC):
                 )
             except Exception as e:
                 if self.search_attempts >= 1 and self.notifier is not None:
-                    self.notifier.last_gasp(error=e)
+                    if hasattr(self.notifier, "emit_last_gasp"):
+                        self.notifier.emit_last_gasp(error=e)
                 raise e
         else:
             starting_count = len(self.campsites_found)

@@ -293,12 +293,19 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
                     f"{month.strftime('%B')}"
                 )
                 if self.campsites not in [None, []]:
-                    campsites = [
+                    campsites_list = [
                         campsite_obj
                         for campsite_obj in campsites
-                        if int(campsite_obj.campsite_id) in self.campsites
+                        if campsite_obj is not None
+                        and int(campsite_obj.campsite_id) in self.campsites  # type: ignore[operator]
                     ]
-                found_campsites += campsites
+                else:
+                    campsites_list = [
+                        campsite_obj
+                        for campsite_obj in campsites
+                        if campsite_obj is not None
+                    ]
+                found_campsites += campsites_list
                 if index + 1 < len(self.campgrounds):
                     sleep(round(uniform(*RecreationBookingConfig.RATE_LIMITING), 2))
         campsite_df = self.campsites_to_df(campsites=found_campsites)
@@ -378,8 +385,8 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
         if isinstance(campsites[0], RecDotGovCampsite):
             return [
                 ListedCampsite(
-                    id=item.campsite_id,
-                    facility_id=item.asset_id,
+                    id=getattr(item, "campsite_id", 0),
+                    facility_id=getattr(item, "asset_id", 0),
                     name=item.name,
                 )
                 for item in campsites
@@ -387,8 +394,8 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
         elif isinstance(campsites[0], RecDotGovSearchResult):
             return [
                 ListedCampsite(
-                    id=item.entity_id,
-                    facility_id=item.parent_id,
+                    id=getattr(item, "entity_id", 0),
+                    facility_id=getattr(item, "parent_id", 0),
                     name=item.name,
                 )
                 for item in campsites
@@ -407,7 +414,7 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
         List[ListedCampsite]
         """
         recdotgov_campsites = self.campsite_finder.get_internal_campsites(
-            facility_ids=[item.facility_id for item in self.campgrounds]
+            facility_ids=[int(item.facility_id) for item in self.campgrounds]
         )
         listable_campsites = self._get_listable_campsites(campsites=recdotgov_campsites)
         self.log_listed_campsites(

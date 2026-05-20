@@ -19,6 +19,7 @@ from camply.containers.api_responses import (
     RecDotGovCampsite,
     RecDotGovCampsiteResponse,
 )
+from camply.containers.base_container import RecDotGovAttribute, RecDotGovEquipment
 from camply.containers.data_containers import CampsiteLocation
 from camply.providers.recreation_dot_gov.recdotgov_provider import RecreationDotGovBase
 from camply.utils import api_utils
@@ -228,8 +229,16 @@ class RecreationDotGov(RecreationDotGovBase):
                         facility_name=facility_name,
                         facility_id=facility_id,
                         booking_url=booking_url,
-                        permitted_equipment=equipment,
-                        campsite_attributes=attributes,
+                        permitted_equipment=[
+                            RecDotGovEquipment(**equip) for equip in equipment
+                        ]
+                        if equipment
+                        else [],
+                        campsite_attributes=[
+                            RecDotGovAttribute(**attr) for attr in attributes
+                        ]
+                        if attributes
+                        else [],
                         location=location,
                     )
                     total_campsite_availability.append(available_campsite)

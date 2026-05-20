@@ -7,7 +7,7 @@ import os
 from enum import Enum
 from pathlib import Path
 from re import compile
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import yaml
 from yaml import SafeLoader, load
@@ -42,11 +42,12 @@ def read_yaml(path: Optional[str] = None) -> Any:
         log_path: "/var/${LOG_PATH}"
         something_else: "${AWESOME_ENV_VAR}/var/${A_SECOND_AWESOME_VAR}"
     """
-    path = os.path.abspath(path)
+    path_str = str(path)
+    path_str = os.path.abspath(path_str)
     pattern = compile(r".*?\${(\w+)}.*?")
 
     safe_loader = SafeLoader
-    safe_loader.add_implicit_resolver(tag=None, regexp=pattern, first=None)
+    safe_loader.add_implicit_resolver(tag="!env", regexp=pattern, first=None)
 
     def env_var_constructor(safe_loader: yaml.Loader, node: Any) -> Any:
         """
@@ -74,8 +75,8 @@ def read_yaml(path: Optional[str] = None) -> Any:
             return full_value
         return value
 
-    safe_loader.add_constructor(tag=None, constructor=env_var_constructor)
-    with open(path) as conf_data:
+    safe_loader.add_constructor(tag="!env", constructor=env_var_constructor)
+    with open(path_str) as conf_data:
         return load(stream=conf_data, Loader=safe_loader)
 
 
@@ -105,16 +106,17 @@ def yaml_file_to_arguments(
     search_window = handle_search_windows(
         start_date=yaml_model.start_date, end_date=yaml_model.end_date
     )
-    days_of_the_week = yaml_model.days
-    if days_of_the_week is not None:
+    days_of_the_week: Optional[List[int]] = None
+    yaml_days = yaml_model.days
+    if yaml_days is not None:
         lower_mapping = {
             key.lower(): value for key, value in days_of_the_week_mapping.items()
         }
-        days_of_the_week = [lower_mapping[item.lower()] for item in days_of_the_week]
+        days_of_the_week = [lower_mapping[item.lower()] for item in yaml_days]
     equipment = make_list(yaml_model.equipment)
     if isinstance(equipment, list):
         equipment = [tuple(equip) for equip in equipment]
-    provider_kwargs = {
+    provider_kwargs: Dict[str, Any] = {
         "search_window": search_window,
         "recreation_area": yaml_model.recreation_area,
         "campgrounds": yaml_model.campgrounds,
@@ -126,7 +128,7 @@ def yaml_file_to_arguments(
         "offline_search": yaml_model.offline_search,
         "offline_search_path": yaml_model.offline_search_path,
     }
-    search_kwargs = {
+    search_kwargs: Dict[str, Any] = {
         "log": True,
         "verbose": True,
         "continuous": yaml_model.continuous,
@@ -136,4 +138,4 @@ def yaml_file_to_arguments(
         "search_forever": yaml_model.search_forever,
         "search_once": yaml_model.search_once,
     }
-    return provider, provider_kwargs, search_kwargs
+    return str(provider), provider_kwargs, search_kwargs

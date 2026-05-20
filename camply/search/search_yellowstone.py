@@ -69,7 +69,7 @@ class SearchYellowstone(BaseCampingSearch):
             offline_search_path=offline_search_path,
             **kwargs,
         )
-        self.campgrounds = make_list(campgrounds)
+        self.campgrounds = make_list(campgrounds) or []
 
     def get_all_campsites(self) -> List[AvailableCampsite]:
         """
@@ -79,7 +79,7 @@ class SearchYellowstone(BaseCampingSearch):
         -------
         List[AvailableCampsite]
         """
-        all_campsites = []
+        all_campsites: List[AvailableCampsite] = []
         searchable_campgrounds = self._get_searchable_campgrounds()
         this_month = datetime.now().date().replace(day=1)
         for month in self.search_months:
@@ -89,7 +89,7 @@ class SearchYellowstone(BaseCampingSearch):
                 )
         matching_campsites = self._filter_campsites_to_campgrounds(
             campsites=all_campsites,
-            searchable_campgrounds=searchable_campgrounds,
+            searchable_campgrounds=searchable_campgrounds or set(),
         )
         campsite_df = self.campsites_to_df(campsites=matching_campsites)
         campsite_df_validated = self._filter_date_overlap(campsites=campsite_df)

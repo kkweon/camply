@@ -25,8 +25,10 @@ class StrEnum(str, Enum):
     """
 
 
-ProviderEnum = StrEnum(
-    "ProviderEnum", {value: value for value in CAMPSITE_SEARCH_PROVIDER.keys()}
+ProviderEnum = Enum(  # type: ignore[misc]
+    "ProviderEnum",
+    {value: value for value in CAMPSITE_SEARCH_PROVIDER.keys()},
+    type=str,
 )
 ProviderEnum.__doc__ = "Campsite Provider Names"
 

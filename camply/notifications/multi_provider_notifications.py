@@ -4,7 +4,7 @@ Default Notifier: Silent + Extras
 
 import datetime
 import logging
-from typing import Any, Dict, List, Type, Union
+from typing import Any, Dict, List, Optional, Type, Union
 
 from camply.containers import AvailableCampsite
 from camply.notifications.apprise import AppriseNotifications
@@ -53,14 +53,26 @@ class MultiNotifierProvider(BaseNotifications):
             strings
         """
         super().__init__()
-        self.providers = [SilentNotifications()]
+        self.providers: List[BaseNotifications] = [SilentNotifications()]
         if isinstance(provider, str):
-            provider = [prov_string.strip() for prov_string in provider.split(",")]
-        for notifier_object in provider:
+            provider_list: List[Any] = [
+                prov_string.strip() for prov_string in provider.split(",")
+            ]
+        elif isinstance(provider, BaseNotifications):
+            provider_list = [provider]
+        elif provider is None:
+            provider_list = []
+        else:
+            provider_list = list(provider)
+
+        for notifier_object in provider_list:
             if isinstance(notifier_object, BaseNotifications):
-                notifier = notifier_object
+                notifier: Optional[BaseNotifications] = notifier_object
             elif isinstance(notifier_object, str):
-                notifier = CAMPSITE_NOTIFICATIONS.get(notifier_object.lower(), None)()
+                notifier_class = CAMPSITE_NOTIFICATIONS.get(
+                    notifier_object.lower(), None
+                )
+                notifier = notifier_class() if notifier_class else None
             elif notifier_object is None:
                 notifier = None
             else:
@@ -111,7 +123,7 @@ class MultiNotifierProvider(BaseNotifications):
                 "I hope you're watching these logs."
             )
 
-    def last_gasp(self, error: Exception) -> None:
+    def emit_last_gasp(self, error: Exception) -> None:
         """
         Make a `last gasp` notification before exiting
 
@@ -127,6 +139,6 @@ class MultiNotifierProvider(BaseNotifications):
             f"[{date_string}] - ({error.__class__.__name__}) {error_string}"
         )
         for provider in self.providers:
-            if provider.last_gasp is True:
+            if hasattr(provider, "last_gasp_flag") and provider.last_gasp_flag is True:
                 provider.send_message(error_message)
         raise RuntimeError(error_message) from error

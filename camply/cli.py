@@ -23,7 +23,7 @@ from typing import (
 import click
 import rich_click
 from rich import traceback
-from rich_click import RichCommand, RichGroup
+from rich_click import RichCommand, RichGroup  # type: ignore[attr-defined]
 
 from camply import Yellowstone, __application__, __version__
 from camply.config import EquipmentOptions, SearchConfig, logging_config
@@ -46,7 +46,7 @@ class CamplyLogger(logging.Logger):
         ...
 
 
-logging.Logger.camply = log_camply
+logging.Logger.camply = log_camply  # type: ignore[attr-defined]
 logger = cast(CamplyLogger, logging.getLogger(__name__))
 
 DEFAULT_CAMPLY_PROVIDER: str = RecreationDotGov.__name__

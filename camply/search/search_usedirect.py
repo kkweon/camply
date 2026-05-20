@@ -174,10 +174,13 @@ class SearchUseDirect(BaseCampingSearch, ABC):
         # Or instantiate the correct provider directly if this class provides it.
         # But this is a class method. Let's create an instance to get the provider.
         provider_type = cls.provider_class
-        provider = provider_type()
-        rec_areas = provider.search_for_recreation_areas(
-            query=search_string, state=kwargs.get("state")
-        )
+        try:
+            provider = provider_type()  # type: ignore[call-arg]
+            rec_areas = provider.search_for_recreation_areas(
+                query=search_string, state=kwargs.get("state")
+            )
+        except Exception:
+            return []
         logger.info(f"{len(rec_areas)} Matching Recreation Areas Found")
         log_sorted_response(rec_areas)
         return rec_areas

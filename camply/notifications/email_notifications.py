@@ -60,10 +60,11 @@ class EmailNotifications(BaseNotifications):
             self.email_smtp_server_port,
         )
         _email_server.ehlo()
-        _email_server.login(
-            user=self.email_username,
-            password=self._email_password,
-        )
+        if self.email_username and self._email_password:
+            _email_server.login(
+                user=self.email_username,
+                password=self._email_password,
+            )
         _email_server.quit()
 
     def send_message(self, message: str, **kwargs: Any) -> None:

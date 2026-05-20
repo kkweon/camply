@@ -533,8 +533,7 @@ class Yellowstone(BaseProvider):
             if hasattr(yellowstone_current_time, "date")
             else yellowstone_current_time
         )
-        if today > month:
-            month = today
+        month = max(month, today)
         return month
 
     def find_campgrounds(self, **kwargs: Any) -> List[CampgroundFacility]:

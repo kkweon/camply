@@ -3,7 +3,7 @@ Push Notifications via Slack
 """
 
 import logging
-from typing import Any, List
+from typing import Any, Dict, List
 
 import requests
 
@@ -52,6 +52,10 @@ class SlackNotifications(BaseNotifications):
                 "blocks": message_blocks,
             }
         logger.debug(message_json)
+        if not SlackConfig.SLACK_WEBHOOK:
+            raise EnvironmentError(
+                "Slack Webhook URL not found. Set SLACK_WEBHOOK in environment."
+            )
         response = self.session.post(
             url=SlackConfig.SLACK_WEBHOOK,
             json=message_json,
@@ -78,7 +82,7 @@ class SlackNotifications(BaseNotifications):
             message_title, formatted_dict = self.format_standard_campsites(
                 campsite=campsite,
             )
-            fields = []
+            fields: List[Dict[str, Any]] = []
             for key, value in formatted_dict.items():
                 fields.append(
                     {
@@ -97,7 +101,7 @@ class SlackNotifications(BaseNotifications):
                     }
                 )
 
-            blocks = []
+            blocks: List[Dict[str, Any]] = []
             blocks.append(
                 {
                     "type": "header",

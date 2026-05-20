@@ -23,7 +23,9 @@ def is_list_like(obj: Any) -> bool:
     return isinstance(obj, (list, set, tuple))
 
 
-def make_list(obj: Any, coerce: Optional[Callable] = None) -> Optional[List[Any]]:
+def make_list(
+    obj: Any, coerce: Optional[Callable[[Any], Any]] = None
+) -> Optional[List[Any]]:
     """
     Make Anything An Iterable Instance
 
@@ -56,25 +58,34 @@ def handle_search_windows(
     """
     Handle Multiple Search Windows by the CLI
     """
+    start_dates: List[Union[str, date]] = []
+    end_dates: List[Union[str, date]] = []
+
     if isinstance(start_date, (str, date)):
-        start_date = (start_date,)
+        start_dates = [start_date]
         assert isinstance(end_date, (str, date))
-        end_date = (end_date,)
+        end_dates = [end_date]
+    else:
+        start_dates = list(start_date)
+        end_dates = list(end_date)  # type: ignore[arg-type]
     search_windows: List[SearchWindow] = []
-    for field in [start_date, end_date]:
+    for field in [start_dates, end_dates]:
         if field is None or (isinstance(field, (tuple, list)) and len(field) == 0):
             logger.error("Campsite searches require a `start_date` and an `end_date`")
             sys.exit(1)
-    if len(start_date) != len(end_date):
+    if len(start_dates) != len(end_dates):
         logger.error(
             "When searching multiple date windows, you must provide the same amount "
             "of `--start-dates` as `--end-dates`"
         )
         sys.exit(1)
-    for index, date_str in enumerate(start_date):
-        search_windows.append(
-            SearchWindow(start_date=date_str, end_date=end_date[index])
-        )
+    for index, date_str in enumerate(start_dates):
+        end_date_str = end_dates[index]
+        if isinstance(date_str, str):
+            date_str = datetime.datetime.strptime(date_str, "%Y-%m-%d").date()
+        if isinstance(end_date_str, str):
+            end_date_str = datetime.datetime.strptime(end_date_str, "%Y-%m-%d").date()
+        search_windows.append(SearchWindow(start_date=date_str, end_date=end_date_str))
     if len(search_windows) == 1:
         return search_windows[0]
     else:

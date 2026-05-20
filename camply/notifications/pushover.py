@@ -15,7 +15,7 @@ from camply.notifications.base_notifications import BaseNotifications
 logger = logging.getLogger(__name__)
 
 
-class PushoverNotifications(BaseNotifications, logging.StreamHandler):
+class PushoverNotifications(BaseNotifications, logging.StreamHandler[Any]):
     """
     Push Notifications via Pushover + a Logging Handler
     """
@@ -24,7 +24,8 @@ class PushoverNotifications(BaseNotifications, logging.StreamHandler):
         super().__init__()
         self.session.headers.update(PushoverConfig.API_HEADERS)
         logging.StreamHandler.__init__(self)
-        self.setLevel(level=level)
+        if level is not None:
+            self.setLevel(level=level)
         if any([PushoverConfig.PUSH_USER is None, PushoverConfig.PUSH_USER == ""]):
             warning_message = (
                 "Pushover is not configured properly. To send pushover messages "
