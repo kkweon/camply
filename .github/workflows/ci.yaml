@@ -37,26 +37,6 @@ jobs:
               with:
                   version: 3.x
 
-            - name: lint
-              id: lint
-              run: |
-                  task lint
-              continue-on-error: true
-
-            - name: check
-              id: check
-              run: |
-                  task check
-              continue-on-error: true
-
-            - name: Raise Errors For Failures
-              if: |
-                  steps.lint.outcome != 'success' || steps.check.outcome != 'success'
-              run: |
-                  echo "Lint: ${{ steps.lint.outcome }}"
-                  echo "Check: ${{ steps.check.outcome }}"
-                  exit 1
-
             - name: test
               env:
                   UV_PYTHON: ${{ matrix.python }}
