@@ -48,4 +48,5 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN _CAMPLY_COMPLETE=bash_source camply > ${HOME}/.camply-complete.bash && \
     echo "[[ ! -f ${HOME}/.camply-complete.bash ]] || source ${HOME}/.camply-complete.bash" >> ${HOME}/.bashrc
 
-CMD ["camply", "--help"]
+ENTRYPOINT ["camply"]
+CMD ["--help"]
