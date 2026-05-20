@@ -98,6 +98,10 @@ jobs:
                   npm install -g semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/exec semantic-release-gitmoji @semantic-release/github
                   npx semantic-release
 
+            - name: build-docs
+              run: |
+                  task docs -- build
+
             - name: Upload Pages artifact
               uses: actions/upload-pages-artifact@v3
               with:
