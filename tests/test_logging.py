@@ -43,5 +43,5 @@ def test_rich_logging_format():
 
         # Check if the formatter format matches
         assert handler.formatter is not None
-        assert handler.formatter.datefmt == "[%Y-%m-%d %H:%M:%S]"
+        assert handler.formatter.datefmt is None
         assert handler.formatter._fmt == "%(message)s"

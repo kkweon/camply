@@ -87,9 +87,7 @@ def set_up_logging(log_level: Optional[int] = None) -> None:
     log_handler, level_to_log = get_log_handler(log_level=log_level)
     logging.root.handlers = [log_handler]
     if isinstance(log_handler, RichHandler):
-        rich_formatter = logging.Formatter(
-            datefmt="[%Y-%m-%d %H:%M:%S]", fmt="%(message)s"
-        )
+        rich_formatter = logging.Formatter(fmt="%(message)s")
         logging.root.handlers[0].setFormatter(rich_formatter)
         level_to_log = logging.NOTSET
     logging.root.setLevel(level_to_log)
