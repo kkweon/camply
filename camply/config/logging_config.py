@@ -2,13 +2,30 @@
 Dynamic Logging Configuration
 """
 
+import datetime
 import logging
 from os import getenv
 from typing import Optional, Tuple, Union
 
 from rich.logging import RichHandler
+from zoneinfo import ZoneInfo
 
 LOG_HANDLER = getenv("CAMPLY_LOG_HANDLER", "rich").lower()
+
+
+def _la_time_converter(formatter: logging.Formatter, timestamp: float):
+    return datetime.datetime.fromtimestamp(
+        timestamp, tz=ZoneInfo("America/Los_Angeles")
+    ).timetuple()
+
+
+def _rich_la_time_formatter(dt: datetime.datetime) -> str:
+    return dt.astimezone(ZoneInfo("America/Los_Angeles")).strftime(
+        "[%Y-%m-%d %H:%M:%S]"
+    )
+
+
+logging.Formatter.converter = _la_time_converter
 
 
 def get_log_handler(
@@ -34,6 +51,7 @@ def get_log_handler(
         rich_tracebacks=True,
         omit_repeated_times=False,
         show_path=False,
+        log_time_format=_rich_la_time_formatter,
     )
     python_handler = logging.StreamHandler()
     python_formatter = logging.Formatter("%(asctime)s [%(levelname)8s]: %(message)s")
