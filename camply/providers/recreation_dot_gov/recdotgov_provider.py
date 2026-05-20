@@ -19,7 +19,7 @@ from fake_useragent import UserAgent
 from pydantic import ValidationError
 
 from camply.config import STANDARD_HEADERS, RecreationBookingConfig, RIDBConfig
-from camply.containers import CampgroundFacility, RecreationArea
+from camply.containers import AvailableCampsite, CampgroundFacility, RecreationArea
 from camply.containers.api_responses import (
     CampsiteResponse,
     CoreRecDotGovResponse,
@@ -42,6 +42,15 @@ class RecreationDotGovBase(BaseProvider, ABC):
     """
     Python Class for Working with Recreation.gov API / NPS APIs
     """
+
+    @abstractmethod
+    def get_campsite_availabilities(
+        self,
+        facility: CampgroundFacility,
+        month: datetime,
+        campsite_metadata: pd.DataFrame,
+    ) -> List[AvailableCampsite]:
+        pass
 
     def __init__(self, api_key: Optional[str] = None) -> None:
         """

@@ -24,6 +24,7 @@ class SearchYellowstone(BaseCampingSearch):
     Searches on YellowstoneNationalParkLodges.com for Campsites
     """
 
+    campsite_finder: Yellowstone
     recreation_area = Yellowstone.recreation_area
     provider_class = Yellowstone
     list_campsites_supported: bool = False

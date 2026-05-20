@@ -6,7 +6,7 @@ import logging
 import sys
 from abc import ABC, abstractmethod
 from datetime import timedelta
-from typing import Any, Dict, List, Optional, Type, Union, cast
+from typing import Any, Dict, List, Optional, Type, Union
 
 from dateutil.relativedelta import relativedelta
 
@@ -39,13 +39,19 @@ class SearchUseDirect(BaseCampingSearch, ABC):
     Searches on UseDirect.com for Campsites
     """
 
+    campsite_finder: UseDirectProvider
+
     @property
     @abstractmethod
-    def provider_class(self) -> Type[UseDirectProvider]:  # type: ignore
+    def provider_class(self) -> Type[UseDirectProvider]:
         """
         Provider Class to be used for Search
         """
         pass
+
+    @classmethod
+    def get_provider_class(cls) -> Type[UseDirectProvider]:
+        return cls.provider_class
 
     def __init__(
         self,
@@ -83,7 +89,7 @@ class SearchUseDirect(BaseCampingSearch, ABC):
         self._campground_ids = make_list(campgrounds, coerce=int) or []
         campsites = make_list(kwargs.get("campsites", []), coerce=int) or []
         if len(campsites) > 0:
-            finder = cast(UseDirectProvider, self.campsite_finder)
+            finder = self.campsite_finder
             finder.validate_campsites(
                 campsites=campsites, facility_ids=self._campground_ids
             )
@@ -135,7 +141,7 @@ class SearchUseDirect(BaseCampingSearch, ABC):
             log_str = format_log_string(campground)
             logger.info("    %s", log_str)
         campsites_found: List[AvailableCampsite] = []
-        campsite_finder = cast(UseDirectProvider, self.campsite_finder)
+        campsite_finder = self.campsite_finder
         for month in self.search_months:
             for campground in self.campgrounds:
                 logger.info(
@@ -170,12 +176,10 @@ class SearchUseDirect(BaseCampingSearch, ABC):
         """
         Return the UseDirect Recreation Areas
         """
-        # We need an instance to access the property, then call the search
-        # Or instantiate the correct provider directly if this class provides it.
-        # But this is a class method. Let's create an instance to get the provider.
-        provider_type = cls.provider_class
+        provider_type = cls.get_provider_class()
         try:
-            provider = provider_type()  # type: ignore[call-arg]
+            # We don't use `cast` because `cls.provider_class` evaluates to a UseDirectProvider subclass
+            provider = provider_type()
             rec_areas = provider.search_for_recreation_areas(
                 query=search_string, state=kwargs.get("state")
             )
@@ -193,7 +197,7 @@ class SearchUseDirect(BaseCampingSearch, ABC):
         -------
         List[ListedCampsite]
         """
-        finder = cast(UseDirectProvider, self.campsite_finder)
+        finder = self.campsite_finder
         if not finder.usedirect_campsites:
             facility_ids_ints = [int(f) for f in self.campground_ids if f is not None]
             finder.get_campsite_metadata(facility_ids=facility_ids_ints)

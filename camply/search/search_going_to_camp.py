@@ -27,6 +27,7 @@ class SearchGoingToCamp(BaseCampingSearch):
     Searches on GoingToCamp.com for Campsites
     """
 
+    campsite_finder: GoingToCamp
     provider_class = GoingToCamp
     list_campsites_supported: bool = False
 
@@ -237,7 +238,10 @@ class SearchGoingToCamp(BaseCampingSearch):
 
         if self.campsites not in [(), [], None] and isinstance(self.campsites, list):
             self.campsites = [int(campsite_id) for campsite_id in self.campsites]
-            return self._get_campgrounds_by_campsite_id()
+            return self.campsite_finder.find_campgrounds(
+                rec_area_id=make_list(self._recreation_area_id, coerce=int),
+                campground_id=make_list(self._campgrounds, coerce=int),
+            )
 
         return self._get_campgrounds_by_recreation_area_id()
 

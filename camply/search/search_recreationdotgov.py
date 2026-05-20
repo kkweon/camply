@@ -3,10 +3,9 @@ Recreation.gov Web Searching Utilities
 """
 
 import logging
-from abc import ABC
 from random import uniform
 from time import sleep
-from typing import Any, List, Optional, Tuple, Union, cast
+from typing import Any, List, Optional, Tuple, Union
 
 import pandas as pd
 
@@ -23,16 +22,19 @@ from camply.providers import (
     RecreationDotGovTicket,
     RecreationDotGovTimedEntry,
 )
+from camply.providers.recreation_dot_gov.recdotgov_provider import RecreationDotGovBase
 from camply.search.base_search import BaseCampingSearch
 from camply.utils import logging_utils, make_list
 
 logger = logging.getLogger(__name__)
 
 
-class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
+class SearchRecreationDotGovBase(BaseCampingSearch):
     """
     Camping Search Object
     """
+
+    campsite_finder: RecreationDotGovBase
 
     accepted_equipment: Optional[
         List[str]
@@ -267,23 +269,8 @@ class SearchRecreationDotGovBase(BaseCampingSearch, ABC):
                     f"({campground.facility_id}) for availability: "
                     f"{month.strftime('%B, %Y')}"
                 )
-                availabilities = self.campsite_finder.get_recdotgov_data(
-                    campground_id=int(campground.facility_id)
-                    if campground.facility_id
-                    else 0,
-                    month=month,
-                )
-                availabilities_dict = cast(dict[str, Any], availabilities)
-                campsites = self.campsite_finder.process_campsite_availability(
-                    availability=availabilities_dict,
-                    recreation_area=campground.recreation_area,
-                    recreation_area_id=int(campground.recreation_area_id)
-                    if campground.recreation_area_id
-                    else 0,
-                    facility_name=campground.facility_name,
-                    facility_id=int(campground.facility_id)
-                    if campground.facility_id
-                    else 0,
+                campsites = self.campsite_finder.get_campsite_availabilities(
+                    facility=campground,
                     month=month,
                     campsite_metadata=self.campsite_metadata,
                 )

@@ -12,7 +12,7 @@ import pandas as pd
 import requests
 
 from camply.config import RecreationBookingConfig, RIDBConfig
-from camply.containers import AvailableCampsite
+from camply.containers import AvailableCampsite, CampgroundFacility
 from camply.containers.api_responses import (
     CampsiteAvailabilityResponse,
     CampsiteResponse,
@@ -153,32 +153,19 @@ class RecreationDotGov(RecreationDotGovBase):
         attributes = cls._items_to_unique_dicts(item=attributes)
         return equipment, attributes, location
 
-    @classmethod
-    def process_campsite_availability(
-        cls,
-        availability: Dict[str, Any],
-        recreation_area: str,
-        recreation_area_id: int,
-        facility_name: str,
-        facility_id: int,
+    def get_campsite_availabilities(
+        self,
+        facility: CampgroundFacility,
         month: datetime,
         campsite_metadata: pd.DataFrame,
-    ) -> List[Optional[AvailableCampsite]]:
+    ) -> List[AvailableCampsite]:
         """
         Parse the JSON Response and return availabilities
 
         Parameters
         ----------
-        availability: Dict[str, Any]
-            API Response
-        recreation_area: str
-            Name of Recreation Area
-        recreation_area_id: int
-            ID of Recreation Area
-        facility_name: str
-            Campground Facility Name
-        facility_id: int
-            Campground Facility ID
+        facility: CampgroundFacility
+            CampgroundFacility Object
         month: datetime
             Month to Process
         campsite_metadata: pd.DataFrame
@@ -186,10 +173,24 @@ class RecreationDotGov(RecreationDotGovBase):
 
         Returns
         -------
-        total_campsite_availability: List[Optional[AvailableCampsite]]
+        total_campsite_availability: List[AvailableCampsite]
             Any monthly availabilities
         """
-        total_campsite_availability: List[Optional[AvailableCampsite]] = []
+        availability = self.get_recdotgov_data(
+            campground_id=int(facility.facility_id) if facility.facility_id else 0,
+            month=month,
+        )
+        if isinstance(availability, list):
+            return []
+
+        recreation_area = facility.recreation_area
+        recreation_area_id = (
+            int(facility.recreation_area_id) if facility.recreation_area_id else 0
+        )
+        facility_name = facility.facility_name
+        facility_id = int(facility.facility_id) if facility.facility_id else 0
+
+        total_campsite_availability: List[AvailableCampsite] = []
         campsite_data = CampsiteAvailabilityResponse(**availability)
         for campsite_id, site_related_data in campsite_data.campsites.items():
             for (
@@ -207,7 +208,7 @@ class RecreationDotGov(RecreationDotGovBase):
                         equipment,
                         attributes,
                         location,
-                    ) = cls._get_equipment_attributes_location(
+                    ) = self._get_equipment_attributes_location(
                         campsite_id=campsite_id, campsite_metadata=campsite_metadata
                     )
                     available_campsite = AvailableCampsite(

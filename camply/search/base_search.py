@@ -37,7 +37,7 @@ from camply.containers.data_containers import ListedCampsite
 from camply.exceptions import CamplyError, CampsiteNotFoundError
 from camply.notifications.base_notifications import BaseNotifications
 from camply.notifications.multi_provider_notifications import MultiNotifierProvider
-from camply.providers import ProviderType
+from camply.providers.base_provider import BaseProvider
 from camply.utils import make_list
 from camply.utils.general_utils import days_of_the_week_base
 from camply.utils.logging_utils import get_emoji
@@ -87,7 +87,7 @@ class BaseCampingSearch(ABC):
             Days of the week (by weekday integer) to search for.
         """
         self._verbose = kwargs.get("verbose", True)
-        self.campsite_finder: ProviderType = self.provider_class()
+        self.campsite_finder: BaseProvider = self.provider_class()
         self.search_window: List[SearchWindow] = make_list(search_window) or []
         self.days_of_the_week = set(
             days_of_the_week if days_of_the_week is not None else ()
@@ -175,7 +175,7 @@ class BaseCampingSearch(ABC):
 
     @property
     @abstractmethod
-    def provider_class(self) -> Type[ProviderType]:
+    def provider_class(self) -> Type[BaseProvider]:
         """
         Provider Class Dependency Injection
         """

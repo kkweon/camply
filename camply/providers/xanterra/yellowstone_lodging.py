@@ -536,7 +536,11 @@ class Yellowstone(BaseProvider):
         month = max(month, today)
         return month
 
-    def find_campgrounds(self, **kwargs: Any) -> List[CampgroundFacility]:
+    def find_campgrounds(
+        self,
+        search_string: Optional[str] = None,
+        **kwargs: Any,
+    ) -> List[CampgroundFacility]:
         """
         Print the Campgrounds inside of Yellowstone
         """

@@ -146,6 +146,13 @@ known-first-party = ["camply"]
 [tool.ruff.lint.per-file-ignores]
 # Tests can use magic values, assertions, and relative imports
 "tests/**/*" = ["PLR2004", "S101", "TID252"]
+"camply/cli.py" = ["PLR0913"]
+"camply/search/base_search.py" = ["PLR0913"]
+"camply/search/search_going_to_camp.py" = ["PLR0913"]
+"camply/search/search_recreationdotgov.py" = ["PLR0913"]
+"camply/search/search_yellowstone.py" = ["PLR0913"]
+"camply/providers/usedirect/usedirect.py" = ["PLR0913"]
+"camply/utils/api_utils.py" = ["PLR0913"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"

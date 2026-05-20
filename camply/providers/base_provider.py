@@ -113,7 +113,11 @@ class BaseProvider(ABC):
             return sorted(truncated_months)
 
     @abstractmethod
-    def find_campgrounds(self) -> List[CampgroundFacility]:
+    def find_campgrounds(
+        self,
+        search_string: Optional[str] = None,
+        **kwargs: Any,
+    ) -> List[CampgroundFacility]:
         """
         List Recreation Areas for the provider
         """
