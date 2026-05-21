@@ -28,6 +28,7 @@ tasks:
         desc: Run Tests
         cmds:
             - uv run -- pytest {{.CLI_ARGS}}
+            - go test ./...
         deps:
             - task: sync
               vars:
@@ -52,6 +53,7 @@ tasks:
         desc: Run Code Linters
         cmds:
             - uv run -- ruff check {{.CLI_ARGS | default .ROOT_DIR}}
+            - go run github.com/golangci/golangci-lint/cmd/golangci-lint@v1.63.4 run ./...
             - task: fmt
               vars:
                   CLI_ARGS: --check
@@ -61,6 +63,7 @@ tasks:
         desc: Run Code Formatters
         cmds:
             - uv run -- ruff format {{.CLI_ARGS | default .ROOT_DIR}}
+            - go run mvdan.cc/gofumpt@latest -w .
         deps: [sync]
     #######################################
     fix:
@@ -68,6 +71,7 @@ tasks:
         cmds:
             - task: fmt
             - uv run -- ruff check --fix {{.CLI_ARGS | default .ROOT_DIR}}
+            - go run github.com/golangci/golangci-lint/cmd/golangci-lint@v1.63.4 run --fix ./...
         deps: [sync]
     #######################################
     check:

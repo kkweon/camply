@@ -17,13 +17,13 @@ func TestProvider_FindCampsites(t *testing.T) {
 		if r.URL.Path == "/api/search/campsites" {
 			data, _ := os.ReadFile("testdata/metadata_response.json")
 			w.WriteHeader(http.StatusOK)
-			w.Write(data)
+			_, _ = w.Write(data)
 			return
 		}
 		if r.URL.Path == "/api/camps/availability/campground/232447/month" {
 			data, _ := os.ReadFile("testdata/availability_response.json")
 			w.WriteHeader(http.StatusOK)
-			w.Write(data)
+			_, _ = w.Write(data)
 			return
 		}
 		w.WriteHeader(http.StatusNotFound)
@@ -57,4 +57,4 @@ func TestProvider_FindCampsites(t *testing.T) {
 	if len(results) != 2 {
 		t.Errorf("expected 2 available campsite records, got %d", len(results))
 	}
-	}
+}

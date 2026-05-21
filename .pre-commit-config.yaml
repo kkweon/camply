@@ -24,8 +24,27 @@ repos:
           - id: pretty-format-toml
             args: [--autofix, --no-sort]
 
+    - repo: https://github.com/golangci/golangci-lint
+      rev: v1.63.4
+      hooks:
+          - id: golangci-lint
+            args: ["--fix"]
+
+    - repo: https://github.com/dnephin/pre-commit-golang
+      rev: v0.5.1
+      hooks:
+          - id: go-imports
+          - id: go-mod-tidy
+
     - repo: local
       hooks:
+          - id: gofumpt
+            name: gofumpt
+            description: Runs gofumpt code formatter
+            entry: go run mvdan.cc/gofumpt@latest -w
+            language: system
+            types:
+                - go
           - id: ruff-format
             name: format
             description: Runs Code Auto-Formatters
