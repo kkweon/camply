@@ -144,3 +144,4 @@ requirements/*.bak
 # AI Assistant Files
 GEMINI.md
 .antigravitycli/
+camply-go
