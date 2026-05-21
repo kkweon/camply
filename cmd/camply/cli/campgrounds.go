@@ -8,6 +8,7 @@ import (
 
 	"github.com/kkweon/camply/internal/core"
 	"github.com/kkweon/camply/internal/providers/recdotgov"
+	"github.com/kkweon/camply/internal/providers/usedirect"
 )
 
 var (
@@ -37,6 +38,8 @@ var campgroundsCmd = &cobra.Command{
 		switch providerStr {
 		case "RecreationDotGov":
 			provider = recdotgov.NewProvider()
+		case "ReserveCalifornia":
+			provider = usedirect.NewProvider("ReserveCalifornia", "https://california-rdr.prod.cali.rd12.recreation-management.tylerapp.com")
 		default:
 			return fmt.Errorf("unsupported or missing provider: %s", providerStr)
 		}

@@ -128,13 +128,16 @@ func isInSearchWindow(site AvailableCampsite, req SearchRequest) bool {
 		return true
 	}
 
+	siteStart := site.BookingDate.Truncate(24 * time.Hour)
+	siteEnd := site.BookingEndDate.Truncate(24 * time.Hour)
+
 	for i := range req.StartDates {
-		start := req.StartDates[i]
-		end := req.EndDates[i]
+		start := req.StartDates[i].Truncate(24 * time.Hour)
+		end := req.EndDates[i].Truncate(24 * time.Hour)
 
 		// Must start on or after requested start, and end on or before requested end
-		if (site.BookingDate.Equal(start) || site.BookingDate.After(start)) &&
-			(site.BookingEndDate.Equal(end) || site.BookingEndDate.Before(end)) {
+		if (siteStart.Equal(start) || siteStart.After(start)) &&
+			(siteEnd.Equal(end) || siteEnd.Before(end)) {
 			return true
 		}
 	}
