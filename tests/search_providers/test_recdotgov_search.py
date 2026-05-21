@@ -116,6 +116,7 @@ def test_get_all_campsites_recarea(recdotgov_recarea_finder) -> None:
     """
     logger.info("Searching for All Recreation Area Campsites")
     all_campsites = recdotgov_recarea_finder.get_all_campsites()
+    print(f"\\nLEN_RECAREA={len(all_campsites)}\\n")
     SearchRecreationDotGov.assemble_availabilities(
         matching_data=all_campsites, log=True, verbose=False
     )
@@ -133,6 +134,7 @@ def test_get_all_campsites_campground(
     """
     logger.info("Searching for Campground Specific Campsites")
     all_campsites = recdotgov_campground_finder.get_all_campsites()
+    print(f"\nLEN_CAMPGROUND={len(all_campsites)}\\n")
     SearchRecreationDotGov.assemble_availabilities(
         matching_data=all_campsites, log=True, verbose=False
     )

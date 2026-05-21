@@ -58,6 +58,7 @@ def test_going_to_camp_get_all_campsites(
     """
     logger.info("Searching for Campsites")
     all_campsites = going_to_camp_finder.get_all_campsites()
+    print(f"\\nLEN={len(all_campsites)}\\n")
     assert all_campsites
     for camp in all_campsites:
         assert isinstance(camp, AvailableCampsite)

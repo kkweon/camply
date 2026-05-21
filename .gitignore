@@ -140,3 +140,7 @@ camply/providers/usedirect/*/*.json
 
 # Camply Requirements Files
 requirements/*.bak
+
+# AI Assistant Files
+GEMINI.md
+.antigravitycli/

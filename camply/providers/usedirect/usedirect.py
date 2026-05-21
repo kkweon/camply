@@ -655,6 +655,50 @@ class UseDirectProvider(BaseProvider, ABC):
                 )
         return facilities_data_validated
 
+    def find_campsites(
+        self,
+        *,
+        search_months: List[datetime],
+        campgrounds: List[CampgroundFacility],
+        nights: int = 1,
+        **kwargs: Any,
+    ) -> List[AvailableCampsite]:
+        """
+        Search for all campsites matching search criteria.
+
+        Returns
+        -------
+        List[AvailableCampsite]
+        """
+        from datetime import timedelta
+
+        from dateutil.relativedelta import relativedelta
+
+        from camply.utils import logging_utils
+
+        campsites_found: List[AvailableCampsite] = []
+        for month in search_months:
+            for campground in campgrounds:
+                logger.info(
+                    f"Searching {campground.facility_name} "
+                    f"({campground.facility_id}) for availability: "
+                    f"{month.strftime('%B, %Y')}"
+                )
+                end_date = month + relativedelta(months=1) - timedelta(days=1)
+                campsites = self.get_campsites(
+                    campground_id=int(campground.facility_id),
+                    start_date=month,
+                    end_date=end_date,
+                )
+                logger.info(
+                    f"\t{logging_utils.get_emoji(campsites)}\t"
+                    f"{len(campsites)} total sites found in month of "
+                    f"{month.strftime('%B')}"
+                )
+                campsites_found += campsites
+
+        return campsites_found
+
     @classmethod
     def _search_camply_model(cls, query: str, model: CamplyModel) -> bool:
         """

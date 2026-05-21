@@ -5,7 +5,7 @@ Python Class Check Yellowstone Campground Booking API for Availability
 import logging
 from datetime import datetime, timedelta
 from json import loads
-from typing import Any, List, Optional
+from typing import Any, List, Optional, Set
 from urllib import parse
 
 import requests
@@ -546,3 +546,87 @@ class Yellowstone(BaseProvider):
         """
         log_sorted_response(YellowstoneConfig.YELLOWSTONE_CAMPGROUND_OBJECTS)
         return YellowstoneConfig.YELLOWSTONE_CAMPGROUND_OBJECTS
+
+    def _get_searchable_campgrounds(
+        self, campgrounds: Optional[List[str]]
+    ) -> Optional[Set[str]]:
+        """
+        Return the Campgrounds for the Camping Search
+        """
+        if campgrounds in [None, []]:
+            return None
+        supported_campsites = set(YellowstoneConfig.YELLOWSTONE_CAMPGROUNDS.keys())
+        selected_campsites = set(campgrounds)  # type: ignore
+        searchable_campgrounds = supported_campsites.intersection(selected_campsites)
+        if len(searchable_campgrounds) == 0:
+            campground_ids = [
+                f"`{key}` ({value})"
+                for key, value in YellowstoneConfig.YELLOWSTONE_CAMPGROUNDS.items()
+            ]
+            error_message = (
+                "You must supply a YellowstoneNationalParkLodges supported "
+                "campground ID. Current supported Campground IDs: "
+                f"{', '.join(campground_ids)}"
+            )
+            logger.error(error_message)
+            from camply.exceptions import SearchError
+
+            raise SearchError(error_message)
+        logger.info(f"{len(searchable_campgrounds)} Matching Campgrounds Found")
+        for campground in searchable_campgrounds:
+            logger.info(
+                f"⛰  {YellowstoneConfig.YELLOWSTONE_RECREATION_AREA_FORMAL_NAME} "
+                f"(#{YellowstoneConfig.YELLOWSTONE_RECREATION_AREA_ID}) - 🏕  "
+                f"{YellowstoneConfig.YELLOWSTONE_CAMPGROUNDS[campground]} ({campground})"
+            )
+        return searchable_campgrounds
+
+    def _filter_campsites_to_campgrounds(
+        self,
+        campsites: List[AvailableCampsite],
+        searchable_campgrounds: Set[str],
+        campgrounds: Optional[List[str]],
+    ) -> List[AvailableCampsite]:
+        """
+        Filter Campsites Down to Matching Campgrounds
+        """
+        if campgrounds in [None, []]:
+            return campsites
+        matching_campsites = [
+            campsite
+            for campsite in campsites
+            if campsite.facility_id in searchable_campgrounds
+        ]
+        return matching_campsites
+
+    def find_campsites(
+        self,
+        *,
+        search_months: List[datetime],
+        campgrounds: Optional[List[str]] = None,
+        nights: int = 1,
+        **kwargs: Any,
+    ) -> List[AvailableCampsite]:
+        """
+        Search for all matching campsites in Yellowstone.
+
+        Returns
+        -------
+        List[AvailableCampsite]
+        """
+        all_campsites: List[AvailableCampsite] = []
+        searchable_campgrounds = self._get_searchable_campgrounds(campgrounds)
+        this_month = datetime.now().date().replace(day=1)
+        for month in search_months:
+            # month is typically a datetime.date from get_search_months
+            month_date = month.date() if hasattr(month, "date") else month
+            if month_date >= this_month:
+                all_campsites += self.get_monthly_campsites(
+                    month=month, nights=None if nights == 1 else nights
+                )
+        matching_campsites = self._filter_campsites_to_campgrounds(
+            campsites=all_campsites,
+            searchable_campgrounds=searchable_campgrounds or set(),
+            campgrounds=campgrounds,
+        )
+        return matching_campsites

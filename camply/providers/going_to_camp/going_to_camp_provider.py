@@ -11,7 +11,12 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from fake_useragent import UserAgent
 from pydantic import ValidationError
 
-from camply.containers import AvailableResource, CampgroundFacility, RecreationArea
+from camply.containers import (
+    AvailableCampsite,
+    AvailableResource,
+    CampgroundFacility,
+    RecreationArea,
+)
 from camply.containers.base_container import GoingToCampEquipment
 from camply.containers.gtc_api_responses import ResourceLocation
 from camply.exceptions import CamplyError
@@ -602,6 +607,111 @@ class GoingToCamp(BaseProvider):
                     availabilities.append(ar)
 
         return availabilities
+
+    def find_campsites(
+        self,
+        *,
+        search_months: List[datetime.datetime],
+        campgrounds: List[CampgroundFacility],
+        nights: int = 1,
+        search_window: Optional[Union[List[Any], Any]] = None,
+        equipment_id: Optional[int] = None,
+        rec_area_id: Optional[int] = None,
+        **kwargs: Any,
+    ) -> List[AvailableCampsite]:
+        """
+        Search for all campsites matching search criteria.
+
+        Because Going To Camp has no efficient way of filtering
+        campsites for multiple campgrounds, this function is limited to listening
+        all campsites _within_ a cammpground. Iterating through all sites for
+        all campgrounds would likely lead to abuse complaints.
+
+        Returns
+        -------
+        List[AvailableCampsite]
+        """
+        available_sites: List[AvailableCampsite] = []
+        if not search_window or rec_area_id is None:
+            return available_sites
+
+        search_windows = make_list(search_window)
+        if not search_windows:
+            return available_sites
+
+        for window in search_windows:
+            current_start_date = window.get_current_start_date()
+            for campground in campgrounds:
+                sites = self.list_site_availability(
+                    campground=campground,
+                    start_date=current_start_date,
+                    end_date=window.end_date,
+                    equipment_type_id=str(equipment_id)
+                    if equipment_id is not None
+                    else None,
+                )
+                for site in sites:
+                    site_details = self.get_site_details(
+                        rec_area_id, int(site.resource_id)
+                    )
+                    booking_nights = (window.end_date - current_start_date).days
+                    start_dt = datetime.datetime.combine(
+                        current_start_date, datetime.time.min
+                    )
+                    end_dt = datetime.datetime.combine(
+                        window.end_date, datetime.time.min
+                    )
+                    (
+                        rec_area_domain_name,
+                        rec_area,
+                    ) = self.rec_area_lookup(rec_area_id=rec_area_id)
+                    reservation_url = self.get_reservation_link(
+                        rec_area_domain_name,
+                        resource_location_id=campground.facility_id,
+                        map_id=site.map_id,
+                        equipment_id=NON_GROUP_EQUIPMENT,
+                        sub_equipment_id=equipment_id,
+                        party_size=1,
+                        start_date=current_start_date,
+                        end_date=window.end_date,
+                    )
+
+                    # Some rec areas have zero-capacity sites, which should not
+                    # be viable for camping. Skip all zero-capacity sites.
+                    if (
+                        not site_details["minCapacity"]
+                        or not site_details["maxCapacity"]
+                    ):
+                        continue
+
+                    available_sites.append(
+                        AvailableCampsite(
+                            campsite_id=site_details["resourceId"],
+                            campsite_site_name=site_details["localizedValues"][0][
+                                "name"
+                            ],
+                            booking_date=start_dt,
+                            booking_end_date=end_dt,
+                            booking_nights=booking_nights,
+                            campsite_loop_name="Unknown",
+                            campsite_type=site_details["site_attributes"].get(
+                                "Service Type", "Unknown"
+                            ),
+                            campsite_occupancy=(
+                                site_details["minCapacity"],
+                                site_details["maxCapacity"],
+                            ),
+                            campsite_use_type="N/A",
+                            availability_status="Available",
+                            recreation_area=rec_area.recreation_area,
+                            recreation_area_id=rec_area_id,
+                            facility_name=campground.facility_name,
+                            facility_id=campground.facility_id,
+                            booking_url=reservation_url,
+                        )
+                    )
+
+        return available_sites
 
 
 def _fetch_nested_key(obj: Union[dict[Any, Any], list[Any], object], *keys: Any) -> Any:

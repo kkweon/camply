@@ -13,7 +13,7 @@ from fake_useragent import UserAgent
 
 from camply.config import SearchConfig
 from camply.config.api_config import APIConfig
-from camply.containers import CampgroundFacility
+from camply.containers import AvailableCampsite, CampgroundFacility
 
 logger = logging.getLogger(__name__)
 
@@ -121,6 +121,32 @@ class BaseProvider(ABC):
         """
         List Recreation Areas for the provider
         """
+
+    def find_campsites(
+        self,
+        *,
+        search_months: List[datetime],
+        campgrounds: List[Any],
+        nights: int,
+        **kwargs: Any,
+    ) -> List[AvailableCampsite]:
+        """
+        Find Available Campsites
+
+        Parameters
+        ----------
+        search_months: List[datetime]
+            Months to search for campsites
+        campgrounds: List[str]
+            Campground IDs to search
+        nights: int
+            Minimum number of consecutive nights to search per campsite
+
+        Returns
+        -------
+        List[AvailableCampsite]
+        """
+        raise NotImplementedError
 
     def make_http_request(
         self,

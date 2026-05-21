@@ -826,6 +826,80 @@ class RecreationDotGovBase(BaseProvider, ABC):
             all_campsites += self.paginate_recdotgov_campsites(facility_id=facility_id)
         return all_campsites
 
+    def find_campsites(
+        self,
+        *,
+        search_months: List[datetime],
+        campgrounds: List[CampgroundFacility],
+        nights: int = 1,
+        campsites: Optional[List[int]] = None,
+        campsite_metadata: Optional[pd.DataFrame] = None,
+        **kwargs: Any,
+    ) -> List[AvailableCampsite]:
+        """
+        Perform the Search and Return All Monthly Availabilities
+
+        Returns
+        -------
+        List[AvailableCampsite]
+        """
+        from random import uniform
+        from time import sleep
+
+        from camply.config import RecreationBookingConfig
+        from camply.exceptions import SearchError
+        from camply.utils import logging_utils
+
+        found_campsites = []
+        if len(campgrounds) == 0:
+            error_message = "No campgrounds found to search"
+            logger.error(error_message)
+            raise SearchError(error_message)
+        logger.info(f"Searching across {len(campgrounds)} campgrounds")
+        if campsite_metadata is None:
+            campsite_metadata = self.get_internal_campsite_metadata(
+                facility_ids=[
+                    int(facil.facility_id)
+                    for facil in campgrounds
+                    if facil.facility_id is not None
+                ]
+            )
+            logger.info("Metadata fetched for %s campsites", len(campsite_metadata))
+        for index, campground in enumerate(campgrounds):
+            for month in search_months:
+                logger.info(
+                    f"Searching {campground.facility_name}, {campground.recreation_area} "
+                    f"({campground.facility_id}) for availability: "
+                    f"{month.strftime('%B, %Y')}"
+                )
+                avail_campsites = self.get_campsite_availabilities(
+                    facility=campground,
+                    month=month,
+                    campsite_metadata=campsite_metadata,
+                )
+                logger.info(
+                    f"\t{logging_utils.get_emoji(avail_campsites)}\t"
+                    f"{len(avail_campsites)} total sites found in month of "
+                    f"{month.strftime('%B')}"
+                )
+                if campsites not in [None, []]:
+                    campsites_list = [
+                        campsite_obj
+                        for campsite_obj in avail_campsites
+                        if campsite_obj is not None
+                        and int(campsite_obj.campsite_id) in campsites  # type: ignore[operator]
+                    ]
+                else:
+                    campsites_list = [
+                        campsite_obj
+                        for campsite_obj in avail_campsites
+                        if campsite_obj is not None
+                    ]
+                found_campsites += campsites_list
+                if index + 1 < len(campgrounds):
+                    sleep(round(uniform(*RecreationBookingConfig.RATE_LIMITING), 2))
+        return found_campsites
+
     def get_internal_campsite_metadata(self, facility_ids: List[int]) -> pd.DataFrame:
         """
         Retrieve Metadata About all of the underlying Campsites to Search
