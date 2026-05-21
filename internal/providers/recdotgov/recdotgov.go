@@ -51,8 +51,16 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 			return nil, fmt.Errorf("failed to fetch metadata for %s: %w", campgroundID, err)
 		}
 
-		fmt.Printf("🏕  Fetched metadata for Campground #%s (%d total campsites)\n", campgroundID, len(metadata))
+		// Attempt to grab the human readable campground name from the first campsite's metadata
+		facilityName := "Unknown Campground"
+		for _, v := range metadata {
+			if v.FacilityName != "" {
+				facilityName = v.FacilityName
+				break
+			}
+		}
 
+		fmt.Printf("🏕  Fetched metadata for %s (#%s) - %d total campsites\n", facilityName, campgroundID, len(metadata))
 		// 2. Fetch Availabilities
 		for _, month := range months {
 			campsites, err := p.getAvailability(ctx, campgroundID, month)

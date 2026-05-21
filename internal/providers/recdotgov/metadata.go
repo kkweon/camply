@@ -74,7 +74,7 @@ type campsiteSearchResponse struct {
 
 type campsiteSearchItem struct {
 	CampsiteID         string               `json:"campsite_id"`
-	ParentName         string               `json:"parent_name"`
+	ParentName         string               `json:"asset_name"`
 	PermittedEquipment []recdotgovEquipment `json:"permitted_equipment"`
 }
 

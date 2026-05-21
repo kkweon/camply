@@ -153,27 +153,43 @@ func (t *telegramNotifier) SendCampsites(campsites []core.AvailableCampsite) err
 	return nil
 }
 
-// RunTestNotifications executes the test flow just like the Python version
-func RunTestNotifications(providers []string, cfg *config.AppConfig) error {
+func SetupNotifiers(providers []string, cfg *config.AppConfig) ([]Notifier, error) {
 	var notifiers []Notifier
+	var errs []error
 
 	for _, p := range providers {
 		switch p {
 		case "pushover":
 			n, err := NewPushover(cfg)
 			if err != nil {
-				return err
+				errs = append(errs, err)
+			} else {
+				notifiers = append(notifiers, n)
 			}
-			notifiers = append(notifiers, n)
 		case "telegram":
 			n, err := NewTelegram(cfg)
 			if err != nil {
-				return err
+				errs = append(errs, err)
+			} else {
+				notifiers = append(notifiers, n)
 			}
-			notifiers = append(notifiers, n)
 		default:
-			fmt.Printf("⚠️  Warning: Provider '%s' is not yet implemented in the Go rewrite\n", p)
+			fmt.Printf("⚠️  Warning: Notification provider '%s' is not yet implemented in the Go rewrite\n", p)
 		}
+	}
+
+	if len(errs) > 0 {
+		return notifiers, fmt.Errorf("encountered errors setting up notifiers: %v", errs)
+	}
+
+	return notifiers, nil
+}
+
+// RunTestNotifications executes the test flow just like the Python version
+func RunTestNotifications(providers []string, cfg *config.AppConfig) error {
+	notifiers, err := SetupNotifiers(providers, cfg)
+	if err != nil {
+		return err
 	}
 
 	exampleSite := getExampleCampsite()
