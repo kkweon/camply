@@ -1,0 +1,6 @@
+{
+    "NightlyUnit": {
+        "MinOccupancy": 2,
+        "MaxOccupancy": 6
+    }
+}

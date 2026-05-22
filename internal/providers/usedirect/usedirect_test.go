@@ -28,12 +28,19 @@ func TestProvider_FindCampsites_WithEquipmentAndURL(t *testing.T) {
 			return
 		}
 		if strings.Contains(r.URL.Path, "fd/places") {
+			data, _ := os.ReadFile("testdata/places.json")
 			w.WriteHeader(http.StatusOK)
-			_, _ = w.Write([]byte("[]")) // Mock empty places for warmup
+			_, _ = w.Write(data)
 			return
 		}
 		if strings.Contains(r.URL.Path, "search/grid") {
 			data, _ := os.ReadFile("testdata/grid.json")
+			w.WriteHeader(http.StatusOK)
+			_, _ = w.Write(data)
+			return
+		}
+		if strings.Contains(r.URL.Path, "search/details") {
+			data, _ := os.ReadFile("testdata/details.json")
 			w.WriteHeader(http.StatusOK)
 			_, _ = w.Write(data)
 			return
@@ -77,6 +84,15 @@ func TestProvider_FindCampsites_WithEquipmentAndURL(t *testing.T) {
 		expectedURL := "https://www.reservecalifornia.com/park/691/616"
 		if c.BookingURL != expectedURL {
 			t.Errorf("expected BookingURL %q, got %q", expectedURL, c.BookingURL)
+		}
+		if c.RecreationArea != "Pismo SB" {
+			t.Errorf("expected RecreationArea %q, got %q", "Pismo SB", c.RecreationArea)
+		}
+		if c.RecreationAreaID != "691" {
+			t.Errorf("expected RecreationAreaID %q, got %q", "691", c.RecreationAreaID)
+		}
+		if c.MinOccupancy != 2 || c.MaxOccupancy != 6 {
+			t.Errorf("expected occupancy 2-6, got %d-%d", c.MinOccupancy, c.MaxOccupancy)
 		}
 	}
 }

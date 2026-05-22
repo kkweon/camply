@@ -9,6 +9,7 @@ import (
 	"net/http/cookiejar"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/kkweon/camply/internal/core"
@@ -24,7 +25,17 @@ type Provider struct {
 	unitCategories  map[int]string
 	unitTypeGroups  map[int]string
 	facilityToPlace map[int]int
+	places          map[int]core.RecreationArea
+	facilities      map[int]core.CampgroundFacility
 	metadataFetched bool
+	// Cached unit occupancy from /rdr/search/details/<unitId>
+	mu            sync.Mutex
+	unitOccupancy map[int]unitOccupancyData
+}
+
+type unitOccupancyData struct {
+	MinOccupancy int
+	MaxOccupancy int
 }
 
 func NewProvider(providerName, baseURL, campgroundURL string) *Provider {
@@ -34,6 +45,8 @@ func NewProvider(providerName, baseURL, campgroundURL string) *Provider {
 		baseURL:       baseURL,
 		campgroundURL: campgroundURL,
 		providerName:  providerName,
+		places:        make(map[int]core.RecreationArea),
+		facilities:    make(map[int]core.CampgroundFacility),
 	}
 }
 
@@ -142,6 +155,30 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 				_ = grid.Message // no-op to satisfy staticcheck empty branch
 			}
 
+			// Pre-fetch occupancy concurrently for any unit with a free slice
+			var wg sync.WaitGroup
+			sem := make(chan struct{}, 5) // limit concurrency to 5
+			uniqueUnitsToFetch := make(map[int]bool)
+			for _, unit := range grid.Facility.Units {
+				for _, slice := range unit.Slices {
+					if slice.IsFree {
+						uniqueUnitsToFetch[unit.UnitId] = true
+						break
+					}
+				}
+			}
+
+			for unitID := range uniqueUnitsToFetch {
+				wg.Add(1)
+				go func(id int) {
+					defer wg.Done()
+					sem <- struct{}{} // acquire
+					p.fetchUnitOccupancy(ctx, id)
+					<-sem // release
+				}(unitID)
+			}
+			wg.Wait()
+
 			for _, unit := range grid.Facility.Units {
 				for _, slice := range unit.Slices {
 					if slice.IsFree {
@@ -159,6 +196,9 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 						bookingURL := fmt.Sprintf("%s/park/%d/%d", p.campgroundURL, placeID, facilityID)
 						campsiteType := p.unitCategories[unit.UnitCategoryId]
 						campsiteUseType := p.unitTypeGroups[unit.UnitTypeGroupId]
+
+						// Fetch occupancy lazily (cached per unit)
+						p.fetchUnitOccupancy(ctx, unit.UnitId)
 
 						// TylerTech maps Tent sites to Group 5 and Equipment mapping
 						var permittedEquipment []core.Equipment
@@ -188,6 +228,18 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 							})
 						}
 
+						var recreationAreaName string
+						if ra, ok := p.places[placeID]; ok {
+							recreationAreaName = ra.RecreationArea
+						}
+
+						minOcc := 0
+						maxOcc := 1
+						if occ, ok := p.unitOccupancy[unit.UnitId]; ok {
+							minOcc = occ.MinOccupancy
+							maxOcc = occ.MaxOccupancy
+						}
+
 						allCampsites = append(allCampsites, core.AvailableCampsite{
 							CampsiteID:         strconv.Itoa(unit.UnitId),
 							CampsiteSiteName:   unit.Name,
@@ -196,7 +248,11 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 							BookingNights:      1,
 							CampsiteType:       campsiteType,
 							CampsiteUseType:    campsiteUseType,
+							MinOccupancy:       minOcc,
+							MaxOccupancy:       maxOcc,
 							AvailabilityStatus: "Available",
+							RecreationArea:     recreationAreaName,
+							RecreationAreaID:   strconv.Itoa(placeID),
 							FacilityID:         strconv.Itoa(facilityID),
 							FacilityName:       grid.Facility.FacilityName,
 							PermittedEquipment: permittedEquipment,
@@ -211,6 +267,17 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 	return allCampsites, nil
 }
 
+type unitDetailResponse struct {
+	NightlyUnit struct {
+		MinOccupancy int `json:"MinOccupancy"`
+		MaxOccupancy int `json:"MaxOccupancy"`
+	} `json:"NightlyUnit"`
+	DayUseUnit struct {
+		MinOccupancy int `json:"MinOccupancy"`
+		MaxOccupancy int `json:"MaxOccupancy"`
+	} `json:"DayUseUnit"`
+}
+
 type filterResponse struct {
 	UnitCategories []struct {
 		ID   int    `json:"UnitCategoryId"`
@@ -220,6 +287,50 @@ type filterResponse struct {
 		ID   int    `json:"UnitTypesGroupId"`
 		Name string `json:"UnitTypesGroupName"`
 	} `json:"UnitTypesGroups"`
+}
+
+// fetchUnitOccupancy fetches occupancy data for a single unit and caches it
+func (p *Provider) fetchUnitOccupancy(ctx context.Context, unitID int) {
+	p.mu.Lock()
+	if p.unitOccupancy == nil {
+		p.unitOccupancy = make(map[int]unitOccupancyData)
+	}
+	if _, ok := p.unitOccupancy[unitID]; ok {
+		p.mu.Unlock()
+		return
+	}
+	p.mu.Unlock()
+
+	url := fmt.Sprintf("%s/rdr/search/details/%d/startdate/2000-01-01/nights/1/0/0", p.baseURL, unitID)
+	req, _ := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+	req.Header.Set("User-Agent", "Mozilla/5.0")
+	resp, err := p.client.Do(req)
+	if err != nil {
+		return
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode >= 400 {
+		return
+	}
+
+	var det unitDetailResponse
+	if err := json.NewDecoder(resp.Body).Decode(&det); err != nil {
+		return
+	}
+
+	occ := unitOccupancyData{MinOccupancy: 0, MaxOccupancy: 1}
+	if det.NightlyUnit.MaxOccupancy > 0 {
+		occ.MinOccupancy = det.NightlyUnit.MinOccupancy
+		occ.MaxOccupancy = det.NightlyUnit.MaxOccupancy
+	} else if det.DayUseUnit.MaxOccupancy > 0 {
+		occ.MinOccupancy = det.DayUseUnit.MinOccupancy
+		occ.MaxOccupancy = det.DayUseUnit.MaxOccupancy
+	}
+
+	p.mu.Lock()
+	p.unitOccupancy[unitID] = occ
+	p.mu.Unlock()
 }
 
 // refreshMetadata caches all categorical types and resolves WAF session cookies exactly like Python
@@ -249,17 +360,52 @@ func (p *Provider) refreshMetadata(ctx context.Context) error {
 		}
 	}
 
-	// 2. Fetch Facilities for URL mapping
-	req2, _ := http.NewRequestWithContext(ctx, http.MethodGet, fmt.Sprintf("%s/rdr/fd/facilities", p.baseURL), nil)
+	// 2. Fetch Places for Recreation Area mapping
+	p.places = make(map[int]core.RecreationArea)
+	req2, _ := http.NewRequestWithContext(ctx, http.MethodGet, fmt.Sprintf("%s/rdr/fd/places", p.baseURL), nil)
 	req2.Header.Set("User-Agent", "Mozilla/5.0")
 	resp2, err := p.client.Do(req2)
 	if err == nil {
 		defer resp2.Body.Close()
+		var places placesResponse
+		if err := json.NewDecoder(resp2.Body).Decode(&places); err == nil {
+			for _, pl := range places {
+				location := fmt.Sprintf("%s, %s", pl.City, pl.State)
+				if pl.City == "" {
+					location = pl.State
+				}
+				p.places[pl.PlaceId] = core.RecreationArea{
+					RecreationAreaID:       strconv.Itoa(pl.PlaceId),
+					RecreationArea:         pl.Name,
+					RecreationAreaLocation: location,
+				}
+			}
+		}
+	}
+
+	// 3. Fetch Facilities for URL mapping and Campground info
+	p.facilities = make(map[int]core.CampgroundFacility)
+	req3, _ := http.NewRequestWithContext(ctx, http.MethodGet, fmt.Sprintf("%s/rdr/fd/facilities", p.baseURL), nil)
+	req3.Header.Set("User-Agent", "Mozilla/5.0")
+	resp3, err := p.client.Do(req3)
+	if err == nil {
+		defer resp3.Body.Close()
 		var facResponse facilitiesResponse
-		if err := json.NewDecoder(resp2.Body).Decode(&facResponse); err == nil {
+		if err := json.NewDecoder(resp3.Body).Decode(&facResponse); err == nil {
 			p.facilityToPlace = make(map[int]int)
 			for _, f := range facResponse {
 				p.facilityToPlace[f.FacilityId] = f.PlaceId
+
+				recAreaName := ""
+				if ra, ok := p.places[f.PlaceId]; ok {
+					recAreaName = ra.RecreationArea
+				}
+				p.facilities[f.FacilityId] = core.CampgroundFacility{
+					FacilityID:       strconv.Itoa(f.FacilityId),
+					FacilityName:     f.Name,
+					RecreationArea:   recAreaName,
+					RecreationAreaID: strconv.Itoa(f.PlaceId),
+				}
 			}
 		}
 	}
@@ -324,9 +470,15 @@ func (p *Provider) FindCampgrounds(ctx context.Context, req core.SearchRequest) 
 			continue
 		}
 
+		recAreaName := ""
+		if ra, ok := p.places[data.PlaceId]; ok {
+			recAreaName = ra.RecreationArea
+		}
+
 		facilities = append(facilities, core.CampgroundFacility{
 			FacilityID:       strconv.Itoa(data.FacilityId),
 			FacilityName:     data.Name,
+			RecreationArea:   recAreaName,
 			RecreationAreaID: strconv.Itoa(data.PlaceId),
 		})
 	}
