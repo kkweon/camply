@@ -1,0 +1,33 @@
+# ---------------------------------------------------------
+# Builder Stage
+# ---------------------------------------------------------
+FROM --platform=$BUILDPLATFORM golang:1.25-alpine AS builder
+
+WORKDIR /app
+
+# Copy go.mod and go.sum and download dependencies
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Copy source code
+COPY cmd/ cmd/
+COPY internal/ internal/
+
+# Build arguments for cross-compilation
+ARG TARGETOS
+ARG TARGETARCH
+
+# Build static binary
+RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -ldflags="-s -w" -o camply cmd/camply/main.go
+
+# ---------------------------------------------------------
+# Final Runtime Stage
+# ---------------------------------------------------------
+FROM alpine:3.21
+
+RUN apk add --no-cache ca-certificates tzdata
+
+COPY --from=builder /app/camply /usr/local/bin/camply
+
+ENTRYPOINT ["camply"]
+CMD ["--help"]

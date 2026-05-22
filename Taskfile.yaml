@@ -94,7 +94,23 @@ tasks:
             - cmd: uv build
     #######################################
     docker:
-        desc: Build Docker Image
+        desc: Build both Python and Go Docker Images
+        cmds:
+            - task: docker:python
+              vars:
+                  {
+                      CLI_ARGS: "{{.CLI_ARGS}}",
+                      RELEASE_VERSION: "{{.RELEASE_VERSION}}",
+                  }
+            - task: docker:go
+              vars:
+                  {
+                      CLI_ARGS: "{{.CLI_ARGS}}",
+                      RELEASE_VERSION: "{{.RELEASE_VERSION}}",
+                  }
+    #######################################
+    docker:python:
+        desc: Build Python Docker Image
         cmd: |
             docker buildx build \
               --tag {{.DOCKER_REPO}}:{{.RELEASE_VERSION}} \
@@ -103,12 +119,23 @@ tasks:
               --platform linux/amd64,linux/arm64 {{.CLI_ARGS | default ""}} \
               {{.ROOT_DIR}}
         vars:
-            RELEASE_VERSION:
-                ref: .RELEASE_VERSION | default "local"
+            RELEASE_VERSION: '{{.RELEASE_VERSION | default "local"}}'
         requires:
             vars: [DOCKER_REPO]
-        status:
-            - test ! -f {{.ROOT_DIR}}/{{.DOCKERFILE | default "Dockerfile"}}
+    #######################################
+    docker:go:
+        desc: Build Go Docker Image
+        cmd: |
+            docker buildx build \
+              --tag {{.DOCKER_REPO}}:{{.RELEASE_VERSION}}-go \
+              --tag {{.DOCKER_REPO}}:latest-go \
+              --file {{.ROOT_DIR}}/Dockerfile.golang \
+              --platform linux/amd64,linux/arm64 {{.CLI_ARGS | default ""}} \
+              {{.ROOT_DIR}}
+        vars:
+            RELEASE_VERSION: '{{.RELEASE_VERSION | default "local"}}'
+        requires:
+            vars: [DOCKER_REPO]
     #######################################
     build:
         desc: Build the Project Artifacts

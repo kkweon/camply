@@ -32,6 +32,11 @@ jobs:
                   enable-cache: true
                   cache-dependency-glob: "uv.lock"
 
+            - name: setup-go
+              uses: actions/setup-go@v5
+              with:
+                  go-version: "1.25.x"
+
             - name: setup-task
               uses: arduino/setup-task@v2
               with:
