@@ -15,17 +15,26 @@ import (
 )
 
 type Provider struct {
-	client       *http.Client
-	baseURL      string
-	providerName string
+	client        *http.Client
+	baseURL       string
+	campgroundURL string
+	providerName  string
+	// Cached metadata
+	unitCategories  map[int]string
+	unitTypeGroups  map[int]string
+	facilityMap     map[int]string
+	placeMap        map[int]string
+	facilityToPlace map[int]int
+	metadataFetched bool
 }
 
-func NewProvider(providerName, baseURL string) *Provider {
+func NewProvider(providerName, baseURL, campgroundURL string) *Provider {
 	jar, _ := cookiejar.New(nil)
 	return &Provider{
-		client:       &http.Client{Timeout: 30 * time.Second, Jar: jar},
-		baseURL:      baseURL,
-		providerName: providerName,
+		client:        &http.Client{Timeout: 30 * time.Second, Jar: jar},
+		baseURL:       baseURL,
+		campgroundURL: campgroundURL,
+		providerName:  providerName,
 	}
 }
 
@@ -44,9 +53,12 @@ type gridResponse struct {
 		FacilityId   int    `json:"FacilityId"`
 		FacilityName string `json:"Name"`
 		Units        map[string]struct {
-			UnitId int    `json:"UnitId"`
-			Name   string `json:"Name"`
-			Slices map[string]struct {
+			UnitId          int    `json:"UnitId"`
+			Name            string `json:"Name"`
+			UnitCategoryId  int    `json:"UnitCategoryId"`
+			UnitTypeGroupId int    `json:"UnitTypeGroupId"`
+			VehicleLength   int    `json:"VehicleLength"`
+			Slices          map[string]struct {
 				Date   string `json:"Date"`
 				IsFree bool   `json:"IsFree"`
 			} `json:"Slices"`
@@ -62,7 +74,7 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 	}
 
 	// 1. Bypass the TylerTech WAF by grabbing session cookies from a public metadata endpoint
-	err := p.warmupCookies(ctx)
+	err := p.refreshMetadata(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("failed to warmup usedirect session: %w", err)
 	}
@@ -143,8 +155,38 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 							}
 						}
 
-						// ReserveCalifornia format booking link: https://www.reservecalifornia.com/park/0/1121
-						bookingURL := fmt.Sprintf("%s/park/0/%d", p.baseURL, facilityID)
+						// ReserveCalifornia format booking link: https://www.reservecalifornia.com/park/691/616
+						placeID := p.facilityToPlace[facilityID]
+						bookingURL := fmt.Sprintf("%s/park/%d/%d", p.campgroundURL, placeID, facilityID)
+						campsiteType := p.unitCategories[unit.UnitCategoryId]
+						campsiteUseType := p.unitTypeGroups[unit.UnitTypeGroupId]
+
+						// TylerTech maps Tent sites to Group 5 and Equipment mapping
+						var permittedEquipment []core.Equipment
+
+						lowerUseType := strings.ToLower(campsiteUseType)
+
+						// If it's explicitly a "Tent Site" or "Tent and RV" category, or VehicleLength is 0 (primitive)
+						// We also include generic campsites, sites, and hook ups as they are typically tent friendly.
+						if strings.Contains(lowerUseType, "tent") || strings.Contains(lowerUseType, "campsite") || strings.Contains(lowerUseType, "site") || strings.Contains(lowerUseType, "hook up") || unit.VehicleLength == 0 {
+							permittedEquipment = append(permittedEquipment, core.Equipment{
+								EquipmentName: "Tent",
+								MaxLength:     0,
+							})
+						}
+						// Map raw Vehicle Lengths natively into the struct
+						if unit.VehicleLength > 0 {
+							permittedEquipment = append(permittedEquipment, core.Equipment{
+								EquipmentName: "RV",
+								MaxLength:     unit.VehicleLength,
+							}, core.Equipment{
+								EquipmentName: "Trailer",
+								MaxLength:     unit.VehicleLength,
+							}, core.Equipment{
+								EquipmentName: "Vehicle",
+								MaxLength:     unit.VehicleLength,
+							})
+						}
 
 						allCampsites = append(allCampsites, core.AvailableCampsite{
 							CampsiteID:         strconv.Itoa(unit.UnitId),
@@ -152,9 +194,12 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 							BookingDate:        bookingDate,
 							BookingEndDate:     bookingDate.AddDate(0, 0, 1), // Default 1 night, Filter merges them
 							BookingNights:      1,
+							CampsiteType:       campsiteType,
+							CampsiteUseType:    campsiteUseType,
 							AvailabilityStatus: "Available",
 							FacilityID:         strconv.Itoa(facilityID),
 							FacilityName:       grid.Facility.FacilityName,
+							PermittedEquipment: permittedEquipment,
 							BookingURL:         bookingURL,
 						})
 					}
@@ -166,20 +211,60 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 	return allCampsites, nil
 }
 
-func (p *Provider) warmupCookies(ctx context.Context) error {
-	// Hit the public places endpoint to trigger the AWS Application Load Balancer to issue stickounet cookies
-	url := fmt.Sprintf("%s/rdr/fd/places", p.baseURL)
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
-	if err != nil {
-		return err
-	}
-	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36")
+type filterResponse struct {
+	UnitCategories []struct {
+		ID   int    `json:"UnitCategoryId"`
+		Name string `json:"UnitCategoryName"`
+	} `json:"UnitCategories"`
+	UnitTypesGroups []struct {
+		ID   int    `json:"UnitTypesGroupId"`
+		Name string `json:"UnitTypesGroupName"`
+	} `json:"UnitTypesGroups"`
+}
 
-	resp, err := p.client.Do(req)
+// refreshMetadata caches all categorical types and resolves WAF session cookies exactly like Python
+func (p *Provider) refreshMetadata(ctx context.Context) error {
+	if p.metadataFetched {
+		return nil
+	}
+
+	// 1. Fetch Categories for mapping and WAF cookies
+	req1, _ := http.NewRequestWithContext(ctx, http.MethodGet, fmt.Sprintf("%s/rdr/search/filters", p.baseURL), nil)
+	req1.Header.Set("User-Agent", "Mozilla/5.0")
+	resp, err := p.client.Do(req1)
 	if err != nil {
 		return err
 	}
 	defer resp.Body.Close()
+
+	var filters filterResponse
+	if err := json.NewDecoder(resp.Body).Decode(&filters); err == nil {
+		p.unitCategories = make(map[int]string)
+		for _, c := range filters.UnitCategories {
+			p.unitCategories[c.ID] = c.Name
+		}
+		p.unitTypeGroups = make(map[int]string)
+		for _, t := range filters.UnitTypesGroups {
+			p.unitTypeGroups[t.ID] = t.Name
+		}
+	}
+
+	// 2. Fetch Facilities for URL mapping
+	req2, _ := http.NewRequestWithContext(ctx, http.MethodGet, fmt.Sprintf("%s/rdr/fd/facilities", p.baseURL), nil)
+	req2.Header.Set("User-Agent", "Mozilla/5.0")
+	resp2, err := p.client.Do(req2)
+	if err == nil {
+		defer resp2.Body.Close()
+		var facResponse facilitiesResponse
+		if err := json.NewDecoder(resp2.Body).Decode(&facResponse); err == nil {
+			p.facilityToPlace = make(map[int]int)
+			for _, f := range facResponse {
+				p.facilityToPlace[f.FacilityId] = f.PlaceId
+			}
+		}
+	}
+
+	p.metadataFetched = true
 	return nil
 }
 
@@ -192,7 +277,7 @@ type facilitiesResponse []struct {
 func (p *Provider) FindCampgrounds(ctx context.Context, req core.SearchRequest) ([]core.CampgroundFacility, error) {
 	var facilities []core.CampgroundFacility
 
-	err := p.warmupCookies(ctx)
+	err := p.refreshMetadata(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("failed to warmup usedirect session: %w", err)
 	}
@@ -259,7 +344,7 @@ type placesResponse []struct {
 func (p *Provider) FindRecreationAreas(ctx context.Context, req core.SearchRequest) ([]core.RecreationArea, error) {
 	var areas []core.RecreationArea
 
-	err := p.warmupCookies(ctx)
+	err := p.refreshMetadata(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("failed to warmup usedirect session: %w", err)
 	}

@@ -39,7 +39,7 @@ var campgroundsCmd = &cobra.Command{
 		case "RecreationDotGov":
 			provider = recdotgov.NewProvider()
 		case "ReserveCalifornia":
-			provider = usedirect.NewProvider("ReserveCalifornia", "https://california-rdr.prod.cali.rd12.recreation-management.tylerapp.com")
+			provider = usedirect.NewProvider("ReserveCalifornia", "https://california-rdr.prod.cali.rd12.recreation-management.tylerapp.com", "https://www.reservecalifornia.com")
 		default:
 			return fmt.Errorf("unsupported or missing provider: %s", providerStr)
 		}
