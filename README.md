@@ -8,6 +8,17 @@
 > [!NOTE]
 > **Fork Notice:** This is an independently maintained fork of the original [juftin/camply](https://github.com/juftin/camply) project. It features multi-architecture Docker builds (ARM64/Raspberry Pi) and deploys exclusively to GHCR. PyPI releases are not supported.
 
+> [!TIP]
+> **Go Rewrite in Progress:** `camply` is actively being rewritten from Python into Go for enhanced concurrency, a massive speed boost, and standalone binary distribution! Providers like `RecreationDotGov` and `ReserveCalifornia` are currently functional.
+>
+> Try out the blisteringly fast Go prototype natively:
+>
+> ```bash
+> go run cmd/camply/main.go --help
+> go run cmd/camply/main.go recreation-areas --provider ReserveCalifornia --search "Yosemite"
+> go run cmd/camply/main.go campsites --provider RecreationDotGov --campground 232447 --start-date 2026-06-01 --end-date 2026-06-10 --nights 3
+> ```
+
 **`camply`**, the campsite finder ⛺️, is a tool to help you book a campsite online. Finding
 reservations at sold out campgrounds can be tough. That's where camply comes in. It searches
 thousands of campgrounds across the ~~USA~~ world via the APIs of booking services like
