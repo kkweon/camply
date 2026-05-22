@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/kkweon/camply/internal/core"
+	"github.com/kkweon/camply/internal/logger"
 )
 
 type Provider struct {
@@ -166,7 +167,8 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 
 						// If it's explicitly a "Tent Site" or "Tent and RV" category, or VehicleLength is 0 (primitive)
 						// We also include generic campsites, sites, and hook ups as they are typically tent friendly.
-						if strings.Contains(lowerUseType, "tent") || strings.Contains(lowerUseType, "campsite") || strings.Contains(lowerUseType, "site") || strings.Contains(lowerUseType, "hook up") || unit.VehicleLength == 0 {
+						logger.Debug("Evaluating campsite: %s (Type: %s, UseType: %s, VehicleLength: %d)", unit.Name, campsiteType, campsiteUseType, unit.VehicleLength)
+						if strings.Contains(lowerUseType, "tent") || strings.Contains(lowerUseType, "camp") || strings.Contains(lowerUseType, "site") || strings.Contains(lowerUseType, "hook up") || strings.Contains(lowerUseType, "primitive") || unit.VehicleLength == 0 {
 							permittedEquipment = append(permittedEquipment, core.Equipment{
 								EquipmentName: "Tent",
 								MaxLength:     0,
