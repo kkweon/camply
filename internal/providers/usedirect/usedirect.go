@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/http/cookiejar"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/kkweon/camply/internal/core"
@@ -133,10 +134,13 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 			for _, unit := range grid.Facility.Units {
 				for _, slice := range unit.Slices {
 					if slice.IsFree {
-						// Slice dates come in as "2026-06-01T00:00:00"
-						bookingDate, err := time.Parse("2006-01-02T15:04:05", slice.Date)
+						// Slice dates come in as "2026-06-01" or "2026-06-01T00:00:00" depending on TylerTech version
+						bookingDate, err := time.Parse("2006-01-02", slice.Date)
 						if err != nil {
-							continue
+							bookingDate, err = time.Parse("2006-01-02T15:04:05", slice.Date)
+							if err != nil {
+								continue
+							}
 						}
 
 						// ReserveCalifornia format booking link: https://www.reservecalifornia.com/park/0/1121
@@ -215,7 +219,26 @@ func (p *Provider) FindCampgrounds(ctx context.Context, req core.SearchRequest) 
 		return nil, err
 	}
 
+	// Filter down by RecreationArea if provided
+	recAreaMap := make(map[int]bool)
+
+	// req.RecreationArea is a string based on the core.SearchRequest interface we built
+	if req.RecreationArea != "" {
+		if id, err := strconv.Atoi(req.RecreationArea); err == nil {
+			recAreaMap[id] = true
+		}
+	}
+
 	for _, data := range parsedResp {
+		// Apply search filter if query is provided
+		if req.Query != "" && !strings.Contains(strings.ToLower(data.Name), strings.ToLower(req.Query)) {
+			continue
+		}
+
+		if len(recAreaMap) > 0 && !recAreaMap[data.PlaceId] {
+			continue
+		}
+
 		facilities = append(facilities, core.CampgroundFacility{
 			FacilityID:       strconv.Itoa(data.FacilityId),
 			FacilityName:     data.Name,
@@ -264,6 +287,11 @@ func (p *Provider) FindRecreationAreas(ctx context.Context, req core.SearchReque
 	}
 
 	for _, data := range parsedResp {
+		// Apply search filter if query is provided
+		if req.Query != "" && !strings.Contains(strings.ToLower(data.Name), strings.ToLower(req.Query)) {
+			continue
+		}
+
 		location := fmt.Sprintf("%s, %s", data.City, data.State)
 		if data.City == "" {
 			location = data.State

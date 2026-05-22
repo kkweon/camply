@@ -219,12 +219,12 @@ func printTable(campsites []core.AvailableCampsite) {
 		// Group by Location (Rec Area + Facility)
 		groupedByLocation := make(map[string][]core.AvailableCampsite)
 		for _, c := range sitesForDate {
-			locStr := fmt.Sprintf("%s  🏕  %s", c.RecreationArea, c.FacilityName)
+			locStr := fmt.Sprintf("⛰️  %s  🏕  %s", c.RecreationArea, c.FacilityName)
 			groupedByLocation[locStr] = append(groupedByLocation[locStr], c)
 		}
 
 		for locStr, sitesForLoc := range groupedByLocation {
-			logger.Info("\t⛰️  %s: ⛺ %d sites", locStr, len(sitesForLoc))
+			logger.Info("\t%s: ⛺ %d sites", locStr, len(sitesForLoc))
 			for _, c := range sitesForLoc {
 				nightsStr := "night"
 				if c.BookingNights > 1 {
