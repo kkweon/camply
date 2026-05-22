@@ -42,16 +42,28 @@ func (f *Filter) Apply(campsites []AvailableCampsite, req SearchRequest) []Avail
 	return filtered
 }
 
-// consolidateNights replaces pandas .groupby().diff() logic with an O(N log N) algorithm
+// consolidateNights stitches per-night availability slices into bookings of exactly
+// requiredNights consecutive nights, mirroring the Python implementation
+// (camply/search/base_search.py _consecutive_subseq / _find_consecutive_nights).
+//
+// For a maximal run of N consecutive free nights it emits every sliding window of
+// length requiredNights — i.e. N-requiredNights+1 records, each spanning exactly
+// requiredNights nights. Runs shorter than requiredNights emit nothing.
 func consolidateNights(campsites []AvailableCampsite, requiredNights int) []AvailableCampsite {
+	if requiredNights < 1 {
+		requiredNights = 1
+	}
 	if len(campsites) == 0 {
 		return campsites
 	}
 
-	// Group campsites by CampsiteID
+	// Group by campsite within a facility. The composite key matches Python's
+	// (campsite_id, campground_id) grouping and avoids merging units from different
+	// facilities that happen to share a numeric ID.
 	groups := make(map[string][]AvailableCampsite)
 	for _, site := range campsites {
-		groups[site.CampsiteID] = append(groups[site.CampsiteID], site)
+		key := site.CampsiteID + "|" + site.FacilityID
+		groups[key] = append(groups[key], site)
 	}
 
 	var consolidated []AvailableCampsite
@@ -62,40 +74,36 @@ func consolidateNights(campsites []AvailableCampsite, requiredNights int) []Avai
 			return group[i].BookingDate.Before(group[j].BookingDate)
 		})
 
-		// Sliding window to find consecutive nights
-		for i := 0; i < len(group); i++ {
-			consecutiveBlocks := []AvailableCampsite{group[i]}
-
-			for j := i + 1; j < len(group); j++ {
-				lastBlock := consecutiveBlocks[len(consecutiveBlocks)-1]
-				// Is it exactly one day later?
-				if group[j].BookingDate.Equal(lastBlock.BookingDate.AddDate(0, 0, 1)) {
-					consecutiveBlocks = append(consecutiveBlocks, group[j])
-					if len(consecutiveBlocks) >= requiredNights {
-						// Found a valid block of N nights!
-						startSite := consecutiveBlocks[0]
-						endSite := consecutiveBlocks[len(consecutiveBlocks)-1]
-
-						mergedSite := startSite
-						mergedSite.BookingEndDate = endSite.BookingEndDate
-						mergedSite.BookingNights = len(consecutiveBlocks)
-
-						consolidated = append(consolidated, mergedSite)
-					}
-				} else {
-					// Gap in dates, break the sliding window
-					break
-				}
+		// Walk maximal consecutive runs, then emit every sliding window of exactly
+		// requiredNights nights within each run.
+		runStart := 0
+		for i := 1; i <= len(group); i++ {
+			isConsecutive := i < len(group) &&
+				truncDay(group[i].BookingDate).Equal(truncDay(group[i-1].BookingDate).AddDate(0, 0, 1))
+			if isConsecutive {
+				continue
 			}
 
-			// If requiredNights is 1, just add the single night
-			if requiredNights == 1 {
-				consolidated = append(consolidated, group[i])
+			run := group[runStart:i]
+			for s := 0; s+requiredNights <= len(run); s++ {
+				startSite := run[s]
+				endSite := run[s+requiredNights-1]
+
+				mergedSite := startSite
+				mergedSite.BookingEndDate = endSite.BookingEndDate
+				mergedSite.BookingNights = requiredNights
+
+				consolidated = append(consolidated, mergedSite)
 			}
+			runStart = i
 		}
 	}
 
 	return consolidated
+}
+
+func truncDay(t time.Time) time.Time {
+	return t.Truncate(24 * time.Hour)
 }
 
 func hasMatchingEquipment(site AvailableCampsite, requested []Equipment) bool {
