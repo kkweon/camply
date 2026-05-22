@@ -74,8 +74,9 @@ func TestProvider_FindCampsites_WithEquipmentAndURL(t *testing.T) {
 	}
 
 	for _, c := range results {
-	        expectedURL := "https://www.reservecalifornia.com/park/691/616"
-	        if c.BookingURL != expectedURL {
-	                t.Errorf("expected BookingURL %q, got %q", expectedURL, c.BookingURL)
-	        }
-	}}
+		expectedURL := "https://www.reservecalifornia.com/park/691/616"
+		if c.BookingURL != expectedURL {
+			t.Errorf("expected BookingURL %q, got %q", expectedURL, c.BookingURL)
+		}
+	}
+}

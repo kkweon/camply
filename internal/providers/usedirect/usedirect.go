@@ -22,8 +22,6 @@ type Provider struct {
 	// Cached metadata
 	unitCategories  map[int]string
 	unitTypeGroups  map[int]string
-	facilityMap     map[int]string
-	placeMap        map[int]string
 	facilityToPlace map[int]int
 	metadataFetched bool
 }
