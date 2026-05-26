@@ -1,110 +1,110 @@
 interactions:
-    - request:
-          body: null
-          headers:
-              Accept-Language:
-                  - en-US,en;q=0.9
-              User-Agent:
-                  - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like
-                    Gecko) Chrome/112.0.0.0 Safari/537.36
-          method: GET
-          uri: https://longpoint.goingtocamp.com/api/equipment
-      response:
-          body:
-              string:
-                  '[{"equipmentCategoryId":-32768,"order":1,"localizedValues":[{"cultureName":"en-CA","name":"Equipment"}],"subEquipmentCategories":[{"subEquipmentCategoryId":-32768,"order":1,"localizedValues":[{"cultureName":"en-CA","name":"1
-                  Tent"}]},{"subEquipmentCategoryId":-32767,"order":2,"localizedValues":[{"cultureName":"en-CA","name":"2
-                  Tents"}]},{"subEquipmentCategoryId":-32766,"order":3,"localizedValues":[{"cultureName":"en-CA","name":"Van/Camper"}]},{"subEquipmentCategoryId":-32765,"order":4,"localizedValues":[{"cultureName":"en-CA","name":"Trailer
-                  up to 18ft"}]},{"subEquipmentCategoryId":-32764,"order":5,"localizedValues":[{"cultureName":"en-CA","name":"Trailer
-                  up to 25ft"}]},{"subEquipmentCategoryId":-32763,"order":6,"localizedValues":[{"cultureName":"en-CA","name":"Trailer
-                  up to 32ft"}]},{"subEquipmentCategoryId":-32762,"order":8,"localizedValues":[{"cultureName":"en-CA","name":"Trailer
-                  up to 40ft"}]},{"subEquipmentCategoryId":-32742,"order":9,"localizedValues":[{"cultureName":"en-CA","name":"Trailer
-                  over 40ft"}]},{"subEquipmentCategoryId":-32740,"order":7,"localizedValues":[{"cultureName":"en-CA","name":"Trailer
-                  up to 36ft"}]}]}]'
-          headers:
-              Accept-Ranges:
-                  - bytes
-              Access-Control-Allow-Origin:
-                  - longpoint.goingtocamp.com
-              Cache-Control:
-                  - no-cache
-              Connection:
-                  - keep-alive
-              Content-Length:
-                  - "1144"
-              Content-Security-Policy:
-                  - "font-src 'self' fonts.gstatic.com; style-src 'self' 'unsafe-inline'
-                    fonts.googleapis.com; img-src 'self' data: www.googletagmanager.com www.google.ca
-                    www.google.com fonts.gstatic.com www.google-analytics.com googleads.g.doubleclick.net
-                    www.facebook.com; object-src 'none'; frame-ancestors 'self'; frame-src
-                    'self' td.doubleclick.net www.googletagmanager.com apps.cac1.pure.cloud
-                    apps.mypurecloud.com; worker-src blob: 'self'; media-src 'none'; manifest-src
-                    'self'; form-action 'self'; default-src 'self'; connect-src 'self'
-                    canadacentral-1.in.applicationinsights.azure.com dc.services.visualstudio.com
-                    js.monitor.azure.com static.queue-it.net camis.queue-it.net assets.queue-it.net
-                    apps.cac1.pure.cloud apps.mypurecloud.com d37hm4w715hh7d.cloudfront.net dhqbrvplips7x.cloudfront.net
-                    www.googletagmanager.com www.google-analytics.com fonts.gstatic.com fonts.googleapis.com
-                    region1.google-analytics.com analytics.google.com stats.g.doubleclick.net
-                    googleads.g.doubleclick.net www.google.ca www.google.com www.googleadservices.com
-                    region1.analytics.google.com js.adsrvr.org connect.facebook.net www.facebook.com
-                    api-cdn.cac1.pure.cloud api-cdn.mypurecloud.com webmessaging.cac1.pure.cloud
-                    webmessaging.mypurecloud.com wss://webmessaging.cac1.pure.cloud wss://webmessaging.mypurecloud.com
-                    f45bbwyj2c.execute-api.us-west-2.amazonaws.com camis-cc-canada-prod.my.connect.aws
-                    d84qd4e9hf18l.cloudfront.net participant.connect.ca-central-1.amazonaws.com
-                    wss://tufsuyburufn.transport.connect.ca-central-1.amazonaws.com ieluqbvv.telemetry.connect.ca-central-1.amazonaws.com
-                    camis-cc-us-prod.my.connect.aws d312s9sdfh7l0u.cloudfront.net participant.connect.us-east-1.amazonaws.com
-                    wss://iymucosyv9ff.transport.connect.us-east-1.amazonaws.com fgxnbyek.telemetry.connect.us-east-1.amazonaws.com;
-                    script-src 'self' 'sha256-vtmHxQXR+wvgF29Uief/lyL14Zr7TvfAKjS5U81jXCg='
-                    'sha256-7NnRdz2lrBXM+jWoeJGwVuv+6u6z3tsIxi58B8UyLqw=' 'sha256-MhtPZXr7+LpJUY5qtMutB+qWfQtMaPccfe7QXtCcEYc='
-                    'sha256-N7LG6dinbuucvyioFUfta7Ks37GVqmj1SX/DwtWDfOk=' 'sha256-xjzVYdwqzNlD6ruAl4dV02ELvV/A2MBADVrpIgzVIFg='
-                    'sha256-U4HS2H47jDFsLvME9+8bOG7H7mGo4gvrl7vp36fWo7I=' 'sha256-2f3xeaqpTBMmFPuz/ex260juRflTx6P1dYXTjOOAtAk='
-                    'unsafe-hashes' blob: assets.queue-it.net static.queue-it.net camis.queue-it.net
-                    apps.cac1.pure.cloud apps.mypurecloud.com dhqbrvplips7x.cloudfront.net www.googletagmanager.com
-                    www.google-analytics.com www.google.com www.googleadservices.com js.adsrvr.org
-                    connect.facebook.net camis-cc-canada-prod.my.connect.aws camis-cc-us-prod.my.connect.aws
-                    'sha256-DS446UUTyLCvumOcYDwvnn2CzsQ1FysweqJfjVznKwI=' 'sha256-8UenLo2ft9FLfJ8ZXFxHMaCOxTa9ZnloedmvUXdiviU='
-                    'sha256-glsiM8WXIXTW5ZptrQZ1HMkJ/MSgvg/FLEzc/wP/3Zg=' 'sha256-ErSGQ5RkfdaGFyDT7yi/vnakQoxNloHzsJR8SRc4ISE='
-                    googleads.g.doubleclick.net; report-to csp-endpoint; report-uri /api/csp-violation; "
-              Content-Type:
-                  - application/json; charset=utf-8
-              Date:
-                  - Wed, 20 May 2026 23:38:16 GMT
-              Permissions-Policy:
-                  - bluetooth=(), camera=(), display-capture=(), fullscreen=(), geolocation=(),
-                    gyroscope=(), microphone=(), usb=(), xr-spatial-tracking=()
-              Pragma:
-                  - no-cache
-              Referrer-Policy:
-                  - strict-origin-when-cross-origin
-              Report-To:
-                  - '{ group: "csp-endpoint", "max_age": 86400, "endpoints": [ { "url": "https://longpoint.goingtocamp.com/api/csp-violation"
-                    }] }'
-              Reporting-Endpoints:
-                  - csp-endpoint="https://longpoint.goingtocamp.com/api/csp-violation"
-              Set-Cookie:
-                  - .AspNetCore.Antiforgery.3YREhQdkuHQ=CfDJ8CA8hYe1Go5GlC8vHYqhTrAWLETXcrcp0o_WiTaDKSnhrmXl1UgOaGc9m8skcVe2f4vT1VcK_ShIH8F9OSLvuF2K75_NgQJOBY8oqxWJYD67EVgv1FToeDaU4-oQobvjLuOzPcB_h_wjU5O7mejSFAM;
-                    path=/; secure; samesite=strict; httponly
-                  - XSRF-TOKEN=CfDJ8CA8hYe1Go5GlC8vHYqhTrAi6AfPEGxKqDeFVLkFClFsnavmTFEFvffwIWGAsghcggCPpXmtFtoAa5xHVgQA-wXy6l6wDHIwO9OvphbzmFvTY_JYFsW834GusPS1G1OQR9zFqu-MMBX8zPdZ7dtMI2E;
-                    path=/; secure
-              Strict-Transport-Security:
-                  - max-age=31536000; includeSubDomains
-              Vary:
-                  - Accept-Encoding
-              X-Cache:
-                  - CONFIG_NOCACHE
-              X-Content-Type-Options:
-                  - nosniff
-              X-Frame-Options:
-                  - deny
-              X-Permitted-Cross-Domain-Policies:
-                  - none
-              X-XSS-Protection:
-                  - "1"
-              api-supported-versions:
-                  - "1.0"
-              x-azure-ref:
-                  - 20260520T233816Z-1646496db66gcmrbhC1CO1ahu800000001mg000000000b7c
-          status:
-              code: 200
-              message: OK
+  - request:
+      body: null
+      headers:
+        Accept-Language:
+          - en-US,en;q=0.9
+        User-Agent:
+          - Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like
+            Gecko) Chrome/112.0.0.0 Safari/537.36
+      method: GET
+      uri: https://longpoint.goingtocamp.com/api/equipment
+    response:
+      body:
+        string:
+          '[{"equipmentCategoryId":-32768,"order":1,"localizedValues":[{"cultureName":"en-CA","name":"Equipment"}],"subEquipmentCategories":[{"subEquipmentCategoryId":-32768,"order":1,"localizedValues":[{"cultureName":"en-CA","name":"1
+          Tent"}]},{"subEquipmentCategoryId":-32767,"order":2,"localizedValues":[{"cultureName":"en-CA","name":"2
+          Tents"}]},{"subEquipmentCategoryId":-32766,"order":3,"localizedValues":[{"cultureName":"en-CA","name":"Van/Camper"}]},{"subEquipmentCategoryId":-32765,"order":4,"localizedValues":[{"cultureName":"en-CA","name":"Trailer
+          up to 18ft"}]},{"subEquipmentCategoryId":-32764,"order":5,"localizedValues":[{"cultureName":"en-CA","name":"Trailer
+          up to 25ft"}]},{"subEquipmentCategoryId":-32763,"order":6,"localizedValues":[{"cultureName":"en-CA","name":"Trailer
+          up to 32ft"}]},{"subEquipmentCategoryId":-32762,"order":8,"localizedValues":[{"cultureName":"en-CA","name":"Trailer
+          up to 40ft"}]},{"subEquipmentCategoryId":-32742,"order":9,"localizedValues":[{"cultureName":"en-CA","name":"Trailer
+          over 40ft"}]},{"subEquipmentCategoryId":-32740,"order":7,"localizedValues":[{"cultureName":"en-CA","name":"Trailer
+          up to 36ft"}]}]}]'
+      headers:
+        Accept-Ranges:
+          - bytes
+        Access-Control-Allow-Origin:
+          - longpoint.goingtocamp.com
+        Cache-Control:
+          - no-cache
+        Connection:
+          - keep-alive
+        Content-Length:
+          - '1144'
+        Content-Security-Policy:
+          - "font-src 'self' fonts.gstatic.com; style-src 'self' 'unsafe-inline'
+            fonts.googleapis.com; img-src 'self' data: www.googletagmanager.com www.google.ca
+            www.google.com fonts.gstatic.com www.google-analytics.com googleads.g.doubleclick.net
+            www.facebook.com; object-src 'none'; frame-ancestors 'self'; frame-src
+            'self' td.doubleclick.net www.googletagmanager.com apps.cac1.pure.cloud
+            apps.mypurecloud.com; worker-src blob: 'self'; media-src 'none'; manifest-src
+            'self'; form-action 'self'; default-src 'self'; connect-src 'self'
+            canadacentral-1.in.applicationinsights.azure.com dc.services.visualstudio.com
+            js.monitor.azure.com static.queue-it.net camis.queue-it.net assets.queue-it.net
+            apps.cac1.pure.cloud apps.mypurecloud.com d37hm4w715hh7d.cloudfront.net dhqbrvplips7x.cloudfront.net
+            www.googletagmanager.com www.google-analytics.com fonts.gstatic.com fonts.googleapis.com
+            region1.google-analytics.com analytics.google.com stats.g.doubleclick.net
+            googleads.g.doubleclick.net www.google.ca www.google.com www.googleadservices.com
+            region1.analytics.google.com js.adsrvr.org connect.facebook.net www.facebook.com
+            api-cdn.cac1.pure.cloud api-cdn.mypurecloud.com webmessaging.cac1.pure.cloud
+            webmessaging.mypurecloud.com wss://webmessaging.cac1.pure.cloud wss://webmessaging.mypurecloud.com
+            f45bbwyj2c.execute-api.us-west-2.amazonaws.com camis-cc-canada-prod.my.connect.aws
+            d84qd4e9hf18l.cloudfront.net participant.connect.ca-central-1.amazonaws.com
+            wss://tufsuyburufn.transport.connect.ca-central-1.amazonaws.com ieluqbvv.telemetry.connect.ca-central-1.amazonaws.com
+            camis-cc-us-prod.my.connect.aws d312s9sdfh7l0u.cloudfront.net participant.connect.us-east-1.amazonaws.com
+            wss://iymucosyv9ff.transport.connect.us-east-1.amazonaws.com fgxnbyek.telemetry.connect.us-east-1.amazonaws.com;
+            script-src 'self' 'sha256-vtmHxQXR+wvgF29Uief/lyL14Zr7TvfAKjS5U81jXCg='
+            'sha256-7NnRdz2lrBXM+jWoeJGwVuv+6u6z3tsIxi58B8UyLqw=' 'sha256-MhtPZXr7+LpJUY5qtMutB+qWfQtMaPccfe7QXtCcEYc='
+            'sha256-N7LG6dinbuucvyioFUfta7Ks37GVqmj1SX/DwtWDfOk=' 'sha256-xjzVYdwqzNlD6ruAl4dV02ELvV/A2MBADVrpIgzVIFg='
+            'sha256-U4HS2H47jDFsLvME9+8bOG7H7mGo4gvrl7vp36fWo7I=' 'sha256-2f3xeaqpTBMmFPuz/ex260juRflTx6P1dYXTjOOAtAk='
+            'unsafe-hashes' blob: assets.queue-it.net static.queue-it.net camis.queue-it.net
+            apps.cac1.pure.cloud apps.mypurecloud.com dhqbrvplips7x.cloudfront.net www.googletagmanager.com
+            www.google-analytics.com www.google.com www.googleadservices.com js.adsrvr.org
+            connect.facebook.net camis-cc-canada-prod.my.connect.aws camis-cc-us-prod.my.connect.aws
+            'sha256-DS446UUTyLCvumOcYDwvnn2CzsQ1FysweqJfjVznKwI=' 'sha256-8UenLo2ft9FLfJ8ZXFxHMaCOxTa9ZnloedmvUXdiviU='
+            'sha256-glsiM8WXIXTW5ZptrQZ1HMkJ/MSgvg/FLEzc/wP/3Zg=' 'sha256-ErSGQ5RkfdaGFyDT7yi/vnakQoxNloHzsJR8SRc4ISE='
+            googleads.g.doubleclick.net; report-to csp-endpoint; report-uri /api/csp-violation; "
+        Content-Type:
+          - application/json; charset=utf-8
+        Date:
+          - Wed, 20 May 2026 23:38:16 GMT
+        Permissions-Policy:
+          - bluetooth=(), camera=(), display-capture=(), fullscreen=(), geolocation=(),
+            gyroscope=(), microphone=(), usb=(), xr-spatial-tracking=()
+        Pragma:
+          - no-cache
+        Referrer-Policy:
+          - strict-origin-when-cross-origin
+        Report-To:
+          - '{ group: "csp-endpoint", "max_age": 86400, "endpoints": [ { "url": "https://longpoint.goingtocamp.com/api/csp-violation"
+            }] }'
+        Reporting-Endpoints:
+          - csp-endpoint="https://longpoint.goingtocamp.com/api/csp-violation"
+        Set-Cookie:
+          - .AspNetCore.Antiforgery.3YREhQdkuHQ=CfDJ8CA8hYe1Go5GlC8vHYqhTrAWLETXcrcp0o_WiTaDKSnhrmXl1UgOaGc9m8skcVe2f4vT1VcK_ShIH8F9OSLvuF2K75_NgQJOBY8oqxWJYD67EVgv1FToeDaU4-oQobvjLuOzPcB_h_wjU5O7mejSFAM;
+            path=/; secure; samesite=strict; httponly
+          - XSRF-TOKEN=CfDJ8CA8hYe1Go5GlC8vHYqhTrAi6AfPEGxKqDeFVLkFClFsnavmTFEFvffwIWGAsghcggCPpXmtFtoAa5xHVgQA-wXy6l6wDHIwO9OvphbzmFvTY_JYFsW834GusPS1G1OQR9zFqu-MMBX8zPdZ7dtMI2E;
+            path=/; secure
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+        Vary:
+          - Accept-Encoding
+        X-Cache:
+          - CONFIG_NOCACHE
+        X-Content-Type-Options:
+          - nosniff
+        X-Frame-Options:
+          - deny
+        X-Permitted-Cross-Domain-Policies:
+          - none
+        X-XSS-Protection:
+          - '1'
+        api-supported-versions:
+          - '1.0'
+        x-azure-ref:
+          - 20260520T233816Z-1646496db66gcmrbhC1CO1ahu800000001mg000000000b7c
+      status:
+        code: 200
+        message: OK
 version: 1

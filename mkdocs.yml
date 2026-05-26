@@ -2,26 +2,26 @@
 
 site_name: camply
 theme:
-    favicon: _static/camply.png
-    logo: _static/camply.png
-    name: material
-    features:
-        - navigation.tracking
-        - content.code.annotate
-        - content.code.copy
-    palette:
-        - media: "(prefers-color-scheme: light)"
-          scheme: default
-          accent: purple
-          toggle:
-              icon: material/weather-sunny
-              name: Switch to dark mode
-        - media: "(prefers-color-scheme: dark)"
-          scheme: slate
-          primary: black
-          toggle:
-              icon: material/weather-night
-              name: Switch to light mode
+  favicon: _static/camply.png
+  logo: _static/camply.png
+  name: material
+  features:
+    - navigation.tracking
+    - content.code.annotate
+    - content.code.copy
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      accent: purple
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: black
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
 repo_url: https://github.com/kkweon/camply
 repo_name: kkweon/camply
 edit_uri: blob/develop/docs/
@@ -30,66 +30,66 @@ remote_branch: gh-pages
 copyright: Copyright &copy; 2020 Justin Flannery
 extra_css: [extra.css]
 nav:
-    - camply ⛺: index.md
-    - Installation ☀️: installation.md
-    - Providers 🏕: providers.md
-    - Usage 📝: command_line_usage.md
-    - How To Run Camply 🏃: how_to_run.md
-    - Finding Campsites on Recreation.gov 🌲: recreationdotgov.md
-    - Object Oriented Usage 🐍: python.md
-    - Command Line Interface ⌨️: cli.md
-    - API Documentation 🤖: reference/
-    - Dependencies ♻️: dependencies.md
-    - Contributing 🤝: contributing.md
-    - GitHub 🛠: https://github.com/kkweon/camply
-    - Changelog 📝: https://github.com/kkweon/camply/releases
+  - camply ⛺: index.md
+  - Installation ☀️: installation.md
+  - Providers 🏕: providers.md
+  - Usage 📝: command_line_usage.md
+  - How To Run Camply 🏃: how_to_run.md
+  - Finding Campsites on Recreation.gov 🌲: recreationdotgov.md
+  - Object Oriented Usage 🐍: python.md
+  - Command Line Interface ⌨️: cli.md
+  - API Documentation 🤖: reference/
+  - Dependencies ♻️: dependencies.md
+  - Contributing 🤝: contributing.md
+  - GitHub 🛠: https://github.com/kkweon/camply
+  - Changelog 📝: https://github.com/kkweon/camply/releases
 extra:
-    generator: false
+  generator: false
 markdown_extensions:
-    - toc:
-          permalink: "#"
-    - pymdownx.snippets:
-    - pymdownx.magiclink:
-    - attr_list:
-    - sane_lists:
-    - mkdocs-click:
-    - md_in_html:
-    - pymdownx.highlight:
-          anchor_linenums: true
-    - pymdownx.inlinehilite:
-    - pymdownx.superfences:
-    - markdown.extensions.attr_list:
-    - pymdownx.keys:
-    - pymdownx.tasklist:
-          custom_checkbox: true
-    - pymdownx.highlight:
-          anchor_linenums: true
-    - admonition:
-    - pymdownx.tilde:
-    - callouts
-    - pymdownx.details
-    - pymdownx.emoji
-    - pymdownx.tabbed:
-          alternate_style: true
+  - toc:
+      permalink: '#'
+  - pymdownx.snippets:
+  - pymdownx.magiclink:
+  - attr_list:
+  - sane_lists:
+  - mkdocs-click:
+  - md_in_html:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite:
+  - pymdownx.superfences:
+  - markdown.extensions.attr_list:
+  - pymdownx.keys:
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - admonition:
+  - pymdownx.tilde:
+  - callouts
+  - pymdownx.details
+  - pymdownx.emoji
+  - pymdownx.tabbed:
+      alternate_style: true
 plugins:
-    - search
-    - gen-files:
-          scripts:
-              - docs/gen_ref_pages.py
-    - literate-nav:
-          nav_file: SUMMARY.md
-    - section-index:
-    - mkdocstrings:
-          handlers:
-              python:
-                  import:
-                      - https://docs.python.org/3/objects.inv
-                      - https://numpy.org/doc/stable/objects.inv
-                      - https://pandas.pydata.org/docs/objects.inv
-                  options:
-                      docstring_style: numpy
-    - exclude-search:
-          exclude:
-              - reference/*
-          exclude_unreferenced: true
-    - markdown-exec
+  - search
+  - gen-files:
+      scripts:
+        - docs/gen_ref_pages.py
+  - literate-nav:
+      nav_file: SUMMARY.md
+  - section-index:
+  - mkdocstrings:
+      handlers:
+        python:
+          import:
+            - https://docs.python.org/3/objects.inv
+            - https://numpy.org/doc/stable/objects.inv
+            - https://pandas.pydata.org/docs/objects.inv
+          options:
+            docstring_style: numpy
+  - exclude-search:
+      exclude:
+        - reference/*
+      exclude_unreferenced: true
+  - markdown-exec

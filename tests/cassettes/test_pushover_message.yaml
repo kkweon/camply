@@ -1,82 +1,82 @@
 interactions:
-    - request:
-          body: null
-          headers:
-              Accept:
-                  - "*/*"
-              Accept-Encoding:
-                  - gzip, deflate
-              Connection:
-                  - keep-alive
-              Content-Length:
-                  - "0"
-              Content-Type:
-                  - application/json
-              User-Agent:
-                  - python-requests/2.28.2
-          method: POST
-          uri: https://api.pushover.net/1/messages.json?message=This+is+a+test+message%21&token=REDACTED&user=REDACTED
-      response:
-          body:
-              string: '{"status":1,"request":"c15e2597-a476-4cda-8206-cb310d61352b"}'
-          headers:
-              Access-Control-Allow-Headers:
-                  - X-Requested-With, X-Prototype-Version, Origin, Accept, Content-Type, X-CSRF-Token,
-                    X-Pushover-App, Authorization
-              Access-Control-Allow-Methods:
-                  - POST, OPTIONS
-              Access-Control-Allow-Origin:
-                  - "*"
-              Access-Control-Max-Age:
-                  - "1728000"
-              CF-Cache-Status:
-                  - DYNAMIC
-              CF-RAY:
-                  - 7bbfafcd8c1f27e8-SLC
-              Cache-Control:
-                  - max-age=0, private, must-revalidate
-              Connection:
-                  - keep-alive
-              Content-Type:
-                  - application/json; charset=utf-8
-              Date:
-                  - Sat, 22 Apr 2023 17:46:32 GMT
-              ETag:
-                  - W/"619dd65fbaccf94a8b0ee991d6326419"
-              Referrer-Policy:
-                  - strict-origin-when-cross-origin
-              Server:
-                  - cloudflare
-              Strict-Transport-Security:
-                  - max-age=31536000
-              Transfer-Encoding:
-                  - chunked
-              X-Content-Type-Options:
-                  - nosniff
-              X-Download-Options:
-                  - noopen
-              X-Frame-Options:
-                  - SAMEORIGIN
-                  - DENY
-              X-Limit-App-Limit:
-                  - "10000"
-              X-Limit-App-Remaining:
-                  - "9999"
-              X-Limit-App-Reset:
-                  - "1682917200"
-              X-PO-H:
-                  - t
-              X-Permitted-Cross-Domain-Policies:
-                  - none
-              X-Request-Id:
-                  - c15e2597-a476-4cda-8206-cb310d61352b
-              X-Runtime:
-                  - "0.057934"
-              X-XSS-Protection:
-                  - 1; mode=block
-              content-length:
-                  - "61"
-          status:
-              code: 200
-              message: OK
+  - request:
+      body: null
+      headers:
+        Accept:
+          - '*/*'
+        Accept-Encoding:
+          - gzip, deflate
+        Connection:
+          - keep-alive
+        Content-Length:
+          - '0'
+        Content-Type:
+          - application/json
+        User-Agent:
+          - python-requests/2.28.2
+      method: POST
+      uri: https://api.pushover.net/1/messages.json?message=This+is+a+test+message%21&token=REDACTED&user=REDACTED
+    response:
+      body:
+        string: '{"status":1,"request":"c15e2597-a476-4cda-8206-cb310d61352b"}'
+      headers:
+        Access-Control-Allow-Headers:
+          - X-Requested-With, X-Prototype-Version, Origin, Accept, Content-Type, X-CSRF-Token,
+            X-Pushover-App, Authorization
+        Access-Control-Allow-Methods:
+          - POST, OPTIONS
+        Access-Control-Allow-Origin:
+          - '*'
+        Access-Control-Max-Age:
+          - '1728000'
+        CF-Cache-Status:
+          - DYNAMIC
+        CF-RAY:
+          - 7bbfafcd8c1f27e8-SLC
+        Cache-Control:
+          - max-age=0, private, must-revalidate
+        Connection:
+          - keep-alive
+        Content-Type:
+          - application/json; charset=utf-8
+        Date:
+          - Sat, 22 Apr 2023 17:46:32 GMT
+        ETag:
+          - W/"619dd65fbaccf94a8b0ee991d6326419"
+        Referrer-Policy:
+          - strict-origin-when-cross-origin
+        Server:
+          - cloudflare
+        Strict-Transport-Security:
+          - max-age=31536000
+        Transfer-Encoding:
+          - chunked
+        X-Content-Type-Options:
+          - nosniff
+        X-Download-Options:
+          - noopen
+        X-Frame-Options:
+          - SAMEORIGIN
+          - DENY
+        X-Limit-App-Limit:
+          - '10000'
+        X-Limit-App-Remaining:
+          - '9999'
+        X-Limit-App-Reset:
+          - '1682917200'
+        X-PO-H:
+          - t
+        X-Permitted-Cross-Domain-Policies:
+          - none
+        X-Request-Id:
+          - c15e2597-a476-4cda-8206-cb310d61352b
+        X-Runtime:
+          - '0.057934'
+        X-XSS-Protection:
+          - 1; mode=block
+        content-length:
+          - '61'
+      status:
+        code: 200
+        message: OK
 version: 1

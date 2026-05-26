@@ -1,20 +1,20 @@
 {
-    "campsites": [
-        {
-            "campsite_id": "100",
-            "parent_name": "Test Campground",
-            "permitted_equipment": [
-                { "equipment_name": "Tent", "max_length": 0 },
-                { "equipment_name": "RV", "max_length": 24 }
-            ]
-        },
-        {
-            "campsite_id": "101",
-            "parent_name": "Test Campground",
-            "permitted_equipment": []
-        }
-    ],
-    "size": 2,
-    "start": "0",
-    "total": 2
+  "campsites": [
+    {
+      "campsite_id": "100",
+      "parent_name": "Test Campground",
+      "permitted_equipment": [
+        { "equipment_name": "Tent", "max_length": 0 },
+        { "equipment_name": "RV", "max_length": 24 }
+      ]
+    },
+    {
+      "campsite_id": "101",
+      "parent_name": "Test Campground",
+      "permitted_equipment": []
+    }
+  ],
+  "size": 2,
+  "start": "0",
+  "total": 2
 }

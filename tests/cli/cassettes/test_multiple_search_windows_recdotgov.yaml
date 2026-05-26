@@ -1,317 +1,317 @@
 interactions:
-    - request:
-          body: null
-          headers:
-              User-Agent:
-                  - Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.6
-                    Safari/537.11
-              accept:
-                  - application/json
-              apikey:
-                  - REDACTED
-          method: GET
-          uri: https://ridb.recreation.gov/api/v1/facilities/232045?full=True
-      response:
-          body:
-              string:
-                  "{\"ACTIVITY\":[{\"ActivityID\":5,\"ActivityName\":\"BIKING\",\"FacilityActivityDescription\":\"Biking\",\"FacilityActivityFeeDescription\":\"\",\"FacilityID\":\"232045\"},{\"ActivityID\":6,\"ActivityName\":\"BOATING\",\"FacilityActivityDescription\":\"Canoeing\",\"FacilityActivityFeeDescription\":\"\",\"FacilityID\":\"232045\"},{\"ActivityID\":9,\"ActivityName\":\"CAMPING\",\"FacilityActivityDescription\":\"Camping\",\"FacilityActivityFeeDescription\":\"Camping\",\"FacilityID\":\"232045\"},{\"ActivityID\":11,\"ActivityName\":\"FISHING\",\"FacilityActivityDescription\":\"Fishing\",\"FacilityActivityFeeDescription\":\"\",\"FacilityID\":\"232045\"},{\"ActivityID\":14,\"ActivityName\":\"HIKING\",\"FacilityActivityDescription\":\"Hiking\",\"FacilityActivityFeeDescription\":\"\",\"FacilityID\":\"232045\"},{\"ActivityID\":34,\"ActivityName\":\"SWIMMING
-                  SITE\",\"FacilityActivityDescription\":\"Swimming\",\"FacilityActivityFeeDescription\":\"\",\"FacilityID\":\"232045\"}],\"CAMPSITE\":[],\"EVENT\":[],\"Enabled\":true,\"FACILITYADDRESS\":[{\"AddressCountryCode\":\"USA\",\"AddressStateCode\":\"CA\",\"City\":\"Foresthill\",\"FacilityAddressID\":\"20437400\",\"FacilityAddressType\":\"Default\",\"FacilityID\":\"232045\",\"FacilityStreetAddress1\":\"22830
-                  Foresthill Road\",\"FacilityStreetAddress2\":\"\",\"FacilityStreetAddress3\":\"\",\"LastUpdatedDate\":\"2023-04-22\",\"PostalCode\":\"95631\"}],\"FacilityAdaAccess\":\"N\",\"FacilityDescription\":\"<h2>Overview</h2>\\nForbes
-                  Creek Group Campground is located near the southeast shore of Sugar Pine Reservoir
-                  in the Tahoe National Forest. Visitors enjoy the area for its fishing, canoeing
-                  and hiking opportunities. This facility is operated and maintained by the
-                  Tahoe National Forest.<h2>Recreation</h2>\\nFishing, canoeing, swimming and
-                  boating are popular activities on the reservoir. A trail system for walking
-                  and non-motorized biking connects the two group sites at the campground, to
-                  the lake and nearby boat ramp.\_\_ The North Fork of the American River is
-                  nearby, offering opportunities for additional fishing and swimming. Many miles
-                  of hiking, biking and off-road vehicle trails are in the surrounding area.<h2>Facilities</h2>\\nThe
-                  campground offers two group campsites, Madrone and Rocky Ridge. Each site
-                  can accommodate up to 50 people and 18 vehicles. Both sites are equipped with
-                  a central cooking and picnic area, with a large campfire circle and multiple
-                  tables.\_ RVs, trailers and tents are allowed within the campground. An unloading
-                  area and accessible parking are available within the campground.<h2>Natural
-                  Features</h2>\\nThe 160-acre Sugar Pine Reservoir sits at an elevation of
-                  3,600 feet. Stands of cedar and ponderosa pine provides ample shade in the
-                  campground, which overlooks the reservoir. Summertime temperatures are warm
-                  during the day and cool at night.\",\"FacilityDirections\":\"Take Interstate
-                  80 to the Foresthill/Auburn exit, near Auburn. Continue east for 17 miles
-                  to Foresthill. Travel through town, about 9 miles, to Forest Road 10/Sugar
-                  Pine Road. Turn left and continue about 9 miles. Look for the Sugar Pine Recreation
-                  Area sign and turn right on the first road after the sign. Continue about
-                  a half-mile to the Rocky Ridge Group Campground, on the right, and to the
-                  Madrone Group Campground, at the end of the circle.\",\"FacilityEmail\":\"\",\"FacilityID\":\"232045\",\"FacilityLatitude\":39.1311111,\"FacilityLongitude\":-120.7819444,\"FacilityMapURL\":\"\",\"FacilityName\":\"FORBES
-                  CREEK\",\"FacilityPhone\":\"530-367-2224\",\"FacilityReservationURL\":\"\",\"FacilityTypeDescription\":\"Campground\",\"FacilityUseFeeDescription\":\"\",\"GEOJSON\":{\"COORDINATES\":[-120.7819444,39.1311111],\"TYPE\":\"Point\"},\"Keywords\":\"FORB,TAHOE
-                  NF - FS\",\"LINK\":[{\"Description\":\"California State Road Conditions\",\"EntityID\":\"232045\",\"EntityLinkID\":\"f7868acb9eddf3ff68c0365dc733c553\",\"EntityType\":\"Facility\",\"LinkType\":\"Other\",\"Title\":\"California
-                  State Road Conditions\",\"URL\":\"http://www.dot.ca.gov\"},{\"Description\":\"California
-                  State Tourism\",\"EntityID\":\"232045\",\"EntityLinkID\":\"60217acbf4be21db4ffa79eb82b5b513\",\"EntityType\":\"Facility\",\"LinkType\":\"Other\",\"Title\":\"California
-                  State Tourism\",\"URL\":\"http://gocalif.ca.gov/AM/Template.cfm?Section=Home\"},{\"Description\":\"Print
-                  Facility Map\",\"EntityID\":\"232045\",\"EntityLinkID\":\"7126b5c5f6110fa73149b633df8d09a0\",\"EntityType\":\"Facility\",\"LinkType\":\"Other\",\"Title\":\"Print
-                  Facility Map\",\"URL\":\"http://www.recreation.gov/webphotos/facilitymaps/70266_FORB.pdf\"}],\"LastUpdatedDate\":\"2023-04-22\",\"LegacyFacilityID\":\"70266\",\"MEDIA\":[{\"Credits\":\"\",\"Description\":\"\",\"EmbedCode\":\"\",\"EntityID\":\"232045\",\"EntityMediaID\":\"2570533\",\"EntityType\":\"Facility\",\"Height\":360,\"IsGallery\":true,\"IsPreview\":false,\"IsPrimary\":false,\"MediaType\":\"Image\",\"Subtitle\":\"\",\"Title\":\"FORBES
-                  CREEK\",\"URL\":\"https://cdn.recreation.gov/public/images/64092.jpg\",\"Width\":540},{\"Credits\":\"Joel
-                  Miller USFS November 2018.\",\"Description\":\"Sugar pine\",\"EmbedCode\":\"\",\"EntityID\":\"232045\",\"EntityMediaID\":\"8bd74a9a-adaf-4c8b-b06e-b5e8610bfa61\",\"EntityType\":\"Facility\",\"Height\":340,\"IsGallery\":false,\"IsPreview\":false,\"IsPrimary\":true,\"MediaType\":\"Image\",\"Subtitle\":\"\",\"Title\":\"Sugar
-                  pine\",\"URL\":\"https://cdn.recreation.gov/public/2018/11/15/00/31/232045_26f2c941-82f7-4a5f-9dee-0ab2cd6931e9_1440.jpg\",\"Width\":1440},{\"Credits\":\"\",\"Description\":\"\",\"EmbedCode\":\"\",\"EntityID\":\"232045\",\"EntityMediaID\":\"2570442\",\"EntityType\":\"Facility\",\"Height\":360,\"IsGallery\":true,\"IsPreview\":false,\"IsPrimary\":false,\"MediaType\":\"Image\",\"Subtitle\":\"\",\"Title\":\"FORBES
-                  CREEK\",\"URL\":\"https://cdn.recreation.gov/public/images/63996.jpg\",\"Width\":540},{\"Credits\":\"\",\"Description\":\"\",\"EmbedCode\":\"\",\"EntityID\":\"232045\",\"EntityMediaID\":\"2570422\",\"EntityType\":\"Facility\",\"Height\":360,\"IsGallery\":true,\"IsPreview\":false,\"IsPrimary\":false,\"MediaType\":\"Image\",\"Subtitle\":\"\",\"Title\":\"FORBES
-                  CREEK\",\"URL\":\"https://cdn.recreation.gov/public/images/63975.jpg\",\"Width\":540},{\"Credits\":\"\",\"Description\":\"\",\"EmbedCode\":\"\",\"EntityID\":\"232045\",\"EntityMediaID\":\"2570605\",\"EntityType\":\"Facility\",\"Height\":360,\"IsGallery\":true,\"IsPreview\":false,\"IsPrimary\":false,\"MediaType\":\"Image\",\"Subtitle\":\"\",\"Title\":\"FORBES
-                  CREEK\",\"URL\":\"https://cdn.recreation.gov/public/images/64168.jpg\",\"Width\":540},{\"Credits\":\"\",\"Description\":\"\",\"EmbedCode\":\"\",\"EntityID\":\"232045\",\"EntityMediaID\":\"2570434\",\"EntityType\":\"Facility\",\"Height\":360,\"IsGallery\":true,\"IsPreview\":false,\"IsPrimary\":false,\"MediaType\":\"Image\",\"Subtitle\":\"\",\"Title\":\"FORBES
-                  CREEK\",\"URL\":\"https://cdn.recreation.gov/public/images/63987.jpg\",\"Width\":540},{\"Credits\":\"\",\"Description\":\"\",\"EmbedCode\":\"\",\"EntityID\":\"232045\",\"EntityMediaID\":\"2570491\",\"EntityType\":\"Facility\",\"Height\":360,\"IsGallery\":true,\"IsPreview\":false,\"IsPrimary\":false,\"MediaType\":\"Image\",\"Subtitle\":\"\",\"Title\":\"FORBES
-                  CREEK\",\"URL\":\"https://cdn.recreation.gov/public/images/64047.jpg\",\"Width\":540}],\"ORGANIZATION\":[{\"LastUpdatedDate\":\"2018-06-26\",\"OrgAbbrevName\":\"FS\",\"OrgID\":\"131\",\"OrgImageURL\":\"fs.jpg\",\"OrgJurisdictionType\":\"State\",\"OrgName\":\"USDA
-                  Forest Service\",\"OrgParentID\":\"163\",\"OrgType\":\"Federal Agency\",\"OrgURLAddress\":\"http://www.fs.fed.us\",\"OrgURLText\":\"\"}],\"OrgFacilityID\":\"AN370266\",\"PERMITENTRANCE\":[],\"ParentOrgID\":\"131\",\"ParentRecAreaID\":\"1077\",\"RECAREA\":[{\"RecAreaID\":\"1077\",\"RecAreaName\":\"Tahoe
-                  National Forest\",\"ResourceLink\":\"http://localhost:3000/api/v1/recareas/1077\"}],\"Reservable\":true,\"StayLimit\":\"\",\"TOUR\":[]}\n"
-          headers:
-              Access-Control-Allow-Origin:
-                  - "*"
-              Alt-Svc:
-                  - h3=":443"; ma=86400
-              Connection:
-                  - keep-alive
-              Content-Length:
-                  - "7186"
-              Content-Type:
-                  - application/json; charset=utf-8
-              Date:
-                  - Sat, 22 Apr 2023 17:56:33 GMT
-              Server:
-                  - CloudFront
-              Strict-Transport-Security:
-                  - max-age=31536000; includeSubdomains; always
-              Vary:
-                  - Accept-Encoding
-              Via:
-                  - 1.1 ce431f517854de6a993633b3607e3d06.cloudfront.net (CloudFront)
-              X-Amz-Cf-Id:
-                  - NilCEonrw68CPMwFTuTS0_zYAjx2cg8ksjTykAJIiQX6JXbokB-dSA==
-              X-Amz-Cf-Pop:
-                  - DEN52-P3
-              X-Cache:
-                  - Miss from cloudfront
-          status:
-              code: 200
-              message: OK
-    - request:
-          body: null
-          headers:
-              Accept:
-                  - "*/*"
-              Accept-Encoding:
-                  - gzip, deflate, br
-              Accept-Language:
-                  - en-US,en;q=0.9,la;q=0.8
-              Cache-Control:
-                  - max-age=0
-              Connection:
-                  - keep-alive
-              Referer:
-                  - https://www.recreation.gov/
-              Upgrade-Insecure-Requests:
-                  - "1"
-              User-Agent:
-                  - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML,
-                    like Gecko) Chrome/49.0.2656.18 Safari/537.36
-          method: GET
-          uri: https://www.recreation.gov/api/search/campsites?fq=asset_id%3A232045&include_non_site_specific_campsites=True&size=1000&start=0
-      response:
-          body:
-              string:
-                  '{"campsites":[{"accessible":"true","asset_id":"232045","asset_name":"FORBES
-                  CREEK","asset_type":"Campground","attributes":[{"attribute_category":"site_details","attribute_id":56,"attribute_name":"Min
-                  Num of People","attribute_value":"1"},{"attribute_category":"site_details","attribute_id":12,"attribute_name":"Checkout
-                  Time","attribute_value":"12:00 PM"},{"attribute_category":"site_details","attribute_id":65,"attribute_name":"Pets
-                  Allowed","attribute_value":"Yes"},{"attribute_category":"site_details","attribute_id":77,"attribute_name":"Shade","attribute_value":"Full"},{"attribute_category":"site_details","attribute_id":52,"attribute_name":"Max
-                  Num of People","attribute_value":"50"},{"attribute_category":"site_details","attribute_id":10,"attribute_name":"Capacity/Size
-                  Rating","attribute_value":"Single"},{"attribute_category":"site_details","attribute_id":11,"attribute_name":"Checkin
-                  Time","attribute_value":"2:00 PM"},{"attribute_category":"equipment_details","attribute_id":23,"attribute_name":"Driveway
-                  Entry","attribute_value":"Back-In"},{"attribute_category":"equipment_details","attribute_id":54,"attribute_name":"Max
-                  Vehicle Length","attribute_value":"45"},{"attribute_category":"equipment_details","attribute_id":0,"attribute_name":"Is
-                  Equipment Mandatory","attribute_value":"true"},{"attribute_category":"equipment_details","attribute_id":53,"attribute_name":"Max
-                  Num of Vehicles","attribute_value":"18"},{"attribute_category":"equipment_details","attribute_id":26,"attribute_name":"Driveway
-                  Surface","attribute_value":"Paved"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Campfire
-                  Rings","attribute_value":"Campfire Rings"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Drinking
-                  Water","attribute_value":"Drinking Water"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Grills","attribute_value":"Grills"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Picnic
-                  Tables","attribute_value":"Picnic Tables"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Vault
-                  Toilets","attribute_value":"Vault Toilets"}],"average_rating":3,"campsite_id":"83871","campsite_reserve_type":"Site-Specific","campsite_status":"Open","city":"Foresthill","country_code":"United
-                  States","fee_templates":{"Off Peak":"Off PeakGROUP STANDARD NONELECTRIC","Peak":"PeakGROUP
-                  STANDARD NONELECTRIC","Transition":"TransitionGROUP STANDARD NONELECTRIC","Walk
-                  In":"Walk InGROUP STANDARD NONELECTRIC"},"latitude":"39.13067571600020","longitude":"-120.78260910600000","loop":"MADRONE","name":"GS1","notices":[{"text":"This
-                  site accommodates 6 tents.","type":"warning"},{"text":"This site accommodates
-                  6 tents.","type":"info"}],"number_of_ratings":2,"org_id":"131","org_name":"USDA
-                  Forest Service","parent_asset_id":"232045","parent_asset_name":"FORBES CREEK","parent_asset_type":"campground","permitted_equipment":[{"equipment_name":"RV","max_length":45},{"equipment_name":"Tent","max_length":0},{"equipment_name":"Trailer","max_length":0}],"preview_image_url":"https://cdn.recreation.gov/public/2018/11/15/00/24/83871_c440dfc7-8473-4a03-a5e7-12c39641e3b2_1440.jpg","reservable":true,"state_code":"California","type":"GROUP
-                  STANDARD NONELECTRIC","type_of_use":"Overnight"},{"accessible":"true","asset_id":"232045","asset_name":"FORBES
-                  CREEK","asset_type":"Campground","attributes":[{"attribute_category":"site_details","attribute_id":65,"attribute_name":"Pets
-                  Allowed","attribute_value":"Yes"},{"attribute_category":"site_details","attribute_id":77,"attribute_name":"Shade","attribute_value":"Full"},{"attribute_category":"site_details","attribute_id":52,"attribute_name":"Max
-                  Num of People","attribute_value":"50"},{"attribute_category":"site_details","attribute_id":10,"attribute_name":"Capacity/Size
-                  Rating","attribute_value":"Single"},{"attribute_category":"site_details","attribute_id":11,"attribute_name":"Checkin
-                  Time","attribute_value":"2:00 PM"},{"attribute_category":"site_details","attribute_id":56,"attribute_name":"Min
-                  Num of People","attribute_value":"1"},{"attribute_category":"site_details","attribute_id":12,"attribute_name":"Checkout
-                  Time","attribute_value":"12:00 PM"},{"attribute_category":"equipment_details","attribute_id":23,"attribute_name":"Driveway
-                  Entry","attribute_value":"Back-In"},{"attribute_category":"equipment_details","attribute_id":54,"attribute_name":"Max
-                  Vehicle Length","attribute_value":"45"},{"attribute_category":"equipment_details","attribute_id":0,"attribute_name":"Is
-                  Equipment Mandatory","attribute_value":"true"},{"attribute_category":"equipment_details","attribute_id":53,"attribute_name":"Max
-                  Num of Vehicles","attribute_value":"20"},{"attribute_category":"equipment_details","attribute_id":26,"attribute_name":"Driveway
-                  Surface","attribute_value":"Paved"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Campfire
-                  Circles","attribute_value":"Campfire Circles"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Drinking
-                  Water","attribute_value":"Drinking Water"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Picnic
-                  Tables","attribute_value":"Picnic Tables"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Vault
-                  Toilets","attribute_value":"Vault Toilets"}],"campsite_id":"83343","campsite_reserve_type":"Site-Specific","campsite_status":"Open","city":"Foresthill","country_code":"United
-                  States","fee_templates":{"Off Peak":"Off PeakGROUP STANDARD NONELECTRIC","Peak":"PeakGROUP
-                  STANDARD NONELECTRIC","Transition":"TransitionGROUP STANDARD NONELECTRIC","Walk
-                  In":"Walk InGROUP STANDARD NONELECTRIC"},"latitude":"39.13105623700010","longitude":"-120.78385190300000","loop":"ROCKY
-                  RIDGE","name":"GS2","notices":[{"text":"This site accommodates 6 tents.","type":"warning"},{"text":"This
-                  site accommodates 6 tents.","type":"info"}],"org_id":"131","org_name":"USDA
-                  Forest Service","parent_asset_id":"232045","parent_asset_name":"FORBES CREEK","parent_asset_type":"campground","permitted_equipment":[{"equipment_name":"RV","max_length":45},{"equipment_name":"Tent","max_length":0},{"equipment_name":"Trailer","max_length":0}],"preview_image_url":"https://cdn.recreation.gov/public/2021/10/13/21/03/83343_b17d0376-b77d-4f15-9ead-ed7d02e11715_1440.png","reservable":true,"state_code":"California","type":"GROUP
-                  STANDARD NONELECTRIC","type_of_use":"Overnight"}],"size":2,"spelling_autocorrected":false,"start":"0","total":2}'
-          headers:
-              Access-Control-Allow-Origin:
-                  - "*"
-              Age:
-                  - "133"
-              Alt-Svc:
-                  - h3=":443"; ma=86400
-              Connection:
-                  - keep-alive
-              Content-Type:
-                  - application/json; charset=utf-8
-              Date:
-                  - Sat, 22 Apr 2023 17:54:20 GMT
-              Transfer-Encoding:
-                  - chunked
-              Vary:
-                  - Accept-Encoding
-              Via:
-                  - 1.1 a7c0ba01db75946f7df3f7eaf69984b6.cloudfront.net (CloudFront)
-              X-Amz-Cf-Id:
-                  - ZnKT7woOXWvSZ7_6oM2syNg1hBmVyNsqe23PICjb9Bv5vw9Z0o4HZw==
-              X-Amz-Cf-Pop:
-                  - DEN52-P2
-              X-Cache:
-                  - Hit from cloudfront
-              content-length:
-                  - "6439"
-          status:
-              code: 200
-              message: OK
-    - request:
-          body: null
-          headers:
-              Accept:
-                  - "*/*"
-              Accept-Encoding:
-                  - gzip, deflate, br
-              Accept-Language:
-                  - en-US,en;q=0.9,la;q=0.8
-              Cache-Control:
-                  - max-age=0
-              Connection:
-                  - keep-alive
-              Referer:
-                  - https://www.recreation.gov/
-              Upgrade-Insecure-Requests:
-                  - "1"
-              User-Agent:
-                  - Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.3 (KHTML, like Gecko)
-                    Chrome/5.0.358.0 Safari/533.3
-          method: GET
-          uri: https://www.recreation.gov/api/camps/availability/campground/232045/month?start_date=2023-07-01T00%3A00%3A00.000Z
-      response:
-          body:
-              string:
-                  '{"campsites":{"83343":{"availabilities":{"2023-07-01T00:00:00Z":"Reserved","2023-07-02T00:00:00Z":"Reserved","2023-07-03T00:00:00Z":"Reserved","2023-07-04T00:00:00Z":"Reserved","2023-07-05T00:00:00Z":"Reserved","2023-07-06T00:00:00Z":"Reserved","2023-07-07T00:00:00Z":"Reserved","2023-07-08T00:00:00Z":"Reserved","2023-07-09T00:00:00Z":"Reserved","2023-07-10T00:00:00Z":"Reserved","2023-07-11T00:00:00Z":"Available","2023-07-12T00:00:00Z":"Available","2023-07-13T00:00:00Z":"Reserved","2023-07-14T00:00:00Z":"Reserved","2023-07-15T00:00:00Z":"Reserved","2023-07-16T00:00:00Z":"Reserved","2023-07-17T00:00:00Z":"Reserved","2023-07-18T00:00:00Z":"Reserved","2023-07-19T00:00:00Z":"Reserved","2023-07-20T00:00:00Z":"Reserved","2023-07-21T00:00:00Z":"Reserved","2023-07-22T00:00:00Z":"Reserved","2023-07-23T00:00:00Z":"Reserved","2023-07-24T00:00:00Z":"Reserved","2023-07-25T00:00:00Z":"Reserved","2023-07-26T00:00:00Z":"Reserved","2023-07-27T00:00:00Z":"Reserved","2023-07-28T00:00:00Z":"Reserved","2023-07-29T00:00:00Z":"Reserved","2023-07-30T00:00:00Z":"Reserved","2023-07-31T00:00:00Z":"Reserved"},"campsite_id":"83343","campsite_reserve_type":"Site-Specific","campsite_rules":null,"campsite_type":"GROUP
-                  STANDARD NONELECTRIC","capacity_rating":"Single","loop":"ROCKY RIDGE","max_num_people":50,"min_num_people":1,"quantities":{"2023-07-01T00:00:00Z":0,"2023-07-02T00:00:00Z":0,"2023-07-03T00:00:00Z":0,"2023-07-04T00:00:00Z":0,"2023-07-05T00:00:00Z":0,"2023-07-06T00:00:00Z":0,"2023-07-07T00:00:00Z":0,"2023-07-08T00:00:00Z":0,"2023-07-09T00:00:00Z":0,"2023-07-10T00:00:00Z":0,"2023-07-11T00:00:00Z":1,"2023-07-12T00:00:00Z":1,"2023-07-13T00:00:00Z":0,"2023-07-14T00:00:00Z":0,"2023-07-15T00:00:00Z":0,"2023-07-16T00:00:00Z":0,"2023-07-17T00:00:00Z":0,"2023-07-18T00:00:00Z":0,"2023-07-19T00:00:00Z":0,"2023-07-20T00:00:00Z":0,"2023-07-21T00:00:00Z":0,"2023-07-22T00:00:00Z":0,"2023-07-23T00:00:00Z":0,"2023-07-24T00:00:00Z":0,"2023-07-25T00:00:00Z":0,"2023-07-26T00:00:00Z":0,"2023-07-27T00:00:00Z":0,"2023-07-28T00:00:00Z":0,"2023-07-29T00:00:00Z":0,"2023-07-30T00:00:00Z":0,"2023-07-31T00:00:00Z":0},"site":"GS2","supplemental_camping":null,"type_of_use":"Overnight"},"83871":{"availabilities":{"2023-07-01T00:00:00Z":"Reserved","2023-07-02T00:00:00Z":"Reserved","2023-07-03T00:00:00Z":"Reserved","2023-07-04T00:00:00Z":"Reserved","2023-07-05T00:00:00Z":"Available","2023-07-06T00:00:00Z":"Reserved","2023-07-07T00:00:00Z":"Reserved","2023-07-08T00:00:00Z":"Reserved","2023-07-09T00:00:00Z":"Reserved","2023-07-10T00:00:00Z":"Reserved","2023-07-11T00:00:00Z":"Reserved","2023-07-12T00:00:00Z":"Reserved","2023-07-13T00:00:00Z":"Reserved","2023-07-14T00:00:00Z":"Reserved","2023-07-15T00:00:00Z":"Reserved","2023-07-16T00:00:00Z":"Reserved","2023-07-17T00:00:00Z":"Reserved","2023-07-18T00:00:00Z":"Reserved","2023-07-19T00:00:00Z":"Reserved","2023-07-20T00:00:00Z":"Reserved","2023-07-21T00:00:00Z":"Reserved","2023-07-22T00:00:00Z":"Reserved","2023-07-23T00:00:00Z":"Reserved","2023-07-24T00:00:00Z":"Reserved","2023-07-25T00:00:00Z":"Reserved","2023-07-26T00:00:00Z":"Reserved","2023-07-27T00:00:00Z":"Reserved","2023-07-28T00:00:00Z":"Reserved","2023-07-29T00:00:00Z":"Reserved","2023-07-30T00:00:00Z":"Reserved","2023-07-31T00:00:00Z":"Reserved"},"campsite_id":"83871","campsite_reserve_type":"Site-Specific","campsite_rules":null,"campsite_type":"GROUP
-                  STANDARD NONELECTRIC","capacity_rating":"Single","loop":"MADRONE","max_num_people":50,"min_num_people":1,"quantities":{"2023-07-01T00:00:00Z":0,"2023-07-02T00:00:00Z":0,"2023-07-03T00:00:00Z":0,"2023-07-04T00:00:00Z":0,"2023-07-05T00:00:00Z":1,"2023-07-06T00:00:00Z":0,"2023-07-07T00:00:00Z":0,"2023-07-08T00:00:00Z":0,"2023-07-09T00:00:00Z":0,"2023-07-10T00:00:00Z":0,"2023-07-11T00:00:00Z":0,"2023-07-12T00:00:00Z":0,"2023-07-13T00:00:00Z":0,"2023-07-14T00:00:00Z":0,"2023-07-15T00:00:00Z":0,"2023-07-16T00:00:00Z":0,"2023-07-17T00:00:00Z":0,"2023-07-18T00:00:00Z":0,"2023-07-19T00:00:00Z":0,"2023-07-20T00:00:00Z":0,"2023-07-21T00:00:00Z":0,"2023-07-22T00:00:00Z":0,"2023-07-23T00:00:00Z":0,"2023-07-24T00:00:00Z":0,"2023-07-25T00:00:00Z":0,"2023-07-26T00:00:00Z":0,"2023-07-27T00:00:00Z":0,"2023-07-28T00:00:00Z":0,"2023-07-29T00:00:00Z":0,"2023-07-30T00:00:00Z":0,"2023-07-31T00:00:00Z":0},"site":"GS1","supplemental_camping":null,"type_of_use":"Overnight"}},"count":2}
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.6
+            Safari/537.11
+        accept:
+          - application/json
+        apikey:
+          - REDACTED
+      method: GET
+      uri: https://ridb.recreation.gov/api/v1/facilities/232045?full=True
+    response:
+      body:
+        string:
+          "{\"ACTIVITY\":[{\"ActivityID\":5,\"ActivityName\":\"BIKING\",\"FacilityActivityDescription\":\"Biking\",\"FacilityActivityFeeDescription\":\"\",\"FacilityID\":\"232045\"},{\"ActivityID\":6,\"ActivityName\":\"BOATING\",\"FacilityActivityDescription\":\"Canoeing\",\"FacilityActivityFeeDescription\":\"\",\"FacilityID\":\"232045\"},{\"ActivityID\":9,\"ActivityName\":\"CAMPING\",\"FacilityActivityDescription\":\"Camping\",\"FacilityActivityFeeDescription\":\"Camping\",\"FacilityID\":\"232045\"},{\"ActivityID\":11,\"ActivityName\":\"FISHING\",\"FacilityActivityDescription\":\"Fishing\",\"FacilityActivityFeeDescription\":\"\",\"FacilityID\":\"232045\"},{\"ActivityID\":14,\"ActivityName\":\"HIKING\",\"FacilityActivityDescription\":\"Hiking\",\"FacilityActivityFeeDescription\":\"\",\"FacilityID\":\"232045\"},{\"ActivityID\":34,\"ActivityName\":\"SWIMMING
+          SITE\",\"FacilityActivityDescription\":\"Swimming\",\"FacilityActivityFeeDescription\":\"\",\"FacilityID\":\"232045\"}],\"CAMPSITE\":[],\"EVENT\":[],\"Enabled\":true,\"FACILITYADDRESS\":[{\"AddressCountryCode\":\"USA\",\"AddressStateCode\":\"CA\",\"City\":\"Foresthill\",\"FacilityAddressID\":\"20437400\",\"FacilityAddressType\":\"Default\",\"FacilityID\":\"232045\",\"FacilityStreetAddress1\":\"22830
+          Foresthill Road\",\"FacilityStreetAddress2\":\"\",\"FacilityStreetAddress3\":\"\",\"LastUpdatedDate\":\"2023-04-22\",\"PostalCode\":\"95631\"}],\"FacilityAdaAccess\":\"N\",\"FacilityDescription\":\"<h2>Overview</h2>\\nForbes
+          Creek Group Campground is located near the southeast shore of Sugar Pine Reservoir
+          in the Tahoe National Forest. Visitors enjoy the area for its fishing, canoeing
+          and hiking opportunities. This facility is operated and maintained by the
+          Tahoe National Forest.<h2>Recreation</h2>\\nFishing, canoeing, swimming and
+          boating are popular activities on the reservoir. A trail system for walking
+          and non-motorized biking connects the two group sites at the campground, to
+          the lake and nearby boat ramp.\_\_ The North Fork of the American River is
+          nearby, offering opportunities for additional fishing and swimming. Many miles
+          of hiking, biking and off-road vehicle trails are in the surrounding area.<h2>Facilities</h2>\\nThe
+          campground offers two group campsites, Madrone and Rocky Ridge. Each site
+          can accommodate up to 50 people and 18 vehicles. Both sites are equipped with
+          a central cooking and picnic area, with a large campfire circle and multiple
+          tables.\_ RVs, trailers and tents are allowed within the campground. An unloading
+          area and accessible parking are available within the campground.<h2>Natural
+          Features</h2>\\nThe 160-acre Sugar Pine Reservoir sits at an elevation of
+          3,600 feet. Stands of cedar and ponderosa pine provides ample shade in the
+          campground, which overlooks the reservoir. Summertime temperatures are warm
+          during the day and cool at night.\",\"FacilityDirections\":\"Take Interstate
+          80 to the Foresthill/Auburn exit, near Auburn. Continue east for 17 miles
+          to Foresthill. Travel through town, about 9 miles, to Forest Road 10/Sugar
+          Pine Road. Turn left and continue about 9 miles. Look for the Sugar Pine Recreation
+          Area sign and turn right on the first road after the sign. Continue about
+          a half-mile to the Rocky Ridge Group Campground, on the right, and to the
+          Madrone Group Campground, at the end of the circle.\",\"FacilityEmail\":\"\",\"FacilityID\":\"232045\",\"FacilityLatitude\":39.1311111,\"FacilityLongitude\":-120.7819444,\"FacilityMapURL\":\"\",\"FacilityName\":\"FORBES
+          CREEK\",\"FacilityPhone\":\"530-367-2224\",\"FacilityReservationURL\":\"\",\"FacilityTypeDescription\":\"Campground\",\"FacilityUseFeeDescription\":\"\",\"GEOJSON\":{\"COORDINATES\":[-120.7819444,39.1311111],\"TYPE\":\"Point\"},\"Keywords\":\"FORB,TAHOE
+          NF - FS\",\"LINK\":[{\"Description\":\"California State Road Conditions\",\"EntityID\":\"232045\",\"EntityLinkID\":\"f7868acb9eddf3ff68c0365dc733c553\",\"EntityType\":\"Facility\",\"LinkType\":\"Other\",\"Title\":\"California
+          State Road Conditions\",\"URL\":\"http://www.dot.ca.gov\"},{\"Description\":\"California
+          State Tourism\",\"EntityID\":\"232045\",\"EntityLinkID\":\"60217acbf4be21db4ffa79eb82b5b513\",\"EntityType\":\"Facility\",\"LinkType\":\"Other\",\"Title\":\"California
+          State Tourism\",\"URL\":\"http://gocalif.ca.gov/AM/Template.cfm?Section=Home\"},{\"Description\":\"Print
+          Facility Map\",\"EntityID\":\"232045\",\"EntityLinkID\":\"7126b5c5f6110fa73149b633df8d09a0\",\"EntityType\":\"Facility\",\"LinkType\":\"Other\",\"Title\":\"Print
+          Facility Map\",\"URL\":\"http://www.recreation.gov/webphotos/facilitymaps/70266_FORB.pdf\"}],\"LastUpdatedDate\":\"2023-04-22\",\"LegacyFacilityID\":\"70266\",\"MEDIA\":[{\"Credits\":\"\",\"Description\":\"\",\"EmbedCode\":\"\",\"EntityID\":\"232045\",\"EntityMediaID\":\"2570533\",\"EntityType\":\"Facility\",\"Height\":360,\"IsGallery\":true,\"IsPreview\":false,\"IsPrimary\":false,\"MediaType\":\"Image\",\"Subtitle\":\"\",\"Title\":\"FORBES
+          CREEK\",\"URL\":\"https://cdn.recreation.gov/public/images/64092.jpg\",\"Width\":540},{\"Credits\":\"Joel
+          Miller USFS November 2018.\",\"Description\":\"Sugar pine\",\"EmbedCode\":\"\",\"EntityID\":\"232045\",\"EntityMediaID\":\"8bd74a9a-adaf-4c8b-b06e-b5e8610bfa61\",\"EntityType\":\"Facility\",\"Height\":340,\"IsGallery\":false,\"IsPreview\":false,\"IsPrimary\":true,\"MediaType\":\"Image\",\"Subtitle\":\"\",\"Title\":\"Sugar
+          pine\",\"URL\":\"https://cdn.recreation.gov/public/2018/11/15/00/31/232045_26f2c941-82f7-4a5f-9dee-0ab2cd6931e9_1440.jpg\",\"Width\":1440},{\"Credits\":\"\",\"Description\":\"\",\"EmbedCode\":\"\",\"EntityID\":\"232045\",\"EntityMediaID\":\"2570442\",\"EntityType\":\"Facility\",\"Height\":360,\"IsGallery\":true,\"IsPreview\":false,\"IsPrimary\":false,\"MediaType\":\"Image\",\"Subtitle\":\"\",\"Title\":\"FORBES
+          CREEK\",\"URL\":\"https://cdn.recreation.gov/public/images/63996.jpg\",\"Width\":540},{\"Credits\":\"\",\"Description\":\"\",\"EmbedCode\":\"\",\"EntityID\":\"232045\",\"EntityMediaID\":\"2570422\",\"EntityType\":\"Facility\",\"Height\":360,\"IsGallery\":true,\"IsPreview\":false,\"IsPrimary\":false,\"MediaType\":\"Image\",\"Subtitle\":\"\",\"Title\":\"FORBES
+          CREEK\",\"URL\":\"https://cdn.recreation.gov/public/images/63975.jpg\",\"Width\":540},{\"Credits\":\"\",\"Description\":\"\",\"EmbedCode\":\"\",\"EntityID\":\"232045\",\"EntityMediaID\":\"2570605\",\"EntityType\":\"Facility\",\"Height\":360,\"IsGallery\":true,\"IsPreview\":false,\"IsPrimary\":false,\"MediaType\":\"Image\",\"Subtitle\":\"\",\"Title\":\"FORBES
+          CREEK\",\"URL\":\"https://cdn.recreation.gov/public/images/64168.jpg\",\"Width\":540},{\"Credits\":\"\",\"Description\":\"\",\"EmbedCode\":\"\",\"EntityID\":\"232045\",\"EntityMediaID\":\"2570434\",\"EntityType\":\"Facility\",\"Height\":360,\"IsGallery\":true,\"IsPreview\":false,\"IsPrimary\":false,\"MediaType\":\"Image\",\"Subtitle\":\"\",\"Title\":\"FORBES
+          CREEK\",\"URL\":\"https://cdn.recreation.gov/public/images/63987.jpg\",\"Width\":540},{\"Credits\":\"\",\"Description\":\"\",\"EmbedCode\":\"\",\"EntityID\":\"232045\",\"EntityMediaID\":\"2570491\",\"EntityType\":\"Facility\",\"Height\":360,\"IsGallery\":true,\"IsPreview\":false,\"IsPrimary\":false,\"MediaType\":\"Image\",\"Subtitle\":\"\",\"Title\":\"FORBES
+          CREEK\",\"URL\":\"https://cdn.recreation.gov/public/images/64047.jpg\",\"Width\":540}],\"ORGANIZATION\":[{\"LastUpdatedDate\":\"2018-06-26\",\"OrgAbbrevName\":\"FS\",\"OrgID\":\"131\",\"OrgImageURL\":\"fs.jpg\",\"OrgJurisdictionType\":\"State\",\"OrgName\":\"USDA
+          Forest Service\",\"OrgParentID\":\"163\",\"OrgType\":\"Federal Agency\",\"OrgURLAddress\":\"http://www.fs.fed.us\",\"OrgURLText\":\"\"}],\"OrgFacilityID\":\"AN370266\",\"PERMITENTRANCE\":[],\"ParentOrgID\":\"131\",\"ParentRecAreaID\":\"1077\",\"RECAREA\":[{\"RecAreaID\":\"1077\",\"RecAreaName\":\"Tahoe
+          National Forest\",\"ResourceLink\":\"http://localhost:3000/api/v1/recareas/1077\"}],\"Reservable\":true,\"StayLimit\":\"\",\"TOUR\":[]}\n"
+      headers:
+        Access-Control-Allow-Origin:
+          - '*'
+        Alt-Svc:
+          - h3=":443"; ma=86400
+        Connection:
+          - keep-alive
+        Content-Length:
+          - '7186'
+        Content-Type:
+          - application/json; charset=utf-8
+        Date:
+          - Sat, 22 Apr 2023 17:56:33 GMT
+        Server:
+          - CloudFront
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubdomains; always
+        Vary:
+          - Accept-Encoding
+        Via:
+          - 1.1 ce431f517854de6a993633b3607e3d06.cloudfront.net (CloudFront)
+        X-Amz-Cf-Id:
+          - NilCEonrw68CPMwFTuTS0_zYAjx2cg8ksjTykAJIiQX6JXbokB-dSA==
+        X-Amz-Cf-Pop:
+          - DEN52-P3
+        X-Cache:
+          - Miss from cloudfront
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        Accept:
+          - '*/*'
+        Accept-Encoding:
+          - gzip, deflate, br
+        Accept-Language:
+          - en-US,en;q=0.9,la;q=0.8
+        Cache-Control:
+          - max-age=0
+        Connection:
+          - keep-alive
+        Referer:
+          - https://www.recreation.gov/
+        Upgrade-Insecure-Requests:
+          - '1'
+        User-Agent:
+          - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML,
+            like Gecko) Chrome/49.0.2656.18 Safari/537.36
+      method: GET
+      uri: https://www.recreation.gov/api/search/campsites?fq=asset_id%3A232045&include_non_site_specific_campsites=True&size=1000&start=0
+    response:
+      body:
+        string:
+          '{"campsites":[{"accessible":"true","asset_id":"232045","asset_name":"FORBES
+          CREEK","asset_type":"Campground","attributes":[{"attribute_category":"site_details","attribute_id":56,"attribute_name":"Min
+          Num of People","attribute_value":"1"},{"attribute_category":"site_details","attribute_id":12,"attribute_name":"Checkout
+          Time","attribute_value":"12:00 PM"},{"attribute_category":"site_details","attribute_id":65,"attribute_name":"Pets
+          Allowed","attribute_value":"Yes"},{"attribute_category":"site_details","attribute_id":77,"attribute_name":"Shade","attribute_value":"Full"},{"attribute_category":"site_details","attribute_id":52,"attribute_name":"Max
+          Num of People","attribute_value":"50"},{"attribute_category":"site_details","attribute_id":10,"attribute_name":"Capacity/Size
+          Rating","attribute_value":"Single"},{"attribute_category":"site_details","attribute_id":11,"attribute_name":"Checkin
+          Time","attribute_value":"2:00 PM"},{"attribute_category":"equipment_details","attribute_id":23,"attribute_name":"Driveway
+          Entry","attribute_value":"Back-In"},{"attribute_category":"equipment_details","attribute_id":54,"attribute_name":"Max
+          Vehicle Length","attribute_value":"45"},{"attribute_category":"equipment_details","attribute_id":0,"attribute_name":"Is
+          Equipment Mandatory","attribute_value":"true"},{"attribute_category":"equipment_details","attribute_id":53,"attribute_name":"Max
+          Num of Vehicles","attribute_value":"18"},{"attribute_category":"equipment_details","attribute_id":26,"attribute_name":"Driveway
+          Surface","attribute_value":"Paved"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Campfire
+          Rings","attribute_value":"Campfire Rings"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Drinking
+          Water","attribute_value":"Drinking Water"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Grills","attribute_value":"Grills"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Picnic
+          Tables","attribute_value":"Picnic Tables"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Vault
+          Toilets","attribute_value":"Vault Toilets"}],"average_rating":3,"campsite_id":"83871","campsite_reserve_type":"Site-Specific","campsite_status":"Open","city":"Foresthill","country_code":"United
+          States","fee_templates":{"Off Peak":"Off PeakGROUP STANDARD NONELECTRIC","Peak":"PeakGROUP
+          STANDARD NONELECTRIC","Transition":"TransitionGROUP STANDARD NONELECTRIC","Walk
+          In":"Walk InGROUP STANDARD NONELECTRIC"},"latitude":"39.13067571600020","longitude":"-120.78260910600000","loop":"MADRONE","name":"GS1","notices":[{"text":"This
+          site accommodates 6 tents.","type":"warning"},{"text":"This site accommodates
+          6 tents.","type":"info"}],"number_of_ratings":2,"org_id":"131","org_name":"USDA
+          Forest Service","parent_asset_id":"232045","parent_asset_name":"FORBES CREEK","parent_asset_type":"campground","permitted_equipment":[{"equipment_name":"RV","max_length":45},{"equipment_name":"Tent","max_length":0},{"equipment_name":"Trailer","max_length":0}],"preview_image_url":"https://cdn.recreation.gov/public/2018/11/15/00/24/83871_c440dfc7-8473-4a03-a5e7-12c39641e3b2_1440.jpg","reservable":true,"state_code":"California","type":"GROUP
+          STANDARD NONELECTRIC","type_of_use":"Overnight"},{"accessible":"true","asset_id":"232045","asset_name":"FORBES
+          CREEK","asset_type":"Campground","attributes":[{"attribute_category":"site_details","attribute_id":65,"attribute_name":"Pets
+          Allowed","attribute_value":"Yes"},{"attribute_category":"site_details","attribute_id":77,"attribute_name":"Shade","attribute_value":"Full"},{"attribute_category":"site_details","attribute_id":52,"attribute_name":"Max
+          Num of People","attribute_value":"50"},{"attribute_category":"site_details","attribute_id":10,"attribute_name":"Capacity/Size
+          Rating","attribute_value":"Single"},{"attribute_category":"site_details","attribute_id":11,"attribute_name":"Checkin
+          Time","attribute_value":"2:00 PM"},{"attribute_category":"site_details","attribute_id":56,"attribute_name":"Min
+          Num of People","attribute_value":"1"},{"attribute_category":"site_details","attribute_id":12,"attribute_name":"Checkout
+          Time","attribute_value":"12:00 PM"},{"attribute_category":"equipment_details","attribute_id":23,"attribute_name":"Driveway
+          Entry","attribute_value":"Back-In"},{"attribute_category":"equipment_details","attribute_id":54,"attribute_name":"Max
+          Vehicle Length","attribute_value":"45"},{"attribute_category":"equipment_details","attribute_id":0,"attribute_name":"Is
+          Equipment Mandatory","attribute_value":"true"},{"attribute_category":"equipment_details","attribute_id":53,"attribute_name":"Max
+          Num of Vehicles","attribute_value":"20"},{"attribute_category":"equipment_details","attribute_id":26,"attribute_name":"Driveway
+          Surface","attribute_value":"Paved"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Campfire
+          Circles","attribute_value":"Campfire Circles"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Drinking
+          Water","attribute_value":"Drinking Water"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Picnic
+          Tables","attribute_value":"Picnic Tables"},{"attribute_category":"amenities","attribute_id":0,"attribute_name":"Vault
+          Toilets","attribute_value":"Vault Toilets"}],"campsite_id":"83343","campsite_reserve_type":"Site-Specific","campsite_status":"Open","city":"Foresthill","country_code":"United
+          States","fee_templates":{"Off Peak":"Off PeakGROUP STANDARD NONELECTRIC","Peak":"PeakGROUP
+          STANDARD NONELECTRIC","Transition":"TransitionGROUP STANDARD NONELECTRIC","Walk
+          In":"Walk InGROUP STANDARD NONELECTRIC"},"latitude":"39.13105623700010","longitude":"-120.78385190300000","loop":"ROCKY
+          RIDGE","name":"GS2","notices":[{"text":"This site accommodates 6 tents.","type":"warning"},{"text":"This
+          site accommodates 6 tents.","type":"info"}],"org_id":"131","org_name":"USDA
+          Forest Service","parent_asset_id":"232045","parent_asset_name":"FORBES CREEK","parent_asset_type":"campground","permitted_equipment":[{"equipment_name":"RV","max_length":45},{"equipment_name":"Tent","max_length":0},{"equipment_name":"Trailer","max_length":0}],"preview_image_url":"https://cdn.recreation.gov/public/2021/10/13/21/03/83343_b17d0376-b77d-4f15-9ead-ed7d02e11715_1440.png","reservable":true,"state_code":"California","type":"GROUP
+          STANDARD NONELECTRIC","type_of_use":"Overnight"}],"size":2,"spelling_autocorrected":false,"start":"0","total":2}'
+      headers:
+        Access-Control-Allow-Origin:
+          - '*'
+        Age:
+          - '133'
+        Alt-Svc:
+          - h3=":443"; ma=86400
+        Connection:
+          - keep-alive
+        Content-Type:
+          - application/json; charset=utf-8
+        Date:
+          - Sat, 22 Apr 2023 17:54:20 GMT
+        Transfer-Encoding:
+          - chunked
+        Vary:
+          - Accept-Encoding
+        Via:
+          - 1.1 a7c0ba01db75946f7df3f7eaf69984b6.cloudfront.net (CloudFront)
+        X-Amz-Cf-Id:
+          - ZnKT7woOXWvSZ7_6oM2syNg1hBmVyNsqe23PICjb9Bv5vw9Z0o4HZw==
+        X-Amz-Cf-Pop:
+          - DEN52-P2
+        X-Cache:
+          - Hit from cloudfront
+        content-length:
+          - '6439'
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        Accept:
+          - '*/*'
+        Accept-Encoding:
+          - gzip, deflate, br
+        Accept-Language:
+          - en-US,en;q=0.9,la;q=0.8
+        Cache-Control:
+          - max-age=0
+        Connection:
+          - keep-alive
+        Referer:
+          - https://www.recreation.gov/
+        Upgrade-Insecure-Requests:
+          - '1'
+        User-Agent:
+          - Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.3 (KHTML, like Gecko)
+            Chrome/5.0.358.0 Safari/533.3
+      method: GET
+      uri: https://www.recreation.gov/api/camps/availability/campground/232045/month?start_date=2023-07-01T00%3A00%3A00.000Z
+    response:
+      body:
+        string:
+          '{"campsites":{"83343":{"availabilities":{"2023-07-01T00:00:00Z":"Reserved","2023-07-02T00:00:00Z":"Reserved","2023-07-03T00:00:00Z":"Reserved","2023-07-04T00:00:00Z":"Reserved","2023-07-05T00:00:00Z":"Reserved","2023-07-06T00:00:00Z":"Reserved","2023-07-07T00:00:00Z":"Reserved","2023-07-08T00:00:00Z":"Reserved","2023-07-09T00:00:00Z":"Reserved","2023-07-10T00:00:00Z":"Reserved","2023-07-11T00:00:00Z":"Available","2023-07-12T00:00:00Z":"Available","2023-07-13T00:00:00Z":"Reserved","2023-07-14T00:00:00Z":"Reserved","2023-07-15T00:00:00Z":"Reserved","2023-07-16T00:00:00Z":"Reserved","2023-07-17T00:00:00Z":"Reserved","2023-07-18T00:00:00Z":"Reserved","2023-07-19T00:00:00Z":"Reserved","2023-07-20T00:00:00Z":"Reserved","2023-07-21T00:00:00Z":"Reserved","2023-07-22T00:00:00Z":"Reserved","2023-07-23T00:00:00Z":"Reserved","2023-07-24T00:00:00Z":"Reserved","2023-07-25T00:00:00Z":"Reserved","2023-07-26T00:00:00Z":"Reserved","2023-07-27T00:00:00Z":"Reserved","2023-07-28T00:00:00Z":"Reserved","2023-07-29T00:00:00Z":"Reserved","2023-07-30T00:00:00Z":"Reserved","2023-07-31T00:00:00Z":"Reserved"},"campsite_id":"83343","campsite_reserve_type":"Site-Specific","campsite_rules":null,"campsite_type":"GROUP
+          STANDARD NONELECTRIC","capacity_rating":"Single","loop":"ROCKY RIDGE","max_num_people":50,"min_num_people":1,"quantities":{"2023-07-01T00:00:00Z":0,"2023-07-02T00:00:00Z":0,"2023-07-03T00:00:00Z":0,"2023-07-04T00:00:00Z":0,"2023-07-05T00:00:00Z":0,"2023-07-06T00:00:00Z":0,"2023-07-07T00:00:00Z":0,"2023-07-08T00:00:00Z":0,"2023-07-09T00:00:00Z":0,"2023-07-10T00:00:00Z":0,"2023-07-11T00:00:00Z":1,"2023-07-12T00:00:00Z":1,"2023-07-13T00:00:00Z":0,"2023-07-14T00:00:00Z":0,"2023-07-15T00:00:00Z":0,"2023-07-16T00:00:00Z":0,"2023-07-17T00:00:00Z":0,"2023-07-18T00:00:00Z":0,"2023-07-19T00:00:00Z":0,"2023-07-20T00:00:00Z":0,"2023-07-21T00:00:00Z":0,"2023-07-22T00:00:00Z":0,"2023-07-23T00:00:00Z":0,"2023-07-24T00:00:00Z":0,"2023-07-25T00:00:00Z":0,"2023-07-26T00:00:00Z":0,"2023-07-27T00:00:00Z":0,"2023-07-28T00:00:00Z":0,"2023-07-29T00:00:00Z":0,"2023-07-30T00:00:00Z":0,"2023-07-31T00:00:00Z":0},"site":"GS2","supplemental_camping":null,"type_of_use":"Overnight"},"83871":{"availabilities":{"2023-07-01T00:00:00Z":"Reserved","2023-07-02T00:00:00Z":"Reserved","2023-07-03T00:00:00Z":"Reserved","2023-07-04T00:00:00Z":"Reserved","2023-07-05T00:00:00Z":"Available","2023-07-06T00:00:00Z":"Reserved","2023-07-07T00:00:00Z":"Reserved","2023-07-08T00:00:00Z":"Reserved","2023-07-09T00:00:00Z":"Reserved","2023-07-10T00:00:00Z":"Reserved","2023-07-11T00:00:00Z":"Reserved","2023-07-12T00:00:00Z":"Reserved","2023-07-13T00:00:00Z":"Reserved","2023-07-14T00:00:00Z":"Reserved","2023-07-15T00:00:00Z":"Reserved","2023-07-16T00:00:00Z":"Reserved","2023-07-17T00:00:00Z":"Reserved","2023-07-18T00:00:00Z":"Reserved","2023-07-19T00:00:00Z":"Reserved","2023-07-20T00:00:00Z":"Reserved","2023-07-21T00:00:00Z":"Reserved","2023-07-22T00:00:00Z":"Reserved","2023-07-23T00:00:00Z":"Reserved","2023-07-24T00:00:00Z":"Reserved","2023-07-25T00:00:00Z":"Reserved","2023-07-26T00:00:00Z":"Reserved","2023-07-27T00:00:00Z":"Reserved","2023-07-28T00:00:00Z":"Reserved","2023-07-29T00:00:00Z":"Reserved","2023-07-30T00:00:00Z":"Reserved","2023-07-31T00:00:00Z":"Reserved"},"campsite_id":"83871","campsite_reserve_type":"Site-Specific","campsite_rules":null,"campsite_type":"GROUP
+          STANDARD NONELECTRIC","capacity_rating":"Single","loop":"MADRONE","max_num_people":50,"min_num_people":1,"quantities":{"2023-07-01T00:00:00Z":0,"2023-07-02T00:00:00Z":0,"2023-07-03T00:00:00Z":0,"2023-07-04T00:00:00Z":0,"2023-07-05T00:00:00Z":1,"2023-07-06T00:00:00Z":0,"2023-07-07T00:00:00Z":0,"2023-07-08T00:00:00Z":0,"2023-07-09T00:00:00Z":0,"2023-07-10T00:00:00Z":0,"2023-07-11T00:00:00Z":0,"2023-07-12T00:00:00Z":0,"2023-07-13T00:00:00Z":0,"2023-07-14T00:00:00Z":0,"2023-07-15T00:00:00Z":0,"2023-07-16T00:00:00Z":0,"2023-07-17T00:00:00Z":0,"2023-07-18T00:00:00Z":0,"2023-07-19T00:00:00Z":0,"2023-07-20T00:00:00Z":0,"2023-07-21T00:00:00Z":0,"2023-07-22T00:00:00Z":0,"2023-07-23T00:00:00Z":0,"2023-07-24T00:00:00Z":0,"2023-07-25T00:00:00Z":0,"2023-07-26T00:00:00Z":0,"2023-07-27T00:00:00Z":0,"2023-07-28T00:00:00Z":0,"2023-07-29T00:00:00Z":0,"2023-07-30T00:00:00Z":0,"2023-07-31T00:00:00Z":0},"site":"GS1","supplemental_camping":null,"type_of_use":"Overnight"}},"count":2}
 
-                  '
-          headers:
-              Access-Control-Allow-Origin:
-                  - "*"
-              Alt-Svc:
-                  - h3=":443"; ma=86400
-              Connection:
-                  - keep-alive
-              Content-Type:
-                  - application/json; charset=utf-8
-              Date:
-                  - Sat, 22 Apr 2023 17:56:33 GMT
-              Server:
-                  - CloudFront
-              Strict-Transport-Security:
-                  - max-age=31536000; includeSubdomains; always
-              Transfer-Encoding:
-                  - chunked
-              Vary:
-                  - Accept-Encoding
-              Via:
-                  - 1.1 f0a2a95cb4d25b2414a9c1a7a754943e.cloudfront.net (CloudFront)
-              X-Amz-Cf-Id:
-                  - CCAxe9skFBcbH3hNaxDRnCD7AVV5xZheZq1fwjCl-EzfiOm69w80pg==
-              X-Amz-Cf-Pop:
-                  - DEN52-P2
-              X-Cache:
-                  - Miss from cloudfront
-              content-length:
-                  - "4337"
-          status:
-              code: 200
-              message: OK
-    - request:
-          body: null
-          headers:
-              Accept:
-                  - "*/*"
-              Accept-Encoding:
-                  - gzip, deflate, br
-              Accept-Language:
-                  - en-US,en;q=0.9,la;q=0.8
-              Cache-Control:
-                  - max-age=0
-              Connection:
-                  - keep-alive
-              Referer:
-                  - https://www.recreation.gov/
-              Upgrade-Insecure-Requests:
-                  - "1"
-              User-Agent:
-                  - Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/534.13 (KHTML, like
-                    Gecko) Chrome/9.0.597.107 Safari/534.13 v1416664997.4379
-          method: GET
-          uri: https://www.recreation.gov/api/camps/availability/campground/232045/month?start_date=2023-08-01T00%3A00%3A00.000Z
-      response:
-          body:
-              string:
-                  '{"campsites":{"83343":{"availabilities":{"2023-08-01T00:00:00Z":"Reserved","2023-08-02T00:00:00Z":"Reserved","2023-08-03T00:00:00Z":"Reserved","2023-08-04T00:00:00Z":"Reserved","2023-08-05T00:00:00Z":"Reserved","2023-08-06T00:00:00Z":"Reserved","2023-08-07T00:00:00Z":"Available","2023-08-08T00:00:00Z":"Available","2023-08-09T00:00:00Z":"Reserved","2023-08-10T00:00:00Z":"Reserved","2023-08-11T00:00:00Z":"Reserved","2023-08-12T00:00:00Z":"Reserved","2023-08-13T00:00:00Z":"Reserved","2023-08-14T00:00:00Z":"Available","2023-08-15T00:00:00Z":"Available","2023-08-16T00:00:00Z":"Available","2023-08-17T00:00:00Z":"Reserved","2023-08-18T00:00:00Z":"Reserved","2023-08-19T00:00:00Z":"Reserved","2023-08-20T00:00:00Z":"Reserved","2023-08-21T00:00:00Z":"Available","2023-08-22T00:00:00Z":"Reserved","2023-08-23T00:00:00Z":"Reserved","2023-08-24T00:00:00Z":"Reserved","2023-08-25T00:00:00Z":"Reserved","2023-08-26T00:00:00Z":"Reserved","2023-08-27T00:00:00Z":"Available","2023-08-28T00:00:00Z":"Available","2023-08-29T00:00:00Z":"Available","2023-08-30T00:00:00Z":"Available","2023-08-31T00:00:00Z":"Available"},"campsite_id":"83343","campsite_reserve_type":"Site-Specific","campsite_rules":null,"campsite_type":"GROUP
-                  STANDARD NONELECTRIC","capacity_rating":"Single","loop":"ROCKY RIDGE","max_num_people":50,"min_num_people":1,"quantities":{"2023-08-01T00:00:00Z":0,"2023-08-02T00:00:00Z":0,"2023-08-03T00:00:00Z":0,"2023-08-04T00:00:00Z":0,"2023-08-05T00:00:00Z":0,"2023-08-06T00:00:00Z":0,"2023-08-07T00:00:00Z":1,"2023-08-08T00:00:00Z":1,"2023-08-09T00:00:00Z":0,"2023-08-10T00:00:00Z":0,"2023-08-11T00:00:00Z":0,"2023-08-12T00:00:00Z":0,"2023-08-13T00:00:00Z":0,"2023-08-14T00:00:00Z":1,"2023-08-15T00:00:00Z":1,"2023-08-16T00:00:00Z":1,"2023-08-17T00:00:00Z":0,"2023-08-18T00:00:00Z":0,"2023-08-19T00:00:00Z":0,"2023-08-20T00:00:00Z":0,"2023-08-21T00:00:00Z":1,"2023-08-22T00:00:00Z":0,"2023-08-23T00:00:00Z":0,"2023-08-24T00:00:00Z":0,"2023-08-25T00:00:00Z":0,"2023-08-26T00:00:00Z":0,"2023-08-27T00:00:00Z":1,"2023-08-28T00:00:00Z":1,"2023-08-29T00:00:00Z":1,"2023-08-30T00:00:00Z":1,"2023-08-31T00:00:00Z":1},"site":"GS2","supplemental_camping":null,"type_of_use":"Overnight"},"83871":{"availabilities":{"2023-08-01T00:00:00Z":"Reserved","2023-08-02T00:00:00Z":"Reserved","2023-08-03T00:00:00Z":"Reserved","2023-08-04T00:00:00Z":"Reserved","2023-08-05T00:00:00Z":"Reserved","2023-08-06T00:00:00Z":"Reserved","2023-08-07T00:00:00Z":"Available","2023-08-08T00:00:00Z":"Available","2023-08-09T00:00:00Z":"Available","2023-08-10T00:00:00Z":"Available","2023-08-11T00:00:00Z":"Reserved","2023-08-12T00:00:00Z":"Reserved","2023-08-13T00:00:00Z":"Reserved","2023-08-14T00:00:00Z":"Reserved","2023-08-15T00:00:00Z":"Reserved","2023-08-16T00:00:00Z":"Available","2023-08-17T00:00:00Z":"Reserved","2023-08-18T00:00:00Z":"Reserved","2023-08-19T00:00:00Z":"Reserved","2023-08-20T00:00:00Z":"Reserved","2023-08-21T00:00:00Z":"Available","2023-08-22T00:00:00Z":"Available","2023-08-23T00:00:00Z":"Available","2023-08-24T00:00:00Z":"Available","2023-08-25T00:00:00Z":"Available","2023-08-26T00:00:00Z":"Reserved","2023-08-27T00:00:00Z":"Available","2023-08-28T00:00:00Z":"Available","2023-08-29T00:00:00Z":"Available","2023-08-30T00:00:00Z":"Available","2023-08-31T00:00:00Z":"Available"},"campsite_id":"83871","campsite_reserve_type":"Site-Specific","campsite_rules":null,"campsite_type":"GROUP
-                  STANDARD NONELECTRIC","capacity_rating":"Single","loop":"MADRONE","max_num_people":50,"min_num_people":1,"quantities":{"2023-08-01T00:00:00Z":0,"2023-08-02T00:00:00Z":0,"2023-08-03T00:00:00Z":0,"2023-08-04T00:00:00Z":0,"2023-08-05T00:00:00Z":0,"2023-08-06T00:00:00Z":0,"2023-08-07T00:00:00Z":1,"2023-08-08T00:00:00Z":1,"2023-08-09T00:00:00Z":1,"2023-08-10T00:00:00Z":1,"2023-08-11T00:00:00Z":0,"2023-08-12T00:00:00Z":0,"2023-08-13T00:00:00Z":0,"2023-08-14T00:00:00Z":0,"2023-08-15T00:00:00Z":0,"2023-08-16T00:00:00Z":1,"2023-08-17T00:00:00Z":0,"2023-08-18T00:00:00Z":0,"2023-08-19T00:00:00Z":0,"2023-08-20T00:00:00Z":0,"2023-08-21T00:00:00Z":1,"2023-08-22T00:00:00Z":1,"2023-08-23T00:00:00Z":1,"2023-08-24T00:00:00Z":1,"2023-08-25T00:00:00Z":1,"2023-08-26T00:00:00Z":0,"2023-08-27T00:00:00Z":1,"2023-08-28T00:00:00Z":1,"2023-08-29T00:00:00Z":1,"2023-08-30T00:00:00Z":1,"2023-08-31T00:00:00Z":1},"site":"GS1","supplemental_camping":null,"type_of_use":"Overnight"}},"count":2}
+          '
+      headers:
+        Access-Control-Allow-Origin:
+          - '*'
+        Alt-Svc:
+          - h3=":443"; ma=86400
+        Connection:
+          - keep-alive
+        Content-Type:
+          - application/json; charset=utf-8
+        Date:
+          - Sat, 22 Apr 2023 17:56:33 GMT
+        Server:
+          - CloudFront
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubdomains; always
+        Transfer-Encoding:
+          - chunked
+        Vary:
+          - Accept-Encoding
+        Via:
+          - 1.1 f0a2a95cb4d25b2414a9c1a7a754943e.cloudfront.net (CloudFront)
+        X-Amz-Cf-Id:
+          - CCAxe9skFBcbH3hNaxDRnCD7AVV5xZheZq1fwjCl-EzfiOm69w80pg==
+        X-Amz-Cf-Pop:
+          - DEN52-P2
+        X-Cache:
+          - Miss from cloudfront
+        content-length:
+          - '4337'
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        Accept:
+          - '*/*'
+        Accept-Encoding:
+          - gzip, deflate, br
+        Accept-Language:
+          - en-US,en;q=0.9,la;q=0.8
+        Cache-Control:
+          - max-age=0
+        Connection:
+          - keep-alive
+        Referer:
+          - https://www.recreation.gov/
+        Upgrade-Insecure-Requests:
+          - '1'
+        User-Agent:
+          - Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/534.13 (KHTML, like
+            Gecko) Chrome/9.0.597.107 Safari/534.13 v1416664997.4379
+      method: GET
+      uri: https://www.recreation.gov/api/camps/availability/campground/232045/month?start_date=2023-08-01T00%3A00%3A00.000Z
+    response:
+      body:
+        string:
+          '{"campsites":{"83343":{"availabilities":{"2023-08-01T00:00:00Z":"Reserved","2023-08-02T00:00:00Z":"Reserved","2023-08-03T00:00:00Z":"Reserved","2023-08-04T00:00:00Z":"Reserved","2023-08-05T00:00:00Z":"Reserved","2023-08-06T00:00:00Z":"Reserved","2023-08-07T00:00:00Z":"Available","2023-08-08T00:00:00Z":"Available","2023-08-09T00:00:00Z":"Reserved","2023-08-10T00:00:00Z":"Reserved","2023-08-11T00:00:00Z":"Reserved","2023-08-12T00:00:00Z":"Reserved","2023-08-13T00:00:00Z":"Reserved","2023-08-14T00:00:00Z":"Available","2023-08-15T00:00:00Z":"Available","2023-08-16T00:00:00Z":"Available","2023-08-17T00:00:00Z":"Reserved","2023-08-18T00:00:00Z":"Reserved","2023-08-19T00:00:00Z":"Reserved","2023-08-20T00:00:00Z":"Reserved","2023-08-21T00:00:00Z":"Available","2023-08-22T00:00:00Z":"Reserved","2023-08-23T00:00:00Z":"Reserved","2023-08-24T00:00:00Z":"Reserved","2023-08-25T00:00:00Z":"Reserved","2023-08-26T00:00:00Z":"Reserved","2023-08-27T00:00:00Z":"Available","2023-08-28T00:00:00Z":"Available","2023-08-29T00:00:00Z":"Available","2023-08-30T00:00:00Z":"Available","2023-08-31T00:00:00Z":"Available"},"campsite_id":"83343","campsite_reserve_type":"Site-Specific","campsite_rules":null,"campsite_type":"GROUP
+          STANDARD NONELECTRIC","capacity_rating":"Single","loop":"ROCKY RIDGE","max_num_people":50,"min_num_people":1,"quantities":{"2023-08-01T00:00:00Z":0,"2023-08-02T00:00:00Z":0,"2023-08-03T00:00:00Z":0,"2023-08-04T00:00:00Z":0,"2023-08-05T00:00:00Z":0,"2023-08-06T00:00:00Z":0,"2023-08-07T00:00:00Z":1,"2023-08-08T00:00:00Z":1,"2023-08-09T00:00:00Z":0,"2023-08-10T00:00:00Z":0,"2023-08-11T00:00:00Z":0,"2023-08-12T00:00:00Z":0,"2023-08-13T00:00:00Z":0,"2023-08-14T00:00:00Z":1,"2023-08-15T00:00:00Z":1,"2023-08-16T00:00:00Z":1,"2023-08-17T00:00:00Z":0,"2023-08-18T00:00:00Z":0,"2023-08-19T00:00:00Z":0,"2023-08-20T00:00:00Z":0,"2023-08-21T00:00:00Z":1,"2023-08-22T00:00:00Z":0,"2023-08-23T00:00:00Z":0,"2023-08-24T00:00:00Z":0,"2023-08-25T00:00:00Z":0,"2023-08-26T00:00:00Z":0,"2023-08-27T00:00:00Z":1,"2023-08-28T00:00:00Z":1,"2023-08-29T00:00:00Z":1,"2023-08-30T00:00:00Z":1,"2023-08-31T00:00:00Z":1},"site":"GS2","supplemental_camping":null,"type_of_use":"Overnight"},"83871":{"availabilities":{"2023-08-01T00:00:00Z":"Reserved","2023-08-02T00:00:00Z":"Reserved","2023-08-03T00:00:00Z":"Reserved","2023-08-04T00:00:00Z":"Reserved","2023-08-05T00:00:00Z":"Reserved","2023-08-06T00:00:00Z":"Reserved","2023-08-07T00:00:00Z":"Available","2023-08-08T00:00:00Z":"Available","2023-08-09T00:00:00Z":"Available","2023-08-10T00:00:00Z":"Available","2023-08-11T00:00:00Z":"Reserved","2023-08-12T00:00:00Z":"Reserved","2023-08-13T00:00:00Z":"Reserved","2023-08-14T00:00:00Z":"Reserved","2023-08-15T00:00:00Z":"Reserved","2023-08-16T00:00:00Z":"Available","2023-08-17T00:00:00Z":"Reserved","2023-08-18T00:00:00Z":"Reserved","2023-08-19T00:00:00Z":"Reserved","2023-08-20T00:00:00Z":"Reserved","2023-08-21T00:00:00Z":"Available","2023-08-22T00:00:00Z":"Available","2023-08-23T00:00:00Z":"Available","2023-08-24T00:00:00Z":"Available","2023-08-25T00:00:00Z":"Available","2023-08-26T00:00:00Z":"Reserved","2023-08-27T00:00:00Z":"Available","2023-08-28T00:00:00Z":"Available","2023-08-29T00:00:00Z":"Available","2023-08-30T00:00:00Z":"Available","2023-08-31T00:00:00Z":"Available"},"campsite_id":"83871","campsite_reserve_type":"Site-Specific","campsite_rules":null,"campsite_type":"GROUP
+          STANDARD NONELECTRIC","capacity_rating":"Single","loop":"MADRONE","max_num_people":50,"min_num_people":1,"quantities":{"2023-08-01T00:00:00Z":0,"2023-08-02T00:00:00Z":0,"2023-08-03T00:00:00Z":0,"2023-08-04T00:00:00Z":0,"2023-08-05T00:00:00Z":0,"2023-08-06T00:00:00Z":0,"2023-08-07T00:00:00Z":1,"2023-08-08T00:00:00Z":1,"2023-08-09T00:00:00Z":1,"2023-08-10T00:00:00Z":1,"2023-08-11T00:00:00Z":0,"2023-08-12T00:00:00Z":0,"2023-08-13T00:00:00Z":0,"2023-08-14T00:00:00Z":0,"2023-08-15T00:00:00Z":0,"2023-08-16T00:00:00Z":1,"2023-08-17T00:00:00Z":0,"2023-08-18T00:00:00Z":0,"2023-08-19T00:00:00Z":0,"2023-08-20T00:00:00Z":0,"2023-08-21T00:00:00Z":1,"2023-08-22T00:00:00Z":1,"2023-08-23T00:00:00Z":1,"2023-08-24T00:00:00Z":1,"2023-08-25T00:00:00Z":1,"2023-08-26T00:00:00Z":0,"2023-08-27T00:00:00Z":1,"2023-08-28T00:00:00Z":1,"2023-08-29T00:00:00Z":1,"2023-08-30T00:00:00Z":1,"2023-08-31T00:00:00Z":1},"site":"GS1","supplemental_camping":null,"type_of_use":"Overnight"}},"count":2}
 
-                  '
-          headers:
-              Access-Control-Allow-Origin:
-                  - "*"
-              Alt-Svc:
-                  - h3=":443"; ma=86400
-              Connection:
-                  - keep-alive
-              Content-Type:
-                  - application/json; charset=utf-8
-              Date:
-                  - Sat, 22 Apr 2023 17:56:34 GMT
-              Server:
-                  - CloudFront
-              Strict-Transport-Security:
-                  - max-age=31536000; includeSubdomains; always
-              Transfer-Encoding:
-                  - chunked
-              Vary:
-                  - Accept-Encoding
-              Via:
-                  - 1.1 d09fd0ac0a8733df98f134da74eec098.cloudfront.net (CloudFront)
-              X-Amz-Cf-Id:
-                  - 4PC3TeY_0jP1xMEj-rr8LG8_DeOaQB9P8gA3IIocyKhLl2R99efPhQ==
-              X-Amz-Cf-Pop:
-                  - DEN52-P2
-              X-Cache:
-                  - Miss from cloudfront
-              content-length:
-                  - "4360"
-          status:
-              code: 200
-              message: OK
+          '
+      headers:
+        Access-Control-Allow-Origin:
+          - '*'
+        Alt-Svc:
+          - h3=":443"; ma=86400
+        Connection:
+          - keep-alive
+        Content-Type:
+          - application/json; charset=utf-8
+        Date:
+          - Sat, 22 Apr 2023 17:56:34 GMT
+        Server:
+          - CloudFront
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubdomains; always
+        Transfer-Encoding:
+          - chunked
+        Vary:
+          - Accept-Encoding
+        Via:
+          - 1.1 d09fd0ac0a8733df98f134da74eec098.cloudfront.net (CloudFront)
+        X-Amz-Cf-Id:
+          - 4PC3TeY_0jP1xMEj-rr8LG8_DeOaQB9P8gA3IIocyKhLl2R99efPhQ==
+        X-Amz-Cf-Pop:
+          - DEN52-P2
+        X-Cache:
+          - Miss from cloudfront
+        content-length:
+          - '4360'
+      status:
+        code: 200
+        message: OK
 version: 1
