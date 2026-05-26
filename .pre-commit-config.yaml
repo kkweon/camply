@@ -1,84 +1,83 @@
 # yaml-language-server: $schema=https://schemastore.org/pre-commit-config.json
 
 exclude: |
-    (?x)(
-      docs/yaml_search.json
-    )
+  (?x)(
+    docs/yaml_search.json
+  )
 
 repos:
-    - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v6.0.0
-      hooks:
-          - id: trailing-whitespace
-          - id: end-of-file-fixer
-          - id: check-yaml
-          - id: check-ast
-          - id: check-docstring-first
-          - id: check-merge-conflict
-          - id: mixed-line-ending
-          - id: no-commit-to-branch
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-ast
+      - id: check-docstring-first
+      - id: check-merge-conflict
+      - id: mixed-line-ending
+      - id: no-commit-to-branch
 
-    - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-      rev: v2.15.0
-      hooks:
-          - id: pretty-format-toml
-            args: [--autofix, --no-sort]
+  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+    rev: v2.15.0
+    hooks:
+      - id: pretty-format-toml
+        args: [--autofix, --no-sort]
 
-    - repo: https://github.com/golangci/golangci-lint
-      rev: v1.63.4
-      hooks:
-          - id: golangci-lint
-            args: ["--fix"]
+  - repo: https://github.com/golangci/golangci-lint
+    rev: v1.63.4
+    hooks:
+      - id: golangci-lint
+        args: ['--fix']
 
-    - repo: https://github.com/dnephin/pre-commit-golang
-      rev: v0.5.1
-      hooks:
-          - id: go-imports
-          - id: go-mod-tidy
+  - repo: https://github.com/dnephin/pre-commit-golang
+    rev: v0.5.1
+    hooks:
+      - id: go-imports
+      - id: go-mod-tidy
 
-    - repo: local
-      hooks:
-          - id: gofumpt
-            name: gofumpt
-            description: Runs gofumpt code formatter
-            entry: go run mvdan.cc/gofumpt@latest -w
-            language: system
-            types:
-                - go
-          - id: ruff-format
-            name: format
-            description: Runs Code Auto-Formatters
-            entry: uv run ruff format
-            language: system
-            types:
-                - python
-          - id: ruff-check
-            name: lint
-            description: Runs Code Linters
-            entry: uv run ruff check --fix
-            language: system
-            types:
-                - python
-          - id: uv-lock
-            name: uv-lock
-            description: Runs uv lock when pyproject.toml changes
-            entry: uv lock
-            language: system
-            pass_filenames: false
-            files: pyproject.toml
-          - id: prettier
-            name: prettier
-            description: Runs Prettier Code Formatter
-            entry: prettier --write --ignore-unknown
-            args: ["--tab-width=4"]
-            language: node
-            types:
-                - text
-            additional_dependencies:
-                - prettier@3.6.2
-            exclude: |
-                (?x)(
-                  docs/cli.md|
-                  PULL_REQUEST_TEMPLATE.md|
-                  .github/semantic_release/release_notes.hbs
-                )
+  - repo: local
+    hooks:
+      - id: gofumpt
+        name: gofumpt
+        description: Runs gofumpt code formatter
+        entry: go run mvdan.cc/gofumpt@latest -w
+        language: system
+        types:
+          - go
+      - id: ruff-format
+        name: format
+        description: Runs Code Auto-Formatters
+        entry: uv run ruff format
+        language: system
+        types:
+          - python
+      - id: ruff-check
+        name: lint
+        description: Runs Code Linters
+        entry: uv run ruff check --fix
+        language: system
+        types:
+          - python
+      - id: uv-lock
+        name: uv-lock
+        description: Runs uv lock when pyproject.toml changes
+        entry: uv lock
+        language: system
+        pass_filenames: false
+        files: pyproject.toml
+      - id: prettier
+        name: prettier
+        description: Runs Prettier Code Formatter
+        entry: prettier --write --ignore-unknown
+        language: node
+        types:
+          - text
+        additional_dependencies:
+          - prettier@3.6.2
+        exclude: |
+          (?x)(
+            docs/cli.md|
+            PULL_REQUEST_TEMPLATE.md|
+            .github/semantic_release/release_notes.hbs
+          )

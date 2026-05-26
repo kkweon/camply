@@ -9,23 +9,23 @@ there are no numbers to renumber. References use `file:line`.
 ## 🔴 Critical
 
 - [ ] **`--campsite` flag is silently ignored**
-    - `cmd/camply/cli/campsites.go:105` sets `req.Campsites`, but nothing reads it (no
-      provider, no filter). Today a `--campsite` search returns the whole campground.
-    - PRD.md:25 requires limiting results strictly to those sites. Python resolves
-      campsite→facility _and_ post-filters (`camply/.../recdotgov_provider.py:885-891`).
-    - Fix: at minimum, drop sites whose `CampsiteID` ∉ `req.Campsites` in `core.Filter`
-      when that slice is non-empty.
+  - `cmd/camply/cli/campsites.go:105` sets `req.Campsites`, but nothing reads it (no
+    provider, no filter). Today a `--campsite` search returns the whole campground.
+  - PRD.md:25 requires limiting results strictly to those sites. Python resolves
+    campsite→facility _and_ post-filters (`camply/.../recdotgov_provider.py:885-891`).
+  - Fix: at minimum, drop sites whose `CampsiteID` ∉ `req.Campsites` in `core.Filter`
+    when that slice is non-empty.
 
 ---
 
 ## 🟠 High
 
 - [ ] **usedirect sends the full date range in one grid request**
-    - Go sends entire `[start, end]` in a single request (`usedirect.go:113-120`). Python
-      chunks per month (`StartDate = max(start, today-1)`, `EndDate = last day of month`,
-      one request per month per campground — `usedirect.py:316`, `search_usedirect.py:143-161`).
-    - If the grid endpoint caps its response window (the per-month chunking implies it does),
-      long searches silently return incomplete availability. Fix: match month-chunking.
+  - Go sends entire `[start, end]` in a single request (`usedirect.go:113-120`). Python
+    chunks per month (`StartDate = max(start, today-1)`, `EndDate = last day of month`,
+    one request per month per campground — `usedirect.py:316`, `search_usedirect.py:143-161`).
+  - If the grid endpoint caps its response window (the per-month chunking implies it does),
+    long searches silently return incomplete availability. Fix: match month-chunking.
 
 - [ ] **RIDB pagination has no offset cap or zero-progress guard (infinite-loop/hang risk)** —
       `recdotgov.go:117/199`. Python caps at offset 500 (`recdotgov_provider.py:436`). A
@@ -34,14 +34,14 @@ there are no numbers to renumber. References use `file:line`.
       a zero-progress break.
 
 - [ ] **usedirect equipment matching is invented and nearly a no-op**
-    - Python does no equipment filtering for usedirect — warns and ignores `--equipment`
-      (`camply/search/search_usedirect.py:121-124`).
-    - Go's heuristic `strings.Contains(lowerUseType, "site")` (`usedirect.go:211`) matches
-      almost every real type-group name (`Campsite`, `Tent Site`, `Premium Campsite`,
-      `Enroute Site`…) → nearly everything tagged `Tent`, while excluding `Boat In`/`Hike In`/
-      `Day Use`. Grid endpoint has no real equipment data.
-    - Fix: either drop equipment filtering for this provider (match Python, warn) or document
-      it as intentional best-effort — but replace the `"site"` substring with something principled.
+  - Python does no equipment filtering for usedirect — warns and ignores `--equipment`
+    (`camply/search/search_usedirect.py:121-124`).
+  - Go's heuristic `strings.Contains(lowerUseType, "site")` (`usedirect.go:211`) matches
+    almost every real type-group name (`Campsite`, `Tent Site`, `Premium Campsite`,
+    `Enroute Site`…) → nearly everything tagged `Tent`, while excluding `Boat In`/`Hike In`/
+    `Day Use`. Grid endpoint has no real equipment data.
+  - Fix: either drop equipment filtering for this provider (match Python, warn) or document
+    it as intentional best-effort — but replace the `"site"` substring with something principled.
 
 - [ ] **usedirect has no WAF protection (extract shared `internal/httpx`)** — recdotgov now
       rate-limits + retries + sends browser headers via its package-local `getJSON`
@@ -50,16 +50,16 @@ there are no numbers to renumber. References use `file:line`.
       concurrent fan-out (`usedirect.go:158-180`) gets throttled too.
 
 - [ ] **usedirect occupancy: deviates from Python + redundant double-fetch**
-    - Python hardcodes occupancy `(0, 1)`, no per-unit call (`usedirect.py:486`). Go still makes a
-      `/rdr/search/details/<unitId>` request per available unit (`usedirect.go:293-334`); the N+1
-      is now **concurrent** (sem=5, `usedirect.go:158-180`, commit b596cbc), so latency is
-      mitigated but it's still N requests / WAF risk and a behavioral deviation from Python.
-    - Remove redundant synchronous call at `usedirect.go:201` (units already pre-fetched
-      concurrently at `usedirect.go:158-180`; this call is now a guaranteed cache hit).
-    - Document/justify the hardcoded `startdate/2000-01-01` (`usedirect.go:304`) or it may
-      return nothing in prod.
-    - `time.Now().Truncate(24*time.Hour)` (`usedirect.go:108`) truncates on absolute UTC, so the
-      "today-1" floor can land on the wrong wall-clock day in non-UTC zones. Use a date-aware floor.
+  - Python hardcodes occupancy `(0, 1)`, no per-unit call (`usedirect.py:486`). Go still makes a
+    `/rdr/search/details/<unitId>` request per available unit (`usedirect.go:293-334`); the N+1
+    is now **concurrent** (sem=5, `usedirect.go:158-180`, commit b596cbc), so latency is
+    mitigated but it's still N requests / WAF risk and a behavioral deviation from Python.
+  - Remove redundant synchronous call at `usedirect.go:201` (units already pre-fetched
+    concurrently at `usedirect.go:158-180`; this call is now a guaranteed cache hit).
+  - Document/justify the hardcoded `startdate/2000-01-01` (`usedirect.go:304`) or it may
+    return nothing in prod.
+  - `time.Now().Truncate(24*time.Hour)` (`usedirect.go:108`) truncates on absolute UTC, so the
+    "today-1" floor can land on the wrong wall-clock day in non-UTC zones. Use a date-aware floor.
 
 ---
 
@@ -111,23 +111,23 @@ there are no numbers to renumber. References use `file:line`.
 ## ✅ Completed
 
 - [x] **recdotgov WAF/403 hardening — browser headers + rate limiting + retry** — ✅ fixed
-    - New shared helper `internal/providers/recdotgov/http.go` (`getJSON`) owns the full
-      request lifecycle: rate limit → rotating Chrome UA + `STANDARD_HEADERS`-style headers +
-      caller `Referer`/`apikey` → retry → decode → close. All four call sites
-      (`getAvailability`, `fetchMetadata`, `FindCampgrounds`, `FindRecreationAreas`) now go
-      through it; `fetchMetadata` gained the previously-missing `Referer`.
-    - Rate limit: package-global `rate.NewLimiter(3, 3)` (3 req/s, burst 3), mirroring
-      Python's `@ratelimit.limits(calls=3, period=1)`.
-    - Retry ("Moderate" profile): retry only `429`/`5xx`/network errors; `403` (WAF) and
-      `404` are terminal (headers defeat a 403, retrying can't). Full-jitter exponential,
-      base 1s, factor 2, per-sleep cap 8s, stop at 5 retries OR 30s — ~12s typical / ~23s
-      worst per failing request. Bound deliberately short because long-running searches use
-      an external CronJob, not an in-process daemon.
-    - Deliberately omits `Accept-Encoding` (Python sets it) to keep Go's transparent gzip
-      decompression; documented in `setBrowserHeaders`.
-    - Also resolves the Medium "defer inside pagination loops" item (`getJSON` closes each
-      body per request). Added `dep golang.org/x/time v0.15.0` and `http_test.go`
-      (429-retry, 403-terminal, header assertions).
+  - New shared helper `internal/providers/recdotgov/http.go` (`getJSON`) owns the full
+    request lifecycle: rate limit → rotating Chrome UA + `STANDARD_HEADERS`-style headers +
+    caller `Referer`/`apikey` → retry → decode → close. All four call sites
+    (`getAvailability`, `fetchMetadata`, `FindCampgrounds`, `FindRecreationAreas`) now go
+    through it; `fetchMetadata` gained the previously-missing `Referer`.
+  - Rate limit: package-global `rate.NewLimiter(3, 3)` (3 req/s, burst 3), mirroring
+    Python's `@ratelimit.limits(calls=3, period=1)`.
+  - Retry ("Moderate" profile): retry only `429`/`5xx`/network errors; `403` (WAF) and
+    `404` are terminal (headers defeat a 403, retrying can't). Full-jitter exponential,
+    base 1s, factor 2, per-sleep cap 8s, stop at 5 retries OR 30s — ~12s typical / ~23s
+    worst per failing request. Bound deliberately short because long-running searches use
+    an external CronJob, not an in-process daemon.
+  - Deliberately omits `Accept-Encoding` (Python sets it) to keep Go's transparent gzip
+    decompression; documented in `setBrowserHeaders`.
+  - Also resolves the Medium "defer inside pagination loops" item (`getJSON` closes each
+    body per request). Added `dep golang.org/x/time v0.15.0` and `http_test.go`
+    (429-retry, 403-terminal, header assertions).
 
 - [x] **`consolidateNights` produced duplicate & over-long records** — ✅ fixed in `dc0ca74`.
       Rewrote `internal/core/filter.go` to emit sliding windows of exactly `requiredNights`

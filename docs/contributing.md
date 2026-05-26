@@ -8,27 +8,27 @@ manager) and **[task]** (task runner). Once both are installed, you can use
 
 1. [Install uv](https://docs.astral.sh/uv/getting-started/installation/)
 
-    ```shell
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-    ```
+   ```shell
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   ```
 
 2. [Install task](https://taskfile.dev/installation/)
 
-    ```shell
-    sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d
-    ```
+   ```shell
+   sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d
+   ```
 
 3. Install project dependencies and list available tasks
 
-    ```shell
-    task install
-    ```
+   ```shell
+   task install
+   ```
 
 4. Optionally, activate the virtual environment created by `uv`:
 
-    ```shell
-    source .venv/bin/activate
-    ```
+   ```shell
+   source .venv/bin/activate
+   ```
 
 ## Using Task
 
