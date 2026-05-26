@@ -2,7 +2,6 @@ package recdotgov
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -123,24 +122,8 @@ func (p *Provider) FindCampgrounds(ctx context.Context, req core.SearchRequest) 
 			urlStr += fmt.Sprintf("&state=%s", url.QueryEscape(req.State))
 		}
 
-		reqHTTP, err := http.NewRequestWithContext(ctx, http.MethodGet, urlStr, nil)
-		if err != nil {
-			return nil, err
-		}
-		reqHTTP.Header.Set("apikey", ridbApiKey)
-
-		resp, err := p.client.Do(reqHTTP)
-		if err != nil {
-			return nil, err
-		}
-		defer resp.Body.Close()
-
-		if resp.StatusCode != http.StatusOK {
-			return nil, fmt.Errorf("ridb API returned status: %d", resp.StatusCode)
-		}
-
 		var parsedResp ridbFacilitiesResponse
-		if err := json.NewDecoder(resp.Body).Decode(&parsedResp); err != nil {
+		if err := p.getJSON(ctx, urlStr, ridbHeaders, &parsedResp); err != nil {
 			return nil, err
 		}
 
@@ -205,24 +188,8 @@ func (p *Provider) FindRecreationAreas(ctx context.Context, req core.SearchReque
 			urlStr += fmt.Sprintf("&state=%s", url.QueryEscape(req.State))
 		}
 
-		reqHTTP, err := http.NewRequestWithContext(ctx, http.MethodGet, urlStr, nil)
-		if err != nil {
-			return nil, err
-		}
-		reqHTTP.Header.Set("apikey", ridbApiKey)
-
-		resp, err := p.client.Do(reqHTTP)
-		if err != nil {
-			return nil, err
-		}
-		defer resp.Body.Close()
-
-		if resp.StatusCode != http.StatusOK {
-			return nil, fmt.Errorf("ridb API returned status: %d", resp.StatusCode)
-		}
-
 		var parsedResp ridbRecAreaResponse
-		if err := json.NewDecoder(resp.Body).Decode(&parsedResp); err != nil {
+		if err := p.getJSON(ctx, urlStr, ridbHeaders, &parsedResp); err != nil {
 			return nil, err
 		}
 
@@ -251,27 +218,8 @@ func (p *Provider) getAvailability(ctx context.Context, campgroundID string, mon
 	urlStr := fmt.Sprintf("%s://%s/%s/%s/month?start_date=%s",
 		p.apiScheme, p.apiNetLoc, p.apiBasePath, campgroundID, url.QueryEscape(month.Format("2006-01-02T00:00:00.000Z")))
 
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, urlStr, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	// Camply traditionally sets user agents and referrers
-	req.Header.Set("User-Agent", "camply/go-rewrite")
-	req.Header.Set("Referer", "https://www.recreation.gov/")
-
-	resp, err := p.client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("recreation.gov API returned status: %d", resp.StatusCode)
-	}
-
 	var apiResp monthAvailabilityResponse
-	if err := json.NewDecoder(resp.Body).Decode(&apiResp); err != nil {
+	if err := p.getJSON(ctx, urlStr, recdotgovHeaders, &apiResp); err != nil {
 		return nil, err
 	}
 

@@ -2,9 +2,7 @@ package recdotgov
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
-	"net/http"
 
 	"github.com/kkweon/camply/internal/core"
 )
@@ -22,24 +20,8 @@ func (p *Provider) fetchMetadata(ctx context.Context, campgroundID string) (map[
 		urlStr := fmt.Sprintf("%s://%s/api/search/campsites?start=%d&size=%d&fq=asset_id:%s&include_non_site_specific_campsites=true",
 			p.apiScheme, p.apiNetLoc, start, size, campgroundID)
 
-		req, err := http.NewRequestWithContext(ctx, http.MethodGet, urlStr, nil)
-		if err != nil {
-			return nil, err
-		}
-		req.Header.Set("User-Agent", "camply/go-rewrite")
-
-		resp, err := p.client.Do(req)
-		if err != nil {
-			return nil, err
-		}
-		defer resp.Body.Close()
-
-		if resp.StatusCode != http.StatusOK {
-			return nil, fmt.Errorf("recreation.gov API returned status: %d", resp.StatusCode)
-		}
-
 		var metaResp campsiteSearchResponse
-		if err := json.NewDecoder(resp.Body).Decode(&metaResp); err != nil {
+		if err := p.getJSON(ctx, urlStr, recdotgovHeaders, &metaResp); err != nil {
 			return nil, err
 		}
 
