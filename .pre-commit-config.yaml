@@ -17,6 +17,7 @@ repos:
       - id: check-merge-conflict
       - id: mixed-line-ending
       - id: no-commit-to-branch
+        args: [--branch, main, --branch, master]
 
   - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
     rev: v2.15.0
@@ -66,6 +67,16 @@ repos:
         language: system
         pass_filenames: false
         files: pyproject.toml
+      - id: mypy
+        name: mypy
+        description: Runs Static Type Checker
+        entry: uv run -- mypy
+        language: system
+        types:
+          - python
+        pass_filenames: false
+        args: [camply]
+        require_serial: true
       - id: prettier
         name: prettier
         description: Runs Prettier Code Formatter
