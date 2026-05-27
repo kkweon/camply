@@ -109,7 +109,7 @@ jobs:
 
       - name: build-docs
         run: |
-          task docs -- build
+          task docs
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

@@ -34,18 +34,18 @@ manager) and **[task]** (task runner). Once both are installed, you can use
 
 ### Task Cheat Sheet
 
-| Command Description | Command             | Notes                                   |
-| ------------------- | ------------------- | --------------------------------------- |
-| Install Project     | `task install`      | Installs project and dev dependencies   |
-| Run Tests           | `task test`         | Runs tests with `pytest`                |
-| Run Linting         | `task lint`         | Lints code with `ruff`                  |
-| Fix Code Issues     | `task fix`          | Formats and auto-fixes code with `ruff` |
-| Run Formatting      | `task fmt`          | Formats code with `ruff`                |
-| Run Type Checking   | `task check`        | Runs static analysis with `mypy`        |
-| Build Project       | `task build`        | Builds project artifacts                |
-| Update Dependencies | `task lock`         | Regenerates project lockfile            |
-| Serve Documentation | `task docs`         | Serves docs with `mkdocs`               |
-| Run Commands        | `task run -- <cmd>` | Runs arbitrary commands                 |
+| Command Description | Command              | Notes                                   |
+| ------------------- | -------------------- | --------------------------------------- |
+| Install Project     | `task install`       | Installs project and dev dependencies   |
+| Run Tests           | `task test`          | Runs tests with `pytest`                |
+| Run Linting         | `task lint`          | Lints code with `ruff`                  |
+| Fix Code Issues     | `task fix`           | Formats and auto-fixes code with `ruff` |
+| Run Type Checking   | `task check`         | Runs static analysis with `mypy`        |
+| Build Project       | `task build`         | Builds project artifacts                |
+| Update Dependencies | `task lock`          | Regenerates project lockfile            |
+| Build Documentation | `task docs`          | Builds docs with `mkdocs`               |
+| Serve Documentation | `task docs -- serve` | Serves docs locally with `mkdocs serve` |
+| Run Commands        | `task run -- <cmd>`  | Runs arbitrary commands                 |
 
 ### Task Explanation
 

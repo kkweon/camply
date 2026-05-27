@@ -8,29 +8,26 @@ env:
   PUSHOVER_PUSH_USER: placeholder
 vars:
   DOCKER_REPO: ghcr.io/kkweon/camply
-  FORMATTER_HOOKS: >-
-    ruff-format
-    gofumpt
-    prettier
-    pretty-format-toml
-    trailing-whitespace
-    end-of-file-fixer
-    mixed-line-ending
 
 tasks:
-  #######################################
+  # =============================================================
+  # Setup
+  # =============================================================
   default:
     desc: Install Project, List Tasks
     cmds:
       - task --list-all
     deps: [sync]
-  #######################################
+
   install:
     desc: Install Project + Dev Dependencies
     cmds:
       - task: pre-commit-install
       - task: sync
-  #######################################
+
+  # =============================================================
+  # Quality (test, lint, fix)
+  # =============================================================
   test:
     desc: Run Tests
     cmds:
@@ -44,7 +41,7 @@ tasks:
     env:
       GITHUB_TOKEN: placeholder
       UV_PYTHON: '{{.UV_PYTHON}}'
-  #######################################
+
   test:matrix:
     desc: Run Tests with different Python versions
     cmds:
@@ -54,32 +51,28 @@ tasks:
         task: test
         vars:
           UV_PYTHON: '{{.ITEM.PYTHON}}'
-  #######################################
+
   lint:
     desc: Run All Checks (exits non-zero if anything is non-compliant)
     cmds:
       - uv tool run --isolated pre-commit run --all-files --show-diff-on-failure
     deps: [sync]
-  #######################################
-  fmt:
-    desc: Run Formatters Only (writes formatting fixes; no linter --fix)
-    cmds:
-      - for: { var: FORMATTER_HOOKS }
-        cmd: uv tool run --isolated pre-commit run {{.ITEM}} --all-files
-    deps: [sync]
-  #######################################
+
   fix:
     desc: Run All Auto-Fixers (formatters + linter --fix)
     cmds:
       - uv tool run --isolated pre-commit run --all-files
     deps: [sync]
-  #######################################
+
+  # =============================================================
+  # Build & Distribution
+  # =============================================================
   dist:
     desc: Build the Project Artifacts
     cmds:
       - cmd: rm -rf {{.ROOT_DIR}}/dist
       - cmd: uv build
-  #######################################
+
   docker:
     desc: Build both Python and Go Docker Images
     cmds:
@@ -89,7 +82,7 @@ tasks:
       - task: docker:go
         vars:
           { CLI_ARGS: '{{.CLI_ARGS}}', RELEASE_VERSION: '{{.RELEASE_VERSION}}' }
-  #######################################
+
   docker:python:
     desc: Build Python Docker Image
     cmd: |
@@ -103,7 +96,7 @@ tasks:
       RELEASE_VERSION: '{{.RELEASE_VERSION | default "local"}}'
     requires:
       vars: [DOCKER_REPO]
-  #######################################
+
   docker:go:
     desc: Build Go Docker Image
     cmd: |
@@ -117,13 +110,17 @@ tasks:
       RELEASE_VERSION: '{{.RELEASE_VERSION | default "local"}}'
     requires:
       vars: [DOCKER_REPO]
-  #######################################
+
   build:
     desc: Build the Project Artifacts
     cmds:
       - task: dist
       - task: docker
-  #######################################
+      - task: docs
+
+  # =============================================================
+  # Release
+  # =============================================================
   publish:
     desc: Publish the Project Artifacts
     cmds:
@@ -132,48 +129,37 @@ tasks:
           CLI_ARGS: --push
     requires:
       vars: [CI, RELEASE_VERSION]
-  #######################################
-  docs:
-    desc: Generate Documentation
-    cmds:
-      - uv run --group docs -- mkdocs {{.CLI_ARGS | default "serve"}}
-  #######################################
+
+  # =============================================================
+  # Run
+  # =============================================================
   run:
     desc: Run Command within Project (requires "--")
     interactive: true
     cmds:
       - uv run -- {{.CLI_ARGS}}
-  #######################################
-  docker-run:
-    desc: Run Command within Docker Container (supports "--" for command)
-    interactive: true
+
+  # =============================================================
+  # Documentation
+  # =============================================================
+  docs:
+    desc: Build Documentation Site (use "-- serve" to serve locally)
     cmds:
-      - |
-        docker run \
-          --rm -it \
-          {{.DOCKER_REPO}}:{{.DOCKER_TAG_PREFIX}}{{.RELEASE_VERSION}} \
-          {{.CLI_ARGS}}
-    deps:
-      - task: docker
-        vars:
-          CLI_ARGS: ''
-    vars:
-      RELEASE_VERSION:
-        ref: .RELEASE_VERSION | default "local"
-    status:
-      - test ! -f {{.ROOT_DIR}}/{{.DOCKERFILE | default "Dockerfile"}}
-    requires:
-      vars: [DOCKER_REPO]
-  #######################################
+      - uv run --group docs -- mkdocs {{.CLI_ARGS | default "build"}}
+
+  # =============================================================
+  # Maintenance
+  # =============================================================
   lock:
     desc: Regenerate the Project Lockfile
     cmds:
       - uv lock
     env:
       UV_LOCKED: '0'
-  #######################################
-  # INTERNAL TASKS
-  #######################################
+
+  # =============================================================
+  # Internal
+  # =============================================================
   sync:
     desc: Install Project Dependencies
     internal: true
@@ -181,7 +167,7 @@ tasks:
       - uv sync --all-extras {{.CLI_ARGS}}
     env:
       UV_PYTHON: '{{.UV_PYTHON}}'
-  #######################################
+
   pre-commit-install:
     desc: Install Pre-Commit Hooks
     internal: true
