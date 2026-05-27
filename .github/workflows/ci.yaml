@@ -31,19 +31,24 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: 'uv.lock'
+          github-token: ${{ github.token }}
 
       - name: setup-go
         uses: actions/setup-go@v5
         with:
           go-version: '1.25.x'
+          token: ${{ github.token }}
 
       - name: setup-task
         uses: arduino/setup-task@v2
         with:
           version: 3.x
+          repo-token: ${{ github.token }}
 
       - name: pre-commit
         uses: pre-commit/action@v3.0.1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: test
         env:
@@ -81,11 +86,13 @@ jobs:
         uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
+          github-token: ${{ github.token }}
 
       - name: setup-task
         uses: arduino/setup-task@v2
         with:
           version: 3.x
+          repo-token: ${{ github.token }}
 
       - name: docker-hub
         uses: docker/login-action@v3
