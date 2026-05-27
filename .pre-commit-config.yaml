@@ -35,11 +35,17 @@ repos:
   - repo: https://github.com/dnephin/pre-commit-golang
     rev: v0.5.1
     hooks:
-      - id: go-imports
       - id: go-mod-tidy
 
   - repo: local
     hooks:
+      - id: goimports
+        name: goimports
+        description: Runs goimports formatter
+        entry: go run golang.org/x/tools/cmd/goimports@latest -w
+        language: system
+        types:
+          - go
       - id: gofumpt
         name: gofumpt
         description: Runs gofumpt code formatter
