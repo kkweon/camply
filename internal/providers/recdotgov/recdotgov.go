@@ -15,6 +15,7 @@ const (
 	apiNetLoc   = "www.recreation.gov"
 	apiBasePath = "api/camps/availability/campground"
 	ridbApiKey  = "a7416471-1b5d-4a64-ad3d-a233e7cb5c44"
+	ridbBaseURL = "https://ridb.recreation.gov/api/v1"
 )
 
 // Provider implements the core.Provider interface for Recreation.gov
@@ -23,6 +24,9 @@ type Provider struct {
 	apiScheme   string
 	apiNetLoc   string
 	apiBasePath string
+	// ridbBaseURL is the root of the RIDB data API (no trailing slash). It is a
+	// field rather than a const so tests can point it at an httptest server.
+	ridbBaseURL string
 }
 
 // NewProvider creates a new Recreation.gov provider
@@ -32,6 +36,7 @@ func NewProvider() *Provider {
 		apiScheme:   "https",
 		apiNetLoc:   "www.recreation.gov",
 		apiBasePath: "api/camps/availability/campground",
+		ridbBaseURL: ridbBaseURL,
 	}
 }
 
@@ -113,8 +118,18 @@ func (p *Provider) FindCampgrounds(ctx context.Context, req core.SearchRequest) 
 	size := 500
 	total := 1
 
+	// RIDB serves facilities from two endpoints: a flat /facilities list and a
+	// /recareas/{id}/facilities list scoped to one recreation area. The flat
+	// endpoint has NO rec-area filter, so scoping must be done by choosing the
+	// nested path -- passing the ID to /facilities would silently return every
+	// reservable campground in the country.
+	endpoint := p.ridbBaseURL + "/facilities"
+	if req.RecreationArea != "" {
+		endpoint = fmt.Sprintf("%s/recareas/%s/facilities", p.ridbBaseURL, url.PathEscape(req.RecreationArea))
+	}
+
 	for start < total {
-		urlStr := fmt.Sprintf("https://ridb.recreation.gov/api/v1/facilities?full=true&limit=%d&offset=%d", size, start)
+		urlStr := fmt.Sprintf("%s?full=true&limit=%d&offset=%d", endpoint, size, start)
 		if req.Query != "" {
 			urlStr += fmt.Sprintf("&query=%s", url.QueryEscape(req.Query))
 		}
@@ -128,6 +143,11 @@ func (p *Provider) FindCampgrounds(ctx context.Context, req core.SearchRequest) 
 		}
 
 		total = parsedResp.MetaData.Results.TotalCount
+		// Guard against a page that reports results but returns no rows: without
+		// this, start never advances and the loop spins forever.
+		if parsedResp.MetaData.Results.CurrentCount == 0 {
+			break
+		}
 		start += parsedResp.MetaData.Results.CurrentCount
 
 		for _, data := range parsedResp.RecData {
@@ -180,7 +200,7 @@ func (p *Provider) FindRecreationAreas(ctx context.Context, req core.SearchReque
 	total := 1
 
 	for start < total {
-		urlStr := fmt.Sprintf("https://ridb.recreation.gov/api/v1/recareas?full=true&limit=%d&offset=%d", size, start)
+		urlStr := fmt.Sprintf("%s/recareas?full=true&limit=%d&offset=%d", p.ridbBaseURL, size, start)
 		if req.Query != "" {
 			urlStr += fmt.Sprintf("&query=%s", url.QueryEscape(req.Query))
 		}
