@@ -2,6 +2,7 @@ package notifications
 
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -64,16 +65,38 @@ func formatMessage(c core.AvailableCampsite) (string, string) {
 type pushoverNotifier struct {
 	client *http.Client
 	config *config.AppConfig
+	// token is the resolved Pushover application token: the user's own if set,
+	// otherwise camply's shared default app.
+	token string
 }
 
-// NewPushover creates a new Pushover notifier if the config is valid
+// pushoverDefaultAPIToken is camply's own registered Pushover application, stored
+// base64-encoded to match the Python implementation (camply/config/notification_config.py).
+// Users only need to supply PUSHOVER_PUSH_USER; the app token is optional.
+const pushoverDefaultAPIToken = "YXBqOWlzNjRrdm5zZWt3YmEyeDZxaDV0cWhxbXI5"
+
+// NewPushover creates a new Pushover notifier if the config is valid.
+// Only PUSHOVER_PUSH_USER is required: Pushover's user key identifies the
+// recipient, while the token identifies the sending application, so an unset
+// token falls back to camply's shared app rather than being an error.
 func NewPushover(cfg *config.AppConfig) (Notifier, error) {
-	if cfg.PushoverPushToken == "" || cfg.PushoverPushUser == "" {
-		return nil, fmt.Errorf("Pushover requires both PUSHOVER_PUSH_TOKEN and PUSHOVER_PUSH_USER in ~/.camply")
+	if cfg.PushoverPushUser == "" {
+		return nil, fmt.Errorf("Pushover requires PUSHOVER_PUSH_USER in ~/.camply")
 	}
+
+	token := cfg.PushoverPushToken
+	if token == "" {
+		decoded, err := base64.StdEncoding.DecodeString(pushoverDefaultAPIToken)
+		if err != nil {
+			return nil, fmt.Errorf("failed to decode default Pushover token: %w", err)
+		}
+		token = string(decoded)
+	}
+
 	return &pushoverNotifier{
 		client: &http.Client{Timeout: 5 * time.Second},
 		config: cfg,
+		token:  token,
 	}, nil
 }
 
@@ -82,7 +105,7 @@ func (p *pushoverNotifier) SendCampsites(campsites []core.AvailableCampsite) err
 		title, message := formatMessage(c)
 
 		payload := map[string]interface{}{
-			"token":   p.config.PushoverPushToken,
+			"token":   p.token,
 			"user":    p.config.PushoverPushUser,
 			"message": message,
 			"title":   title,
