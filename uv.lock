@@ -44,7 +44,7 @@ wheels = [
 
 [[package]]
 name = "camply"
-version = "0.39.5"
+version = "0.39.6"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
