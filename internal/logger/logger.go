@@ -57,7 +57,7 @@ func (h *CamplyHandler) Handle(_ context.Context, r slog.Record) error {
 		out = os.Stderr
 	}
 
-	fmt.Fprintf(out, "[%s] %s %s\n", r.Time.Format("2006-01-02 15:04:05"), levelStr, r.Message)
+	_, _ = fmt.Fprintf(out, "[%s] %s %s\n", r.Time.Format("2006-01-02 15:04:05"), levelStr, r.Message)
 	return nil
 }
 

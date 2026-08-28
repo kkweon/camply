@@ -101,13 +101,13 @@ func (p *Provider) getJSON(ctx context.Context, urlStr string, extra map[string]
 
 		if resp.StatusCode == http.StatusOK {
 			err := json.NewDecoder(resp.Body).Decode(out)
-			resp.Body.Close()
+			_ = resp.Body.Close()
 			return err
 		}
 
 		// Drain + close so the connection can be reused.
 		_, _ = io.Copy(io.Discard, resp.Body)
-		resp.Body.Close()
+		_ = resp.Body.Close()
 
 		if isRetryableStatus(resp.StatusCode) {
 			lastErr = fmt.Errorf("recreation.gov API returned status: %d", resp.StatusCode)

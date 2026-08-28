@@ -138,16 +138,16 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 			}
 
 			if resp.StatusCode >= 400 {
-				resp.Body.Close()
+				_ = resp.Body.Close()
 				return nil, fmt.Errorf("UseDirect API returned status: %d", resp.StatusCode)
 			}
 
 			var grid gridResponse
 			if err := json.NewDecoder(resp.Body).Decode(&grid); err != nil {
-				resp.Body.Close()
+				_ = resp.Body.Close()
 				return nil, err
 			}
-			resp.Body.Close()
+			_ = resp.Body.Close()
 
 			if grid.Message != "" {
 				// TylerTech sometimes returns a debug message here even on 200 OK. Don't fail the request.
@@ -318,7 +318,7 @@ func (p *Provider) fetchUnitOccupancy(ctx context.Context, unitID int) {
 	if err != nil {
 		return
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode >= 400 {
 		return
@@ -356,7 +356,7 @@ func (p *Provider) refreshMetadata(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	var filters filterResponse
 	if err := json.NewDecoder(resp.Body).Decode(&filters); err == nil {
@@ -376,7 +376,7 @@ func (p *Provider) refreshMetadata(ctx context.Context) error {
 	req2.Header.Set("User-Agent", "Mozilla/5.0")
 	resp2, err := p.client.Do(req2)
 	if err == nil {
-		defer resp2.Body.Close()
+		defer func() { _ = resp2.Body.Close() }()
 		var places placesResponse
 		if err := json.NewDecoder(resp2.Body).Decode(&places); err == nil {
 			for _, pl := range places {
@@ -399,7 +399,7 @@ func (p *Provider) refreshMetadata(ctx context.Context) error {
 	req3.Header.Set("User-Agent", "Mozilla/5.0")
 	resp3, err := p.client.Do(req3)
 	if err == nil {
-		defer resp3.Body.Close()
+		defer func() { _ = resp3.Body.Close() }()
 		var facResponse facilitiesResponse
 		if err := json.NewDecoder(resp3.Body).Decode(&facResponse); err == nil {
 			p.facilityToPlace = make(map[int]int)
@@ -449,7 +449,7 @@ func (p *Provider) FindCampgrounds(ctx context.Context, req core.SearchRequest) 
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode >= 400 {
 		return nil, fmt.Errorf("UseDirect API returned status: %d", resp.StatusCode)
@@ -522,7 +522,7 @@ func (p *Provider) FindRecreationAreas(ctx context.Context, req core.SearchReque
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode >= 400 {
 		return nil, fmt.Errorf("UseDirect API returned status: %d", resp.StatusCode)

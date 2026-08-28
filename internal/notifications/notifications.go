@@ -81,7 +81,7 @@ const pushoverDefaultAPIToken = "YXBqOWlzNjRrdm5zZWt3YmEyeDZxaDV0cWhxbXI5"
 // token falls back to camply's shared app rather than being an error.
 func NewPushover(cfg *config.AppConfig) (Notifier, error) {
 	if cfg.PushoverPushUser == "" {
-		return nil, fmt.Errorf("Pushover requires PUSHOVER_PUSH_USER in ~/.camply")
+		return nil, fmt.Errorf("pushover requires PUSHOVER_PUSH_USER in ~/.camply")
 	}
 
 	token := cfg.PushoverPushToken
@@ -121,7 +121,7 @@ func (p *pushoverNotifier) SendCampsites(campsites []core.AvailableCampsite) err
 		if err != nil {
 			return fmt.Errorf("failed to send Pushover message: %w", err)
 		}
-		defer resp.Body.Close()
+		defer func() { _ = resp.Body.Close() }()
 
 		if resp.StatusCode >= 400 {
 			return fmt.Errorf("pushover API returned status: %d", resp.StatusCode)
@@ -138,7 +138,7 @@ type telegramNotifier struct {
 // NewTelegram creates a new Telegram notifier if the config is valid
 func NewTelegram(cfg *config.AppConfig) (Notifier, error) {
 	if cfg.TelegramBotToken == "" || cfg.TelegramChatID == "" {
-		return nil, fmt.Errorf("Telegram requires both TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID in ~/.camply")
+		return nil, fmt.Errorf("telegram requires both TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID in ~/.camply")
 	}
 	return &telegramNotifier{
 		client: &http.Client{Timeout: 5 * time.Second},
@@ -167,7 +167,7 @@ func (t *telegramNotifier) SendCampsites(campsites []core.AvailableCampsite) err
 		if err != nil {
 			return fmt.Errorf("failed to send Telegram message: %w", err)
 		}
-		defer resp.Body.Close()
+		defer func() { _ = resp.Body.Close() }()
 
 		if resp.StatusCode >= 400 {
 			return fmt.Errorf("telegram API returned status: %d", resp.StatusCode)

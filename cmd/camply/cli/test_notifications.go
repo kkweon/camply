@@ -27,7 +27,7 @@ var testNotificationsCmd = &cobra.Command{
 		notifications, _ := cmd.Flags().GetStringSlice("notifications")
 
 		if len(notifications) == 0 {
-			return fmt.Errorf("Missing option '--notifications'. Choose from: pushover, email, ntfy, apprise, pushbullet, slack, telegram, twilio, webhook, silent")
+			return fmt.Errorf("missing option '--notifications'. Choose from: pushover, email, ntfy, apprise, pushbullet, slack, telegram, twilio, webhook, silent")
 		}
 
 		appConfig, err := config.Load()
