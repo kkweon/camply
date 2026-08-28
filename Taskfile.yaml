@@ -40,6 +40,7 @@ tasks:
           CLI_ARGS: --quiet
     env:
       GITHUB_TOKEN: placeholder
+      CAMPLY_LOG_HANDLER: PYTHON
       UV_PYTHON: '{{.UV_PYTHON}}'
 
   test:matrix:

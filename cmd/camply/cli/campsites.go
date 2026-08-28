@@ -57,7 +57,22 @@ var campsitesCmd = &cobra.Command{
 		}
 
 		// Load global configurations for notifications
-		appConfig, _ := config.Load()
+		appConfig, err := config.Load()
+		if err != nil {
+			return fmt.Errorf("failed to load configuration: %w", err)
+		}
+
+		// Set the notifiers up before searching. Doing this lazily meant a
+		// broken notification config stayed invisible until the one run that
+		// actually had something to report — exactly the run you cannot
+		// afford to lose.
+		var notifiers []notifications_pkg.Notifier
+		if len(notifications) > 0 {
+			notifiers, err = notifications_pkg.SetupNotifiers(notifications, appConfig)
+			if err != nil {
+				return fmt.Errorf("failed to set up notifications: %w", err)
+			}
+		}
 
 		// 3. Select Provider
 		var provider interface {
@@ -122,16 +137,11 @@ var campsitesCmd = &cobra.Command{
 		printTable(filteredCampsites)
 
 		// 9. Send Notifications
-		if len(filteredCampsites) > 0 && len(notifications) > 0 {
+		if len(filteredCampsites) > 0 && len(notifiers) > 0 {
 			logger.Info("Dispatching notifications via %v...", notifications)
-			notifiers, err := notifications_pkg.SetupNotifiers(notifications, appConfig)
-			if err != nil {
-				logger.Error("Error setting up notifications: %v", err)
-			} else {
-				for _, n := range notifiers {
-					if err := n.SendCampsites(filteredCampsites); err != nil {
-						logger.Error("Failed to send notification: %v", err)
-					}
+			for _, n := range notifiers {
+				if err := n.SendCampsites(filteredCampsites); err != nil {
+					return fmt.Errorf("failed to send notification: %w", err)
 				}
 			}
 		}

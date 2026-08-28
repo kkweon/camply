@@ -8,53 +8,52 @@ on:
     branches:
       - develop
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   test:
-    env:
-      CAMPLY_LOG_HANDLER: PYTHON
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix:
-        include:
-          - { name: Python 3.12, python: '3.12' }
     permissions:
       contents: read
-      id-token: write
-      pull-requests: write
     steps:
       - name: checkout
         uses: actions/checkout@v7
 
+      # Python comes from .python-version, Go from the go.mod `go` directive -
+      # the same sources uv and go read locally. Nothing here is CI-specific.
       - name: setup-uv
         uses: astral-sh/setup-uv@v10.0.1
         with:
           enable-cache: true
           cache-dependency-glob: 'uv.lock'
-          github-token: ${{ github.token }}
 
       - name: setup-go
         uses: actions/setup-go@v7
         with:
-          go-version: '1.25.x'
-          token: ${{ github.token }}
+          # `go 1.26` carries no patch, so this resolves the newest 1.26.x
+          go-version-file: go.mod
 
       - name: setup-task
         uses: arduino/setup-task@v3.0.0
         with:
           version: 3.x
+          # No default on this input, unlike setup-uv/setup-go. Without it the
+          # release lookup is unauthenticated and gets rate limited.
           repo-token: ${{ github.token }}
 
-      - name: pre-commit
-        uses: pre-commit/action@v3.0.1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+      - name: cache-pre-commit
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
+
+      - name: lint
+        run: task lint
 
       - name: test
-        env:
-          UV_PYTHON: ${{ matrix.python }}
-        run: |
-          task test
+        run: task test
 
   release:
     needs: test
@@ -74,19 +73,20 @@ jobs:
       - name: checkout
         uses: actions/checkout@v7
         with:
+          # semantic-release pushes the version bump and needs full history
           persist-credentials: true
           fetch-depth: 0
 
       - name: setup-node
         uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: lts/*
 
       - name: setup-uv
         uses: astral-sh/setup-uv@v10.0.1
         with:
           enable-cache: true
-          github-token: ${{ github.token }}
+          cache-dependency-glob: 'uv.lock'
 
       - name: setup-task
         uses: arduino/setup-task@v3.0.0
@@ -94,35 +94,36 @@ jobs:
           version: 3.x
           repo-token: ${{ github.token }}
 
-      - name: docker-hub
+      - name: ghcr-login
         uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ github.token }}
 
-      - name: Set up QEMU
+      - name: setup-qemu
         uses: docker/setup-qemu-action@v4
 
-      - name: Set up Docker Buildx
+      - name: setup-buildx
         uses: docker/setup-buildx-action@v4
 
-      - name: Semantic Release
+      # Only the plugins referenced by .releaserc.json
+      - name: semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
-          npm install -g semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/exec semantic-release-gitmoji @semantic-release/github
+          npm install -g semantic-release @semantic-release/exec @semantic-release/git @semantic-release/github
           npx semantic-release
 
+      # Rebuilds outside of a release too, so docs deploy on every push
       - name: build-docs
-        run: |
-          task docs
+        run: task docs
 
-      - name: Upload Pages artifact
+      - name: upload-pages-artifact
         uses: actions/upload-pages-artifact@v5
         with:
           path: site
 
-      - name: Publish Docs
+      - name: deploy-pages
         uses: actions/deploy-pages@v5
         id: deployment

@@ -26,8 +26,24 @@ func Load() (*AppConfig, error) {
 	viper.SetConfigType("env")
 	viper.AddConfigPath(homeDir)
 
-	// Also allow environment variables to override the config file
+	// Also allow environment variables to override the config file.
 	viper.AutomaticEnv()
+
+	// AutomaticEnv on its own does not reach Unmarshal: Viper only unmarshals
+	// keys it already knows about, so a value supplied purely through the
+	// environment — as it is under Kubernetes, where these arrive from a
+	// Secret via envFrom — is silently dropped. Bind each key explicitly so
+	// the environment alone is enough to configure notifications.
+	for _, key := range []string{
+		"PUSHOVER_PUSH_TOKEN",
+		"PUSHOVER_PUSH_USER",
+		"TELEGRAM_BOT_TOKEN",
+		"TELEGRAM_CHAT_ID",
+	} {
+		if err := viper.BindEnv(key); err != nil {
+			return nil, fmt.Errorf("unable to bind %s: %w", key, err)
+		}
+	}
 
 	var config AppConfig
 
