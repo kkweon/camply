@@ -214,8 +214,18 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 								MaxLength:     0,
 							})
 						}
+						// Remote Camping units (Hike & Bike, Bike In, Boat In, Walk In) are
+						// not drive-in sites even when the API reports a vehicle length, so
+						// they must not advertise vehicle equipment.
+						lowerType := strings.ToLower(campsiteType)
+						driveIn := !strings.Contains(lowerType, "remote") &&
+							!strings.Contains(lowerUseType, "hike") &&
+							!strings.Contains(lowerUseType, "bike") &&
+							!strings.Contains(lowerUseType, "walk") &&
+							!strings.Contains(lowerUseType, "boat")
+
 						// Map raw Vehicle Lengths natively into the struct
-						if unit.VehicleLength > 0 {
+						if unit.VehicleLength > 0 && driveIn {
 							permittedEquipment = append(permittedEquipment, core.Equipment{
 								EquipmentName: "RV",
 								MaxLength:     unit.VehicleLength,
