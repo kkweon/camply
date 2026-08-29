@@ -7,6 +7,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/kkweon/camply/internal/core"
+	"github.com/kkweon/camply/internal/logger"
 	"github.com/kkweon/camply/internal/providers"
 )
 
@@ -18,9 +19,11 @@ type campgroundsRunner struct {
 	provider    string
 	search      string
 	state       string
-	recArea     string
+	recAreas    []string
 	campgrounds []string
 	campsites   []string
+
+	renamedFlags map[string]string
 }
 
 func newCampgroundsCmd(descs []providers.Descriptor) *cobra.Command {
@@ -32,23 +35,25 @@ func newCampgroundsCmd(descs []providers.Descriptor) *cobra.Command {
 		RunE:  r.run,
 	}
 
-	cmd.Flags().StringVar(&r.provider, "provider", "RecreationDotGov", "Camping Search Provider")
-	cmd.Flags().StringVar(&r.search, "search", "", "Search string")
-	cmd.Flags().StringVar(&r.state, "state", "", "State abbreviation")
-	cmd.Flags().StringVar(&r.recArea, "rec-area", "", "Recreation Area ID")
-	cmd.Flags().StringSliceVar(&r.campgrounds, "campground", []string{}, "Campground ID(s)")
-	cmd.Flags().StringSliceVar(&r.campsites, "campsite", []string{}, "Campsite ID(s)")
+	f := cmd.Flags()
+	f.SetNormalizeFunc(aliasNormalizer(&r.renamedFlags))
+
+	f.StringVar(&r.provider, "provider", "RecreationDotGov", "Camping Search Provider")
+	f.StringVar(&r.search, "search", "", "Search string (one value)")
+	f.StringVar(&r.state, "state", "", "State abbreviation (one value)")
+	f.StringSliceVar(&r.recAreas, "rec-areas", []string{},
+		multiHelp("Recreation Area IDs", "rec-areas 2991,1074", "rec-areas 2991", "rec-areas 1074"))
+	f.StringSliceVar(&r.campgrounds, "campgrounds", []string{},
+		multiHelp("Campground IDs", "campgrounds 232461,234039", "campgrounds 232461", "campgrounds 234039"))
+	f.StringSliceVar(&r.campsites, "campsites", []string{},
+		multiHelp("Campsite IDs", "campsites 2433,2437", "campsites 2433", "campsites 2437"))
 
 	return cmd
 }
 
 func (r *campgroundsRunner) run(cmd *cobra.Command, _ []string) error {
-	req := core.SearchRequest{
-		Query:          r.search,
-		State:          r.state,
-		RecreationArea: r.recArea,
-		Campgrounds:    r.campgrounds,
-		Campsites:      r.campsites,
+	for _, w := range renamedFlagWarnings(r.renamedFlags) {
+		logger.Warn("%s", w)
 	}
 
 	provider, desc, err := providers.NewFrom(r.registry, r.provider)
@@ -58,9 +63,27 @@ func (r *campgroundsRunner) run(cmd *cobra.Command, _ []string) error {
 
 	fmt.Printf("🏕  Searching %s for Campgrounds...\n", desc.DisplayName)
 
-	facilities, err := provider.FindCampgrounds(context.Background(), req)
-	if err != nil {
-		return fmt.Errorf("error fetching campgrounds: %w", err)
+	// core.SearchRequest still carries a single recreation area, so query once
+	// per ID and concatenate — the same shape the campsites command uses.
+	areas := r.recAreas
+	if len(areas) == 0 {
+		areas = []string{""}
+	}
+
+	var facilities []core.CampgroundFacility
+	for _, area := range areas {
+		req := core.SearchRequest{
+			Query:          r.search,
+			State:          r.state,
+			RecreationArea: area,
+			Campgrounds:    r.campgrounds,
+			Campsites:      r.campsites,
+		}
+		found, err := provider.FindCampgrounds(context.Background(), req)
+		if err != nil {
+			return fmt.Errorf("error fetching campgrounds: %w", err)
+		}
+		facilities = append(facilities, found...)
 	}
 
 	printCampgroundsTable(facilities)
