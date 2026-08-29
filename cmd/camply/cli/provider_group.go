@@ -57,3 +57,18 @@ func equipmentHelp(d *providers.Descriptor) string {
 	}
 	return base + " — varies by campground; " + v.Source
 }
+
+// campsiteTypeHelp describes --campsite-types for one provider. This is the
+// field that separates drive-in sites from walk-in ones; equipment cannot,
+// because a walk-in site still permits a tent.
+func campsiteTypeHelp(d *providers.Descriptor) string {
+	base := "Campsite types to accept — this is what separates drive-in from walk-in sites"
+	if d == nil {
+		return base
+	}
+	v, ok := providers.LookupVocabulary(*d, providers.FlagCampsiteTypes)
+	if !ok {
+		return base
+	}
+	return base + "; " + v.Source
+}

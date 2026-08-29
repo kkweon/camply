@@ -63,8 +63,8 @@ func describeEquipmentFilter(eq []core.Equipment) string {
 // a real recreation.gov name, so it passes here and only the post-fetch
 // coverage check can catch it. What this does catch is a name belonging to a
 // different provider entirely, and plain typos.
-func validateEquipmentTypes(names []string, d providers.Descriptor, registry []providers.Descriptor) error {
-	vocab, ok := providers.LookupVocabulary(d, providers.FlagEquipmentTypes)
+func validateVocabularyValues(flag string, names []string, d providers.Descriptor, registry []providers.Descriptor) error {
+	vocab, ok := providers.LookupVocabulary(d, flag)
 	if !ok {
 		return nil
 	}
@@ -74,7 +74,7 @@ func validateEquipmentTypes(names []string, d providers.Descriptor, registry []p
 		if name == "" {
 			// An empty term matches nothing and would be reported later as a
 			// mysterious miss. Reject it where the cause is still obvious.
-			return fmt.Errorf("--%s cannot contain an empty value", providers.FlagEquipmentTypes)
+			return fmt.Errorf("--%s cannot contain an empty value", flag)
 		}
 		if containsFold(vocab.Values, name) {
 			continue
@@ -83,7 +83,7 @@ func validateEquipmentTypes(names []string, d providers.Descriptor, registry []p
 		// A value that belongs to another provider is the exact shape of the
 		// reported bug, so say so rather than offering a generic typo hint.
 		if elsewhere := providers.FindElsewhere(registry, name, d.Key); len(elsewhere) > 0 {
-			return crossProviderError(name, d, vocab, elsewhere)
+			return crossProviderError(flag, name, d, vocab, elsewhere)
 		}
 
 		// A comma followed by a space splits into a value with leading
@@ -98,7 +98,7 @@ func validateEquipmentTypes(names []string, d providers.Descriptor, registry []p
 		}
 
 		if vocab.Closed {
-			return unknownValueError(name, d, vocab)
+			return unknownValueError(flag, name, d, vocab)
 		}
 		// Open vocabulary: an unlisted name may still be real, so this only
 		// hints. The authoritative check is coverage after the fetch.
@@ -106,17 +106,17 @@ func validateEquipmentTypes(names []string, d providers.Descriptor, registry []p
 		if h := suggest.Closest(name, vocab.Values, 1); len(h) > 0 {
 			hint = fmt.Sprintf(" Did you mean %q?", h[0])
 		}
-		logger.Warn("%q is not an equipment name camply knows for %s.%s "+
-			"Continuing; the search will report how many sites it matched.",
-			name, d.DisplayName, hint)
+		logger.Warn("%q is not a --%s value camply knows for %s.%s "+
+			"Continuing; the search will report how many sites matched.",
+			name, flag, d.DisplayName, hint)
 	}
 	return nil
 }
 
-func crossProviderError(name string, d providers.Descriptor, vocab providers.Vocabulary, elsewhere []providers.Term) error {
+func crossProviderError(flag, name string, d providers.Descriptor, vocab providers.Vocabulary, elsewhere []providers.Term) error {
 	var b strings.Builder
 	fmt.Fprintf(&b, "--%s=%s is not valid for %s.\n",
-		providers.FlagEquipmentTypes, name, d.DisplayName)
+		flag, name, d.DisplayName)
 	fmt.Fprintf(&b, "%q belongs to %s.\n\n", name, elsewhere[0].Display)
 
 	fmt.Fprintf(&b, "Values %s accepts (%s):\n    %s\n\n",
@@ -125,28 +125,27 @@ func crossProviderError(name string, d providers.Descriptor, vocab providers.Voc
 	fmt.Fprintf(&b, "Did you mean one of these?\n")
 	if hints := suggest.Closest(name, vocab.Values, 3); len(hints) > 0 {
 		fmt.Fprintf(&b, "    camply %s campsites --%s %s ...\n",
-			d.Key, providers.FlagEquipmentTypes, joinQuoted(hints))
+			d.Key, flag, joinQuoted(hints))
 	}
 	fmt.Fprintf(&b, "    camply %s campsites --%s %s ...\n",
-		elsewhere[0].Provider, providers.FlagEquipmentTypes, shellQuote(elsewhere[0].Value))
+		elsewhere[0].Provider, flag, shellQuote(elsewhere[0].Value))
 
 	return fmt.Errorf("%s", strings.TrimRight(b.String(), "\n"))
 }
 
-func unknownValueError(name string, d providers.Descriptor, vocab providers.Vocabulary) error {
+func unknownValueError(flag, name string, d providers.Descriptor, vocab providers.Vocabulary) error {
 	var b strings.Builder
 	fmt.Fprintf(&b, "--%s=%s is not valid for %s.\n\n",
-		providers.FlagEquipmentTypes, name, d.DisplayName)
+		flag, name, d.DisplayName)
 	fmt.Fprintf(&b, "Accepted values (%s):\n    %s\n",
 		vocab.Source, strings.Join(vocab.Values, ", "))
 
 	if hints := suggest.Closest(name, vocab.Values, 3); len(hints) > 0 {
 		fmt.Fprintf(&b, "\nDid you mean %s?\n", joinQuoted(hints))
 		fmt.Fprintf(&b, "    camply %s campsites --%s %s ...\n",
-			d.Key, providers.FlagEquipmentTypes, joinQuoted(hints[:1]))
+			d.Key, flag, joinQuoted(hints[:1]))
 	}
-	fmt.Fprintf(&b, "\nSeveral values: --%s %s\n",
-		providers.FlagEquipmentTypes, joinQuoted(firstN(vocab.Values, 2)))
+	fmt.Fprintf(&b, "\nSeveral values: --%s %s\n", flag, joinQuoted(firstN(vocab.Values, 2)))
 
 	return fmt.Errorf("%s", strings.TrimRight(b.String(), "\n"))
 }

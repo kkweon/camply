@@ -69,8 +69,11 @@ type Descriptor struct {
 	Vocabularies func() []Vocabulary
 }
 
-// FlagEquipmentTypes is the flag whose values the equipment vocabularies cover.
-const FlagEquipmentTypes = "equipment-types"
+// Flags whose accepted values the vocabularies describe.
+const (
+	FlagEquipmentTypes = "equipment-types"
+	FlagCampsiteTypes  = "campsite-types"
+)
 
 func descriptors() []Descriptor {
 	return []Descriptor{
@@ -92,6 +95,11 @@ func descriptors() []Descriptor {
 					Closed: false,
 					Values: recdotgov.KnownEquipment,
 					Source: "names observed on recreation.gov",
+				}, {
+					Flag:   FlagCampsiteTypes,
+					Closed: false,
+					Values: recdotgov.KnownCampsiteTypes,
+					Source: "types observed on recreation.gov",
 				}}
 			},
 		},
@@ -112,6 +120,13 @@ func descriptors() []Descriptor {
 					Closed: true,
 					Values: usedirect.SynthesizedEquipment,
 					Source: "synthesized by camply from unit category and vehicle length",
+				}, {
+					Flag: FlagCampsiteTypes,
+					// Open: the categories come from the live /rdr/search/filters
+					// response, so camply cannot enumerate them ahead of time.
+					Closed: false,
+					Values: usedirect.KnownUnitCategories,
+					Source: "unit categories from ReserveCalifornia's filters endpoint",
 				}}
 			},
 		},

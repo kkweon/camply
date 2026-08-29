@@ -37,6 +37,7 @@ type SearchRequest struct {
 	Campgrounds    []string
 	RecreationArea string
 	Campsites      []string
+	CampsiteTypes  []string
 	EquipmentID    string
 	Equipment      []Equipment
 	Query          string

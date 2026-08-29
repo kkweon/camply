@@ -36,6 +36,13 @@ func (f *Filter) Apply(campsites []AvailableCampsite, req SearchRequest) []Avail
 			continue
 		}
 
+		// 6. Check campsite type. Equipment cannot express this: a WALK TO site
+		// still permits a tent, so only the type separates drive-in from
+		// walk-in.
+		if len(req.CampsiteTypes) > 0 && !hasMatchingCampsiteType(site, req.CampsiteTypes) {
+			continue
+		}
+
 		filtered = append(filtered, site)
 	}
 
@@ -146,6 +153,15 @@ func isInSearchWindow(site AvailableCampsite, req SearchRequest) bool {
 		// Must start on or after requested start, and end on or before requested end
 		if (siteStart.Equal(start) || siteStart.After(start)) &&
 			(siteEnd.Equal(end) || siteEnd.Before(end)) {
+			return true
+		}
+	}
+	return false
+}
+
+func hasMatchingCampsiteType(site AvailableCampsite, wanted []string) bool {
+	for _, w := range wanted {
+		if strings.EqualFold(strings.TrimSpace(w), strings.TrimSpace(site.CampsiteType)) {
 			return true
 		}
 	}

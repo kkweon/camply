@@ -61,6 +61,11 @@ func fakeRegistry(fake *fakeProvider) []providers.Descriptor {
 					Closed: false, // open, like recreation.gov
 					Values: []string{"Tent", "Small Tent", "RV", "Car"},
 					Source: "names observed on FakeProvider",
+				}, {
+					Flag:   providers.FlagCampsiteTypes,
+					Closed: false,
+					Values: []string{"STANDARD NONELECTRIC", "TENT ONLY NONELECTRIC", "WALK TO"},
+					Source: "types observed on FakeProvider",
 				}}
 			},
 		},
@@ -695,5 +700,56 @@ func TestEmptyEquipmentValueIsRejected(t *testing.T) {
 	}
 	if !strings.Contains(res.Err.Error(), "empty value") {
 		t.Errorf("error should say the value is empty, got: %v", res.Err)
+	}
+}
+
+// The original request that started this work: drive-in tent sites. Equipment
+// cannot express it — a WALK TO site permits a tent — so only the campsite type
+// separates them.
+func TestCampsiteTypesExcludeWalkInSites(t *testing.T) {
+	mk := func(id, campsiteType string) core.AvailableCampsite {
+		s := site(id, 4)
+		s.CampsiteType = campsiteType
+		s.PermittedEquipment = []core.Equipment{{EquipmentName: "Tent", MaxLength: 30}}
+		return s
+	}
+	fake := &fakeProvider{sites: []core.AvailableCampsite{
+		mk("drive", "STANDARD NONELECTRIC"),
+		mk("tent", "TENT ONLY NONELECTRIC"),
+		mk("walk", "WALK TO"),
+	}}
+
+	res := runCLI(t, fakeRegistry(fake),
+		"fake", "campsites", "--campgrounds", "1",
+		"--date-ranges", "2026-09-04:2026-09-07",
+		"--campsite-types", "STANDARD NONELECTRIC,TENT ONLY NONELECTRIC")
+
+	if res.Err != nil {
+		t.Fatalf("unexpected error: %v", res.Err)
+	}
+	for _, want := range []string{"campsites/drive", "campsites/tent"} {
+		if !strings.Contains(res.Stdout, want) {
+			t.Errorf("%s should be in the results", want)
+		}
+	}
+	if strings.Contains(res.Stdout, "campsites/walk") {
+		t.Error("a WALK TO site is not drive-in and must be excluded")
+	}
+}
+
+func TestUnknownCampsiteTypeWarnsOnAnOpenVocabulary(t *testing.T) {
+	fake := &fakeProvider{sites: []core.AvailableCampsite{site("A", 4)}}
+	res := runCLI(t, fakeRegistry(fake),
+		"fake", "campsites", "--campgrounds", "1",
+		"--date-ranges", "2026-09-04:2026-09-07",
+		"--campsite-types", "STANDARD NONELECTRICC")
+
+	// recreation.gov returns whatever a campground configured, so an uncatalogued
+	// type may still be real; this warns rather than blocking the search.
+	if !strings.Contains(res.Stderr, "campsite-types") {
+		t.Errorf("an unknown type should be reported, got stderr:\n%s", res.Stderr)
+	}
+	if !strings.Contains(res.Stderr, "Did you mean") {
+		t.Errorf("the warning should suggest a correction, got:\n%s", res.Stderr)
 	}
 }

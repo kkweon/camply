@@ -32,6 +32,7 @@ type campsitesRunner struct {
 	startDate      singleValue
 	endDate        singleValue
 	equipmentTypes []string
+	campsiteTypes  []string
 	maxEquipLength int
 	allowPartial   bool
 	notifications  []string
@@ -88,6 +89,9 @@ func addSearchFlags(cmd *cobra.Command, r *campsitesRunner, d *providers.Descrip
 	f.StringSliceVar(&r.equipmentTypes, "equipment-types", []string{},
 		multiHelp(equipmentHelp(d), "equipment-types Tent,'Small Tent'",
 			"equipment-types Tent", "equipment-types 'Small Tent'"))
+	f.StringSliceVar(&r.campsiteTypes, "campsite-types", []string{},
+		multiHelp(campsiteTypeHelp(d), "campsite-types 'STANDARD NONELECTRIC'",
+			"campsite-types 'STANDARD NONELECTRIC'", "campsite-types 'TENT ONLY NONELECTRIC'"))
 	f.IntVar(&r.maxEquipLength, "max-equipment-length", 0,
 		"Only sites that fit equipment this long, in feet (one value)")
 	f.BoolVar(&r.allowPartial, "allow-partial-match", false,
@@ -122,7 +126,11 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 		if err := validateEquipmentLength(r.equipmentTypes, r.maxEquipLength); err != nil {
 			return err
 		}
-		if err := validateEquipmentTypes(r.equipmentTypes, desc, r.crossProviderRegistry()); err != nil {
+		reg := r.crossProviderRegistry()
+		if err := validateVocabularyValues(providers.FlagEquipmentTypes, r.equipmentTypes, desc, reg); err != nil {
+			return err
+		}
+		if err := validateVocabularyValues(providers.FlagCampsiteTypes, r.campsiteTypes, desc, reg); err != nil {
 			return err
 		}
 		parsedEquipment := buildEquipmentFilter(r.equipmentTypes, r.maxEquipLength)
@@ -171,13 +179,14 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 
 		// 5. Build Request
 		req := core.SearchRequest{
-			StartDates:   parsedStarts,
-			EndDates:     parsedEnds,
-			Nights:       r.nights,
-			WeekendsOnly: r.weekendsOnly,
-			Campgrounds:  r.campgrounds,
-			Campsites:    r.campsites,
-			Equipment:    parsedEquipment,
+			StartDates:    parsedStarts,
+			EndDates:      parsedEnds,
+			Nights:        r.nights,
+			WeekendsOnly:  r.weekendsOnly,
+			Campgrounds:   r.campgrounds,
+			Campsites:     r.campsites,
+			CampsiteTypes: r.campsiteTypes,
+			Equipment:     parsedEquipment,
 		}
 
 		logger.Info("Searching across %d campgrounds", len(r.campgrounds))
