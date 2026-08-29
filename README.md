@@ -15,9 +15,13 @@
 >
 > ```bash
 > go run cmd/camply/main.go --help
-> go run cmd/camply/main.go recreation-areas --provider ReserveCalifornia --search "Yosemite"
-> go run cmd/camply/main.go campsites --provider RecreationDotGov --campground 232447 --start-date 2026-06-01 --end-date 2026-06-10 --nights 3
+> go run cmd/camply/main.go reservecalifornia recreation-areas --search "Yosemite"
+> go run cmd/camply/main.go recdotgov campsites --campgrounds 232447 \
+>     --date-ranges 2026-06-01:2026-06-10 --nights 3
 > ```
+>
+> The Go CLI puts the provider first, so every flag it offers is one that
+> provider's API can act on. `camply <provider> <command> --help` lists them.
 
 **`camply`**, the campsite finder ⛺️, is a tool to help you book a campsite online. Finding
 reservations at sold out campgrounds can be tough. That's where camply comes in. It searches
