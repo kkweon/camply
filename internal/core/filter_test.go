@@ -153,3 +153,57 @@ func TestFilterApplyConsolidates(t *testing.T) {
 		t.Fatalf("Apply returned %d records, want 2 (one per single night): %+v", len(got), got)
 	}
 }
+
+// Equipment cannot express drive-in: a WALK TO site still permits a tent, so
+// only campsite_type separates sites reachable by car from those that are not.
+func TestFilterByCampsiteType(t *testing.T) {
+	sites := []AvailableCampsite{
+		{CampsiteID: "1", CampsiteType: "STANDARD NONELECTRIC", BookingDate: day(2026, 9, 4), BookingEndDate: day(2026, 9, 5)},
+		{CampsiteID: "2", CampsiteType: "TENT ONLY NONELECTRIC", BookingDate: day(2026, 9, 4), BookingEndDate: day(2026, 9, 5)},
+		{CampsiteID: "3", CampsiteType: "WALK TO", BookingDate: day(2026, 9, 4), BookingEndDate: day(2026, 9, 5)},
+		{CampsiteID: "4", CampsiteType: "RV NONELECTRIC", BookingDate: day(2026, 9, 4), BookingEndDate: day(2026, 9, 5)},
+	}
+	req := SearchRequest{
+		Nights:        1,
+		StartDates:    []time.Time{day(2026, 9, 1)},
+		EndDates:      []time.Time{day(2026, 9, 30)},
+		CampsiteTypes: []string{"STANDARD NONELECTRIC", "TENT ONLY NONELECTRIC"},
+	}
+
+	got := (&Filter{}).Apply(sites, req)
+	if len(got) != 2 {
+		t.Fatalf("got %d sites, want 2 (WALK TO and RV NONELECTRIC excluded)", len(got))
+	}
+	for _, s := range got {
+		if s.CampsiteType == "WALK TO" || s.CampsiteType == "RV NONELECTRIC" {
+			t.Errorf("%s should have been filtered out", s.CampsiteType)
+		}
+	}
+}
+
+func TestCampsiteTypeMatchIgnoresCaseAndPadding(t *testing.T) {
+	sites := []AvailableCampsite{
+		{CampsiteID: "1", CampsiteType: "WALK TO", BookingDate: day(2026, 9, 4), BookingEndDate: day(2026, 9, 5)},
+	}
+	req := SearchRequest{
+		Nights:        1,
+		StartDates:    []time.Time{day(2026, 9, 1)},
+		EndDates:      []time.Time{day(2026, 9, 30)},
+		CampsiteTypes: []string{"  walk to  "},
+	}
+	if got := (&Filter{}).Apply(sites, req); len(got) != 1 {
+		t.Errorf("got %d sites, want 1 — matching should tolerate case and padding", len(got))
+	}
+}
+
+// No campsite-type filter must mean no filtering, not "match nothing".
+func TestNoCampsiteTypeFilterKeepsEverything(t *testing.T) {
+	sites := []AvailableCampsite{
+		{CampsiteID: "1", CampsiteType: "WALK TO", BookingDate: day(2026, 9, 4), BookingEndDate: day(2026, 9, 5)},
+		{CampsiteID: "2", CampsiteType: "", BookingDate: day(2026, 9, 4), BookingEndDate: day(2026, 9, 5)},
+	}
+	req := SearchRequest{Nights: 1, StartDates: []time.Time{day(2026, 9, 1)}, EndDates: []time.Time{day(2026, 9, 30)}}
+	if got := (&Filter{}).Apply(sites, req); len(got) != 2 {
+		t.Errorf("got %d sites, want 2", len(got))
+	}
+}
