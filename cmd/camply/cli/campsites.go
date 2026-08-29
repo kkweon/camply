@@ -4,8 +4,6 @@ import (
 	"context"
 	"fmt"
 	"sort"
-	"strconv"
-	"strings"
 
 	"github.com/spf13/cobra"
 
@@ -34,6 +32,8 @@ type campsitesRunner struct {
 	startDate      singleValue
 	endDate        singleValue
 	equipmentTypes []string
+	maxEquipLength int
+	allowPartial   bool
 	notifications  []string
 	nights         int
 	weekendsOnly   bool
@@ -44,8 +44,11 @@ type campsitesRunner struct {
 
 // newProviderCampsitesCmd builds `camply <provider> campsites`, bound to one
 // provider so a flag that means nothing for it is never offered.
-func newProviderCampsitesCmd(d providers.Descriptor) *cobra.Command {
-	r := &campsitesRunner{desc: &d}
+func newProviderCampsitesCmd(d providers.Descriptor, registry []providers.Descriptor) *cobra.Command {
+	// The registry travels with the command even though the provider is fixed:
+	// an error still needs every provider's vocabulary to say where a rejected
+	// value does belong.
+	r := &campsitesRunner{desc: &d, registry: registry}
 
 	cmd := &cobra.Command{
 		Use:   "campsites",
@@ -83,8 +86,12 @@ func addSearchFlags(cmd *cobra.Command, r *campsitesRunner, d *providers.Descrip
 	f.Var(&r.startDate, "start-date", "Start of a single search window, YYYY-MM-DD (one value)")
 	f.Var(&r.endDate, "end-date", "End of a single search window, YYYY-MM-DD (one value)")
 	f.StringSliceVar(&r.equipmentTypes, "equipment-types", []string{},
-		multiHelp("Equipment types a campsite must permit", "equipment-types Tent,'Small Tent'",
+		multiHelp(equipmentHelp(d), "equipment-types Tent,'Small Tent'",
 			"equipment-types Tent", "equipment-types 'Small Tent'"))
+	f.IntVar(&r.maxEquipLength, "max-equipment-length", 0,
+		"Only sites that fit equipment this long, in feet (one value)")
+	f.BoolVar(&r.allowPartial, "allow-partial-match", false,
+		"Continue when an equipment filter matches nothing at some campgrounds, instead of failing")
 	f.StringSliceVar(&r.notifications, "notifications", []string{},
 		multiHelp("Notification providers", "notifications pushover,telegram",
 			"notifications pushover", "notifications telegram"))
@@ -107,10 +114,17 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 		}
 		parsedStarts, parsedEnds := splitWindows(windows)
 
-		// 2. Parse Equipment
-		parsedEquipment, err := parseEquipment(r.equipmentTypes)
+		// 2. Equipment
+		provider, desc, err := r.resolveProvider()
 		if err != nil {
-			return fmt.Errorf("invalid equipment format: %w", err)
+			return err
+		}
+		if err := validateEquipmentTypes(r.equipmentTypes, desc, r.crossProviderRegistry()); err != nil {
+			return err
+		}
+		parsedEquipment := buildEquipmentFilter(r.equipmentTypes, r.maxEquipLength)
+		if d := describeEquipmentFilter(parsedEquipment); d != "" {
+			logger.Info("Equipment filter: %s", d)
 		}
 
 		// Load global configurations for notifications
@@ -129,12 +143,6 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 			if err != nil {
 				return fmt.Errorf("failed to set up notifications: %w", err)
 			}
-		}
-
-		// 3. Select Provider
-		provider, _, err := r.resolveProvider()
-		if err != nil {
-			return err
 		}
 
 		ctx := context.Background()
@@ -177,6 +185,14 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 			return fmt.Errorf("error fetching campsites: %w", err)
 		}
 
+		// 6b. Measure the equipment filter before it silently removes anything.
+		if err := reportEquipmentCoverage(
+			core.AnalyzeEquipment(rawCampsites, parsedEquipment),
+			parsedEquipment, desc, r.crossProviderRegistry(), r.allowPartial,
+		); err != nil {
+			return err
+		}
+
 		// 7. Apply Fast Native Filter (Consolidates consecutive nights & filters bounds, weekends, equipment, campsites)
 		filter := core.Filter{}
 		filteredCampsites := filter.Apply(rawCampsites, req)
@@ -197,28 +213,6 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 		logger.Camply("Exiting camply 👋")
 		return nil
 	}
-}
-
-func parseEquipment(eqs []string) ([]core.Equipment, error) {
-	var parsed []core.Equipment
-	for _, e := range eqs {
-		parts := strings.Split(e, ",")
-		name := strings.TrimSpace(parts[0])
-		maxLength := 0
-		if len(parts) > 1 {
-			lengthStr := strings.TrimSpace(parts[1])
-			l, err := strconv.Atoi(lengthStr)
-			if err != nil {
-				return nil, fmt.Errorf("invalid length '%s' for equipment '%s'", lengthStr, name)
-			}
-			maxLength = l
-		}
-		parsed = append(parsed, core.Equipment{
-			EquipmentName: name,
-			MaxLength:     maxLength,
-		})
-	}
-	return parsed, nil
 }
 
 func printTable(campsites []core.AvailableCampsite) {
@@ -274,4 +268,14 @@ func (r *campsitesRunner) resolveProvider() (providers.Provider, providers.Descr
 		return r.desc.New(), *r.desc, nil
 	}
 	return providers.NewFrom(r.registry, r.provider)
+}
+
+// crossProviderRegistry is consulted to say where a rejected value does belong.
+func (r *campsitesRunner) crossProviderRegistry() []providers.Descriptor {
+	if len(r.registry) > 0 {
+		return r.registry
+	}
+	// Only reachable if a command was built without one; the real registry is
+	// the correct answer there.
+	return providers.Descriptors()
 }

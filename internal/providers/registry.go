@@ -63,7 +63,14 @@ type Descriptor struct {
 	// providers use disjoint ID namespaces, so one provider's ID silently
 	// matches nothing on the other.
 	RecAreaIDHelp string
+
+	// Vocabularies returns the value sets this provider accepts, so a bad value
+	// can be rejected with the valid ones listed rather than matching nothing.
+	Vocabularies func() []Vocabulary
 }
+
+// FlagEquipmentTypes is the flag whose values the equipment vocabularies cover.
+const FlagEquipmentTypes = "equipment-types"
 
 func descriptors() []Descriptor {
 	return []Descriptor{
@@ -76,6 +83,17 @@ func descriptors() []Descriptor {
 			New:           func() Provider { return recdotgov.NewProvider() },
 			SupportsState: true,
 			RecAreaIDHelp: "RIDB Recreation Area ID (see 'camply recdotgov recreation-areas')",
+			Vocabularies: func() []Vocabulary {
+				return []Vocabulary{{
+					Flag: FlagEquipmentTypes,
+					// Open: recreation.gov returns whatever a campground
+					// configured, and it differs between campgrounds in one
+					// search. An unlisted name may still be real.
+					Closed: false,
+					Values: recdotgov.KnownEquipment,
+					Source: "names observed on recreation.gov",
+				}}
+			},
 		},
 		{
 			Key:           KeyReserveCalifornia,
@@ -86,6 +104,16 @@ func descriptors() []Descriptor {
 			New:           func() Provider { return usedirect.NewReserveCalifornia() },
 			SupportsState: false,
 			RecAreaIDHelp: "ReserveCalifornia Place ID, an integer (see 'camply reservecalifornia recreation-areas')",
+			Vocabularies: func() []Vocabulary {
+				return []Vocabulary{{
+					Flag: FlagEquipmentTypes,
+					// Closed: these names are synthesized by camply, so nothing
+					// else can be returned.
+					Closed: true,
+					Values: usedirect.SynthesizedEquipment,
+					Source: "synthesized by camply from unit category and vehicle length",
+				}}
+			},
 		},
 		{
 			Key:         KeyGoingToCamp,

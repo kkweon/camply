@@ -55,6 +55,14 @@ func fakeRegistry(fake *fakeProvider) []providers.Descriptor {
 			New:           func() providers.Provider { return fake },
 			SupportsState: true,
 			RecAreaIDHelp: "fake ID",
+			Vocabularies: func() []providers.Vocabulary {
+				return []providers.Vocabulary{{
+					Flag:   providers.FlagEquipmentTypes,
+					Closed: false, // open, like recreation.gov
+					Values: []string{"Tent", "Small Tent", "RV", "Car"},
+					Source: "names observed on FakeProvider",
+				}}
+			},
 		},
 		{
 			Key:           "nostate",
@@ -64,6 +72,14 @@ func fakeRegistry(fake *fakeProvider) []providers.Descriptor {
 			New:           func() providers.Provider { return fake },
 			SupportsState: false,
 			RecAreaIDHelp: "NoState Place ID",
+			Vocabularies: func() []providers.Vocabulary {
+				return []providers.Vocabulary{{
+					Flag:   providers.FlagEquipmentTypes,
+					Closed: true, // synthesized, like UseDirect
+					Values: []string{"Tent", "RV", "Trailer", "Vehicle"},
+					Source: "synthesized by camply",
+				}}
+			},
 		},
 		{
 			Key:         "planned",
@@ -434,7 +450,7 @@ func TestDeprecatedCommandsAreHiddenButStillRun(t *testing.T) {
 // Telling someone their command is deprecated without showing the replacement
 // leaves them to work it out. The hint must be pasteable into a manifest.
 func TestLegacyCommandPrintsAPasteableReplacement(t *testing.T) {
-	fake := &fakeProvider{sites: []core.AvailableCampsite{site("A", 4)}}
+	fake := &fakeProvider{sites: []core.AvailableCampsite{equippedSite("A", "1", 4, "Tent")}}
 	res := runCLI(t, fakeRegistry(fake),
 		"campsites", "--provider", "FakeProvider",
 		"--campground", "232461", "--campground", "234039",
@@ -502,5 +518,149 @@ func TestLegacyCommandWarnsAboutIgnoredFlags(t *testing.T) {
 	}
 	if !strings.Contains(res.Stderr, "--state has no effect") {
 		t.Errorf("a flag the provider ignores should be called out, got:\n%s", res.Stderr)
+	}
+}
+
+func equippedSite(id, facility string, day int, equipment ...string) core.AvailableCampsite {
+	s := site(id, day)
+	s.FacilityID = facility
+	s.FacilityName = "Facility " + facility
+	for _, e := range equipment {
+		s.PermittedEquipment = append(s.PermittedEquipment, core.Equipment{EquipmentName: e, MaxLength: 30})
+	}
+	return s
+}
+
+// The incident, end to end: a filter value that is valid for the provider but
+// matches nothing at some of the campgrounds searched. This used to print
+// "0 New Campsites Found" and read as a full campground.
+func TestEquipmentThatMatchesNothingFailsInsteadOfReportingZero(t *testing.T) {
+	fake := &fakeProvider{sites: []core.AvailableCampsite{
+		equippedSite("A", "big", 4, "Tent", "RV"),
+		equippedSite("B", "big", 4, "Tent"),
+		equippedSite("C", "small", 4, "Small Tent"),
+	}}
+
+	res := runCLI(t, fakeRegistry(fake),
+		"fake", "campsites", "--campgrounds", "big,small",
+		"--date-ranges", "2026-09-04:2026-09-07", "--equipment-types", "Tent")
+
+	if res.Err == nil {
+		t.Fatal("a filter that matches nothing at a campground must fail, not report zero")
+	}
+	msg := res.Err.Error()
+	for _, want := range []string{
+		"matched nothing at 1 of 2 campground(s)",
+		"Facility small",
+		"Small Tent",            // what that campground does offer
+		"--allow-partial-match", // the escape hatch
+	} {
+		if !strings.Contains(msg, want) {
+			t.Errorf("error should contain %q, got:\n%s", want, msg)
+		}
+	}
+	if strings.Contains(res.Stdout, "0 New Campsites Found") {
+		t.Error("the run must not present this as an empty result")
+	}
+}
+
+func TestTotalMissNamesTheProviderTheValueBelongsTo(t *testing.T) {
+	fake := &fakeProvider{sites: []core.AvailableCampsite{
+		equippedSite("A", "1", 4, "Tent"),
+	}}
+
+	// "RV" is a valid FakeProvider value, so it survives pre-flight validation.
+	// It is absent from every site here, which only counting after the fetch can
+	// reveal — the shape of the reported incident.
+	res := runCLI(t, fakeRegistry(fake),
+		"fake", "campsites", "--campgrounds", "1",
+		"--date-ranges", "2026-09-04:2026-09-07", "--equipment-types", "RV")
+
+	if res.Err == nil {
+		t.Fatal("a value matching no site should fail")
+	}
+	msg := res.Err.Error()
+	if !strings.Contains(msg, "matched nothing at 1 of 1 campground(s)") {
+		t.Errorf("error should report which campgrounds were dropped, got:\n%s", msg)
+	}
+	if !strings.Contains(msg, "NoStateProvider") {
+		t.Errorf("error should say where the value does belong, got:\n%s", msg)
+	}
+}
+
+func TestAllowPartialMatchDowngradesToAWarning(t *testing.T) {
+	fake := &fakeProvider{sites: []core.AvailableCampsite{
+		equippedSite("A", "big", 4, "Tent"),
+		equippedSite("C", "small", 4, "Small Tent"),
+	}}
+
+	res := runCLI(t, fakeRegistry(fake),
+		"fake", "campsites", "--campgrounds", "big,small",
+		"--date-ranges", "2026-09-04:2026-09-07",
+		"--equipment-types", "Tent", "--allow-partial-match")
+
+	if res.Err != nil {
+		t.Fatalf("--allow-partial-match should let the search proceed: %v", res.Err)
+	}
+	if !strings.Contains(res.Stderr, "matched nothing at 1 of 2 campground(s)") {
+		t.Errorf("the problem should still be reported, got stderr:\n%s", res.Stderr)
+	}
+}
+
+// A closed vocabulary can reject before any request is made.
+func TestClosedVocabularyRejectsBeforeSearching(t *testing.T) {
+	fake := &fakeProvider{}
+	res := runCLI(t, fakeRegistry(fake),
+		"nostate", "campsites", "--campgrounds", "1",
+		"--date-ranges", "2026-09-04:2026-09-07", "--equipment-types", "Tnt")
+
+	if res.Err == nil {
+		t.Fatal("an unknown value on a closed vocabulary should fail")
+	}
+	if !strings.Contains(res.Err.Error(), "Did you mean") {
+		t.Errorf("error should suggest a correction, got:\n%s", res.Err)
+	}
+	if fake.campsite != 0 {
+		t.Error("validation must run before the provider is queried")
+	}
+}
+
+func TestValueFromAnotherProviderIsRejectedWithBothOptions(t *testing.T) {
+	fake := &fakeProvider{}
+	res := runCLI(t, fakeRegistry(fake),
+		"nostate", "campsites", "--campgrounds", "1",
+		"--date-ranges", "2026-09-04:2026-09-07", "--equipment-types", "Small Tent")
+
+	if res.Err == nil {
+		t.Fatal("a value belonging to another provider should fail")
+	}
+	msg := res.Err.Error()
+	for _, want := range []string{"belongs to FakeProvider", "camply fake campsites"} {
+		if !strings.Contains(msg, want) {
+			t.Errorf("error should contain %q, got:\n%s", want, msg)
+		}
+	}
+}
+
+// The embedded Name,Length syntax never worked: the flag is a slice, so pflag
+// split on the comma and "25" arrived as an equipment name.
+func TestEquipmentLengthIsItsOwnFlag(t *testing.T) {
+	fake := &fakeProvider{sites: []core.AvailableCampsite{
+		equippedSite("A", "1", 4, "RV"), // MaxLength 30
+	}}
+
+	res := runCLI(t, fakeRegistry(fake),
+		"fake", "campsites", "--campgrounds", "1",
+		"--date-ranges", "2026-09-04:2026-09-07",
+		"--equipment-types", "RV", "--max-equipment-length", "25")
+
+	if res.Err != nil {
+		t.Fatalf("a 25 ft requirement should match a 30 ft site: %v", res.Err)
+	}
+	if len(fake.lastReq.Equipment) != 1 {
+		t.Fatalf("want one equipment term, got %v", fake.lastReq.Equipment)
+	}
+	if got := fake.lastReq.Equipment[0]; got.EquipmentName != "RV" || got.MaxLength != 25 {
+		t.Errorf("equipment = %+v, want {RV 25}", got)
 	}
 }
