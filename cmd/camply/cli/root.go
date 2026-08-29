@@ -41,10 +41,25 @@ func newRootCmdWithRegistry(descs []providers.Descriptor) *cobra.Command {
 
 	root.PersistentFlags().BoolVar(&debug, "debug", false, "Enable extra debugging output")
 
+	// Cobra's "unknown flag: --state" names the failure but not the fix.
+	root.SetFlagErrorFunc(providerAwareFlagError(descs))
+
+	// One group per usable provider, so a flag that means nothing for the
+	// chosen provider is never registered.
+	for _, d := range descs {
+		if d.Status == providers.StatusSupported {
+			root.AddCommand(newProviderGroupCmd(d))
+		}
+	}
+
+	// Deprecated top-level commands; see legacy.go for why they stay.
 	root.AddCommand(
 		newCampsitesCmd(descs),
 		newCampgroundsCmd(descs),
 		newRecreationAreasCmd(descs),
+	)
+
+	root.AddCommand(
 		newProvidersCmd(descs),
 		newTestNotificationsCmd(),
 	)

@@ -57,12 +57,41 @@ func fakeRegistry(fake *fakeProvider) []providers.Descriptor {
 			RecAreaIDHelp: "fake ID",
 		},
 		{
+			Key:           "nostate",
+			DisplayName:   "NoStateProvider",
+			Description:   "supported, but its API has no state filter",
+			Status:        providers.StatusSupported,
+			New:           func() providers.Provider { return fake },
+			SupportsState: false,
+			RecAreaIDHelp: "NoState Place ID",
+		},
+		{
 			Key:         "planned",
 			DisplayName: "PlannedProvider",
 			Description: "not built yet",
 			Status:      providers.StatusPlanned,
 		},
 	}
+}
+
+// findCmd walks the tree by name, e.g. findCmd(root, "recdotgov", "campsites").
+func findCmd(t *testing.T, root *cobra.Command, path ...string) *cobra.Command {
+	t.Helper()
+	cur := root
+	for _, name := range path {
+		var next *cobra.Command
+		for _, c := range cur.Commands() {
+			if c.Name() == name {
+				next = c
+				break
+			}
+		}
+		if next == nil {
+			t.Fatalf("command %q not found under %q", name, cur.Name())
+		}
+		cur = next
+	}
+	return cur
 }
 
 type cliResult struct {
@@ -310,5 +339,168 @@ func TestProvidersCommandReportsStatusForEveryDescriptor(t *testing.T) {
 		if d.DisplayName == "" {
 			t.Error("descriptor without a display name would render a blank row")
 		}
+	}
+}
+
+// The premise of the split: a provider only offers flags its API can act on.
+func TestStateFlagOnlyExistsWhereTheAPISupportsIt(t *testing.T) {
+	root := newRootCmdWithRegistry(fakeRegistry(&fakeProvider{}))
+
+	withState := findCmd(t, root, "fake", "campgrounds")
+	if withState.Flags().Lookup("state") == nil {
+		t.Error("a provider that supports --state should offer it")
+	}
+
+	without := findCmd(t, root, "nostate", "campgrounds")
+	if without.Flags().Lookup("state") != nil {
+		t.Error("a provider that ignores --state must not offer it; " +
+			"accepting input and dropping it is the bug being fixed")
+	}
+}
+
+// The two providers use disjoint rec-area ID namespaces, so one provider's ID
+// matches nothing on the other. The help has to say which is meant.
+func TestRecAreaHelpIsProviderSpecific(t *testing.T) {
+	root := newRootCmdWithRegistry(fakeRegistry(&fakeProvider{}))
+
+	a := findCmd(t, root, "fake", "campsites").Flags().Lookup("rec-areas")
+	b := findCmd(t, root, "nostate", "campsites").Flags().Lookup("rec-areas")
+
+	if a == nil || b == nil {
+		t.Fatal("--rec-areas missing")
+	}
+	if !strings.Contains(a.Usage, "fake ID") {
+		t.Errorf("help should describe this provider's IDs, got: %s", a.Usage)
+	}
+	if !strings.Contains(b.Usage, "NoState Place ID") {
+		t.Errorf("help should describe this provider's IDs, got: %s", b.Usage)
+	}
+	if a.Usage == b.Usage {
+		t.Error("both providers show identical --rec-areas help despite disjoint ID spaces")
+	}
+}
+
+func TestProviderSubcommandHasNoProviderFlag(t *testing.T) {
+	root := newRootCmdWithRegistry(fakeRegistry(&fakeProvider{}))
+	cmd := findCmd(t, root, "fake", "campsites")
+	if cmd.Flags().Lookup("provider") != nil {
+		t.Error("the provider is the subcommand; --provider would be redundant and contradictable")
+	}
+}
+
+// An unknown flag must say where it does work, not just that it failed.
+func TestUnsupportedFlagErrorNamesAProviderThatHasIt(t *testing.T) {
+	res := runCLI(t, fakeRegistry(&fakeProvider{}),
+		"nostate", "campgrounds", "--state", "CA")
+
+	if res.Err == nil {
+		t.Fatal("--state on a provider without it should fail")
+	}
+	msg := res.Err.Error()
+	if strings.TrimSpace(msg) == "unknown flag: --state" {
+		t.Fatal("error is cobra's default; it does not tell the user what to do")
+	}
+	for _, want := range []string{"NoStateProvider", "camply fake campgrounds --state"} {
+		if !strings.Contains(msg, want) {
+			t.Errorf("error should contain %q, got:\n%s", want, msg)
+		}
+	}
+}
+
+// An unrelated typo must keep cobra's own message rather than being reshaped.
+func TestUnrelatedUnknownFlagKeepsDefaultError(t *testing.T) {
+	res := runCLI(t, fakeRegistry(&fakeProvider{}),
+		"fake", "campgrounds", "--bogus")
+	if res.Err == nil {
+		t.Fatal("an unknown flag should fail")
+	}
+	if !strings.Contains(res.Err.Error(), "unknown flag: --bogus") {
+		t.Errorf("unexpected error: %v", res.Err)
+	}
+}
+
+func TestDeprecatedCommandsAreHiddenButStillRun(t *testing.T) {
+	root := newRootCmdWithRegistry(fakeRegistry(&fakeProvider{}))
+	legacy := findCmd(t, root, "campsites")
+
+	if legacy.Deprecated == "" {
+		t.Error("the top-level campsites command should be marked deprecated")
+	}
+	if legacy.IsAvailableCommand() {
+		t.Error("a deprecated command should not be advertised in help")
+	}
+}
+
+// Telling someone their command is deprecated without showing the replacement
+// leaves them to work it out. The hint must be pasteable into a manifest.
+func TestLegacyCommandPrintsAPasteableReplacement(t *testing.T) {
+	fake := &fakeProvider{sites: []core.AvailableCampsite{site("A", 4)}}
+	res := runCLI(t, fakeRegistry(fake),
+		"campsites", "--provider", "FakeProvider",
+		"--campground", "232461", "--campground", "234039",
+		"--equipment", "Tent",
+		"--start-date", "2026-09-04", "--end-date", "2026-09-07",
+		"--nights", "2", "--weekends")
+
+	if res.Err != nil {
+		t.Fatalf("the deprecated command must keep working: %v", res.Err)
+	}
+
+	replacement := replacementLine(t, res.Stderr)
+
+	for _, want := range []string{
+		"camply fake campsites",
+		"--campgrounds 232461,234039", // slices render as input, not Go syntax
+		"--equipment-types Tent",      // renamed flag uses its new name
+		"--nights 2",
+		"--weekends", // bool renders without a value
+	} {
+		if !strings.Contains(replacement, want) {
+			t.Errorf("replacement should contain %q, got:\n%s", want, replacement)
+		}
+	}
+	// The provider is the subcommand now; repeating --provider could contradict it.
+	if strings.Contains(replacement, "--provider") {
+		t.Errorf("replacement repeats --provider: %s", replacement)
+	}
+
+	// Results are written at INFO on stdout and must stay uncontaminated.
+	//
+	// Only camply's own warning is asserted here. Cobra prints its built-in
+	// Deprecated notice through OutOrStderr(), which resolves to the out writer
+	// whenever one is set — as this harness does to capture results. With no out
+	// writer, as in the real binary, it falls back to stderr.
+	if strings.Contains(res.Stdout, "camply fake campsites --campgrounds") {
+		t.Errorf("migration hint leaked into the results stream: %q", res.Stdout)
+	}
+	if !strings.Contains(res.Stdout, "0 New Campsites Found") {
+		t.Errorf("results missing from stdout: %q", res.Stdout)
+	}
+}
+
+// replacementLine pulls the suggested command out of the deprecation warning.
+// Asserting on the whole of stderr would also match the quoted command the user
+// typed, which legitimately contains --provider.
+func replacementLine(t *testing.T, stderr string) string {
+	t.Helper()
+	for _, line := range strings.Split(stderr, "\n") {
+		if strings.Contains(line, "camply fake campsites") {
+			return strings.TrimSpace(line)
+		}
+	}
+	t.Fatalf("no replacement command found in stderr:\n%s", stderr)
+	return ""
+}
+
+func TestLegacyCommandWarnsAboutIgnoredFlags(t *testing.T) {
+	fake := &fakeProvider{}
+	res := runCLI(t, fakeRegistry(fake),
+		"campgrounds", "--provider", "NoStateProvider", "--state", "CA")
+
+	if res.Err != nil {
+		t.Fatalf("the deprecated command must keep working: %v", res.Err)
+	}
+	if !strings.Contains(res.Stderr, "--state has no effect") {
+		t.Errorf("a flag the provider ignores should be called out, got:\n%s", res.Stderr)
 	}
 }
