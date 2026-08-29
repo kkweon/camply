@@ -7,65 +7,64 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/kkweon/camply/internal/core"
-	"github.com/kkweon/camply/internal/providers/recdotgov"
-	"github.com/kkweon/camply/internal/providers/usedirect"
+	"github.com/kkweon/camply/internal/providers"
 )
 
-var (
-	cgSearchStr  string
-	cgStateStr   string
-	cgRecArea    string
-	cgCampground []string
-	cgCampsite   []string
-)
+// campgroundsRunner holds one command invocation's flag values. Each command
+// constructor allocates its own, so sibling commands cannot share state.
+type campgroundsRunner struct {
+	registry []providers.Descriptor
 
-var campgroundsCmd = &cobra.Command{
-	Use:   "campgrounds",
-	Short: "Search for Campgrounds",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		req := core.SearchRequest{
-			Query:          cgSearchStr,
-			State:          cgStateStr,
-			RecreationArea: cgRecArea,
-			Campgrounds:    cgCampground,
-			Campsites:      cgCampsite,
-		}
-
-		var provider interface {
-			FindCampgrounds(context.Context, core.SearchRequest) ([]core.CampgroundFacility, error)
-		}
-
-		switch providerStr {
-		case "RecreationDotGov":
-			provider = recdotgov.NewProvider()
-		case "ReserveCalifornia":
-			provider = usedirect.NewProvider("ReserveCalifornia", "https://california-rdr.prod.cali.rd12.recreation-management.tylerapp.com", "https://www.reservecalifornia.com")
-		default:
-			return fmt.Errorf("unsupported or missing provider: %s", providerStr)
-		}
-
-		fmt.Printf("🏕  Searching %s for Campgrounds...\n", providerStr)
-
-		ctx := context.Background()
-		facilities, err := provider.FindCampgrounds(ctx, req)
-		if err != nil {
-			return fmt.Errorf("error fetching campgrounds: %w", err)
-		}
-
-		printCampgroundsTable(facilities)
-		return nil
-	},
+	provider    string
+	search      string
+	state       string
+	recArea     string
+	campgrounds []string
+	campsites   []string
 }
 
-func init() {
-	rootCmd.AddCommand(campgroundsCmd)
+func newCampgroundsCmd(descs []providers.Descriptor) *cobra.Command {
+	r := &campgroundsRunner{registry: descs}
 
-	campgroundsCmd.Flags().StringVar(&providerStr, "provider", "RecreationDotGov", "Camping Search Provider")
-	campgroundsCmd.Flags().StringVar(&cgSearchStr, "search", "", "Search string")
-	campgroundsCmd.Flags().StringVar(&cgStateStr, "state", "", "State abbreviation")
-	campgroundsCmd.Flags().StringVar(&cgRecArea, "rec-area", "", "Recreation Area ID")
-	campgroundsCmd.Flags().StringSliceVar(&cgCampground, "campground", []string{}, "Campground ID(s)")
-	campgroundsCmd.Flags().StringSliceVar(&cgCampsite, "campsite", []string{}, "Campsite ID(s)")
+	cmd := &cobra.Command{
+		Use:   "campgrounds",
+		Short: "Search for Campgrounds",
+		RunE:  r.run,
+	}
+
+	cmd.Flags().StringVar(&r.provider, "provider", "RecreationDotGov", "Camping Search Provider")
+	cmd.Flags().StringVar(&r.search, "search", "", "Search string")
+	cmd.Flags().StringVar(&r.state, "state", "", "State abbreviation")
+	cmd.Flags().StringVar(&r.recArea, "rec-area", "", "Recreation Area ID")
+	cmd.Flags().StringSliceVar(&r.campgrounds, "campground", []string{}, "Campground ID(s)")
+	cmd.Flags().StringSliceVar(&r.campsites, "campsite", []string{}, "Campsite ID(s)")
+
+	return cmd
+}
+
+func (r *campgroundsRunner) run(cmd *cobra.Command, _ []string) error {
+	req := core.SearchRequest{
+		Query:          r.search,
+		State:          r.state,
+		RecreationArea: r.recArea,
+		Campgrounds:    r.campgrounds,
+		Campsites:      r.campsites,
+	}
+
+	provider, desc, err := providers.NewFrom(r.registry, r.provider)
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("🏕  Searching %s for Campgrounds...\n", desc.DisplayName)
+
+	facilities, err := provider.FindCampgrounds(context.Background(), req)
+	if err != nil {
+		return fmt.Errorf("error fetching campgrounds: %w", err)
+	}
+
+	printCampgroundsTable(facilities)
+	return nil
 }
 
 func printCampgroundsTable(facilities []core.CampgroundFacility) {

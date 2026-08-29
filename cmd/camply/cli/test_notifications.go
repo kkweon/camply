@@ -20,39 +20,40 @@ import (
      Campsite (e.g. Site 044, RV length 24)
 */
 
-var testNotificationsCmd = &cobra.Command{
-	Use:   "test-notifications",
-	Short: "Test your notification provider setup",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		notifications, _ := cmd.Flags().GetStringSlice("notifications")
+func newTestNotificationsCmd() *cobra.Command {
+	var notifications []string
 
-		if len(notifications) == 0 {
-			return fmt.Errorf("missing option '--notifications'. Choose from: pushover, email, ntfy, apprise, pushbullet, slack, telegram, twilio, webhook, silent")
-		}
-
-		appConfig, err := config.Load()
-		if err != nil {
-			fmt.Printf("⚠️ Warning: Could not load ~/.camply config: %v\n", err)
-		} else {
-			fmt.Println("✅ Successfully loaded ~/.camply config")
-			if appConfig.PushoverPushToken != "" {
-				fmt.Println("   - Pushover credentials detected")
+	cmd := &cobra.Command{
+		Use:   "test-notifications",
+		Short: "Test your notification provider setup",
+		RunE: func(cmd *cobra.Command, _ []string) error {
+			if len(notifications) == 0 {
+				return fmt.Errorf("missing option '--notifications'. Choose from: pushover, email, ntfy, apprise, pushbullet, slack, telegram, twilio, webhook, silent")
 			}
-			if appConfig.TelegramBotToken != "" {
-				fmt.Println("   - Telegram credentials detected")
+
+			appConfig, err := config.Load()
+			if err != nil {
+				fmt.Printf("⚠️ Warning: Could not load ~/.camply config: %v\n", err)
+			} else {
+				fmt.Println("✅ Successfully loaded ~/.camply config")
+				if appConfig.PushoverPushToken != "" {
+					fmt.Println("   - Pushover credentials detected")
+				}
+				if appConfig.TelegramBotToken != "" {
+					fmt.Println("   - Telegram credentials detected")
+				}
 			}
-		}
 
-		// Execute the actual API calls based on ~/.camply configs
-		if err := notifications_pkg.RunTestNotifications(notifications, appConfig); err != nil {
-			return err
-		}
+			// Execute the actual API calls based on ~/.camply configs
+			if err := notifications_pkg.RunTestNotifications(notifications, appConfig); err != nil {
+				return err
+			}
 
-		return nil
-	},
-}
+			return nil
+		},
+	}
 
-func init() {
-	rootCmd.AddCommand(testNotificationsCmd)
-	testNotificationsCmd.Flags().StringSlice("notifications", []string{}, "Notification providers to test")
+	cmd.Flags().StringSliceVar(&notifications, "notifications", []string{}, "Notification providers to test")
+
+	return cmd
 }

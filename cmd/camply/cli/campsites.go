@@ -14,12 +14,15 @@ import (
 	"github.com/kkweon/camply/internal/core"
 	"github.com/kkweon/camply/internal/logger"
 	notifications_pkg "github.com/kkweon/camply/internal/notifications"
-	"github.com/kkweon/camply/internal/providers/recdotgov"
-	"github.com/kkweon/camply/internal/providers/usedirect"
+	"github.com/kkweon/camply/internal/providers"
 )
 
-var (
-	providerStr   string
+// campsitesRunner holds one command invocation's flag values. Allocating it in
+// the constructor keeps sibling commands from sharing state.
+type campsitesRunner struct {
+	registry []providers.Descriptor
+
+	provider      string
 	campgrounds   []string
 	recAreas      []string
 	campsites     []string
@@ -29,19 +32,40 @@ var (
 	notifications []string
 	nights        int
 	weekendsOnly  bool
-)
+}
 
-var campsitesCmd = &cobra.Command{
-	Use:   "campsites",
-	Short: "Find available campsites",
-	RunE: func(cmd *cobra.Command, args []string) error {
+func newCampsitesCmd(descs []providers.Descriptor) *cobra.Command {
+	r := &campsitesRunner{registry: descs}
+
+	cmd := &cobra.Command{
+		Use:   "campsites",
+		Short: "Find available campsites",
+		RunE:  r.run,
+	}
+
+	cmd.Flags().StringVar(&r.provider, "provider", "RecreationDotGov", "Camping Search Provider")
+	cmd.Flags().StringSliceVar(&r.campgrounds, "campground", []string{}, "Campground ID(s)")
+	cmd.Flags().StringSliceVar(&r.recAreas, "rec-area", []string{}, "Recreation Area ID(s)")
+	cmd.Flags().StringSliceVar(&r.campsites, "campsite", []string{}, "Campsite ID(s)")
+	cmd.Flags().StringSliceVar(&r.startDates, "start-date", []string{}, "Start of Search window (YYYY-MM-DD)")
+	cmd.Flags().StringSliceVar(&r.endDates, "end-date", []string{}, "End of Search window (YYYY-MM-DD)")
+	cmd.Flags().StringSliceVar(&r.equipment, "equipment", []string{}, "Equipment filter in format 'Name,Length' (e.g. 'RV,25' or 'Tent')")
+	cmd.Flags().StringSliceVar(&r.notifications, "notifications", []string{}, "Notification providers to use")
+	cmd.Flags().IntVar(&r.nights, "nights", 1, "Minimum number of consecutive nights")
+	cmd.Flags().BoolVar(&r.weekendsOnly, "weekends", false, "Only search for weekend availabilities")
+
+	return cmd
+}
+
+func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
+	{
 		logger.Camply("camply, the campsite finder ⛺️")
 		// 1. Parse Dates
-		parsedStarts, err := parseDates(startDates)
+		parsedStarts, err := parseDates(r.startDates)
 		if err != nil {
 			return fmt.Errorf("invalid start date: %w", err)
 		}
-		parsedEnds, err := parseDates(endDates)
+		parsedEnds, err := parseDates(r.endDates)
 		if err != nil {
 			return fmt.Errorf("invalid end date: %w", err)
 		}
@@ -51,7 +75,7 @@ var campsitesCmd = &cobra.Command{
 		}
 
 		// 2. Parse Equipment
-		parsedEquipment, err := parseEquipment(equipment)
+		parsedEquipment, err := parseEquipment(r.equipment)
 		if err != nil {
 			return fmt.Errorf("invalid equipment format: %w", err)
 		}
@@ -67,61 +91,52 @@ var campsitesCmd = &cobra.Command{
 		// actually had something to report — exactly the run you cannot
 		// afford to lose.
 		var notifiers []notifications_pkg.Notifier
-		if len(notifications) > 0 {
-			notifiers, err = notifications_pkg.SetupNotifiers(notifications, appConfig)
+		if len(r.notifications) > 0 {
+			notifiers, err = notifications_pkg.SetupNotifiers(r.notifications, appConfig)
 			if err != nil {
 				return fmt.Errorf("failed to set up notifications: %w", err)
 			}
 		}
 
 		// 3. Select Provider
-		var provider interface {
-			FindCampsites(context.Context, core.SearchRequest) ([]core.AvailableCampsite, error)
-			FindCampgrounds(context.Context, core.SearchRequest) ([]core.CampgroundFacility, error)
-		}
-
-		switch providerStr {
-		case "RecreationDotGov":
-			provider = recdotgov.NewProvider()
-		case "ReserveCalifornia":
-			provider = usedirect.NewProvider("ReserveCalifornia", "https://california-rdr.prod.cali.rd12.recreation-management.tylerapp.com", "https://www.reservecalifornia.com")
-		default:
-			return fmt.Errorf("unsupported or missing provider in Go rewrite: %s", providerStr)
+		provider, _, err := providers.NewFrom(r.registry, r.provider)
+		if err != nil {
+			return err
 		}
 
 		ctx := context.Background()
 
 		// 4. Resolve Recreation Areas to Campgrounds
-		if len(recAreas) > 0 {
-			logger.Info("Resolving %d recreation area(s) to campgrounds...", len(recAreas))
-			for _, recArea := range recAreas {
+		if len(r.recAreas) > 0 {
+			logger.Info("Resolving %d recreation area(s) to r.campgrounds...", len(r.recAreas))
+			for _, recArea := range r.recAreas {
 				req := core.SearchRequest{RecreationArea: recArea}
 				facilities, err := provider.FindCampgrounds(ctx, req)
 				if err != nil {
-					return fmt.Errorf("failed to fetch campgrounds for rec-area %s: %w", recArea, err)
+					return fmt.Errorf("failed to fetch r.campgrounds for rec-area %s: %w", recArea, err)
 				}
 				for _, f := range facilities {
-					campgrounds = append(campgrounds, f.FacilityID)
+					r.campgrounds = append(r.campgrounds, f.FacilityID)
 				}
 			}
 		}
 
-		if len(campgrounds) == 0 {
-			return fmt.Errorf("no campgrounds specified. Please provide --campground or --rec-area")
+		if len(r.campgrounds) == 0 {
+			return fmt.Errorf("no r.campgrounds specified. Please provide --campground or --rec-area")
 		}
 
 		// 5. Build Request
 		req := core.SearchRequest{
 			StartDates:   parsedStarts,
 			EndDates:     parsedEnds,
-			Nights:       nights,
-			WeekendsOnly: weekendsOnly,
-			Campgrounds:  campgrounds,
-			Campsites:    campsites,
+			Nights:       r.nights,
+			WeekendsOnly: r.weekendsOnly,
+			Campgrounds:  r.campgrounds,
+			Campsites:    r.campsites,
 			Equipment:    parsedEquipment,
 		}
 
-		logger.Info("Searching across %d campgrounds", len(campgrounds))
+		logger.Info("Searching across %d r.campgrounds", len(r.campgrounds))
 
 		// 6. Fetch Raw Campsites
 		rawCampsites, err := provider.FindCampsites(ctx, req)
@@ -138,7 +153,7 @@ var campsitesCmd = &cobra.Command{
 
 		// 9. Send Notifications
 		if len(filteredCampsites) > 0 && len(notifiers) > 0 {
-			logger.Info("Dispatching notifications via %v...", notifications)
+			logger.Info("Dispatching notifications via %v...", r.notifications)
 			for _, n := range notifiers {
 				if err := n.SendCampsites(filteredCampsites); err != nil {
 					return fmt.Errorf("failed to send notification: %w", err)
@@ -148,22 +163,7 @@ var campsitesCmd = &cobra.Command{
 
 		logger.Camply("Exiting camply 👋")
 		return nil
-	},
-}
-
-func init() {
-	rootCmd.AddCommand(campsitesCmd)
-
-	campsitesCmd.Flags().StringVar(&providerStr, "provider", "RecreationDotGov", "Camping Search Provider")
-	campsitesCmd.Flags().StringSliceVar(&campgrounds, "campground", []string{}, "Campground ID(s)")
-	campsitesCmd.Flags().StringSliceVar(&recAreas, "rec-area", []string{}, "Recreation Area ID(s)")
-	campsitesCmd.Flags().StringSliceVar(&campsites, "campsite", []string{}, "Campsite ID(s)")
-	campsitesCmd.Flags().StringSliceVar(&startDates, "start-date", []string{}, "Start of Search window (YYYY-MM-DD)")
-	campsitesCmd.Flags().StringSliceVar(&endDates, "end-date", []string{}, "End of Search window (YYYY-MM-DD)")
-	campsitesCmd.Flags().StringSliceVar(&equipment, "equipment", []string{}, "Equipment filter in format 'Name,Length' (e.g. 'RV,25' or 'Tent')")
-	campsitesCmd.Flags().StringSliceVar(&notifications, "notifications", []string{}, "Notification providers to use")
-	campsitesCmd.Flags().IntVar(&nights, "nights", 1, "Minimum number of consecutive nights")
-	campsitesCmd.Flags().BoolVar(&weekendsOnly, "weekends", false, "Only search for weekend availabilities")
+	}
 }
 
 func parseDates(dates []string) ([]time.Time, error) {

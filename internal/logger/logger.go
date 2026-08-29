@@ -3,8 +3,10 @@ package logger
 import (
 	"context"
 	"fmt"
+	"io"
 	"log/slog"
 	"os"
+	"sync"
 )
 
 const LevelCamply = slog.LevelInfo + 1
@@ -13,6 +15,39 @@ var logLevel = new(slog.LevelVar)
 
 // DebugMode is bound to the global --debug flag
 var DebugMode bool
+
+// Output streams. Results are written at INFO, so they must stay on stdout and
+// warnings must not join them there — a caller piping stdout should receive
+// results only. Guarded by a mutex because providers log from goroutines.
+var (
+	outMu     sync.Mutex
+	outWriter io.Writer = os.Stdout
+	errWriter io.Writer = os.Stderr
+)
+
+// SetOutput redirects the logger's streams. Tests need this: the handler writes
+// straight to the process streams, bypassing cobra's writers, so without it
+// nothing logged during a command can be captured.
+func SetOutput(out, errOut io.Writer) {
+	outMu.Lock()
+	defer outMu.Unlock()
+	outWriter, errWriter = out, errOut
+}
+
+// ResetOutput restores the process streams.
+func ResetOutput() { SetOutput(os.Stdout, os.Stderr) }
+
+func writers() (io.Writer, io.Writer) {
+	outMu.Lock()
+	defer outMu.Unlock()
+	return outWriter, errWriter
+}
+
+// SetDebug sets the debug level without callers reaching into package state.
+func SetDebug(on bool) {
+	DebugMode = on
+	Setup()
+}
 
 func init() {
 	h := &CamplyHandler{
@@ -48,13 +83,16 @@ func (h *CamplyHandler) Handle(_ context.Context, r slog.Record) error {
 		levelStr = "ERROR   "
 	case slog.LevelDebug:
 		levelStr = "DEBUG   "
+	case slog.LevelWarn:
+		levelStr = "WARNING "
 	case LevelCamply:
 		levelStr = "CAMPLY  "
 	}
 
-	out := os.Stdout
-	if r.Level == slog.LevelError {
-		out = os.Stderr
+	stdout, stderr := writers()
+	out := stdout
+	if r.Level == slog.LevelError || r.Level == slog.LevelWarn {
+		out = stderr
 	}
 
 	_, _ = fmt.Fprintf(out, "[%s] %s %s\n", r.Time.Format("2006-01-02 15:04:05"), levelStr, r.Message)
@@ -72,6 +110,12 @@ func Info(format string, a ...interface{}) {
 // Error logs an error message
 func Error(format string, a ...interface{}) {
 	slog.Default().Log(context.Background(), slog.LevelError, fmt.Sprintf(format, a...))
+}
+
+// Warn logs a warning. It goes to stderr so it never contaminates the results
+// stream, which is written at INFO on stdout.
+func Warn(format string, a ...interface{}) {
+	slog.Default().Log(context.Background(), slog.LevelWarn, fmt.Sprintf(format, a...))
 }
 
 // Camply logs a generic camply message (like startup/exit)
