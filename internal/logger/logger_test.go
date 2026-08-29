@@ -3,6 +3,7 @@ package logger
 import (
 	"bytes"
 	"strings"
+	"sync"
 	"testing"
 )
 
@@ -63,5 +64,33 @@ func TestDebugSuppressedUnlessEnabled(t *testing.T) {
 	Debug("now visible")
 	if !strings.Contains(out.String(), "now visible") {
 		t.Fatalf("debug missing while enabled, got %q", out.String())
+	}
+}
+
+// slog may call Handle from several goroutines at once — usedirect logs from a
+// pool of five. Looking up the writer under a lock but writing outside it is a
+// real data race; this fails under -race if the lock stops covering the write.
+func TestConcurrentLoggingIsSerialized(t *testing.T) {
+	var buf bytes.Buffer
+	SetOutput(&buf, &buf)
+	t.Cleanup(ResetOutput)
+	Setup()
+
+	const goroutines = 50
+	var wg sync.WaitGroup
+	for i := 0; i < goroutines; i++ {
+		wg.Add(1)
+		go func(n int) {
+			defer wg.Done()
+			Info("message %d", n)
+			Warn("warning %d", n)
+		}(i)
+	}
+	wg.Wait()
+
+	// Every record must survive intact; interleaved writes would tear lines.
+	lines := strings.Count(buf.String(), "\n")
+	if lines != goroutines*2 {
+		t.Errorf("got %d lines, want %d — records were lost or torn", lines, goroutines*2)
 	}
 }

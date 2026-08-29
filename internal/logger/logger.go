@@ -37,10 +37,20 @@ func SetOutput(out, errOut io.Writer) {
 // ResetOutput restores the process streams.
 func ResetOutput() { SetOutput(os.Stdout, os.Stderr) }
 
-func writers() (io.Writer, io.Writer) {
+// write emits one record while holding outMu.
+//
+// slog may call Handle from several goroutines at once, so the lock has to span
+// the write itself, not just the writer lookup. Releasing it first let two
+// records interleave in the same writer — a real data race, not a theoretical
+// one: usedirect logs from a pool of five goroutines.
+func write(toErr bool, format string, a ...interface{}) {
 	outMu.Lock()
 	defer outMu.Unlock()
-	return outWriter, errWriter
+	w := outWriter
+	if toErr {
+		w = errWriter
+	}
+	_, _ = fmt.Fprintf(w, format, a...)
 }
 
 // SetDebug sets the debug level without callers reaching into package state.
@@ -89,13 +99,8 @@ func (h *CamplyHandler) Handle(_ context.Context, r slog.Record) error {
 		levelStr = "CAMPLY  "
 	}
 
-	stdout, stderr := writers()
-	out := stdout
-	if r.Level == slog.LevelError || r.Level == slog.LevelWarn {
-		out = stderr
-	}
-
-	_, _ = fmt.Fprintf(out, "[%s] %s %s\n", r.Time.Format("2006-01-02 15:04:05"), levelStr, r.Message)
+	toErr := r.Level == slog.LevelError || r.Level == slog.LevelWarn
+	write(toErr, "[%s] %s %s\n", r.Time.Format("2006-01-02 15:04:05"), levelStr, r.Message)
 	return nil
 }
 
