@@ -33,7 +33,7 @@ func newTestNotificationsCmd() *cobra.Command {
 
 			appConfig, err := config.Load()
 			if err != nil {
-				fmt.Printf("⚠️ Warning: Could not load ~/.camply config: %v\n", err)
+				_, _ = fmt.Fprintf(cmd.ErrOrStderr(), "⚠️ Warning: Could not load ~/.camply config: %v\n", err)
 			} else {
 				fmt.Println("✅ Successfully loaded ~/.camply config")
 				if appConfig.PushoverPushToken != "" {

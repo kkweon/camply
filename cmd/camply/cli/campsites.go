@@ -108,12 +108,12 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 
 		// 4. Resolve Recreation Areas to Campgrounds
 		if len(r.recAreas) > 0 {
-			logger.Info("Resolving %d recreation area(s) to r.campgrounds...", len(r.recAreas))
+			logger.Info("Resolving %d recreation area(s) to campgrounds...", len(r.recAreas))
 			for _, recArea := range r.recAreas {
 				req := core.SearchRequest{RecreationArea: recArea}
 				facilities, err := provider.FindCampgrounds(ctx, req)
 				if err != nil {
-					return fmt.Errorf("failed to fetch r.campgrounds for rec-area %s: %w", recArea, err)
+					return fmt.Errorf("failed to fetch campgrounds for rec-area %s: %w", recArea, err)
 				}
 				for _, f := range facilities {
 					r.campgrounds = append(r.campgrounds, f.FacilityID)
@@ -122,7 +122,7 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 		}
 
 		if len(r.campgrounds) == 0 {
-			return fmt.Errorf("no r.campgrounds specified. Please provide --campground or --rec-area")
+			return fmt.Errorf("no campgrounds specified. Please provide --campground or --rec-area")
 		}
 
 		// 5. Build Request
@@ -136,7 +136,7 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 			Equipment:    parsedEquipment,
 		}
 
-		logger.Info("Searching across %d r.campgrounds", len(r.campgrounds))
+		logger.Info("Searching across %d campgrounds", len(r.campgrounds))
 
 		// 6. Fetch Raw Campsites
 		rawCampsites, err := provider.FindCampsites(ctx, req)
