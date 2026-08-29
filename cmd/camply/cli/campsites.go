@@ -33,6 +33,7 @@ type campsitesRunner struct {
 	endDate        singleValue
 	equipmentTypes []string
 	campsiteTypes  []string
+	minVehicleLen  int
 	maxEquipLength int
 	allowPartial   bool
 	notifications  []string
@@ -94,6 +95,11 @@ func addSearchFlags(cmd *cobra.Command, r *campsitesRunner, d *providers.Descrip
 			"campsite-types 'STANDARD NONELECTRIC'", "campsite-types 'TENT ONLY NONELECTRIC'"))
 	f.IntVar(&r.maxEquipLength, "max-equipment-length", 0,
 		"Only sites that fit equipment this long, in feet (one value)")
+	// Only where the provider reports a vehicle length per site.
+	if d == nil || d.SupportsVehicleLength {
+		f.IntVar(&r.minVehicleLen, "min-vehicle-length", 0,
+			"Only sites that fit a vehicle at least this long, in feet (one value)")
+	}
 	f.BoolVar(&r.allowPartial, "allow-partial-match", false,
 		"Continue when an equipment filter matches nothing at some campgrounds, instead of failing")
 	f.StringSliceVar(&r.notifications, "notifications", []string{},
@@ -187,6 +193,8 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 			Campsites:     r.campsites,
 			CampsiteTypes: r.campsiteTypes,
 			Equipment:     parsedEquipment,
+
+			MinVehicleLength: r.minVehicleLen,
 		}
 
 		logger.Info("Searching across %d campgrounds", len(r.campgrounds))

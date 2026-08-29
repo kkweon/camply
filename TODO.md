@@ -175,7 +175,14 @@ not taken down by an unrelated release. Remove once the manifests have moved:
 - [ ] Singular flag aliases `--campground`, `--rec-area`, `--campsite`, `--equipment`
       (see `flagAliases` in `cmd/camply/cli/flags.go`).
 - [ ] ReserveCalifornia's synthesized `--equipment-types`. UseDirect grids carry no equipment
-      data; camply invents four names from unit category and vehicle length. The grid endpoint
-      accepts `SleepingUnitId`, `UnitCategoryId` and `MinVehicleLength` as real parameters
-      (confirmed in `camply/providers/usedirect/usedirect.py:318-326`), so those should be
-      exposed instead and the synthesis dropped.
+      data; camply invents four names from unit category and vehicle length.
+      **The obvious replacement does not work.** The Python implementation sends
+      `SleepingUnitId`, `UnitCategoryId` and `MinVehicleLength` in the grid request
+      (`camply/providers/usedirect/usedirect.py:318-326`), but the endpoint ignores all
+      three — D.L. Bliss returns the same 26 units with any value, or none. Sending a
+      parameter is not the same as the API honouring it.
+      What the grid response _does_ carry per unit: `VehicleLength`, `UnitCategoryId`,
+      `UnitTypeGroupId`, `IsAda`. `--min-vehicle-length` now filters on the first
+      client-side, and `--campsite-types` covers the second. There is no sleeping-unit
+      field anywhere in the response, so that cannot be supported at all — a
+      `--sleeping-unit` flag would accept input and do nothing.

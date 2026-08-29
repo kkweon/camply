@@ -59,6 +59,12 @@ type Descriptor struct {
 	// SupportsState reports whether --state does anything. UseDirect ignores it.
 	SupportsState bool
 
+	// SupportsVehicleLength reports whether the provider reports a usable
+	// vehicle length per site. UseDirect's grid response does; recreation.gov
+	// carries length per permitted equipment instead, covered by
+	// --max-equipment-length.
+	SupportsVehicleLength bool
+
 	// RecAreaIDHelp describes what a --rec-area value means here. The two
 	// providers use disjoint ID namespaces, so one provider's ID silently
 	// matches nothing on the other.
@@ -104,14 +110,15 @@ func descriptors() []Descriptor {
 			},
 		},
 		{
-			Key:           KeyReserveCalifornia,
-			DisplayName:   usedirect.ReserveCaliforniaName,
-			Aliases:       []string{"reserve-california", "resca"},
-			Description:   "Reserve California API",
-			Status:        StatusSupported,
-			New:           func() Provider { return usedirect.NewReserveCalifornia() },
-			SupportsState: false,
-			RecAreaIDHelp: "ReserveCalifornia Place ID, an integer (see 'camply reservecalifornia recreation-areas')",
+			Key:                   KeyReserveCalifornia,
+			DisplayName:           usedirect.ReserveCaliforniaName,
+			Aliases:               []string{"reserve-california", "resca"},
+			Description:           "Reserve California API",
+			Status:                StatusSupported,
+			New:                   func() Provider { return usedirect.NewReserveCalifornia() },
+			SupportsState:         false,
+			SupportsVehicleLength: true,
+			RecAreaIDHelp:         "ReserveCalifornia Place ID, an integer (see 'camply reservecalifornia recreation-areas')",
 			Vocabularies: func() []Vocabulary {
 				return []Vocabulary{{
 					Flag: FlagEquipmentTypes,

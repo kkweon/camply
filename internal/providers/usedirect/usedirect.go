@@ -194,6 +194,14 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 						// ReserveCalifornia format booking link: https://www.reservecalifornia.com/park/691/616
 						placeID := p.facilityToPlace[facilityID]
 						bookingURL := fmt.Sprintf("%s/park/%d/%d", p.campgroundURL, placeID, facilityID)
+						// The grid endpoint ignores MinVehicleLength in the
+						// request (verified: identical unit counts with and
+						// without it), so filter on the VehicleLength it does
+						// return per unit.
+						if req.MinVehicleLength > 0 && unit.VehicleLength < req.MinVehicleLength {
+							continue
+						}
+
 						campsiteType := p.unitCategories[unit.UnitCategoryId]
 						campsiteUseType := p.unitTypeGroups[unit.UnitTypeGroupId]
 
