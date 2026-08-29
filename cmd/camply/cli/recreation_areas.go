@@ -7,56 +7,53 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/kkweon/camply/internal/core"
-	"github.com/kkweon/camply/internal/providers/recdotgov"
-	"github.com/kkweon/camply/internal/providers/usedirect"
+	"github.com/kkweon/camply/internal/providers"
 )
 
-var (
-	raSearchStr string
-	raStateStr  string
-)
+type recAreasRunner struct {
+	registry []providers.Descriptor
 
-var recreationAreasCmd = &cobra.Command{
-	Use:   "recreation-areas",
-	Short: "Search for Recreation Areas",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		req := core.SearchRequest{
-			Query: raSearchStr,
-			State: raStateStr,
-		}
-
-		var provider interface {
-			FindRecreationAreas(context.Context, core.SearchRequest) ([]core.RecreationArea, error)
-		}
-
-		switch providerStr {
-		case "RecreationDotGov":
-			provider = recdotgov.NewProvider()
-		case "ReserveCalifornia":
-			provider = usedirect.NewProvider("ReserveCalifornia", "https://california-rdr.prod.cali.rd12.recreation-management.tylerapp.com", "https://www.reservecalifornia.com")
-		default:
-			return fmt.Errorf("unsupported or missing provider: %s", providerStr)
-		}
-
-		fmt.Printf("🏕  Searching %s for Recreation Areas...\n", providerStr)
-
-		ctx := context.Background()
-		areas, err := provider.FindRecreationAreas(ctx, req)
-		if err != nil {
-			return fmt.Errorf("error fetching recreation areas: %w", err)
-		}
-
-		printRecreationAreasTable(areas)
-		return nil
-	},
+	provider string
+	search   string
+	state    string
 }
 
-func init() {
-	rootCmd.AddCommand(recreationAreasCmd)
+func newRecreationAreasCmd(descs []providers.Descriptor) *cobra.Command {
+	r := &recAreasRunner{registry: descs}
 
-	recreationAreasCmd.Flags().StringVar(&providerStr, "provider", "RecreationDotGov", "Camping Search Provider")
-	recreationAreasCmd.Flags().StringVar(&raSearchStr, "search", "", "Search string")
-	recreationAreasCmd.Flags().StringVar(&raStateStr, "state", "", "State abbreviation")
+	cmd := &cobra.Command{
+		Use:   "recreation-areas",
+		Short: "Search for Recreation Areas",
+		RunE:  r.run,
+	}
+
+	cmd.Flags().StringVar(&r.provider, "provider", "RecreationDotGov", "Camping Search Provider")
+	cmd.Flags().StringVar(&r.search, "search", "", "Search string")
+	cmd.Flags().StringVar(&r.state, "state", "", "State abbreviation")
+
+	return cmd
+}
+
+func (r *recAreasRunner) run(cmd *cobra.Command, _ []string) error {
+	req := core.SearchRequest{
+		Query: r.search,
+		State: r.state,
+	}
+
+	provider, desc, err := providers.NewFrom(r.registry, r.provider)
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("🏕  Searching %s for Recreation Areas...\n", desc.DisplayName)
+
+	areas, err := provider.FindRecreationAreas(context.Background(), req)
+	if err != nil {
+		return fmt.Errorf("error fetching recreation areas: %w", err)
+	}
+
+	printRecreationAreasTable(areas)
+	return nil
 }
 
 func printRecreationAreasTable(areas []core.RecreationArea) {
