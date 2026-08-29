@@ -6,7 +6,6 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-	"time"
 
 	"github.com/spf13/cobra"
 
@@ -22,16 +21,20 @@ import (
 type campsitesRunner struct {
 	registry []providers.Descriptor
 
-	provider      string
-	campgrounds   []string
-	recAreas      []string
-	campsites     []string
-	startDates    []string
-	endDates      []string
-	equipment     []string
-	notifications []string
-	nights        int
-	weekendsOnly  bool
+	provider       string
+	campgrounds    []string
+	recAreas       []string
+	campsites      []string
+	dateRanges     []string
+	startDate      singleValue
+	endDate        singleValue
+	equipmentTypes []string
+	notifications  []string
+	nights         int
+	weekendsOnly   bool
+
+	// renamedFlags records the deprecated singular spellings the user typed.
+	renamedFlags map[string]string
 }
 
 func newCampsitesCmd(descs []providers.Descriptor) *cobra.Command {
@@ -43,39 +46,58 @@ func newCampsitesCmd(descs []providers.Descriptor) *cobra.Command {
 		RunE:  r.run,
 	}
 
-	cmd.Flags().StringVar(&r.provider, "provider", "RecreationDotGov", "Camping Search Provider")
-	cmd.Flags().StringSliceVar(&r.campgrounds, "campground", []string{}, "Campground ID(s)")
-	cmd.Flags().StringSliceVar(&r.recAreas, "rec-area", []string{}, "Recreation Area ID(s)")
-	cmd.Flags().StringSliceVar(&r.campsites, "campsite", []string{}, "Campsite ID(s)")
-	cmd.Flags().StringSliceVar(&r.startDates, "start-date", []string{}, "Start of Search window (YYYY-MM-DD)")
-	cmd.Flags().StringSliceVar(&r.endDates, "end-date", []string{}, "End of Search window (YYYY-MM-DD)")
-	cmd.Flags().StringSliceVar(&r.equipment, "equipment", []string{}, "Equipment filter in format 'Name,Length' (e.g. 'RV,25' or 'Tent')")
-	cmd.Flags().StringSliceVar(&r.notifications, "notifications", []string{}, "Notification providers to use")
-	cmd.Flags().IntVar(&r.nights, "nights", 1, "Minimum number of consecutive nights")
-	cmd.Flags().BoolVar(&r.weekendsOnly, "weekends", false, "Only search for weekend availabilities")
+	addSearchFlags(cmd, r)
 
 	return cmd
+}
+
+// addSearchFlags registers the campsite-search flags on cmd.
+func addSearchFlags(cmd *cobra.Command, r *campsitesRunner) {
+	f := cmd.Flags()
+	f.SetNormalizeFunc(aliasNormalizer(&r.renamedFlags))
+
+	r.startDate = singleValue{name: "start-date", hint: multiWindowHint}
+	r.endDate = singleValue{name: "end-date", hint: multiWindowHint}
+
+	f.StringVar(&r.provider, "provider", "RecreationDotGov", "Camping Search Provider")
+	f.StringSliceVar(&r.campgrounds, "campgrounds", []string{},
+		multiHelp("Campground IDs", "campgrounds 232461,234039", "campgrounds 232461", "campgrounds 234039"))
+	f.StringSliceVar(&r.recAreas, "rec-areas", []string{},
+		multiHelp("Recreation Area IDs", "rec-areas 2991,1074", "rec-areas 2991", "rec-areas 1074"))
+	f.StringSliceVar(&r.campsites, "campsites", []string{},
+		multiHelp("Campsite IDs", "campsites 2433,2437", "campsites 2433", "campsites 2437"))
+	f.StringSliceVar(&r.dateRanges, "date-ranges", []string{},
+		multiHelp("Search windows as START:END", "date-ranges 2026-09-04:2026-09-07",
+			"date-ranges 2026-09-04:2026-09-07", "date-ranges 2026-10-01:2026-10-05"))
+	f.Var(&r.startDate, "start-date", "Start of a single search window, YYYY-MM-DD (one value)")
+	f.Var(&r.endDate, "end-date", "End of a single search window, YYYY-MM-DD (one value)")
+	f.StringSliceVar(&r.equipmentTypes, "equipment-types", []string{},
+		multiHelp("Equipment types a campsite must permit", "equipment-types Tent,'Small Tent'",
+			"equipment-types Tent", "equipment-types 'Small Tent'"))
+	f.StringSliceVar(&r.notifications, "notifications", []string{},
+		multiHelp("Notification providers", "notifications pushover,telegram",
+			"notifications pushover", "notifications telegram"))
+	f.IntVar(&r.nights, "nights", 1, "Minimum number of consecutive nights (one value)")
+	f.BoolVar(&r.weekendsOnly, "weekends", false, "Only search for weekend availabilities")
 }
 
 func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 	{
 		logger.Camply("camply, the campsite finder ⛺️")
-		// 1. Parse Dates
-		parsedStarts, err := parseDates(r.startDates)
-		if err != nil {
-			return fmt.Errorf("invalid start date: %w", err)
-		}
-		parsedEnds, err := parseDates(r.endDates)
-		if err != nil {
-			return fmt.Errorf("invalid end date: %w", err)
+
+		for _, w := range renamedFlagWarnings(r.renamedFlags) {
+			logger.Warn("%s", w)
 		}
 
-		if len(parsedStarts) != len(parsedEnds) {
-			return fmt.Errorf("number of start dates must match number of end dates")
+		// 1. Parse Dates
+		windows, err := parseDateWindows(r.dateRanges, r.startDate.value, r.endDate.value)
+		if err != nil {
+			return err
 		}
+		parsedStarts, parsedEnds := splitWindows(windows)
 
 		// 2. Parse Equipment
-		parsedEquipment, err := parseEquipment(r.equipment)
+		parsedEquipment, err := parseEquipment(r.equipmentTypes)
 		if err != nil {
 			return fmt.Errorf("invalid equipment format: %w", err)
 		}
@@ -164,18 +186,6 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 		logger.Camply("Exiting camply 👋")
 		return nil
 	}
-}
-
-func parseDates(dates []string) ([]time.Time, error) {
-	var parsed []time.Time
-	for _, d := range dates {
-		t, err := time.Parse("2006-01-02", d)
-		if err != nil {
-			return nil, err
-		}
-		parsed = append(parsed, t)
-	}
-	return parsed, nil
 }
 
 func parseEquipment(eqs []string) ([]core.Equipment, error) {

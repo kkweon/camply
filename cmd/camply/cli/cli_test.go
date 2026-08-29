@@ -7,6 +7,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
+
 	"github.com/kkweon/camply/internal/core"
 	"github.com/kkweon/camply/internal/logger"
 	"github.com/kkweon/camply/internal/providers"
@@ -212,17 +215,87 @@ func TestMissingCampgroundIsAnError(t *testing.T) {
 	}
 }
 
-// Locks the current parallel-array contract for dates ahead of the planned
-// --date-ranges replacement.
-func TestMismatchedDateCountsAreAnError(t *testing.T) {
+// A repeated --start-date used to be legal and was zipped against --end-date by
+// position, so a mismatched order silently searched the wrong windows.
+func TestRepeatedStartDateIsRejectedAndPointsAtDateRanges(t *testing.T) {
 	fake := &fakeProvider{}
 	res := runCLI(t, fakeRegistry(fake),
-		"campsites", "--provider", "fake", "--campground", "1",
+		"campsites", "--provider", "fake", "--campgrounds", "1",
 		"--start-date", "2026-09-04", "--start-date", "2026-10-01",
 		"--end-date", "2026-09-07")
 
 	if res.Err == nil {
-		t.Fatal("two start dates and one end date should be an error")
+		t.Fatal("a repeated --start-date should be rejected")
+	}
+	if !strings.Contains(res.Err.Error(), "--date-ranges") {
+		t.Errorf("error should point at --date-ranges, got: %v", res.Err)
+	}
+	if fake.campsite != 0 {
+		t.Error("the provider should not be queried when flag parsing fails")
+	}
+}
+
+// The old singular spellings must keep working: CronJobs run :latest-go with
+// imagePullPolicy Always, so an image update reaches them before anyone can
+// edit a manifest.
+func TestOldSingularFlagNamesStillWorkAndWarn(t *testing.T) {
+	fake := &fakeProvider{sites: []core.AvailableCampsite{site("A", 4)}}
+	res := runCLI(t, fakeRegistry(fake),
+		"campsites", "--provider", "fake", "--campground", "232461",
+		"--start-date", "2026-09-04", "--end-date", "2026-09-07")
+
+	if res.Err != nil {
+		t.Fatalf("old flag names should still work: %v", res.Err)
+	}
+	if fake.campsite != 1 {
+		t.Fatalf("provider queried %d times, want 1", fake.campsite)
+	}
+	if len(fake.lastReq.Campgrounds) != 1 || fake.lastReq.Campgrounds[0] != "232461" {
+		t.Errorf("--campground did not reach the request: %v", fake.lastReq.Campgrounds)
+	}
+	if !strings.Contains(res.Stderr, "--campgrounds") {
+		t.Errorf("a rename warning should name the new flag, got stderr: %q", res.Stderr)
+	}
+	// Warnings must not contaminate the results stream.
+	if strings.Contains(res.Stdout, "renamed") {
+		t.Errorf("rename warning leaked into stdout: %q", res.Stdout)
+	}
+}
+
+// Every flag that accepts several values must say so and show how. Adding a new
+// multi-value flag without that guidance fails here.
+func TestMultiValueFlagsDocumentHowToPassSeveral(t *testing.T) {
+	root := newRootCmdWithRegistry(fakeRegistry(&fakeProvider{}))
+
+	var campsites *cobra.Command
+	for _, c := range root.Commands() {
+		if c.Name() == "campsites" {
+			campsites = c
+		}
+	}
+	if campsites == nil {
+		t.Fatal("campsites command not found")
+	}
+
+	campsites.Flags().VisitAll(func(f *pflag.Flag) {
+		switch f.Value.Type() {
+		case "stringSlice":
+			if !strings.Contains(f.Usage, "several allowed") {
+				t.Errorf("--%s takes several values but does not say so", f.Name)
+			}
+			if !strings.Contains(f.Usage, "comma-separated") || !strings.Contains(f.Usage, "repeated") {
+				t.Errorf("--%s does not show both ways to pass several values", f.Name)
+			}
+		case "int", "string", "bool":
+			if strings.Contains(f.Usage, "several allowed") {
+				t.Errorf("--%s takes one value but claims several", f.Name)
+			}
+		}
+	})
+
+	// The singular name must not appear as its own flag; it is an alias.
+	if f := campsites.Flags().Lookup("nights"); f == nil || !strings.Contains(f.Usage, "one value") {
+		t.Error("--nights is plural but takes one value; its help must say so")
 	}
 }
 
