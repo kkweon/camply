@@ -9,6 +9,47 @@ These options apply to almost all commands.
 - `--provider [TEXT]`: Camping Search Provider. Defaults to 'RecreationDotGov'. Valid options are typically listed by the `providers` command.
 - `--debug/--no-debug`: Enable extra debugging output (verbose logging).
 
+## Go CLI Command Structure
+
+The Go rewrite deliberately diverges from the Python CLI here. This is a
+documented decision, not drift.
+
+Python takes `--provider` on a single `campsites` command. The Go CLI puts the
+provider first:
+
+```
+camply recdotgov campsites --campgrounds 232461 --date-ranges 2026-09-04:2026-09-07
+camply reservecalifornia campsites --campgrounds 453 --equipment-types Vehicle
+```
+
+**Why.** `--provider` on one command makes every flag look applicable to every
+provider, and they are not. A ReserveCalifornia equipment name passed to
+RecreationDotGov matched nothing at four of six campgrounds and the job reported
+"0 New Campsites Found" for weeks, indistinguishable from a full campground.
+With the provider as the subcommand, a flag its API cannot act on is never
+registered — `--state` exists on `recdotgov` and not on `reservecalifornia`,
+because UseDirect has no state filter.
+
+Other deliberate differences from the Python CLI:
+
+- **Multi-value flags are plural** (`--campgrounds`, `--rec-areas`,
+  `--campsite-types`) and accept both comma-separated and repeated forms.
+- **`--date-ranges START:END`** replaces the `--start-date`/`--end-date` pair.
+  Those were parallel slices zipped by position, so a mismatched order passed
+  validation and silently searched the wrong windows. `--start-date` and
+  `--end-date` remain for a single window and reject a second occurrence.
+- **`--equipment-types` and `--max-equipment-length`** replace the `Name,Length`
+  syntax, which never worked: the flag is a slice, so the comma split first and
+  the length arrived as a second equipment name.
+- **`--campsite-types`** has no Python equivalent. It filters on the
+  `campsite_type` field, which is what separates drive-in sites from walk-in
+  ones; equipment cannot, because a `WALK TO` site still permits a tent.
+- **Values are validated against per-provider vocabularies**, and a filter that
+  drops a whole campground is an error rather than an empty result.
+
+The Python-facing flag names remain accepted as aliases with a deprecation
+warning, as do the top-level commands.
+
 ## Core Commands
 
 ### 1. `campsites`

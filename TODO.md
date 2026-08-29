@@ -8,7 +8,7 @@ there are no numbers to renumber. References use `file:line`.
 
 ## 🔴 Critical
 
-- [ ] **`--campsite` flag is silently ignored**
+- [x] **`--campsite` flag is silently ignored** — fixed; the flag is now `--campsites` and `core.Filter` honours it.
   - `cmd/camply/cli/campsites.go:105` sets `req.Campsites`, but nothing reads it (no
     provider, no filter). Today a `--campsite` search returns the whole campground.
   - PRD.md:25 requires limiting results strictly to those sites. Python resolves
@@ -92,9 +92,10 @@ there are no numbers to renumber. References use `file:line`.
 - [ ] **Test data field mismatch** — `metadata_response.json` uses `parent_name` but the
       struct reads `json:"asset_name"` (`metadata.go:77`) → `Unknown Campground` in test output;
       facility-name hydration is effectively untested.
-- [ ] **Provider construction duplicated** across `campsites.go:68-75`,
-      `campgrounds.go:38-45`, `recreation_areas.go:32-39` with a repeated hardcoded URL literal.
-      Add a `providers.New(name)` factory.
+- [x] **Provider construction duplicated** — done. `internal/providers/registry.go` holds
+      the descriptors and `providers.New(name)`; the ReserveCalifornia URLs moved to
+      `usedirect.NewReserveCalifornia`. The registry also carries per-provider capability
+      metadata, so each provider's commands only register flags its API can act on.
 - [ ] **`map[string]interface{}` in notifications** (`notifications.go:84,131`)
       contradicts `GEMINI.md:87`. Use typed payload structs.
 - [ ] **Inconsistent logging** — providers and notifications use raw `fmt.Printf`/`fmt.Println`
@@ -161,3 +162,20 @@ there are no numbers to renumber. References use `file:line`.
       "doesn't dedupe raw input" item above.
 - [ ] Add a recdotgov facility-name hydration assertion once the `asset_name`/`parent_name`
       mismatch is fixed — covers the "Test data field mismatch" item above.
+
+---
+
+## 🗓 Deprecation timeline
+
+Kept working so the CronJobs — which run `:latest-go` with `imagePullPolicy: Always` — are
+not taken down by an unrelated release. Remove once the manifests have moved:
+
+- [ ] Top-level `campsites` / `campgrounds` / `recreation-areas` (see `cmd/camply/cli/legacy.go`).
+      Superseded by `camply <provider> <command>`. They print the equivalent new command.
+- [ ] Singular flag aliases `--campground`, `--rec-area`, `--campsite`, `--equipment`
+      (see `flagAliases` in `cmd/camply/cli/flags.go`).
+- [ ] ReserveCalifornia's synthesized `--equipment-types`. UseDirect grids carry no equipment
+      data; camply invents four names from unit category and vehicle length. The grid endpoint
+      accepts `SleepingUnitId`, `UnitCategoryId` and `MinVehicleLength` as real parameters
+      (confirmed in `camply/providers/usedirect/usedirect.py:318-326`), so those should be
+      exposed instead and the synthesis dropped.
