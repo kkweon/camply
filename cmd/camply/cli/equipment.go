@@ -15,6 +15,19 @@ import (
 // The length used to be embedded as "Name,Length", which never worked: the flag
 // is a string slice, so pflag split on the comma first and "25" arrived as a
 // second equipment name. The constraint is its own flag now.
+// A length with nothing to apply it to is silently dropped: with no equipment
+// terms, Filter.Apply skips equipment entirely and the constraint never runs.
+// That is the same class of quiet failure this change exists to remove.
+func validateEquipmentLength(names []string, maxLength int) error {
+	if maxLength > 0 && len(names) == 0 {
+		return fmt.Errorf(
+			"--max-equipment-length has no effect without --%s; it constrains which "+
+				"equipment types are acceptable.\n    --%s Tent --max-equipment-length %d",
+			providers.FlagEquipmentTypes, providers.FlagEquipmentTypes, maxLength)
+	}
+	return nil
+}
+
 func buildEquipmentFilter(names []string, maxLength int) []core.Equipment {
 	out := make([]core.Equipment, 0, len(names))
 	for _, n := range names {
@@ -59,7 +72,9 @@ func validateEquipmentTypes(names []string, d providers.Descriptor, registry []p
 	for _, raw := range names {
 		name := strings.TrimSpace(raw)
 		if name == "" {
-			continue
+			// An empty term matches nothing and would be reported later as a
+			// mysterious miss. Reject it where the cause is still obvious.
+			return fmt.Errorf("--%s cannot contain an empty value", providers.FlagEquipmentTypes)
 		}
 		if containsFold(vocab.Values, name) {
 			continue
