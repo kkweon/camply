@@ -210,7 +210,7 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 						logger.Debug("Evaluating campsite: %s (Type: %s, UseType: %s, VehicleLength: %d)", unit.Name, campsiteType, campsiteUseType, unit.VehicleLength)
 						if strings.Contains(lowerUseType, "tent") || strings.Contains(lowerUseType, "camp") || strings.Contains(lowerUseType, "site") || strings.Contains(lowerUseType, "hook up") || strings.Contains(lowerUseType, "primitive") || unit.VehicleLength == 0 {
 							permittedEquipment = append(permittedEquipment, core.Equipment{
-								EquipmentName: "Tent",
+								EquipmentName: EquipmentTent,
 								MaxLength:     0,
 							})
 						}
@@ -227,13 +227,13 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 						// Map raw Vehicle Lengths natively into the struct
 						if unit.VehicleLength > 0 && driveIn {
 							permittedEquipment = append(permittedEquipment, core.Equipment{
-								EquipmentName: "RV",
+								EquipmentName: EquipmentRV,
 								MaxLength:     unit.VehicleLength,
 							}, core.Equipment{
-								EquipmentName: "Trailer",
+								EquipmentName: EquipmentTrailer,
 								MaxLength:     unit.VehicleLength,
 							}, core.Equipment{
-								EquipmentName: "Vehicle",
+								EquipmentName: EquipmentVehicle,
 								MaxLength:     unit.VehicleLength,
 							})
 						}

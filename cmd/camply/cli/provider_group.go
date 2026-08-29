@@ -1,6 +1,8 @@
 package cli
 
 import (
+	"strings"
+
 	"github.com/spf13/cobra"
 
 	"github.com/kkweon/camply/internal/providers"
@@ -13,7 +15,7 @@ import (
 // nothing for the chosen provider is never registered, so it cannot be passed
 // by mistake. A ReserveCalifornia equipment name reaching RecreationDotGov is
 // what silently discarded 423 of 667 campsites.
-func newProviderGroupCmd(d providers.Descriptor) *cobra.Command {
+func newProviderGroupCmd(d providers.Descriptor, registry []providers.Descriptor) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     string(d.Key),
 		Aliases: append([]string{d.DisplayName}, d.Aliases...),
@@ -21,7 +23,7 @@ func newProviderGroupCmd(d providers.Descriptor) *cobra.Command {
 	}
 
 	cmd.AddCommand(
-		newProviderCampsitesCmd(d),
+		newProviderCampsitesCmd(d, registry),
 		newProviderCampgroundsCmd(d),
 		newProviderRecreationAreasCmd(d),
 	)
@@ -37,4 +39,21 @@ func recAreaDesc(d *providers.Descriptor) string {
 		return "Recreation Area IDs"
 	}
 	return "Recreation Area IDs — " + d.RecAreaIDHelp
+}
+
+// equipmentHelp describes --equipment-types for one provider, listing the
+// closed vocabularies in full so the accepted values are visible in --help.
+func equipmentHelp(d *providers.Descriptor) string {
+	base := "Equipment types a campsite must permit"
+	if d == nil {
+		return base
+	}
+	v, ok := providers.LookupVocabulary(*d, providers.FlagEquipmentTypes)
+	if !ok {
+		return base
+	}
+	if v.Closed {
+		return base + " — one of: " + strings.Join(v.Values, ", ")
+	}
+	return base + " — varies by campground; " + v.Source
 }

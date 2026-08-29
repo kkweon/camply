@@ -48,7 +48,7 @@ func newRootCmdWithRegistry(descs []providers.Descriptor) *cobra.Command {
 	// chosen provider is never registered.
 	for _, d := range descs {
 		if d.Status == providers.StatusSupported {
-			root.AddCommand(newProviderGroupCmd(d))
+			root.AddCommand(newProviderGroupCmd(d, descs))
 		}
 	}
 
