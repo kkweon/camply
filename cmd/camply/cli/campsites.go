@@ -119,6 +119,9 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 		if err != nil {
 			return err
 		}
+		if err := validateEquipmentLength(r.equipmentTypes, r.maxEquipLength); err != nil {
+			return err
+		}
 		if err := validateEquipmentTypes(r.equipmentTypes, desc, r.crossProviderRegistry()); err != nil {
 			return err
 		}

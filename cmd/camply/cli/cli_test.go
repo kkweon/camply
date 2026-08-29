@@ -664,3 +664,36 @@ func TestEquipmentLengthIsItsOwnFlag(t *testing.T) {
 		t.Errorf("equipment = %+v, want {RV 25}", got)
 	}
 }
+
+// A length with no equipment types is silently dropped: Filter.Apply skips
+// equipment entirely when there are no terms, so the constraint never runs.
+func TestMaxEquipmentLengthWithoutTypesIsRejected(t *testing.T) {
+	fake := &fakeProvider{}
+	res := runCLI(t, fakeRegistry(fake),
+		"fake", "campsites", "--campgrounds", "1",
+		"--date-ranges", "2026-09-04:2026-09-07", "--max-equipment-length", "30")
+
+	if res.Err == nil {
+		t.Fatal("--max-equipment-length alone should be rejected, not silently ignored")
+	}
+	if !strings.Contains(res.Err.Error(), "--equipment-types") {
+		t.Errorf("error should name the flag it needs, got: %v", res.Err)
+	}
+	if fake.campsite != 0 {
+		t.Error("the provider should not be queried when the filter cannot work")
+	}
+}
+
+func TestEmptyEquipmentValueIsRejected(t *testing.T) {
+	fake := &fakeProvider{}
+	res := runCLI(t, fakeRegistry(fake),
+		"fake", "campsites", "--campgrounds", "1",
+		"--date-ranges", "2026-09-04:2026-09-07", "--equipment-types", "Tent,")
+
+	if res.Err == nil {
+		t.Fatal("an empty equipment value should be rejected")
+	}
+	if !strings.Contains(res.Err.Error(), "empty value") {
+		t.Errorf("error should say the value is empty, got: %v", res.Err)
+	}
+}
