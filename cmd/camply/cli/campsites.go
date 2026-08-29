@@ -21,6 +21,11 @@ import (
 type campsitesRunner struct {
 	registry []providers.Descriptor
 
+	// desc is set when the command already belongs to a provider
+	// (camply recdotgov campsites). It is nil on the deprecated top-level
+	// command, which resolves the provider from --provider instead.
+	desc *providers.Descriptor
+
 	provider       string
 	campgrounds    []string
 	recAreas       []string
@@ -37,33 +42,39 @@ type campsitesRunner struct {
 	renamedFlags map[string]string
 }
 
-func newCampsitesCmd(descs []providers.Descriptor) *cobra.Command {
-	r := &campsitesRunner{registry: descs}
+// newProviderCampsitesCmd builds `camply <provider> campsites`, bound to one
+// provider so a flag that means nothing for it is never offered.
+func newProviderCampsitesCmd(d providers.Descriptor) *cobra.Command {
+	r := &campsitesRunner{desc: &d}
 
 	cmd := &cobra.Command{
 		Use:   "campsites",
-		Short: "Find available campsites",
+		Short: "Find available campsites on " + d.DisplayName,
 		RunE:  r.run,
 	}
 
-	addSearchFlags(cmd, r)
+	addSearchFlags(cmd, r, &d)
 
 	return cmd
 }
 
-// addSearchFlags registers the campsite-search flags on cmd.
-func addSearchFlags(cmd *cobra.Command, r *campsitesRunner) {
+// addSearchFlags registers the campsite-search flags on cmd. A nil descriptor
+// means the deprecated top-level command, which must accept the union of every
+// provider's flags plus --provider.
+func addSearchFlags(cmd *cobra.Command, r *campsitesRunner, d *providers.Descriptor) {
 	f := cmd.Flags()
 	f.SetNormalizeFunc(aliasNormalizer(&r.renamedFlags))
 
 	r.startDate = singleValue{name: "start-date", hint: multiWindowHint}
 	r.endDate = singleValue{name: "end-date", hint: multiWindowHint}
 
-	f.StringVar(&r.provider, "provider", "RecreationDotGov", "Camping Search Provider")
+	if d == nil {
+		f.StringVar(&r.provider, "provider", "RecreationDotGov", "Camping Search Provider")
+	}
 	f.StringSliceVar(&r.campgrounds, "campgrounds", []string{},
 		multiHelp("Campground IDs", "campgrounds 232461,234039", "campgrounds 232461", "campgrounds 234039"))
 	f.StringSliceVar(&r.recAreas, "rec-areas", []string{},
-		multiHelp("Recreation Area IDs", "rec-areas 2991,1074", "rec-areas 2991", "rec-areas 1074"))
+		multiHelp(recAreaDesc(d), "rec-areas 2991,1074", "rec-areas 2991", "rec-areas 1074"))
 	f.StringSliceVar(&r.campsites, "campsites", []string{},
 		multiHelp("Campsite IDs", "campsites 2433,2437", "campsites 2433", "campsites 2437"))
 	f.StringSliceVar(&r.dateRanges, "date-ranges", []string{},
@@ -121,7 +132,7 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 		}
 
 		// 3. Select Provider
-		provider, _, err := providers.NewFrom(r.registry, r.provider)
+		provider, _, err := r.resolveProvider()
 		if err != nil {
 			return err
 		}
@@ -254,4 +265,13 @@ func printTable(campsites []core.AvailableCampsite) {
 			}
 		}
 	}
+}
+
+// resolveProvider returns the provider this command is bound to, or resolves
+// --provider on the deprecated top-level command.
+func (r *campsitesRunner) resolveProvider() (providers.Provider, providers.Descriptor, error) {
+	if r.desc != nil {
+		return r.desc.New(), *r.desc, nil
+	}
+	return providers.NewFrom(r.registry, r.provider)
 }

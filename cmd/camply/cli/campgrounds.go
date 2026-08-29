@@ -15,6 +15,7 @@ import (
 // constructor allocates its own, so sibling commands cannot share state.
 type campgroundsRunner struct {
 	registry []providers.Descriptor
+	desc     *providers.Descriptor
 
 	provider    string
 	search      string
@@ -26,29 +27,40 @@ type campgroundsRunner struct {
 	renamedFlags map[string]string
 }
 
-func newCampgroundsCmd(descs []providers.Descriptor) *cobra.Command {
-	r := &campgroundsRunner{registry: descs}
+// newProviderCampgroundsCmd builds `camply <provider> campgrounds`.
+func newProviderCampgroundsCmd(d providers.Descriptor) *cobra.Command {
+	r := &campgroundsRunner{desc: &d}
 
 	cmd := &cobra.Command{
 		Use:   "campgrounds",
-		Short: "Search for Campgrounds",
+		Short: "Search for campgrounds on " + d.DisplayName,
 		RunE:  r.run,
 	}
 
+	addCampgroundLookupFlags(cmd, r, &d)
+
+	return cmd
+}
+
+func addCampgroundLookupFlags(cmd *cobra.Command, r *campgroundsRunner, d *providers.Descriptor) {
 	f := cmd.Flags()
 	f.SetNormalizeFunc(aliasNormalizer(&r.renamedFlags))
 
-	f.StringVar(&r.provider, "provider", "RecreationDotGov", "Camping Search Provider")
+	if d == nil {
+		f.StringVar(&r.provider, "provider", "RecreationDotGov", "Camping Search Provider")
+	}
 	f.StringVar(&r.search, "search", "", "Search string (one value)")
-	f.StringVar(&r.state, "state", "", "State abbreviation (one value)")
+	// --state only exists where the API can act on it. UseDirect ignores it, so
+	// offering the flag there would accept input and quietly drop it.
+	if d == nil || d.SupportsState {
+		f.StringVar(&r.state, "state", "", "State abbreviation (one value)")
+	}
 	f.StringSliceVar(&r.recAreas, "rec-areas", []string{},
-		multiHelp("Recreation Area IDs", "rec-areas 2991,1074", "rec-areas 2991", "rec-areas 1074"))
+		multiHelp(recAreaDesc(d), "rec-areas 2991,1074", "rec-areas 2991", "rec-areas 1074"))
 	f.StringSliceVar(&r.campgrounds, "campgrounds", []string{},
 		multiHelp("Campground IDs", "campgrounds 232461,234039", "campgrounds 232461", "campgrounds 234039"))
 	f.StringSliceVar(&r.campsites, "campsites", []string{},
 		multiHelp("Campsite IDs", "campsites 2433,2437", "campsites 2433", "campsites 2437"))
-
-	return cmd
 }
 
 func (r *campgroundsRunner) run(cmd *cobra.Command, _ []string) error {
@@ -56,7 +68,7 @@ func (r *campgroundsRunner) run(cmd *cobra.Command, _ []string) error {
 		logger.Warn("%s", w)
 	}
 
-	provider, desc, err := providers.NewFrom(r.registry, r.provider)
+	provider, desc, err := r.resolveProvider()
 	if err != nil {
 		return err
 	}
@@ -112,4 +124,11 @@ func printCampgroundsTable(facilities []core.CampgroundFacility) {
 	}
 
 	fmt.Printf("\n✅ Found %d matching campground(s)!\n", len(facilities))
+}
+
+func (r *campgroundsRunner) resolveProvider() (providers.Provider, providers.Descriptor, error) {
+	if r.desc != nil {
+		return r.desc.New(), *r.desc, nil
+	}
+	return providers.NewFrom(r.registry, r.provider)
 }

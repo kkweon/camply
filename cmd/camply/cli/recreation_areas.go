@@ -12,26 +12,38 @@ import (
 
 type recAreasRunner struct {
 	registry []providers.Descriptor
+	desc     *providers.Descriptor
 
 	provider string
 	search   string
 	state    string
 }
 
-func newRecreationAreasCmd(descs []providers.Descriptor) *cobra.Command {
-	r := &recAreasRunner{registry: descs}
+// newProviderRecreationAreasCmd builds `camply <provider> recreation-areas`.
+func newProviderRecreationAreasCmd(d providers.Descriptor) *cobra.Command {
+	r := &recAreasRunner{desc: &d}
 
 	cmd := &cobra.Command{
 		Use:   "recreation-areas",
-		Short: "Search for Recreation Areas",
+		Short: "Search for recreation areas on " + d.DisplayName,
 		RunE:  r.run,
 	}
 
-	cmd.Flags().StringVar(&r.provider, "provider", "RecreationDotGov", "Camping Search Provider")
-	cmd.Flags().StringVar(&r.search, "search", "", "Search string")
-	cmd.Flags().StringVar(&r.state, "state", "", "State abbreviation")
+	addRecAreaLookupFlags(cmd, r, &d)
 
 	return cmd
+}
+
+func addRecAreaLookupFlags(cmd *cobra.Command, r *recAreasRunner, d *providers.Descriptor) {
+	f := cmd.Flags()
+
+	if d == nil {
+		f.StringVar(&r.provider, "provider", "RecreationDotGov", "Camping Search Provider")
+	}
+	f.StringVar(&r.search, "search", "", "Search string (one value)")
+	if d == nil || d.SupportsState {
+		f.StringVar(&r.state, "state", "", "State abbreviation (one value)")
+	}
 }
 
 func (r *recAreasRunner) run(cmd *cobra.Command, _ []string) error {
@@ -40,7 +52,7 @@ func (r *recAreasRunner) run(cmd *cobra.Command, _ []string) error {
 		State: r.state,
 	}
 
-	provider, desc, err := providers.NewFrom(r.registry, r.provider)
+	provider, desc, err := r.resolveProvider()
 	if err != nil {
 		return err
 	}
@@ -68,4 +80,11 @@ func printRecreationAreasTable(areas []core.RecreationArea) {
 	}
 
 	fmt.Printf("\n✅ Found %d matching recreation area(s)!\n", len(areas))
+}
+
+func (r *recAreasRunner) resolveProvider() (providers.Provider, providers.Descriptor, error) {
+	if r.desc != nil {
+		return r.desc.New(), *r.desc, nil
+	}
+	return providers.NewFrom(r.registry, r.provider)
 }
