@@ -8,8 +8,13 @@ import (
 )
 
 // newRootCmd builds the command tree against the real provider registry.
-func newRootCmd() *cobra.Command {
-	return newRootCmdWithRegistry(providers.Descriptors())
+//
+// The version is set here rather than inside newRootCmdWithRegistry because it
+// is release metadata, not part of the command surface the registry drives.
+func newRootCmd(version string) *cobra.Command {
+	root := newRootCmdWithRegistry(providers.Descriptors())
+	root.Version = version
+	return root
 }
 
 // newRootCmdWithRegistry builds a complete, independent command tree.
@@ -68,6 +73,6 @@ func newRootCmdWithRegistry(descs []providers.Descriptor) *cobra.Command {
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
-func Execute() error {
-	return newRootCmd().Execute()
+func Execute(version string) error {
+	return newRootCmd(version).Execute()
 }
