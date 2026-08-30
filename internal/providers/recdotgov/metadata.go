@@ -37,9 +37,17 @@ func (p *Provider) fetchMetadata(ctx context.Context, campgroundID string) (map[
 				})
 			}
 
+			// Access is not classified here: the rule also consults
+			// campsite_type, which only the availability response carries. The
+			// raw attributes travel to the hydrate step in recdotgov.go, where
+			// both halves are finally on one struct.
+			siteAccessRaw, maxVehicles := site.accessAttributes()
+
 			campsiteMap[site.CampsiteID] = core.AvailableCampsite{
 				PermittedEquipment: equipment,
 				FacilityName:       site.ParentName, // RecDotGov metadata sometimes brings back parent names
+				SiteAccessRaw:      siteAccessRaw,
+				MaxVehicles:        maxVehicles,
 			}
 		}
 	}
@@ -58,6 +66,26 @@ type campsiteSearchItem struct {
 	CampsiteID         string               `json:"campsite_id"`
 	ParentName         string               `json:"asset_name"`
 	PermittedEquipment []recdotgovEquipment `json:"permitted_equipment"`
+	Attributes         []recdotgovAttribute `json:"attributes"`
+}
+
+type recdotgovAttribute struct {
+	AttributeName  string `json:"attribute_name"`
+	AttributeValue string `json:"attribute_value"`
+}
+
+// accessAttributes pulls the two attributes that bear on vehicle access out of
+// the flat, per-campground attribute list.
+func (c campsiteSearchItem) accessAttributes() (siteAccess string, maxVehicles *int) {
+	for _, attr := range c.Attributes {
+		switch attr.AttributeName {
+		case attrSiteAccess:
+			siteAccess = attr.AttributeValue
+		case attrMaxNumVehicles:
+			maxVehicles = parseMaxVehicles(attr.AttributeValue)
+		}
+	}
+	return siteAccess, maxVehicles
 }
 
 type recdotgovEquipment struct {

@@ -21,6 +21,18 @@ type AvailableCampsite struct {
 	FacilityID         string
 	BookingURL         string
 	PermittedEquipment []Equipment
+
+	// SiteAccess is how the site is reached. The zero value is
+	// SiteAccessUnknown, so a provider that leaves it alone cannot be read as
+	// drive-in.
+	SiteAccess SiteAccess
+	// SiteAccessRaw is the provider's own label, kept verbatim so a value
+	// outside the known vocabulary still reaches the reader intact.
+	SiteAccessRaw string
+	// MaxVehicles is how many vehicles the site parks. It is a pointer because
+	// "zero vehicles" and "not reported" are different answers and only the
+	// first one means anything.
+	MaxVehicles *int
 }
 
 type Equipment struct {
@@ -43,9 +55,13 @@ type SearchRequest struct {
 	// MinVehicleLength filters UseDirect results on the VehicleLength its grid
 	// response reports per unit. It has no recreation.gov equivalent.
 	MinVehicleLength int
-	Equipment        []Equipment
-	Query            string
-	State            string
+	// ExcludeNoVehicleAccess drops sites proven unreachable by car. Sites whose
+	// access the provider did not report are kept, not dropped — see
+	// SiteAccess.NoVehicleAccess.
+	ExcludeNoVehicleAccess bool
+	Equipment              []Equipment
+	Query                  string
+	State                  string
 }
 
 type CampgroundFacility struct {

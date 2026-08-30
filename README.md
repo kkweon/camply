@@ -90,9 +90,23 @@ camply recdotgov campsites \
   `--allow-partial-match` to continue when an equipment filter matches at some campgrounds
   but not others.
 
-Notable filters: `--campsite-types` (what separates drive-in from walk-in),
+Notable filters: `--exclude-no-vehicle-access`, `--campsite-types`,
 `--equipment-types`, `--max-equipment-length`, `--nights`, `--weekends`, and — for
 ReserveCalifornia — `--min-vehicle-length`.
+
+### Vehicle access
+
+Every result reports how the site is reached, and anything that is not a confirmed
+drive-in site is flagged ⚠️ in the terminal and in the notification's title and body.
+This is not optional and needs no flag: `--campsite-types` cannot answer the question,
+because Zephyr Cove types all 47 of its hike-in sites `TENT ONLY NONELECTRIC` — the same
+type as its drive-in tent sites — while Lodgepole types 3 of its _drive-in_ sites
+`WALK TO`.
+
+`--exclude-no-vehicle-access` additionally drops sites **proven** unreachable by car
+(walk-in, hike-in, boat-in). Sites the provider reports no access data for are kept and
+flagged `⚠️ UNKNOWN`, never dropped: an alert you can verify with one click costs less
+than a site you never hear about.
 
 ## Providers
 

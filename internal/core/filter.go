@@ -36,10 +36,22 @@ func (f *Filter) Apply(campsites []AvailableCampsite, req SearchRequest) []Avail
 			continue
 		}
 
-		// 6. Check campsite type. Equipment cannot express this: a WALK TO site
-		// still permits a tent, so only the type separates drive-in from
-		// walk-in.
+		// 6. Check campsite type. This is the coarse cut between tent, RV and
+		// cabin. It does NOT separate drive-in from walk-in, though it was once
+		// used that way: Zephyr Cove types its hike-in sites TENT ONLY
+		// NONELECTRIC and Lodgepole types 3 drive-in sites WALK TO.
 		if len(req.CampsiteTypes) > 0 && !hasMatchingCampsiteType(site, req.CampsiteTypes) {
+			continue
+		}
+
+		// 7. Drop sites proven unreachable by car.
+		//
+		// NoVehicleAccess, not !HasVehicleAccess: a site whose access the
+		// provider never reported is kept and flagged in the alert instead. The
+		// filter is opt-in and easy to forget, so it is not allowed to be the
+		// thing that silently discards a site — that job belongs to the alert,
+		// which always says what it knows.
+		if req.ExcludeNoVehicleAccess && site.SiteAccess.NoVehicleAccess() {
 			continue
 		}
 

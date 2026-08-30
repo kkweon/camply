@@ -36,6 +36,7 @@ type campsitesRunner struct {
 	minVehicleLen  int
 	maxEquipLength int
 	allowPartial   bool
+	excludeNoVeh   bool
 	notifications  []string
 	nights         int
 	weekendsOnly   bool
@@ -100,6 +101,14 @@ func addSearchFlags(cmd *cobra.Command, r *campsitesRunner, d *providers.Descrip
 		f.IntVar(&r.minVehicleLen, "min-vehicle-length", 0,
 			"Only sites that fit a vehicle at least this long, in feet (one value)")
 	}
+	// Named for what it does, not for what remains. "--vehicle-access=drive-in"
+	// would read as a promise that every result is drive-in, but sites the
+	// provider reports nothing about are deliberately kept, and a flag whose
+	// name oversells its guarantee is how the incident happened in the first
+	// place.
+	f.BoolVar(&r.excludeNoVeh, flagExcludeNoVehicleAccess, false,
+		"Drop sites proven unreachable by car (walk-in, hike-in, boat-in). "+
+			"Sites the provider reports no access data for are kept and flagged (one value)")
 	f.BoolVar(&r.allowPartial, "allow-partial-match", false,
 		"Continue when an equipment filter matches nothing at some campgrounds, instead of failing")
 	f.StringSliceVar(&r.notifications, "notifications", []string{},
@@ -194,7 +203,8 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 			CampsiteTypes: r.campsiteTypes,
 			Equipment:     parsedEquipment,
 
-			MinVehicleLength: r.minVehicleLen,
+			MinVehicleLength:       r.minVehicleLen,
+			ExcludeNoVehicleAccess: r.excludeNoVeh,
 		}
 
 		logger.Info("Searching across %d campgrounds", len(r.campgrounds))
@@ -209,6 +219,15 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 		if err := reportEquipmentCoverage(
 			core.AnalyzeEquipment(rawCampsites, parsedEquipment),
 			parsedEquipment, desc, r.crossProviderRegistry(), r.allowPartial,
+		); err != nil {
+			return err
+		}
+
+		// 6c. Measure vehicle access before the filter acts on it, for the same
+		// reason as the equipment coverage above: a filter that removes sites
+		// without saying so is indistinguishable from a campground being full.
+		if err := reportSiteAccessCoverage(
+			core.AnalyzeSiteAccess(rawCampsites), r.excludeNoVeh, r.allowPartial,
 		); err != nil {
 			return err
 		}
@@ -275,7 +294,13 @@ func printTable(campsites []core.AvailableCampsite) {
 				if c.BookingNights > 1 {
 					nightsStr = "nights"
 				}
-				logger.Info("\t\t🔗 %s (%d %s)", c.BookingURL, c.BookingNights, nightsStr)
+				// Same marker the notification title carries, so the
+				// terminal and the phone never tell different stories.
+				if alert := c.SiteAccessAlert(); alert != "" {
+					logger.Info("\t\t🔗 %s (%d %s) %s", c.BookingURL, c.BookingNights, nightsStr, alert)
+				} else {
+					logger.Info("\t\t🔗 %s (%d %s)", c.BookingURL, c.BookingNights, nightsStr)
+				}
 			}
 		}
 	}

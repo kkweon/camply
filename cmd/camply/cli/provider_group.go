@@ -58,11 +58,15 @@ func equipmentHelp(d *providers.Descriptor) string {
 	return base + " — varies by campground; " + v.Source
 }
 
-// campsiteTypeHelp describes --campsite-types for one provider. This is the
-// field that separates drive-in sites from walk-in ones; equipment cannot,
-// because a walk-in site still permits a tent.
+// campsiteTypeHelp describes --campsite-types for one provider.
+//
+// The help text used to promise this flag separated drive-in sites from walk-in
+// ones. It does not, and saying so sent users straight into the bug: Zephyr Cove
+// types all 47 of its hike-in sites TENT ONLY NONELECTRIC. The help now points at
+// the flag that does answer that question.
 func campsiteTypeHelp(d *providers.Descriptor) string {
-	base := "Campsite types to accept — this is what separates drive-in from walk-in sites"
+	base := "Campsite types to accept (tent / RV / cabin). " +
+		"This does NOT separate drive-in from walk-in — use --" + flagExcludeNoVehicleAccess + " for that"
 	if d == nil {
 		return base
 	}

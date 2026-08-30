@@ -196,3 +196,7 @@ func multiHelp(desc, csv, repeatA, repeatB string) string {
 	return fmt.Sprintf("%s (several allowed).\ncomma-separated: --%s\nor repeated:     --%s --%s",
 		desc, csv, repeatA, repeatB)
 }
+
+// flagExcludeNoVehicleAccess is named once so the flag registration and every
+// message that tells a user to pass it cannot drift apart.
+const flagExcludeNoVehicleAccess = "exclude-no-vehicle-access"

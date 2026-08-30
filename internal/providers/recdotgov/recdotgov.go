@@ -80,7 +80,19 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 					if meta.FacilityName != "" {
 						campsites[i].FacilityName = meta.FacilityName
 					}
+					campsites[i].SiteAccessRaw = meta.SiteAccessRaw
+					campsites[i].MaxVehicles = meta.MaxVehicles
 				}
+				// Classified here rather than in either fetch: the attributes
+				// come from the metadata endpoint and campsite_type from the
+				// availability endpoint, and the rule needs both. A campsite
+				// missing from the metadata map keeps the zero value, which is
+				// SiteAccessUnknown — reported, never assumed drive-in.
+				campsites[i].SiteAccess = classifySiteAccess(
+					campsites[i].SiteAccessRaw,
+					campsites[i].MaxVehicles,
+					campsites[i].CampsiteType,
+				)
 			}
 
 			allCampsites = append(allCampsites, campsites...)

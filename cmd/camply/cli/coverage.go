@@ -114,3 +114,59 @@ func dedupe(values []string) []string {
 	}
 	return out
 }
+
+// reportSiteAccessCoverage narrates what vehicle access did to the results.
+//
+// It follows reportEquipmentCoverage's contract: counts are always reported, and
+// only one condition is fatal — a campground where every site is unreachable by
+// car, so --exclude-no-vehicle-access dropped it entirely.
+//
+// It also speaks when the flag is off. A search that returns walk-in sites and
+// says nothing about them is exactly the state that let a hike-in site half a
+// mile from the road arrive looking like a drive-in one.
+func reportSiteAccessCoverage(c core.SiteAccessCoverage, excludeNoVehicle, allowPartial bool) error {
+	if c.TotalSites == 0 {
+		return nil
+	}
+
+	if !excludeNoVehicle {
+		if c.NoVehicle > 0 {
+			logger.Info("%d of %d campsites have no vehicle access; they are included and flagged ⚠️ in results. "+
+				"Pass --%s to drop them.", c.NoVehicle, c.TotalSites, flagExcludeNoVehicleAccess)
+		}
+		return nil
+	}
+
+	logger.Info("--%s dropped %d of %d campsites with no vehicle access.",
+		flagExcludeNoVehicleAccess, c.NoVehicle, c.TotalSites)
+	if c.Unknown > 0 {
+		// Stated positively and every run: these are kept on purpose. Silently
+		// dropping them would be the same silent-loss bug this flag exists to
+		// fix, one level down.
+		logger.Info("%d campsites report no vehicle access data. They are kept and flagged ⚠️ UNKNOWN — "+
+			"verify those on the booking page.", c.Unknown)
+	}
+
+	dropped := c.FacilitiesFullyDropped()
+	if len(dropped) == 0 {
+		return nil
+	}
+
+	var b strings.Builder
+	fmt.Fprintf(&b, "--%s emptied %d of %d campground(s), so they were dropped from the search:\n",
+		flagExcludeNoVehicleAccess, len(dropped), len(c.PerFacility))
+	for _, f := range dropped {
+		label := f.FacilityName
+		if label == "" {
+			label = "campground"
+		}
+		fmt.Fprintf(&b, "    %s (#%s): all %d sites are unreachable by car\n", label, f.FacilityID, f.TotalSites)
+	}
+	report := strings.TrimRight(b.String(), "\n")
+
+	if allowPartial {
+		logger.Warn("%s", report)
+		return nil
+	}
+	return fmt.Errorf("%s\n\nTo search these campgrounds anyway, pass --allow-partial-match", report)
+}

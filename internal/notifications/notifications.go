@@ -19,13 +19,19 @@ type Notifier interface {
 
 func getExampleCampsite() core.AvailableCampsite {
 	return core.AvailableCampsite{
-		CampsiteID:         "100",
-		BookingDate:        time.Date(2023, 9, 1, 0, 0, 0, 0, time.UTC),
-		BookingEndDate:     time.Date(2023, 9, 2, 0, 0, 0, 0, time.UTC),
-		BookingNights:      1,
-		CampsiteSiteName:   "Test Campsite Name",
-		CampsiteLoopName:   "A1",
-		CampsiteType:       "Test",
+		CampsiteID:       "100",
+		BookingDate:      time.Date(2023, 9, 1, 0, 0, 0, 0, time.UTC),
+		BookingEndDate:   time.Date(2023, 9, 2, 0, 0, 0, 0, time.UTC),
+		BookingNights:    1,
+		CampsiteSiteName: "Test Campsite Name",
+		CampsiteLoopName: "A1",
+		CampsiteType:     "Test",
+		// Deliberately a walk-in example: test-notifications is what proves the
+		// warning path renders, and a drive-in sample would exercise the one
+		// case that needs no warning.
+		SiteAccess:         core.SiteAccessWalkIn,
+		SiteAccessRaw:      "Walk-In",
+		MaxVehicles:        new(int),
 		MinOccupancy:       1,
 		MaxOccupancy:       5,
 		CampsiteUseType:    "Test",
@@ -41,6 +47,12 @@ func getExampleCampsite() core.AvailableCampsite {
 // formatMessage creates a standard HTML-formatted string for the campsite
 func formatMessage(c core.AvailableCampsite) (string, string) {
 	title := fmt.Sprintf("%s | %s | %s", c.RecreationArea, c.FacilityName, c.BookingDate.Format("2006-01-02"))
+	// The title leads, and on a phone it is often all that is read before the
+	// booking link is tapped. A site that is not confirmed drive-in says so
+	// there, not only in the body.
+	if alert := c.SiteAccessAlert(); alert != "" {
+		title = alert + " | " + title
+	}
 
 	var buf bytes.Buffer
 	fmt.Fprintf(&buf, "<b>Campsite ID:</b> %s\n", c.CampsiteID)
@@ -50,6 +62,10 @@ func formatMessage(c core.AvailableCampsite) (string, string) {
 	fmt.Fprintf(&buf, "<b>Campsite Site Name:</b> %s\n", c.CampsiteSiteName)
 	fmt.Fprintf(&buf, "<b>Campsite Loop Name:</b> %s\n", c.CampsiteLoopName)
 	fmt.Fprintf(&buf, "<b>Campsite Type:</b> %s\n", c.CampsiteType)
+	// Unconditional, including the unknown case. Campsite Type alone caused the
+	// incident: Zephyr Cove's hike-in sites are typed TENT ONLY NONELECTRIC,
+	// exactly like its drive-in tent sites.
+	fmt.Fprintf(&buf, "<b>Site Access:</b> %s\n", c.SiteAccessSummary())
 	fmt.Fprintf(&buf, "<b>Campsite Occupancy:</b> %d-%d\n", c.MinOccupancy, c.MaxOccupancy)
 	fmt.Fprintf(&buf, "<b>Campsite Use Type:</b> %s\n", c.CampsiteUseType)
 	fmt.Fprintf(&buf, "<b>Availability Status:</b> %s\n", c.AvailabilityStatus)

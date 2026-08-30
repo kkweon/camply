@@ -232,6 +232,14 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 							!strings.Contains(lowerUseType, "walk") &&
 							!strings.Contains(lowerUseType, "boat")
 
+						// Reuse that same verdict for the reported access, so
+						// the alert cannot disagree with the equipment the
+						// provider advertises. UseDirect always resolves to a
+						// definite answer: if it reported Unknown here, every
+						// ReserveCalifornia alert would carry the warning label
+						// and the label would stop meaning anything.
+						siteAccess := classifySiteAccess(driveIn, campsiteType, campsiteUseType)
+
 						// Map raw Vehicle Lengths natively into the struct
 						if unit.VehicleLength > 0 && driveIn {
 							permittedEquipment = append(permittedEquipment, core.Equipment{
@@ -266,6 +274,8 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 							BookingNights:      1,
 							CampsiteType:       campsiteType,
 							CampsiteUseType:    campsiteUseType,
+							SiteAccess:         siteAccess,
+							SiteAccessRaw:      siteAccess.String(),
 							MinOccupancy:       minOcc,
 							MaxOccupancy:       maxOcc,
 							AvailabilityStatus: "Available",
