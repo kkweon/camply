@@ -9,6 +9,8 @@ TITLE: ⚠️ HIKE-IN | Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
 <b>Campsite Type:</b> TENT ONLY NONELECTRIC
 <b>Site Access:</b> ⚠️ HIKE-IN — no vehicle access (Max Vehicles: 0)
 <b>Equipment:</b> Tent, Small Tent
+<b>Accepts:</b> tent
+<b>Hookups:</b> electric: no, water: not reported, sewer: not reported
 <b>Campsite Occupancy:</b> 1-6
 <b>Campsite Use Type:</b> Overnight
 <b>Availability Status:</b> Available
@@ -17,7 +19,7 @@ TITLE: ⚠️ HIKE-IN | Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
 <b>Facility Name:</b> Zephyr Cove RV & Campground
 <b>Facility Id:</b> 10300216
 <b>Booking Link:</b> <a href='https://www.recreation.gov/camping/campsites/10300345'>https://www.recreation.gov/camping/campsites/10300345</a>
-### drive-in
+### drive-in RV site with hookups
 TITLE: Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
 <b>Campsite ID:</b> 10300345
 <b>Booking Date:</b> 2026-09-04
@@ -28,6 +30,8 @@ TITLE: Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
 <b>Campsite Type:</b> TENT ONLY NONELECTRIC
 <b>Site Access:</b> Drive-In (Max Vehicles: 2)
 <b>Equipment:</b> Tent, RV (max 30ft)
+<b>Accepts:</b> tent, RV
+<b>Hookups:</b> electric: yes (50A), water: hookup at site, sewer: no
 <b>Campsite Occupancy:</b> 1-6
 <b>Campsite Use Type:</b> Overnight
 <b>Availability Status:</b> Available
@@ -47,6 +51,8 @@ TITLE: ⚠️ UNKNOWN ACCESS | Lake Tahoe | Zephyr Cove RV & Campground | 2026-0
 <b>Campsite Type:</b> TENT ONLY NONELECTRIC
 <b>Site Access:</b> ⚠️ UNKNOWN — the provider reports no vehicle access data; verify on the booking page before reserving
 <b>Equipment:</b> Not reported
+<b>Accepts:</b> ⚠️ UNKNOWN — the provider does not say what this site accepts
+<b>Hookups:</b> electric: not reported, water: not reported, sewer: not reported
 <b>Campsite Occupancy:</b> 1-6
 <b>Campsite Use Type:</b> Overnight
 <b>Availability Status:</b> Available
@@ -55,7 +61,7 @@ TITLE: ⚠️ UNKNOWN ACCESS | Lake Tahoe | Zephyr Cove RV & Campground | 2026-0
 <b>Facility Name:</b> Zephyr Cove RV & Campground
 <b>Facility Id:</b> 10300216
 <b>Booking Link:</b> <a href='https://www.recreation.gov/camping/campsites/10300345'>https://www.recreation.gov/camping/campsites/10300345</a>
-### walk-in
+### walk-in tent site with a shared tap and a recorded distance
 TITLE: ⚠️ WALK-IN | Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
 <b>Campsite ID:</b> 10300345
 <b>Booking Date:</b> 2026-09-04
@@ -64,8 +70,10 @@ TITLE: ⚠️ WALK-IN | Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
 <b>Campsite Site Name:</b> 36
 <b>Campsite Loop Name:</b> 4
 <b>Campsite Type:</b> TENT ONLY NONELECTRIC
-<b>Site Access:</b> ⚠️ WALK-IN — no vehicle access
+<b>Site Access:</b> ⚠️ WALK-IN — no vehicle access, 39ft from parking
 <b>Equipment:</b> Not reported
+<b>Accepts:</b> tent
+<b>Hookups:</b> electric: not reported, water: shared source, sewer: not reported
 <b>Campsite Occupancy:</b> 1-6
 <b>Campsite Use Type:</b> Overnight
 <b>Availability Status:</b> Available
@@ -85,6 +93,8 @@ TITLE: ⚠️ BOAT-IN | Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
 <b>Campsite Type:</b> TENT ONLY NONELECTRIC
 <b>Site Access:</b> ⚠️ BOAT-IN — no vehicle access
 <b>Equipment:</b> Not reported
+<b>Accepts:</b> ⚠️ UNKNOWN — the provider does not say what this site accepts
+<b>Hookups:</b> electric: not reported, water: not reported, sewer: not reported
 <b>Campsite Occupancy:</b> 1-6
 <b>Campsite Use Type:</b> Overnight
 <b>Availability Status:</b> Available
@@ -104,6 +114,8 @@ TITLE: ⚠️ FERRY-IN | Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
 <b>Campsite Type:</b> TENT ONLY NONELECTRIC
 <b>Site Access:</b> ⚠️ FERRY-IN — no vehicle access
 <b>Equipment:</b> Not reported
+<b>Accepts:</b> ⚠️ UNKNOWN — the provider does not say what this site accepts
+<b>Hookups:</b> electric: not reported, water: not reported, sewer: not reported
 <b>Campsite Occupancy:</b> 1-6
 <b>Campsite Use Type:</b> Overnight
 <b>Availability Status:</b> Available
@@ -123,6 +135,8 @@ TITLE: ⚠️ NO EQUIPMENT DATA | Lake Tahoe | Zephyr Cove RV & Campground | 202
 <b>Campsite Type:</b> TENT ONLY NONELECTRIC
 <b>Site Access:</b> Drive-In (Max Vehicles: 1)
 <b>Equipment:</b> ⚠️ UNKNOWN — the provider reports no equipment data; verify on the booking page before reserving
+<b>Accepts:</b> ⚠️ UNKNOWN — the provider does not say what this site accepts
+<b>Hookups:</b> electric: not reported, water: not reported, sewer: not reported
 <b>Campsite Occupancy:</b> 1-6
 <b>Campsite Use Type:</b> Overnight
 <b>Availability Status:</b> Available

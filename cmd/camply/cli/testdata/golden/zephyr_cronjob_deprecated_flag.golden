@@ -1,4 +1,4 @@
-$ camply recdotgov campsites --campgrounds 10300216 --campsite-types STANDARD NONELECTRIC --campsite-types TENT ONLY NONELECTRIC --parking at-site --date-ranges 2026-09-04:2026-09-07 --nights 2
+$ camply recdotgov campsites --campgrounds 10300216 --campsite-types STANDARD NONELECTRIC --campsite-types TENT ONLY NONELECTRIC --exclude-no-vehicle-access --date-ranges 2026-09-04:2026-09-07 --nights 2
 
 --- stdout ---
 [TIME] CAMPLY   camply, the campsite finder ⛺️
@@ -8,3 +8,4 @@ $ camply recdotgov campsites --campgrounds 10300216 --campsite-types STANDARD NO
 [TIME] CAMPLY   Exiting camply 👋
 
 --- stderr ---
+[TIME] WARNING  --exclude-no-vehicle-access is deprecated; --parking at-site does the same thing.

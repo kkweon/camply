@@ -128,35 +128,35 @@ func dedupe(values []string) []string {
 // reportParkingCoverage narrates what parking did to the results.
 //
 // It follows reportEquipmentCoverage's contract: counts are always reported, and
-// only one condition is fatal — a campground where every site is unreachable by
-// car, so --exclude-no-vehicle-access dropped it entirely.
+// only one condition is fatal — a campground where every site needs a walk, so
+// the filter dropped it entirely.
 //
-// It also speaks when the flag is off. A search that returns walk-in sites and
-// says nothing about them is exactly the state that let a hike-in site half a
-// mile from the road arrive looking like a drive-in one.
-func reportParkingCoverage(c core.ParkingCoverage, excludeNoVehicle, allowPartial bool) error {
+// It also speaks when no parking filter was given. A search that returns walk-in
+// sites and says nothing about them is exactly the state that let a hike-in site
+// half a mile from the road arrive looking like a drive-in one.
+func reportParkingCoverage(c core.ParkingCoverage, wanted []core.Parking, allowPartial bool) error {
 	if c.TotalSites == 0 {
 		return nil
 	}
 
-	if !excludeNoVehicle {
+	if !excludesWalking(wanted) {
 		if c.RequiresWalk > 0 {
-			logger.Info("%d of the %d campsites searched have no vehicle access. --%s would "+
-				"exclude them; %s.",
-				c.RequiresWalk, c.TotalSites, flagExcludeNoVehicleAccess, flaggedInResults)
+			logger.Info("%d of the %d campsites searched need a walk from the car. --%s at-site "+
+				"would exclude them; %s.",
+				c.RequiresWalk, c.TotalSites, flagParking, flaggedInResults)
 		}
 		return nil
 	}
 
-	logger.Info("--%s excluded %d campsites with no vehicle access (of %d searched).",
-		flagExcludeNoVehicleAccess, c.RequiresWalk, c.TotalSites)
+	logger.Info("--%s %s excluded %d campsites that need a walk from the car (of %d searched).",
+		flagParking, joinParking(wanted), c.RequiresWalk, c.TotalSites)
 	if c.Unknown > 0 {
 		// Stated positively and every run: these are kept on purpose. Silently
 		// dropping them would be the same silent-loss bug this flag exists to
 		// fix, one level down.
-		logger.Info("%d campsites searched report no vehicle access data. --%s does not exclude "+
+		logger.Info("%d campsites searched report no parking data. --%s does not exclude "+
 			"them; %s UNKNOWN — verify those on the booking page.",
-			c.Unknown, flagExcludeNoVehicleAccess, flaggedInResults)
+			c.Unknown, flagParking, flaggedInResults)
 	}
 
 	dropped := c.FacilitiesFullyDropped()
@@ -165,14 +165,15 @@ func reportParkingCoverage(c core.ParkingCoverage, excludeNoVehicle, allowPartia
 	}
 
 	var b strings.Builder
-	fmt.Fprintf(&b, "--%s emptied %d of %d campground(s), so they were dropped from the search:\n",
-		flagExcludeNoVehicleAccess, len(dropped), len(c.PerFacility))
+	fmt.Fprintf(&b, "--%s %s emptied %d of %d campground(s), so they were dropped from the search:\n",
+		flagParking, joinParking(wanted), len(dropped), len(c.PerFacility))
 	for _, f := range dropped {
 		label := f.FacilityName
 		if label == "" {
 			label = "campground"
 		}
-		fmt.Fprintf(&b, "    %s (#%s): all %d sites are unreachable by car\n", label, f.FacilityID, f.TotalSites)
+		fmt.Fprintf(&b, "    %s (#%s): all %d sites need a walk from the car\n",
+			label, f.FacilityID, f.TotalSites)
 	}
 	report := strings.TrimRight(b.String(), "\n")
 
@@ -181,4 +182,27 @@ func reportParkingCoverage(c core.ParkingCoverage, excludeNoVehicle, allowPartia
 		return nil
 	}
 	return fmt.Errorf("%s\n\nTo search these campgrounds anyway, pass --allow-partial-match", report)
+}
+
+// excludesWalking reports whether the requested parking levels leave out the
+// ones that need a walk. Asking for at-site,walk excludes nothing worth
+// narrating.
+func excludesWalking(wanted []core.Parking) bool {
+	if len(wanted) == 0 {
+		return false
+	}
+	for _, w := range wanted {
+		if w.RequiresWalk() {
+			return false
+		}
+	}
+	return true
+}
+
+func joinParking(wanted []core.Parking) string {
+	parts := make([]string, 0, len(wanted))
+	for _, w := range wanted {
+		parts = append(parts, w.String())
+	}
+	return strings.Join(parts, ",")
 }

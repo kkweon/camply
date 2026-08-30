@@ -75,6 +75,10 @@ func formatMessage(a core.Availability) (string, string) {
 	// let a site through without ever matching it, and the body is where that
 	// has to be admitted.
 	fmt.Fprintf(&buf, "<b>Equipment:</b> %s\n", a.EquipmentSummary())
+	// The three axes a camper actually chooses between, which the provider's
+	// own campsite type cannot express: it has one slot and four things to say.
+	fmt.Fprintf(&buf, "<b>Accepts:</b> %s\n", a.PermitsSummary())
+	fmt.Fprintf(&buf, "<b>Hookups:</b> %s\n", a.HookupsSummary())
 	fmt.Fprintf(&buf, "<b>Campsite Occupancy:</b> %d-%d\n", a.Site.MinOccupancy, a.Site.MaxOccupancy)
 	fmt.Fprintf(&buf, "<b>Campsite Use Type:</b> %s\n", a.Site.UseType)
 	fmt.Fprintf(&buf, "<b>Availability Status:</b> %s\n", a.Status)

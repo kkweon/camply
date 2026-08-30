@@ -41,7 +41,8 @@ func (a Availability) accessLabel() string {
 func (a Availability) SiteAccessSummary() string {
 	switch {
 	case a.Site.Parking.RequiresWalk():
-		return "⚠️ " + strings.ToUpper(a.accessLabel()) + " — no vehicle access" + a.maxVehiclesSuffix()
+		return "⚠️ " + strings.ToUpper(a.accessLabel()) + " — no vehicle access" +
+			a.walkSuffix() + a.maxVehiclesSuffix()
 	case a.Site.Parking.ReachableByCar():
 		return a.accessLabel() + a.maxVehiclesSuffix()
 	default:
@@ -61,6 +62,19 @@ func (a Availability) SiteAccessAlert() string {
 		return "⚠️ UNKNOWN ACCESS"
 	}
 	return "⚠️ " + strings.ToUpper(a.accessLabel())
+}
+
+// walkSuffix reports how far the gear is carried, where the provider says.
+//
+// Only 5% of sites record it, and it is absent exactly where it matters most —
+// Zephyr Cove's half-mile is prose in a notice — so it is shown when known and
+// never filtered on. Filtering would make 95% of sites unknown and recreate the
+// silent loss this codebase spent a day removing.
+func (a Availability) walkSuffix() string {
+	if a.Site.WalkFeet == nil {
+		return ""
+	}
+	return fmt.Sprintf(", %dft from parking", *a.Site.WalkFeet)
 }
 
 func (a Availability) maxVehiclesSuffix() string {
@@ -114,4 +128,53 @@ func (a Availability) Warnings() []string {
 // WarningPrefix joins Warnings for a title, empty when there is nothing to flag.
 func (a Availability) WarningPrefix() string {
 	return strings.Join(a.Warnings(), " ")
+}
+
+// PermitsSummary is what the site accepts, in the camper's terms.
+//
+// It answers "will this take what I am bringing", which is a different question
+// from the campsite type the provider prints — a STANDARD site takes a tent and
+// an RV both, and its type says neither.
+func (a Availability) PermitsSummary() string {
+	var parts []string
+	for _, p := range []struct {
+		bit   Permitted
+		label string
+	}{
+		{PermitsTent, "tent"},
+		{PermitsRV, "RV"},
+		{PermitsCabin, "cabin"},
+	} {
+		if a.Site.Permits.Has(p.bit) {
+			parts = append(parts, p.label)
+		}
+	}
+	if len(parts) == 0 {
+		return "⚠️ UNKNOWN — the provider does not say what this site accepts"
+	}
+	return strings.Join(parts, ", ")
+}
+
+// HookupsSummary reports the utilities, naming which fact was found for water so
+// a shared tap is never reported as a hookup at the site.
+func (a Availability) HookupsSummary() string {
+	tri := func(t Tri) string {
+		switch t {
+		case TriYes:
+			return "yes"
+		case TriNo:
+			return "no"
+		default:
+			return "not reported"
+		}
+	}
+
+	parts := []string{"electric: " + tri(a.Site.Hookups.Electric)}
+	if a.Site.Amps != nil {
+		parts[0] += fmt.Sprintf(" (%dA)", *a.Site.Amps)
+	}
+	parts = append(parts,
+		"water: "+a.Site.WaterSource(),
+		"sewer: "+tri(a.Site.Hookups.Sewer))
+	return strings.Join(parts, ", ")
 }

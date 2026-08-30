@@ -114,8 +114,41 @@ func TestGolden(t *testing.T) {
 			args: []string{
 				"recdotgov", "campsites", "--campgrounds", "10300216",
 				"--campsite-types", "STANDARD NONELECTRIC", "--campsite-types", "TENT ONLY NONELECTRIC",
+				"--parking", "at-site",
+				"--date-ranges", "2026-09-04:2026-09-07", "--nights", "2",
+			},
+		},
+		{
+			// The same search on the deprecated flag, which the CronJobs still
+			// pass. The result set must match zephyr_cronjob above: mapping the
+			// old flag to at-site,walk would silently start including walk-in
+			// sites, and that is the user's call, not an upgrade's.
+			name: "zephyr_cronjob_deprecated_flag",
+			args: []string{
+				"recdotgov", "campsites", "--campgrounds", "10300216",
+				"--campsite-types", "STANDARD NONELECTRIC", "--campsite-types", "TENT ONLY NONELECTRIC",
 				"--exclude-no-vehicle-access",
 				"--date-ranges", "2026-09-04:2026-09-07", "--nights", "2",
+			},
+		},
+		{
+			// The shelter axis. A STANDARD site takes a tent, so a tent search
+			// must return it; an empty result means the camper's choice has been
+			// confused with the site's permitted set.
+			name: "zephyr_shelter_tent",
+			args: []string{
+				"recdotgov", "campsites", "--campgrounds", "10300216",
+				"--shelter", "tent",
+				"--date-ranges", "2026-09-01:2026-09-30", "--nights", "1",
+			},
+		},
+		{
+			// Hookups, at one of the two campgrounds that record them.
+			name: "meeksbay_hookups",
+			args: []string{
+				"recdotgov", "campsites", "--campgrounds", "10220612",
+				"--shelter", "rv", "--hookups", "electric,water",
+				"--date-ranges", "2026-09-01:2026-09-30", "--nights", "1",
 			},
 		},
 		{
@@ -125,7 +158,7 @@ func TestGolden(t *testing.T) {
 			args: []string{
 				"recdotgov", "campsites", "--campgrounds", "232461",
 				"--campsite-types", "STANDARD NONELECTRIC", "--campsite-types", "TENT ONLY NONELECTRIC",
-				"--exclude-no-vehicle-access",
+				"--parking", "at-site",
 				"--date-ranges", "2026-09-04:2026-09-07", "--nights", "2",
 			},
 		},
@@ -135,7 +168,7 @@ func TestGolden(t *testing.T) {
 			name: "kaspian_emptied",
 			args: []string{
 				"recdotgov", "campsites", "--campgrounds", "232875",
-				"--exclude-no-vehicle-access",
+				"--parking", "at-site",
 				"--date-ranges", "2026-09-04:2026-09-07", "--nights", "1",
 			},
 		},

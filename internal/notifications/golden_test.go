@@ -53,16 +53,28 @@ func TestMessageGolden(t *testing.T) {
 		mut  func(*core.Availability)
 	}{
 		{"the reported incident: hike-in, no vehicle access", func(a *core.Availability) {
+			// As the adapter classifies campsite 10300345: Site Access Hike-In,
+			// no vehicles, tents only, and NONELECTRIC is an explicit no.
 			a.Site.Parking, a.Site.AccessLabel, a.Site.MaxVehicles = core.ParkingNone, "Hike-In", vehicles(0)
 			a.Site.Equipment = []core.Equipment{{EquipmentName: "Tent"}, {EquipmentName: "Small Tent"}}
+			a.Site.Permits = core.PermitsTent
+			a.Site.Hookups = core.Hookups{Electric: core.TriNo}
 		}},
-		{"drive-in", func(a *core.Availability) {
+		{"drive-in RV site with hookups", func(a *core.Availability) {
+			amps := 50
 			a.Site.Parking, a.Site.AccessLabel, a.Site.MaxVehicles = core.ParkingAtSite, "Drive-In", vehicles(2)
 			a.Site.Equipment = []core.Equipment{{EquipmentName: "Tent"}, {EquipmentName: "RV", MaxLength: 30}}
+			a.Site.Permits = core.PermitsTent | core.PermitsRV
+			a.Site.Hookups = core.Hookups{Electric: core.TriYes, Water: core.TriYes, Sewer: core.TriNo}
+			a.Site.Amps = &amps
 		}},
 		{"access unknown", func(a *core.Availability) {}},
-		{"walk-in", func(a *core.Availability) {
+		{"walk-in tent site with a shared tap and a recorded distance", func(a *core.Availability) {
+			feet := 39
 			a.Site.Parking, a.Site.AccessLabel = core.ParkingWalk, "Walk-In"
+			a.Site.Permits = core.PermitsTent
+			a.Site.SharedWater = core.TriYes
+			a.Site.WalkFeet = &feet
 		}},
 		{"boat-in", func(a *core.Availability) {
 			a.Site.Parking, a.Site.AccessLabel = core.ParkingNone, "Boat-In"

@@ -137,3 +137,69 @@ func (p Parking) RequiresWalk() bool { return p == ParkingWalk || p == ParkingNo
 // the campground is SharedWater on Site, deliberately not folded in here: for
 // an RV they are different things.
 type Hookups struct{ Electric, Water, Sewer Tri }
+
+// Hookup names one utility a search can require.
+type Hookup int
+
+const (
+	HookupElectric Hookup = iota
+	HookupWater
+	HookupSewer
+)
+
+func (h Hookup) String() string {
+	switch h {
+	case HookupWater:
+		return "water"
+	case HookupSewer:
+		return "sewer"
+	default:
+		return "electric"
+	}
+}
+
+// Satisfies reports whether a site meets one requested hookup.
+//
+// Unknown counts as satisfied, for the same reason everywhere else here: a
+// provider that said nothing has not said no. Hookups are recorded per
+// campground rather than per site — the two Tahoe resorts record them and the
+// four public campgrounds record none — so dropping unknowns would silently
+// remove whole campgrounds from a search.
+//
+// Water is the one axis whose meaning depends on the search: for an RV or a
+// cabin it is a pipe at the site, and for a tent a shared tap counts too. The
+// rule keys off the camper's own --shelter rather than off the site, because a
+// site that permits both a tent and an RV has no answer to "which kind of camper
+// is this" — only the camper does.
+func (s *Site) Satisfies(h Hookup, shelter Shelter) bool {
+	switch h {
+	case HookupElectric:
+		return s.Hookups.Electric != TriNo
+	case HookupSewer:
+		return s.Hookups.Sewer != TriNo
+	case HookupWater:
+		if s.Hookups.Water == TriYes {
+			return true
+		}
+		if shelter == ShelterRV || shelter == ShelterCabin {
+			return s.Hookups.Water != TriNo
+		}
+		return s.Hookups.Water != TriNo || s.SharedWater != TriNo
+	}
+	return true
+}
+
+// WaterSource names which fact satisfied a water requirement, so an alert never
+// says a bare "water" when what it found was a shared tap.
+func (s *Site) WaterSource() string {
+	switch {
+	case s.Hookups.Water == TriYes:
+		return "hookup at site"
+	case s.SharedWater == TriYes:
+		return "shared source"
+	case s.Hookups.Water == TriNo:
+		return "no hookup"
+	default:
+		return "not reported"
+	}
+}

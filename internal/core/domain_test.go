@@ -208,10 +208,9 @@ func TestAnalyzeParking(t *testing.T) {
 	}
 }
 
-// TestFilterExcludeNoVehicleAccess is the decision this feature turns on: the
-// filter removes only what is proven, and never a site the provider said nothing
-// about.
-func TestFilterExcludeNoVehicleAccess(t *testing.T) {
+// TestFilterParking is the decision this feature turns on: the filter removes
+// only what is proven, and never a site the provider said nothing about.
+func TestFilterParking(t *testing.T) {
 	tests := []struct {
 		name       string
 		parking    Parking
@@ -234,7 +233,7 @@ func TestFilterExcludeNoVehicleAccess(t *testing.T) {
 				t.Errorf("filter off: kept = %d, want 1", len(got))
 			}
 
-			on := f.Apply([]Availability{booking}, SearchRequest{Nights: 1, ExcludeNoVehicleAccess: true})
+			on := f.Apply([]Availability{booking}, SearchRequest{Nights: 1, Parking: []Parking{ParkingAtSite}})
 			if got := len(on) == 1; got != tt.wantKeptOn {
 				t.Errorf("filter on: kept = %v, want %v", got, tt.wantKeptOn)
 			}
@@ -257,8 +256,137 @@ func TestFilterZephyrCoveIncident(t *testing.T) {
 		t.Fatalf("campsite-types alone should still pass this site, got %d results", len(got))
 	}
 
-	req.ExcludeNoVehicleAccess = true
+	req.Parking = []Parking{ParkingAtSite}
 	if got := f.Apply([]Availability{booking}, req); len(got) != 0 {
 		t.Errorf("expected the hike-in site to be dropped, got %d results", len(got))
+	}
+}
+
+// TestFilterShelterIsAChoiceAgainstASet is the test that catches the modelling
+// mistake: a STANDARD site takes a tent, so a tent search must return it.
+func TestFilterShelterIsAChoiceAgainstASet(t *testing.T) {
+	mk := func(id string, permits Permitted) Availability {
+		a := night(id, "f1", day(2026, 9, 4))
+		a.Site.Permits = permits
+		return a
+	}
+	sites := []Availability{
+		mk("standard", PermitsTent|PermitsRV),
+		mk("rv-only", PermitsRV),
+		mk("tent-only", PermitsTent),
+		mk("unknown", PermittedUnknown),
+	}
+
+	got := func(s Shelter) map[string]bool {
+		out := map[string]bool{}
+		for _, a := range (&Filter{}).Apply(sites, SearchRequest{Nights: 1, Shelter: s}) {
+			out[a.Site.ID] = true
+		}
+		return out
+	}
+
+	tent := got(ShelterTent)
+	if !tent["standard"] {
+		t.Error("a STANDARD site takes a tent; excluding it hides 264 sites at the campgrounds measured")
+	}
+	if tent["rv-only"] {
+		t.Error("an RV-only site must not reach a tent camper")
+	}
+	if !tent["unknown"] {
+		t.Error("a site whose permitted set is unknown must be kept, not dropped")
+	}
+
+	rv := got(ShelterRV)
+	if !rv["standard"] || !rv["rv-only"] || rv["tent-only"] {
+		t.Errorf("RV search returned %v", rv)
+	}
+}
+
+// TestWaterMeansDifferentThingsByShelter pins the one context-dependent rule in
+// the flag surface, both readings side by side.
+//
+// It is the rule most able to become the next context-dependent bug, so the two
+// answers for the same site are asserted together rather than in separate tests.
+func TestWaterMeansDifferentThingsByShelter(t *testing.T) {
+	// The shelter only decides the answer where the hookup is explicitly
+	// absent. Where it is merely unreported the site is kept either way, so
+	// this is the case that actually discriminates.
+	spigotOnly := &Site{Hookups: Hookups{Water: TriNo}, SharedWater: TriYes}
+
+	if !spigotOnly.Satisfies(HookupWater, ShelterTent) {
+		t.Error("a tent camper filling a jug is served by a shared tap")
+	}
+	if spigotOnly.Satisfies(HookupWater, ShelterRV) {
+		t.Error("an RV camper asked for a hookup; a tap is not one, and this site says it has none")
+	}
+
+	// Unreported is not a no, for either kind of camper.
+	unreported := &Site{SharedWater: TriYes}
+	for _, sh := range []Shelter{ShelterTent, ShelterRV} {
+		if !unreported.Satisfies(HookupWater, sh) {
+			t.Errorf("%v: an unreported hookup must not exclude", sh)
+		}
+	}
+	if got := spigotOnly.WaterSource(); got != "shared source" {
+		t.Errorf("WaterSource() = %q; an alert must never report a tap as a hookup", got)
+	}
+
+	hookup := &Site{Hookups: Hookups{Water: TriYes}}
+	for _, s := range []Shelter{ShelterTent, ShelterRV, ShelterCabin} {
+		if !hookup.Satisfies(HookupWater, s) {
+			t.Errorf("a real hookup serves %v", s)
+		}
+	}
+	if got := hookup.WaterSource(); got != "hookup at site" {
+		t.Errorf("WaterSource() = %q", got)
+	}
+
+	// Unknown is kept, as everywhere else. Hookups are recorded per campground,
+	// so dropping unknowns would remove whole campgrounds from a search.
+	silent := &Site{}
+	for _, h := range []Hookup{HookupElectric, HookupWater, HookupSewer} {
+		if !silent.Satisfies(h, ShelterRV) {
+			t.Errorf("%v: a provider that said nothing has not said no", h)
+		}
+	}
+
+	// An explicit no is a real answer and does exclude.
+	denied := &Site{Hookups: Hookups{Electric: TriNo}}
+	if denied.Satisfies(HookupElectric, ShelterRV) {
+		t.Error("NONELECTRIC is an explicit no and must exclude")
+	}
+}
+
+// TestFilterHookupsAreAdditive: naming two requires both.
+func TestFilterHookupsAreAdditive(t *testing.T) {
+	mk := func(id string, h Hookups) Availability {
+		a := night(id, "f1", day(2026, 9, 4))
+		a.Site.Hookups = h
+		return a
+	}
+	sites := []Availability{
+		mk("both", Hookups{Electric: TriYes, Water: TriYes}),
+		mk("electric-only", Hookups{Electric: TriYes, Water: TriNo}),
+	}
+
+	req := SearchRequest{Nights: 1, Shelter: ShelterRV, Hookups: []Hookup{HookupElectric, HookupWater}}
+	got := (&Filter{}).Apply(sites, req)
+	if len(got) != 1 || got[0].Site.ID != "both" {
+		t.Errorf("requiring electric and water returned %d sites, want only \"both\"", len(got))
+	}
+}
+
+// TestNormalizeValueFoldsTheTypo is the live bug that prompted normalization:
+// recreation.gov returns "Large Tent Over 9X12`" and camply advertised the clean
+// spelling, which matched nothing.
+func TestNormalizeValueFoldsTheTypo(t *testing.T) {
+	if !EqualValue("Large Tent Over 9X12", "Large Tent Over 9X12`") {
+		t.Error("the backticked spelling must be the same value as the clean one")
+	}
+	if !EqualValue("  TENT ONLY   NONELECTRIC ", "Tent Only Nonelectric") {
+		t.Error("case and spacing must not decide a match")
+	}
+	if EqualValue("Tent", "Small Tent") {
+		t.Error("normalization must not merge distinct values")
 	}
 }

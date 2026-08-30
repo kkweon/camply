@@ -870,24 +870,24 @@ func TestCoverageMessagesArePinned(t *testing.T) {
 	unknown := site("unknown", 4) // Parking zero value is Unknown
 	noEquipment := site("no-equip", 4)
 
-	t.Run("flag off describes what the flag would do", func(t *testing.T) {
+	t.Run("no parking filter describes what one would do", func(t *testing.T) {
 		fake := &fakeProvider{sites: []core.Availability{noVehicle}}
 		res := runCLI(t, fakeRegistry(fake), "fake", "campsites", "--campgrounds", "1",
 			"--date-ranges", "2026-09-04:2026-09-07")
-		want := "1 of the 1 campsites searched have no vehicle access. " +
-			"--exclude-no-vehicle-access would exclude them; any that reach the results are flagged ⚠️."
+		want := "1 of the 1 campsites searched need a walk from the car. " +
+			"--parking at-site would exclude them; any that reach the results are flagged ⚠️."
 		if !strings.Contains(res.Stdout, want) {
 			t.Errorf("want:\n%s\ngot:\n%s", want, res.Stdout)
 		}
 	})
 
-	t.Run("flag on names the denominator it counted", func(t *testing.T) {
+	t.Run("a parking filter names the denominator it counted", func(t *testing.T) {
 		fake := &fakeProvider{sites: []core.Availability{noVehicle, unknown}}
 		res := runCLI(t, fakeRegistry(fake), "fake", "campsites", "--campgrounds", "1",
-			"--date-ranges", "2026-09-04:2026-09-07", "--exclude-no-vehicle-access")
+			"--date-ranges", "2026-09-04:2026-09-07", "--parking", "at-site")
 		for _, want := range []string{
-			"--exclude-no-vehicle-access excluded 1 campsites with no vehicle access (of 2 searched).",
-			"1 campsites searched report no vehicle access data. --exclude-no-vehicle-access " +
+			"--parking at-site excluded 1 campsites that need a walk from the car (of 2 searched).",
+			"1 campsites searched report no parking data. --parking " +
 				"does not exclude them; any that reach the results are flagged ⚠️ UNKNOWN",
 		} {
 			if !strings.Contains(res.Stdout, want) {

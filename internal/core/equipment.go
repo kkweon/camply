@@ -1,9 +1,6 @@
 package core
 
-import (
-	"sort"
-	"strings"
-)
+import "sort"
 
 // FacilityCoverage is how an equipment filter landed at one campground.
 type FacilityCoverage struct {
@@ -94,7 +91,7 @@ func AnalyzeEquipment(availabilities []Availability, requested []Equipment) Cove
 // the diagnosis cannot disagree with the filter it explains.
 func equipmentMatches(site *Site, req Equipment) bool {
 	for _, have := range site.Equipment {
-		if !strings.EqualFold(have.EquipmentName, req.EquipmentName) {
+		if !EqualValue(have.EquipmentName, req.EquipmentName) {
 			continue
 		}
 		if req.MaxLength == 0 || req.MaxLength <= have.MaxLength {

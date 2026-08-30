@@ -1,14 +1,14 @@
-$ camply recdotgov campsites --campgrounds 232875 --exclude-no-vehicle-access --date-ranges 2026-09-04:2026-09-07 --nights 1
+$ camply recdotgov campsites --campgrounds 232875 --parking at-site --date-ranges 2026-09-04:2026-09-07 --nights 1
 
 --- stdout ---
 [TIME] CAMPLY   camply, the campsite finder ⛺️
 [TIME] INFO     Searching across 1 campgrounds
-[TIME] INFO     --exclude-no-vehicle-access excluded 9 campsites with no vehicle access (of 9 searched).
+[TIME] INFO     --parking at-site excluded 9 campsites that need a walk from the car (of 9 searched).
 
 --- stderr ---
 
 --- error ---
---exclude-no-vehicle-access emptied 1 of 1 campground(s), so they were dropped from the search:
-    KASPIAN CAMPGROUND (#232875): all 9 sites are unreachable by car
+--parking at-site emptied 1 of 1 campground(s), so they were dropped from the search:
+    KASPIAN CAMPGROUND (#232875): all 9 sites need a walk from the car
 
 To search these campgrounds anyway, pass --allow-partial-match

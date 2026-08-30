@@ -1,6 +1,7 @@
 package recdotgov
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/kkweon/camply/internal/core"
@@ -256,5 +257,52 @@ func TestAttributeAliasesDoNotOverreach(t *testing.T) {
 		if got := attrs("Hike in Distance", raw).firstNumber(hikeDistanceAttrs); got == nil {
 			t.Errorf("hike distance %q not parsed", raw)
 		}
+	}
+}
+
+// TestDriftIsReportedByValue is what keeps the adapter from decaying quietly.
+//
+// A vocabulary that grows on recreation.gov's side turns into Unknown one
+// campsite at a time, and Unknown is the safe answer nobody investigates. The
+// report has to name the value, because a count says something is wrong while
+// the value says what to add.
+func TestDriftIsReportedByValue(t *testing.T) {
+	TakeDrift() // clear anything an earlier test left behind
+
+	// Recognised values are not drift, however unusual.
+	classifyParking(attrs(attrSiteAccess, "Drive-In"), "STANDARD NONELECTRIC", "")
+	// Nor is silence: a provider that said nothing has not said anything new.
+	classifyParking(attrs(), "STANDARD NONELECTRIC", "")
+	if got := TakeDrift(); len(got) != 0 {
+		t.Fatalf("recognised values and silence are not drift, got %v", got)
+	}
+
+	classifyParking(attrs(attrSiteAccess, "Ferry-In"), "STANDARD NONELECTRIC", "")
+	classifyParking(attrs(attrSiteAccess, "Ferry-In"), "STANDARD NONELECTRIC", "")
+	classifyParking(attrs(attrSiteAccess, "Tram-In"), "STANDARD NONELECTRIC", "")
+
+	report := TakeDrift()
+	if len(report) != 1 {
+		t.Fatalf("want one line, got %v", report)
+	}
+	for _, want := range []string{"Ferry-In", "Tram-In", "Site Access", "3 campsites", "adapter.go"} {
+		if !strings.Contains(report[0], want) {
+			t.Errorf("report is missing %q:\n%s", want, report[0])
+		}
+	}
+
+	// Taking it clears it, so a second search does not re-report the first.
+	if got := TakeDrift(); len(got) != 0 {
+		t.Errorf("drift should be cleared once reported, got %v", got)
+	}
+}
+
+// A label camply does not know is still honoured as non-drivable rather than
+// decaying to Unknown, which a filter keeps.
+func TestUnmappedLabelIsStillNonDrivable(t *testing.T) {
+	got, _ := classifyParking(attrs(attrSiteAccess, "Ferry-In"), "STANDARD NONELECTRIC", "")
+	TakeDrift()
+	if got != core.ParkingWalk {
+		t.Errorf("classifyParking() = %v, want ParkingWalk", got)
 	}
 }

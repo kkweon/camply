@@ -2,7 +2,6 @@ package core
 
 import (
 	"sort"
-	"strings"
 	"time"
 )
 
@@ -66,14 +65,25 @@ func (f *Filter) Apply(availabilities []Availability, req SearchRequest) []Avail
 			continue
 		}
 
-		// 8. Drop sites that need a walk from the car, or have no car access.
+		// 8. The shelter this trip is for: does the site take what I am
+		// bringing? CouldAllow, not Allows — a site whose permitted set is
+		// unknown is kept and flagged, never dropped.
+		if req.Shelter != ShelterUnknown && !site.Permits.CouldAllow(req.Shelter) {
+			continue
+		}
+
+		// 9. Keep only the parkings asked for.
 		//
-		// RequiresWalk, not !ReachableByCar: a site whose access the provider
-		// never reported is kept and flagged in the alert instead. The filter is
-		// opt-in and easy to forget, so it is not allowed to be the thing that
-		// silently discards a site — that job belongs to the alert, which always
-		// says what it knows.
-		if req.ExcludeNoVehicleAccess && site.Parking.RequiresWalk() {
+		// A site whose parking the provider never reported survives: the filter
+		// is opt-in and easy to forget, so it is not allowed to be the thing
+		// that silently discards a site — that job belongs to the alert, which
+		// always says what it knows.
+		if len(req.Parking) > 0 && site.Parking != ParkingUnknown && !hasParking(site, req.Parking) {
+			continue
+		}
+
+		// 10. Hookups are additive: naming two requires both.
+		if !satisfiesHookups(site, req) {
 			continue
 		}
 
@@ -163,7 +173,7 @@ func truncDay(t time.Time) time.Time {
 func hasMatchingEquipment(site *Site, requested []Equipment) bool {
 	for _, reqEq := range requested {
 		for _, siteEq := range site.Equipment {
-			if strings.EqualFold(siteEq.EquipmentName, reqEq.EquipmentName) {
+			if EqualValue(siteEq.EquipmentName, reqEq.EquipmentName) {
 				// If length doesn't matter, or if it fits
 				if reqEq.MaxLength == 0 || reqEq.MaxLength <= siteEq.MaxLength {
 					return true
@@ -201,9 +211,27 @@ func isInSearchWindow(booking Availability, req SearchRequest) bool {
 	return false
 }
 
+func hasParking(site *Site, wanted []Parking) bool {
+	for _, w := range wanted {
+		if w == site.Parking {
+			return true
+		}
+	}
+	return false
+}
+
+func satisfiesHookups(site *Site, req SearchRequest) bool {
+	for _, h := range req.Hookups {
+		if !site.Satisfies(h, req.Shelter) {
+			return false
+		}
+	}
+	return true
+}
+
 func hasMatchingCampsiteType(site *Site, wanted []string) bool {
 	for _, w := range wanted {
-		if strings.EqualFold(strings.TrimSpace(w), strings.TrimSpace(site.RawType)) {
+		if EqualValue(w, site.RawType) {
 			return true
 		}
 	}

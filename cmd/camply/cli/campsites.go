@@ -12,6 +12,7 @@ import (
 	"github.com/kkweon/camply/internal/logger"
 	notifications_pkg "github.com/kkweon/camply/internal/notifications"
 	"github.com/kkweon/camply/internal/providers"
+	"github.com/kkweon/camply/internal/providers/recdotgov"
 )
 
 // campsitesRunner holds one command invocation's flag values. Allocating it in
@@ -36,6 +37,9 @@ type campsitesRunner struct {
 	minVehicleLen  int
 	maxEquipLength int
 	allowPartial   bool
+	shelter        string
+	parking        []string
+	hookups        []string
 	excludeNoVeh   bool
 	notifications  []string
 	nights         int
@@ -101,14 +105,22 @@ func addSearchFlags(cmd *cobra.Command, r *campsitesRunner, d *providers.Descrip
 		f.IntVar(&r.minVehicleLen, "min-vehicle-length", 0,
 			"Only sites that fit a vehicle at least this long, in feet (one value)")
 	}
-	// Named for what it does, not for what remains. "--vehicle-access=drive-in"
-	// would read as a promise that every result is drive-in, but sites the
-	// provider reports nothing about are deliberately kept, and a flag whose
-	// name oversells its guarantee is how the incident happened in the first
-	// place.
+	f.StringVar(&r.shelter, flagShelter, "",
+		"What you are camping in: "+joinKeys(shelterValues)+". One value — it is a choice, "+
+			"not a list, and it also decides what --hookups water means (one value)")
+	f.StringSliceVar(&r.parking, flagParking, nil,
+		multiHelp("How close a car gets: "+joinKeys(parkingValues)+
+			". Sites the provider reports no parking for are kept and flagged ⚠️",
+			"parking at-site,walk", "parking at-site", "parking walk"))
+	f.StringSliceVar(&r.hookups, flagHookups, nil,
+		multiHelp("Utilities the site must have: "+joinKeys(hookupValues)+
+			". Additive — naming two requires both",
+			"hookups electric,water", "hookups electric", "hookups water"))
+	// Superseded by --parking. Kept working because the CronJobs run
+	// ghcr.io/kkweon/camply:latest with imagePullPolicy Always, so a release
+	// reaches them before anyone can edit a manifest.
 	f.BoolVar(&r.excludeNoVeh, flagExcludeNoVehicleAccess, false,
-		"Drop sites proven unreachable by car (walk-in, hike-in, boat-in). "+
-			"Sites with no access data are not excluded; results always flag them ⚠️")
+		"Deprecated: use --"+flagParking+" at-site. Drops sites that need a walk from the car")
 	f.BoolVar(&r.allowPartial, "allow-partial-match", false,
 		"Continue when an equipment filter matches nothing at some campgrounds, instead of failing")
 	f.StringSliceVar(&r.notifications, "notifications", []string{},
@@ -148,6 +160,31 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 		if err := validateVocabularyValues(providers.FlagCampsiteTypes, r.campsiteTypes, desc, reg); err != nil {
 			return err
 		}
+		shelter, err := parseShelter(r.shelter)
+		if err != nil {
+			return err
+		}
+		parking, err := parseParking(r.parking)
+		if err != nil {
+			return err
+		}
+		hookups, err := parseHookups(r.hookups)
+		if err != nil {
+			return err
+		}
+		// Behaviour-preserving: the old flag dropped both walk-in and
+		// no-access sites and kept unknowns, which is exactly --parking at-site.
+		// Mapping it to at-site,walk would silently start including Kaspian and
+		// Lodgepole's 54 walk-in sites, and that is the user's call to make,
+		// not an upgrade's.
+		if r.excludeNoVeh {
+			logger.Warn("--%s is deprecated; --%s at-site does the same thing.",
+				flagExcludeNoVehicleAccess, flagParking)
+			if len(parking) == 0 {
+				parking = []core.Parking{core.ParkingAtSite}
+			}
+		}
+
 		parsedEquipment := buildEquipmentFilter(r.equipmentTypes, r.maxEquipLength)
 		if d := describeEquipmentFilter(parsedEquipment); d != "" {
 			logger.Info("Equipment filter: %s", d)
@@ -203,8 +240,10 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 			CampsiteTypes: r.campsiteTypes,
 			Equipment:     parsedEquipment,
 
-			MinVehicleLength:       r.minVehicleLen,
-			ExcludeNoVehicleAccess: r.excludeNoVeh,
+			MinVehicleLength: r.minVehicleLen,
+			Shelter:          shelter,
+			Parking:          parking,
+			Hookups:          hookups,
 		}
 
 		logger.Info("Searching across %d campgrounds", len(r.campgrounds))
@@ -213,6 +252,14 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 		rawCampsites, err := provider.FindCampsites(ctx, req)
 		if err != nil {
 			return fmt.Errorf("error fetching campsites: %w", err)
+		}
+
+		// 6a. Anything the adapter could not understand, by value. This is the
+		// difference between "the provider said nothing" (normal) and "the
+		// provider said something new" (a bug report), which are otherwise the
+		// same Unknown.
+		for _, line := range recdotgov.TakeDrift() {
+			logger.Warn("%s", line)
 		}
 
 		// 6b. Measure the equipment filter before it silently removes anything.
@@ -227,7 +274,7 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 		// reason as the equipment coverage above: a filter that removes sites
 		// without saying so is indistinguishable from a campground being full.
 		if err := reportParkingCoverage(
-			core.AnalyzeParking(rawCampsites), r.excludeNoVeh, r.allowPartial,
+			core.AnalyzeParking(rawCampsites), parking, r.allowPartial,
 		); err != nil {
 			return err
 		}

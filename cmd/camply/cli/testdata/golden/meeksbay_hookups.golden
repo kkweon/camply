@@ -1,0 +1,27 @@
+$ camply recdotgov campsites --campgrounds 10220612 --shelter rv --hookups electric,water --date-ranges 2026-09-01:2026-09-30 --nights 1
+
+--- stdout ---
+[TIME] CAMPLY   camply, the campsite finder ⛺️
+[TIME] INFO     Searching across 1 campgrounds
+[TIME] INFO     Found 6 Campsites
+[TIME] INFO     📅 Mon, September 07 🏕  1 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 1 sites
+[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220636 (1 night)
+[TIME] INFO     📅 Sun, September 13 🏕  1 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 1 sites
+[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220636 (1 night)
+[TIME] INFO     📅 Thu, September 10 🏕  1 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 1 sites
+[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220636 (1 night)
+[TIME] INFO     📅 Thu, September 24 🏕  1 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 1 sites
+[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220635 (1 night)
+[TIME] INFO     📅 Tue, September 15 🏕  1 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 1 sites
+[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220635 (1 night)
+[TIME] INFO     📅 Wed, September 16 🏕  1 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 1 sites
+[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220638 (1 night)
+[TIME] CAMPLY   Exiting camply 👋
+
+--- stderr ---

@@ -4,10 +4,7 @@ $ camply recdotgov campsites --campgrounds 10220612 --equipment-types Tent --dat
 [TIME] CAMPLY   camply, the campsite finder ⛺️
 [TIME] INFO     Equipment filter: Tent
 [TIME] INFO     Searching across 1 campgrounds
-[TIME] INFO     Found 130 Campsites
-[TIME] INFO     📅 Fri, September 25 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 1 sites
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
+[TIME] INFO     Found 107 Campsites
 [TIME] INFO     📅 Mon, September 07 🏕  7 sites
 [TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 7 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
@@ -16,64 +13,54 @@ $ camply recdotgov campsites --campgrounds 10220612 --equipment-types Tent --dat
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220620 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
+[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220636 (1 night)
 [TIME] INFO     📅 Mon, September 14 🏕  4 sites
 [TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 4 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     📅 Mon, September 21 🏕  8 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 8 sites
+[TIME] INFO     📅 Mon, September 21 🏕  6 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220627 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     📅 Mon, September 28 🏕  7 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 7 sites
+[TIME] INFO     📅 Mon, September 28 🏕  5 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 5 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220627 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     📅 Sat, September 26 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 1 sites
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     📅 Sun, September 13 🏕  4 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 4 sites
+[TIME] INFO     📅 Sun, September 13 🏕  5 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 5 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
+[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220636 (1 night)
 [TIME] INFO     📅 Sun, September 20 🏕  3 sites
 [TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     📅 Sun, September 27 🏕  6 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
+[TIME] INFO     📅 Sun, September 27 🏕  4 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 4 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220620 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220627 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     📅 Thu, September 03 🏕  8 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 8 sites
+[TIME] INFO     📅 Thu, September 03 🏕  6 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220627 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Thu, September 10 🏕  8 sites
 [TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 8 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
@@ -83,84 +70,72 @@ $ camply recdotgov campsites --campgrounds 10220612 --equipment-types Tent --dat
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220620 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     📅 Thu, September 17 🏕  6 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
+[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220636 (1 night)
+[TIME] INFO     📅 Thu, September 17 🏕  5 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 5 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220627 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     📅 Thu, September 24 🏕  7 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 7 sites
+[TIME] INFO     📅 Thu, September 24 🏕  5 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 5 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220613 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220627 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     📅 Tue, September 01 🏕  6 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
+[TIME] INFO     📅 Tue, September 01 🏕  5 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 5 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     📅 Tue, September 08 🏕  6 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
+[TIME] INFO     📅 Tue, September 08 🏕  5 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 5 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Tue, September 15 🏕  4 sites
 [TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 4 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     📅 Tue, September 22 🏕  8 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 8 sites
+[TIME] INFO     📅 Tue, September 22 🏕  6 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220627 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     📅 Tue, September 29 🏕  8 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 8 sites
+[TIME] INFO     📅 Tue, September 29 🏕  6 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220627 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     📅 Wed, September 02 🏕  7 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 7 sites
+[TIME] INFO     📅 Wed, September 02 🏕  5 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 5 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220627 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     📅 Wed, September 09 🏕  7 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 7 sites
+[TIME] INFO     📅 Wed, September 09 🏕  6 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Wed, September 16 🏕  6 sites
 [TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220613 (1 night) ⚠️ NO EQUIPMENT DATA
@@ -169,18 +144,15 @@ $ camply recdotgov campsites --campgrounds 10220612 --equipment-types Tent --dat
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     📅 Wed, September 23 🏕  8 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 8 sites
+[TIME] INFO     📅 Wed, September 23 🏕  6 sites
+[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220613 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220626 (1 night) ⚠️ NO EQUIPMENT DATA
-[TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220627 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] CAMPLY   Exiting camply 👋
 
 --- stderr ---
-[TIME] WARNING  --equipment-types=Tent matched none of the 14 campsites searched. "Tent" is a ReserveCalifornia value.
-[TIME] WARNING  10 of the 14 campsites searched report no equipment data. --equipment-types does not exclude them; any that reach the results are flagged ⚠️.
+[TIME] WARNING  8 of the 19 campsites searched report no equipment data. --equipment-types does not exclude them; any that reach the results are flagged ⚠️.

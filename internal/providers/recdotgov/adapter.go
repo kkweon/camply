@@ -89,10 +89,13 @@ func classifyParking(a attributes, campsiteType, notices string) (core.Parking, 
 	// Meeks Bay returns an empty string where it has no answer, which is
 	// absence, not a label.
 	if raw := strings.TrimSpace(a.text(attrSiteAccess)); raw != "" {
-		if known, ok := siteAccessLabels[strings.ToLower(raw)]; ok {
+		if known, ok := siteAccessLabels[core.NormalizeValue(raw)]; ok {
 			return known, attrSiteAccess + "=" + raw
 		}
-		// A label outside the known set still means "not Drive-In".
+		// A label outside the known set still means "not Drive-In" — but it is
+		// also drift worth reporting, because a vocabulary that grows while
+		// nobody notices decays into Unknown one value at a time.
+		drift.record(attrSiteAccess, raw)
 		return core.ParkingWalk, attrSiteAccess + "=" + raw
 	}
 	if p, ok := noVehicleCampsiteTypes[upperType]; ok {

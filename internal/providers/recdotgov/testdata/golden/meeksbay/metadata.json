@@ -7,6 +7,774 @@
     {
      "attribute_category": "site_details",
      "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Bed Type",
+     "attribute_value": "N/A"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "15"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Rating",
+     "attribute_value": "Preferred"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Beds",
+     "attribute_value": "8"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Location Rating",
+     "attribute_value": "Prime"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Rooms",
+     "attribute_value": "9"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Proximity to Water",
+     "attribute_value": "Lakefront"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Bedrooms",
+     "attribute_value": "7"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "03:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Triple"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shower/Bath Type",
+     "attribute_value": "Bathtub with Shower"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "7"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Cooking Utensils",
+     "attribute_value": "Cooking Utensils"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Drinking Water",
+     "attribute_value": "Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Electricity",
+     "attribute_value": "Electricity"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Electric Stove",
+     "attribute_value": "Electric Stove"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Flush Toilets",
+     "attribute_value": "Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Kitchen",
+     "attribute_value": "Kitchen"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Parking",
+     "attribute_value": "Paved Parking"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Roads",
+     "attribute_value": "Paved Roads"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Refrigerator",
+     "attribute_value": "Refrigerator"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Couches",
+     "attribute_value": "Couches"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Dining Area",
+     "attribute_value": "Dining Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Heater",
+     "attribute_value": "Heater"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Lake Access",
+     "attribute_value": "Lake Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Parking Area",
+     "attribute_value": "Parking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Shade ",
+     "attribute_value": "Shade "
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Parking",
+     "attribute_value": "Accessible Parking"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Drinking Water",
+     "attribute_value": "Accessible Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Flush Toilets",
+     "attribute_value": "Accessible Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Showers",
+     "attribute_value": "Accessible Showers"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Beach Access",
+     "attribute_value": "Beach Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Bed(s)",
+     "attribute_value": "Bed(s)"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Broom & Dust Pan",
+     "attribute_value": "Broom & Dust Pan"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Cooking Pots",
+     "attribute_value": "Cooking Pots"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Event Area",
+     "attribute_value": "Event Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Fire Pit",
+     "attribute_value": "Fire Pit"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Mop",
+     "attribute_value": "Mop"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Oven",
+     "attribute_value": "Oven"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Twin Bed(s)",
+     "attribute_value": "Twin Bed(s)"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Propane Grills",
+     "attribute_value": "Propane Grills"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Microwave",
+     "attribute_value": "Microwave"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Kayak Rentals",
+     "attribute_value": "Kayak Rentals"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Cooking Area",
+     "attribute_value": "Cooking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Coffee Pot",
+     "attribute_value": "Coffee Pot"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Grills",
+     "attribute_value": "Accessible Grills"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Day Use Area",
+     "attribute_value": "Day Use Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Fire Extinguisher",
+     "attribute_value": "Fire Extinguisher"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "General Store",
+     "attribute_value": "General Store"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Tables",
+     "attribute_value": "Tables"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Picnic Area",
+     "attribute_value": "Accessible Picnic Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Bathtub",
+     "attribute_value": "Bathtub"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Bed(s) with mattress",
+     "attribute_value": "Bed(s) with mattress"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Grills",
+     "attribute_value": "Grills"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Scenic Overlooks",
+     "attribute_value": "Scenic Overlooks"
+    }
+   ],
+   "campsite_id": "10220613",
+   "campsite_status": "Open",
+   "loop": "Cabin Row",
+   "name": "Kehlet Mansion",
+   "notices": [
+    {
+     "text": "<p>The Kehlet Mansion has seven bedrooms, five full beds, two queen beds, one twin size bed and a rollaway bed. It also has 3 bathrooms, with a bathtub/shower in one and shower stalls in the others.   Also part of the Mansion area is an outdoor paved area , available for weddings and other group events.\u00a0</p>\n<p>Enjoy the sunrise from the platform deck on the rocks, prepare your summer meals on the large propane Bar-B-Que grills, and soak in the beauty of Lake Tahoe through large bay windows and sun deck. The Kelhet Mansion offers excellent accomodations for large families and events, including a formal dining table which seats eight, exterior bar shack for serving event guests on the ample paved area, and a semi-private beach.</p>\n",
+     "type": "info"
+    },
+    {
+     "text": "<p>No pets are allowed.\u00a0\u00a0</p>\n",
+     "type": "warning"
+    }
+   ],
+   "permitted_equipment": [],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10220612",
+   "asset_name": "Meeks Bay Resort",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Beds",
+     "attribute_value": "4"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Rooms",
+     "attribute_value": "5"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Bed Type",
+     "attribute_value": "Queen"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "3:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Proximity to Water",
+     "attribute_value": "Lakefront"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shower/Bath Type",
+     "attribute_value": "Bathtub with Shower"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Bedrooms",
+     "attribute_value": "3"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "7"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "3"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Gravel"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Cooking Utensils",
+     "attribute_value": "Cooking Utensils"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Drinking Water",
+     "attribute_value": "Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Electricity",
+     "attribute_value": "Electricity"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Electric Stove",
+     "attribute_value": "Electric Stove"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Flush Toilets",
+     "attribute_value": "Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Futon(s)",
+     "attribute_value": "Futon(s)"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Kitchen",
+     "attribute_value": "Kitchen"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Refrigerator",
+     "attribute_value": "Refrigerator"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Beach Access",
+     "attribute_value": "Beach Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Bed(s)",
+     "attribute_value": "Bed(s)"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Broom & Dust Pan",
+     "attribute_value": "Broom & Dust Pan"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Day Use Area",
+     "attribute_value": "Day Use Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Fire Extinguisher",
+     "attribute_value": "Fire Extinguisher"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "General Store",
+     "attribute_value": "General Store"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Mop",
+     "attribute_value": "Mop"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Parking Area",
+     "attribute_value": "Parking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Picnic Area",
+     "attribute_value": "Accessible Picnic Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Bathtub",
+     "attribute_value": "Bathtub"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Bed(s) with mattress",
+     "attribute_value": "Bed(s) with mattress"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Coffee Pot",
+     "attribute_value": "Coffee Pot"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Cooking Area",
+     "attribute_value": "Cooking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Kayak Rentals",
+     "attribute_value": "Kayak Rentals"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Mattress Pad(s)",
+     "attribute_value": "Mattress Pad(s)"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Microwave",
+     "attribute_value": "Microwave"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Smoke Alarm",
+     "attribute_value": "Smoke Alarm"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Cooking Pots",
+     "attribute_value": "Cooking Pots"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Couches",
+     "attribute_value": "Couches"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Oven",
+     "attribute_value": "Oven"
+    }
+   ],
+   "campsite_id": "10220614",
+   "campsite_status": "Open",
+   "loop": "Resort Edge",
+   "name": "Washoe House",
+   "notices": [
+    {
+     "text": "<p><strong>NO PETS ALLOWED.</strong></p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p>The Washoe House is rented with a studio cabin.\u00a0</p>\n",
+     "type": "info"
+    },
+    {
+     "text": "<p>\u00a0There is a twin bedroom, two queen bedrooms in the main house with one double futon and a double bed in the studio cabin.</p>\n",
+     "type": "info"
+    },
+    {
+     "text": "<p>The main house has a full kitchen and full bathroom and the studio has a studio  bathroom.</p>\n",
+     "type": "info"
+    },
+    {
+     "text": "<p>There is an enclosed porch for the dining area and you can enjoy the view of Lake Tahoe from its large windows.\u00a0</p>\n",
+     "type": "info"
+    },
+    {
+     "text": "<p>It has its own picnic area and secluded parking.\u00a0</p>\n",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10220612",
+   "asset_name": "Meeks Bay Resort",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
      "attribute_name": "Check-In",
      "attribute_value": "03:00 PM"
     },
@@ -1314,6 +2082,12 @@
     {
      "attribute_category": "site_details",
      "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "03:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
      "attribute_name": "Pets Allowed",
      "attribute_value": "No"
     },
@@ -1321,37 +2095,7 @@
      "attribute_category": "site_details",
      "attribute_id": 0,
      "attribute_name": "Bed Type",
-     "attribute_value": "N/A"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Max Num of People",
-     "attribute_value": "15"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Site Rating",
-     "attribute_value": "Preferred"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Beds",
-     "attribute_value": "8"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Location Rating",
-     "attribute_value": "Prime"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Water Hookup",
-     "attribute_value": "No"
+     "attribute_value": "Queen"
     },
     {
      "attribute_category": "site_details",
@@ -1362,38 +2106,8 @@
     {
      "attribute_category": "site_details",
      "attribute_id": 0,
-     "attribute_name": "Campfire Allowed",
-     "attribute_value": "Yes"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Rooms",
-     "attribute_value": "9"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Condition Rating",
-     "attribute_value": "Good"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Proximity to Water",
-     "attribute_value": "Lakefront"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Bedrooms",
-     "attribute_value": "7"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Check-In",
-     "attribute_value": "03:00 PM"
+     "attribute_name": "Max Num of People",
+     "attribute_value": "2"
     },
     {
      "attribute_category": "site_details",
@@ -1404,13 +2118,13 @@
     {
      "attribute_category": "site_details",
      "attribute_id": 0,
-     "attribute_name": "Capacity Rating",
-     "attribute_value": "Triple"
+     "attribute_name": "Num of Rooms",
+     "attribute_value": "2"
     },
     {
      "attribute_category": "site_details",
      "attribute_id": 0,
-     "attribute_name": "Shade",
+     "attribute_name": "Campfire Allowed",
      "attribute_value": "Yes"
     },
     {
@@ -1422,14 +2136,20 @@
     {
      "attribute_category": "site_details",
      "attribute_id": 0,
-     "attribute_name": "Shower/Bath Type",
-     "attribute_value": "Bathtub with Shower"
+     "attribute_name": "Num of Beds",
+     "attribute_value": "1"
     },
     {
-     "attribute_category": "equipment_details",
+     "attribute_category": "site_details",
      "attribute_id": 0,
-     "attribute_name": "Driveway Length",
-     "attribute_value": "0"
+     "attribute_name": "Proximity to Water",
+     "attribute_value": "Lakefront"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shower/Bath Type",
+     "attribute_value": "Shower Stall"
     },
     {
      "attribute_category": "equipment_details",
@@ -1441,7 +2161,7 @@
      "attribute_category": "equipment_details",
      "attribute_id": 0,
      "attribute_name": "Max Num of Vehicles",
-     "attribute_value": "7"
+     "attribute_value": "2"
     },
     {
      "attribute_category": "equipment_details",
@@ -1512,72 +2232,6 @@
     {
      "attribute_category": "amenities",
      "attribute_id": 0,
-     "attribute_name": "Campfire Rings",
-     "attribute_value": "Campfire Rings"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Couches",
-     "attribute_value": "Couches"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Dining Area",
-     "attribute_value": "Dining Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Heater",
-     "attribute_value": "Heater"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Lake Access",
-     "attribute_value": "Lake Access"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Parking Area",
-     "attribute_value": "Parking Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Shade ",
-     "attribute_value": "Shade "
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Accessible Parking",
-     "attribute_value": "Accessible Parking"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Accessible Drinking Water",
-     "attribute_value": "Accessible Drinking Water"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Accessible Flush Toilets",
-     "attribute_value": "Accessible Flush Toilets"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Accessible Showers",
-     "attribute_value": "Accessible Showers"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
      "attribute_name": "Beach Access",
      "attribute_value": "Beach Access"
     },
@@ -1602,78 +2256,6 @@
     {
      "attribute_category": "amenities",
      "attribute_id": 0,
-     "attribute_name": "Event Area",
-     "attribute_value": "Event Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Fire Pit",
-     "attribute_value": "Fire Pit"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Mop",
-     "attribute_value": "Mop"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Oven",
-     "attribute_value": "Oven"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Twin Bed(s)",
-     "attribute_value": "Twin Bed(s)"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Propane Grills",
-     "attribute_value": "Propane Grills"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Picnic Tables",
-     "attribute_value": "Picnic Tables"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Microwave",
-     "attribute_value": "Microwave"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Kayak Rentals",
-     "attribute_value": "Kayak Rentals"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Cooking Area",
-     "attribute_value": "Cooking Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Coffee Pot",
-     "attribute_value": "Coffee Pot"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Accessible Grills",
-     "attribute_value": "Accessible Grills"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
      "attribute_name": "Day Use Area",
      "attribute_value": "Day Use Area"
     },
@@ -1692,8 +2274,26 @@
     {
      "attribute_category": "amenities",
      "attribute_id": 0,
-     "attribute_name": "Tables",
-     "attribute_value": "Tables"
+     "attribute_name": "Heater",
+     "attribute_value": "Heater"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Oven",
+     "attribute_value": "Oven"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Parking Area",
+     "attribute_value": "Parking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Sites",
+     "attribute_value": "Paved Sites"
     },
     {
      "attribute_category": "amenities",
@@ -1716,31 +2316,747 @@
     {
      "attribute_category": "amenities",
      "attribute_id": 0,
-     "attribute_name": "Grills",
-     "attribute_value": "Grills"
+     "attribute_name": "Coffee Pot",
+     "attribute_value": "Coffee Pot"
     },
     {
      "attribute_category": "amenities",
      "attribute_id": 0,
-     "attribute_name": "Scenic Overlooks",
-     "attribute_value": "Scenic Overlooks"
+     "attribute_name": "Kayak Rentals",
+     "attribute_value": "Kayak Rentals"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Mattress Pad(s)",
+     "attribute_value": "Mattress Pad(s)"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Microwave",
+     "attribute_value": "Microwave"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Area",
+     "attribute_value": "Picnic Area"
     }
    ],
-   "campsite_id": "10220613",
+   "campsite_id": "10220620",
    "campsite_status": "Open",
    "loop": "Cabin Row",
-   "name": "Kehlet Mansion",
+   "name": "Lodge 7",
    "notices": [
     {
-     "text": "<p>The Kehlet Mansion has seven bedrooms, five full beds, two queen beds, one twin size bed and a rollaway bed. It also has 3 bathrooms, with a bathtub/shower in one and shower stalls in the others.   Also part of the Mansion area is an outdoor paved area , available for weddings and other group events.\u00a0</p>\n<p>Enjoy the sunrise from the platform deck on the rocks, prepare your summer meals on the large propane Bar-B-Que grills, and soak in the beauty of Lake Tahoe through large bay windows and sun deck. The Kelhet Mansion offers excellent accomodations for large families and events, including a formal dining table which seats eight, exterior bar shack for serving event guests on the ample paved area, and a semi-private beach.</p>\n",
+     "text": "<p>NO PETS ALLOWED.</p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p>This lodge has a private deck, 1 queen size bed, full kitchen and bathroom.</p>\n",
      "type": "info"
     },
     {
-     "text": "<p>No pets are allowed.\u00a0\u00a0</p>\n",
-     "type": "warning"
+     "text": "<p>Ths lodge is within walking distance to the beach, general store and beach grille.\u00a0</p>\n",
+     "type": "info"
     }
    ],
    "permitted_equipment": [],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10220612",
+   "asset_name": "Meeks Bay Resort",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Proximity to Water",
+     "attribute_value": "Lakefront"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shower/Bath Type",
+     "attribute_value": "Bathtub with Shower"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Beds",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "5"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Rooms",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Bedrooms",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Bed Type",
+     "attribute_value": "King"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "03:00 PM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Parallel"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Cooking Utensils",
+     "attribute_value": "Cooking Utensils"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Drinking Water",
+     "attribute_value": "Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Electricity",
+     "attribute_value": "Electricity"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Electric Stove",
+     "attribute_value": "Electric Stove"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Flush Toilets",
+     "attribute_value": "Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Futon(s)",
+     "attribute_value": "Futon(s)"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Kitchen",
+     "attribute_value": "Kitchen"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Parking",
+     "attribute_value": "Paved Parking"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Roads",
+     "attribute_value": "Paved Roads"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Refrigerator",
+     "attribute_value": "Refrigerator"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Beach Access",
+     "attribute_value": "Beach Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Bed(s)",
+     "attribute_value": "Bed(s)"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Broom & Dust Pan",
+     "attribute_value": "Broom & Dust Pan"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Fire Extinguisher",
+     "attribute_value": "Fire Extinguisher"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "General Store",
+     "attribute_value": "General Store"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Lights",
+     "attribute_value": "Lights"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Oven",
+     "attribute_value": "Oven"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Parking Area",
+     "attribute_value": "Parking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Sites",
+     "attribute_value": "Paved Sites"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Bathtub",
+     "attribute_value": "Bathtub"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Bed(s) with mattress",
+     "attribute_value": "Bed(s) with mattress"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Coffee Pot",
+     "attribute_value": "Coffee Pot"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Cooking Area",
+     "attribute_value": "Cooking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Dining Area",
+     "attribute_value": "Dining Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Heater",
+     "attribute_value": "Heater"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Kayak Rentals",
+     "attribute_value": "Kayak Rentals"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Lake Access",
+     "attribute_value": "Lake Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Mattress Pad(s)",
+     "attribute_value": "Mattress Pad(s)"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Microwave",
+     "attribute_value": "Microwave"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Smoke Alarm",
+     "attribute_value": "Smoke Alarm"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Table & Chairs",
+     "attribute_value": "Table & Chairs"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Cooking Pots",
+     "attribute_value": "Cooking Pots"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Day Use Area",
+     "attribute_value": "Day Use Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Picnic Area",
+     "attribute_value": "Accessible Picnic Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Area",
+     "attribute_value": "Picnic Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Twin Bed(s)",
+     "attribute_value": "Twin Bed(s)"
+    }
+   ],
+   "campsite_id": "10220621",
+   "campsite_status": "Open",
+   "loop": "Cabin Row",
+   "name": "Lodge 8",
+   "notices": [
+    {
+     "text": "<p>This lodge has, one king bed, one twin bed.</p>\n",
+     "type": "info"
+    },
+    {
+     "text": "<p>Also has 1 double futon full kitchen and bathroom.</p>\n",
+     "type": "info"
+    },
+    {
+     "text": "<p>This lodge is within walking distance to the beach, general store and beach grille.\u00a0</p>\n",
+     "type": "info"
+    },
+    {
+     "text": "<p>NO PETS ALLOWED.</p>\n",
+     "type": "warning"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Vehicle",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10220612",
+   "asset_name": "Meeks Bay Resort",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shower/Bath Type",
+     "attribute_value": "Bathtub with Shower"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Bedrooms",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "03:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Beds",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Proximity to Water",
+     "attribute_value": "Lakefront"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Bed Type",
+     "attribute_value": "Queen"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Rooms",
+     "attribute_value": "3"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Parallel"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Cooking Utensils",
+     "attribute_value": "Cooking Utensils"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Drinking Water",
+     "attribute_value": "Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Electricity",
+     "attribute_value": "Electricity"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Electric Stove",
+     "attribute_value": "Electric Stove"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Flush Toilets",
+     "attribute_value": "Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Futon(s)",
+     "attribute_value": "Futon(s)"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Kitchen",
+     "attribute_value": "Kitchen"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Parking",
+     "attribute_value": "Paved Parking"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Roads",
+     "attribute_value": "Paved Roads"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Refrigerator",
+     "attribute_value": "Refrigerator"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Bed(s)",
+     "attribute_value": "Bed(s)"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Broom & Dust Pan",
+     "attribute_value": "Broom & Dust Pan"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Cooking Pots",
+     "attribute_value": "Cooking Pots"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Fire Extinguisher",
+     "attribute_value": "Fire Extinguisher"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "General Store",
+     "attribute_value": "General Store"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Heater",
+     "attribute_value": "Heater"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Lights",
+     "attribute_value": "Lights"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Oven",
+     "attribute_value": "Oven"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Parking Area",
+     "attribute_value": "Parking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Sites",
+     "attribute_value": "Paved Sites"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Bed(s) with mattress",
+     "attribute_value": "Bed(s) with mattress"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Coffee Pot",
+     "attribute_value": "Coffee Pot"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Cooking Area",
+     "attribute_value": "Cooking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Dining Area",
+     "attribute_value": "Dining Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Kayak Rentals",
+     "attribute_value": "Kayak Rentals"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Lake Access",
+     "attribute_value": "Lake Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Microwave",
+     "attribute_value": "Microwave"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Smoke Alarm",
+     "attribute_value": "Smoke Alarm"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Table & Chairs",
+     "attribute_value": "Table & Chairs"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Beach Access",
+     "attribute_value": "Beach Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Day Use Area",
+     "attribute_value": "Day Use Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Picnic Area",
+     "attribute_value": "Accessible Picnic Area"
+    }
+   ],
+   "campsite_id": "10220622",
+   "campsite_status": "Open",
+   "loop": "Cabin Row",
+   "name": "Lodge 9",
+   "notices": [
+    {
+     "text": "<p>This lodge has 2 queen size beds, 1 double futon, full kitchen and bathroom.</p>\n<p>\u00a0</p>\n",
+     "type": "info"
+    },
+    {
+     "text": "<p>Enjoy the scenic view of Lake Tahoe out your front window.\u00a0</p>\n",
+     "type": "info"
+    },
+    {
+     "text": "<p>This lodge is within walking distance to the beach, general store, and beach grille.</p>\n",
+     "type": "info"
+    },
+    {
+     "text": "<p>NO PETS ALLOWED.</p>\n",
+     "type": "warning"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Vehicle",
+     "max_length": 0
+    }
+   ],
    "type_of_use": "Overnight"
   },
   {
@@ -2745,20 +4061,26 @@
     {
      "attribute_category": "site_details",
      "attribute_id": 0,
-     "attribute_name": "Campfire Allowed",
-     "attribute_value": "Yes"
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
     },
     {
      "attribute_category": "site_details",
      "attribute_id": 0,
-     "attribute_name": "Bed Type",
-     "attribute_value": "King"
+     "attribute_name": "Proximity to Water",
+     "attribute_value": ""
     },
     {
      "attribute_category": "site_details",
      "attribute_id": 0,
      "attribute_name": "Min Num of People",
      "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
     },
     {
      "attribute_category": "site_details",
@@ -2769,1650 +4091,915 @@
     {
      "attribute_category": "site_details",
      "attribute_id": 0,
-     "attribute_name": "Num of Bedrooms",
-     "attribute_value": "1"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Beds",
-     "attribute_value": "2"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Site Access",
-     "attribute_value": ""
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Shower/Bath Type",
-     "attribute_value": "Bathtub with Shower"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Proximity to Water",
-     "attribute_value": "Lakefront"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Rooms",
-     "attribute_value": "3"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Pets Allowed",
-     "attribute_value": "No"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Check-Out",
-     "attribute_value": "11:00 AM"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Check-In",
-     "attribute_value": "03:00 PM"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Driveway Grade",
-     "attribute_value": "Slight"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Is Equipment Mandatory",
-     "attribute_value": ""
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Max Num of Vehicles",
-     "attribute_value": "2"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Driveway Surface",
-     "attribute_value": "Paved"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Cooking Utensils",
-     "attribute_value": "Cooking Utensils"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Drinking Water",
-     "attribute_value": "Drinking Water"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Electricity",
-     "attribute_value": "Electricity"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Electric Stove",
-     "attribute_value": "Electric Stove"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Flush Toilets",
-     "attribute_value": "Flush Toilets"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Futon(s)",
-     "attribute_value": "Futon(s)"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Kitchen",
-     "attribute_value": "Kitchen"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Paved Parking",
-     "attribute_value": "Paved Parking"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Paved Roads",
-     "attribute_value": "Paved Roads"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Refrigerator",
-     "attribute_value": "Refrigerator"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Beach Access",
-     "attribute_value": "Beach Access"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Broom & Dust Pan",
-     "attribute_value": "Broom & Dust Pan"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Cooking Pots",
-     "attribute_value": "Cooking Pots"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Fire Extinguisher",
-     "attribute_value": "Fire Extinguisher"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "General Store",
-     "attribute_value": "General Store"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Lights",
-     "attribute_value": "Lights"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Oven",
-     "attribute_value": "Oven"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Parking Area",
-     "attribute_value": "Parking Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Paved Sites",
-     "attribute_value": "Paved Sites"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Bed(s) with mattress",
-     "attribute_value": "Bed(s) with mattress"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Coffee Pot",
-     "attribute_value": "Coffee Pot"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Cooking Area",
-     "attribute_value": "Cooking Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Dining Area",
-     "attribute_value": "Dining Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Kayak Rentals",
-     "attribute_value": "Kayak Rentals"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Microwave",
-     "attribute_value": "Microwave"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Picnic Area",
-     "attribute_value": "Picnic Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Picnic Tables",
-     "attribute_value": "Picnic Tables"
-    }
-   ],
-   "campsite_id": "10220626",
-   "campsite_status": "Open",
-   "loop": "Cabin Row",
-   "name": "Lodge 13",
-   "notices": [
-    {
-     "text": "<p>This Lodge has one king and on twin sized bed and a double size futon.</p>\n\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>Enjoy the view of Lake Tahoe from your front window!.\u00a0</p>\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>This lodge is within walking distance to the beach, general store and beach grille.\u00a0</p>\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>NO PETS ALLOWED.</p>\n",
-     "type": "warning"
-    }
-   ],
-   "permitted_equipment": [],
-   "type_of_use": "Overnight"
-  },
-  {
-   "asset_id": "10220612",
-   "asset_name": "Meeks Bay Resort",
-   "attributes": [
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Pets Allowed",
-     "attribute_value": "No"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Min Num of People",
-     "attribute_value": "1"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
      "attribute_name": "Campfire Allowed",
      "attribute_value": "Yes"
     },
     {
      "attribute_category": "site_details",
      "attribute_id": 0,
-     "attribute_name": "Proximity to Water",
-     "attribute_value": "Lakefront"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Check-In",
-     "attribute_value": "03:00 PM"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Site Access",
-     "attribute_value": ""
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Max Num of People",
-     "attribute_value": "6"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Bedrooms",
-     "attribute_value": "2"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Rooms",
-     "attribute_value": "3"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Check-Out",
-     "attribute_value": "11:00 AM"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Shower/Bath Type",
-     "attribute_value": "Bathtub with Shower"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Bed Type",
-     "attribute_value": "Queen"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Beds",
-     "attribute_value": "2"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Driveway Surface",
-     "attribute_value": "Paved"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Driveway Grade",
-     "attribute_value": "Slight"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Is Equipment Mandatory",
-     "attribute_value": ""
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Max Num of Vehicles",
-     "attribute_value": "2"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Cooking Utensils",
-     "attribute_value": "Cooking Utensils"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Drinking Water",
-     "attribute_value": "Drinking Water"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Electricity",
-     "attribute_value": "Electricity"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Electric Stove",
-     "attribute_value": "Electric Stove"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Flush Toilets",
-     "attribute_value": "Flush Toilets"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Futon(s)",
-     "attribute_value": "Futon(s)"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Kitchen",
-     "attribute_value": "Kitchen"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Paved Parking",
-     "attribute_value": "Paved Parking"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Paved Roads",
-     "attribute_value": "Paved Roads"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Refrigerator",
-     "attribute_value": "Refrigerator"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Bed(s)",
-     "attribute_value": "Bed(s)"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Broom & Dust Pan",
-     "attribute_value": "Broom & Dust Pan"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "General Store",
-     "attribute_value": "General Store"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Heater",
-     "attribute_value": "Heater"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Lights",
-     "attribute_value": "Lights"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Oven",
-     "attribute_value": "Oven"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Parking Area",
-     "attribute_value": "Parking Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Bed(s) with mattress",
-     "attribute_value": "Bed(s) with mattress"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Coffee Pot",
-     "attribute_value": "Coffee Pot"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Fire Extinguisher",
-     "attribute_value": "Fire Extinguisher"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Kayak Rentals",
-     "attribute_value": "Kayak Rentals"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Lake Access",
-     "attribute_value": "Lake Access"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Mattress Pad(s)",
-     "attribute_value": "Mattress Pad(s)"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Microwave",
-     "attribute_value": "Microwave"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Picnic Area",
-     "attribute_value": "Picnic Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Picnic Tables",
-     "attribute_value": "Picnic Tables"
-    }
-   ],
-   "campsite_id": "10220627",
-   "campsite_status": "Open",
-   "loop": "Cabin Row",
-   "name": "Lodge 14",
-   "notices": [
-    {
-     "text": "<p>NO PETS ALLOWED.</p>\n",
-     "type": "warning"
-    },
-    {
-     "text": "<p>This lodge has 2 bedrooms, 1 queen size bed and 2 twin size beds as well as a double size futon.</p>\n<p>.</p>\n\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>It has 1 &1/2 bathrooms.</p>\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>Enjoy the view of Lake Tahoe out your front window!</p>\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>This lodge is within walking distance to the beach, general store and beach grille.\u00a0</p>\n",
-     "type": "info"
-    }
-   ],
-   "permitted_equipment": [],
-   "type_of_use": "Overnight"
-  },
-  {
-   "asset_id": "10220612",
-   "asset_name": "Meeks Bay Resort",
-   "attributes": [
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Check-In",
-     "attribute_value": "03:00 PM"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Pets Allowed",
-     "attribute_value": "No"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Bed Type",
-     "attribute_value": "Queen"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Check-Out",
-     "attribute_value": "11:00 AM"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Max Num of People",
-     "attribute_value": "2"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Min Num of People",
-     "attribute_value": "1"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Rooms",
-     "attribute_value": "2"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Campfire Allowed",
-     "attribute_value": "Yes"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Site Access",
-     "attribute_value": "Drive-In"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Beds",
-     "attribute_value": "1"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Proximity to Water",
-     "attribute_value": "Lakefront"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Shower/Bath Type",
-     "attribute_value": "Shower Stall"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Is Equipment Mandatory",
-     "attribute_value": ""
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Max Num of Vehicles",
-     "attribute_value": "2"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Driveway Surface",
-     "attribute_value": "Paved"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Driveway Grade",
-     "attribute_value": "Slight"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Cooking Utensils",
-     "attribute_value": "Cooking Utensils"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Drinking Water",
-     "attribute_value": "Drinking Water"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Electricity",
-     "attribute_value": "Electricity"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Electric Stove",
-     "attribute_value": "Electric Stove"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Flush Toilets",
-     "attribute_value": "Flush Toilets"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Kitchen",
-     "attribute_value": "Kitchen"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Paved Parking",
-     "attribute_value": "Paved Parking"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Paved Roads",
-     "attribute_value": "Paved Roads"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Refrigerator",
-     "attribute_value": "Refrigerator"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Beach Access",
-     "attribute_value": "Beach Access"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Bed(s)",
-     "attribute_value": "Bed(s)"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Broom & Dust Pan",
-     "attribute_value": "Broom & Dust Pan"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Cooking Pots",
-     "attribute_value": "Cooking Pots"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Day Use Area",
-     "attribute_value": "Day Use Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Fire Extinguisher",
-     "attribute_value": "Fire Extinguisher"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "General Store",
-     "attribute_value": "General Store"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Heater",
-     "attribute_value": "Heater"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Oven",
-     "attribute_value": "Oven"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Parking Area",
-     "attribute_value": "Parking Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Paved Sites",
-     "attribute_value": "Paved Sites"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Accessible Picnic Area",
-     "attribute_value": "Accessible Picnic Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Bathtub",
-     "attribute_value": "Bathtub"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Bed(s) with mattress",
-     "attribute_value": "Bed(s) with mattress"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Coffee Pot",
-     "attribute_value": "Coffee Pot"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Kayak Rentals",
-     "attribute_value": "Kayak Rentals"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Mattress Pad(s)",
-     "attribute_value": "Mattress Pad(s)"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Microwave",
-     "attribute_value": "Microwave"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Picnic Area",
-     "attribute_value": "Picnic Area"
-    }
-   ],
-   "campsite_id": "10220620",
-   "campsite_status": "Open",
-   "loop": "Cabin Row",
-   "name": "Lodge 7",
-   "notices": [
-    {
-     "text": "<p>NO PETS ALLOWED.</p>\n",
-     "type": "warning"
-    },
-    {
-     "text": "<p>This lodge has a private deck, 1 queen size bed, full kitchen and bathroom.</p>\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>Ths lodge is within walking distance to the beach, general store and beach grille.\u00a0</p>\n",
-     "type": "info"
-    }
-   ],
-   "permitted_equipment": [],
-   "type_of_use": "Overnight"
-  },
-  {
-   "asset_id": "10220612",
-   "asset_name": "Meeks Bay Resort",
-   "attributes": [
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Pets Allowed",
-     "attribute_value": "No"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Proximity to Water",
-     "attribute_value": "Lakefront"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Shower/Bath Type",
-     "attribute_value": "Bathtub with Shower"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Beds",
-     "attribute_value": "2"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Site Access",
-     "attribute_value": "Drive-In"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Min Num of People",
-     "attribute_value": "1"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Check-Out",
-     "attribute_value": "11:00 AM"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Max Num of People",
-     "attribute_value": "5"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Rooms",
-     "attribute_value": "2"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Bedrooms",
-     "attribute_value": "1"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Campfire Allowed",
-     "attribute_value": "Yes"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Bed Type",
-     "attribute_value": "King"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Check-In",
-     "attribute_value": "03:00 PM"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Driveway Grade",
-     "attribute_value": "Slight"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Is Equipment Mandatory",
-     "attribute_value": ""
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Max Num of Vehicles",
-     "attribute_value": "2"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Driveway Surface",
-     "attribute_value": "Paved"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Driveway Entry",
-     "attribute_value": "Parallel"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Cooking Utensils",
-     "attribute_value": "Cooking Utensils"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Drinking Water",
-     "attribute_value": "Drinking Water"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Electricity",
-     "attribute_value": "Electricity"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Electric Stove",
-     "attribute_value": "Electric Stove"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Flush Toilets",
-     "attribute_value": "Flush Toilets"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Futon(s)",
-     "attribute_value": "Futon(s)"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Kitchen",
-     "attribute_value": "Kitchen"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Paved Parking",
-     "attribute_value": "Paved Parking"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Paved Roads",
-     "attribute_value": "Paved Roads"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Refrigerator",
-     "attribute_value": "Refrigerator"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Beach Access",
-     "attribute_value": "Beach Access"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Bed(s)",
-     "attribute_value": "Bed(s)"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Broom & Dust Pan",
-     "attribute_value": "Broom & Dust Pan"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Fire Extinguisher",
-     "attribute_value": "Fire Extinguisher"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "General Store",
-     "attribute_value": "General Store"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Lights",
-     "attribute_value": "Lights"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Oven",
-     "attribute_value": "Oven"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Parking Area",
-     "attribute_value": "Parking Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Paved Sites",
-     "attribute_value": "Paved Sites"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Bathtub",
-     "attribute_value": "Bathtub"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Bed(s) with mattress",
-     "attribute_value": "Bed(s) with mattress"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Coffee Pot",
-     "attribute_value": "Coffee Pot"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Cooking Area",
-     "attribute_value": "Cooking Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Dining Area",
-     "attribute_value": "Dining Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Heater",
-     "attribute_value": "Heater"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Kayak Rentals",
-     "attribute_value": "Kayak Rentals"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Lake Access",
-     "attribute_value": "Lake Access"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Mattress Pad(s)",
-     "attribute_value": "Mattress Pad(s)"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Microwave",
-     "attribute_value": "Microwave"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Smoke Alarm",
-     "attribute_value": "Smoke Alarm"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Table & Chairs",
-     "attribute_value": "Table & Chairs"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Cooking Pots",
-     "attribute_value": "Cooking Pots"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Day Use Area",
-     "attribute_value": "Day Use Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Accessible Picnic Area",
-     "attribute_value": "Accessible Picnic Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Picnic Area",
-     "attribute_value": "Picnic Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Twin Bed(s)",
-     "attribute_value": "Twin Bed(s)"
-    }
-   ],
-   "campsite_id": "10220621",
-   "campsite_status": "Open",
-   "loop": "Cabin Row",
-   "name": "Lodge 8",
-   "notices": [
-    {
-     "text": "<p>This lodge has, one king bed, one twin bed.</p>\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>Also has 1 double futon full kitchen and bathroom.</p>\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>This lodge is within walking distance to the beach, general store and beach grille.\u00a0</p>\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>NO PETS ALLOWED.</p>\n",
-     "type": "warning"
-    }
-   ],
-   "permitted_equipment": [
-    {
-     "equipment_name": "Vehicle",
-     "max_length": 0
-    }
-   ],
-   "type_of_use": "Overnight"
-  },
-  {
-   "asset_id": "10220612",
-   "asset_name": "Meeks Bay Resort",
-   "attributes": [
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Min Num of People",
-     "attribute_value": "1"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Shower/Bath Type",
-     "attribute_value": "Bathtub with Shower"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Bedrooms",
-     "attribute_value": "1"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Check-In",
-     "attribute_value": "03:00 PM"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Beds",
-     "attribute_value": "2"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Proximity to Water",
-     "attribute_value": "Lakefront"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Max Num of People",
-     "attribute_value": "6"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Bed Type",
-     "attribute_value": "Queen"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Site Access",
-     "attribute_value": "Drive-In"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Campfire Allowed",
-     "attribute_value": "Yes"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Check-Out",
-     "attribute_value": "11:00 AM"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Pets Allowed",
-     "attribute_value": "No"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Rooms",
-     "attribute_value": "3"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Driveway Grade",
-     "attribute_value": "Slight"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Is Equipment Mandatory",
-     "attribute_value": ""
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Max Num of Vehicles",
-     "attribute_value": "2"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Driveway Surface",
-     "attribute_value": "Paved"
-    },
-    {
-     "attribute_category": "equipment_details",
-     "attribute_id": 0,
-     "attribute_name": "Driveway Entry",
-     "attribute_value": "Parallel"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Cooking Utensils",
-     "attribute_value": "Cooking Utensils"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Drinking Water",
-     "attribute_value": "Drinking Water"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Electricity",
-     "attribute_value": "Electricity"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Electric Stove",
-     "attribute_value": "Electric Stove"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Flush Toilets",
-     "attribute_value": "Flush Toilets"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Futon(s)",
-     "attribute_value": "Futon(s)"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Kitchen",
-     "attribute_value": "Kitchen"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Paved Parking",
-     "attribute_value": "Paved Parking"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Paved Roads",
-     "attribute_value": "Paved Roads"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Refrigerator",
-     "attribute_value": "Refrigerator"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Bed(s)",
-     "attribute_value": "Bed(s)"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Broom & Dust Pan",
-     "attribute_value": "Broom & Dust Pan"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Cooking Pots",
-     "attribute_value": "Cooking Pots"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Fire Extinguisher",
-     "attribute_value": "Fire Extinguisher"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "General Store",
-     "attribute_value": "General Store"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Heater",
-     "attribute_value": "Heater"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Lights",
-     "attribute_value": "Lights"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Oven",
-     "attribute_value": "Oven"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Parking Area",
-     "attribute_value": "Parking Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Paved Sites",
-     "attribute_value": "Paved Sites"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Bed(s) with mattress",
-     "attribute_value": "Bed(s) with mattress"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Coffee Pot",
-     "attribute_value": "Coffee Pot"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Cooking Area",
-     "attribute_value": "Cooking Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Dining Area",
-     "attribute_value": "Dining Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Kayak Rentals",
-     "attribute_value": "Kayak Rentals"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Lake Access",
-     "attribute_value": "Lake Access"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Microwave",
-     "attribute_value": "Microwave"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Smoke Alarm",
-     "attribute_value": "Smoke Alarm"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Table & Chairs",
-     "attribute_value": "Table & Chairs"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Beach Access",
-     "attribute_value": "Beach Access"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Day Use Area",
-     "attribute_value": "Day Use Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Accessible Picnic Area",
-     "attribute_value": "Accessible Picnic Area"
-    }
-   ],
-   "campsite_id": "10220622",
-   "campsite_status": "Open",
-   "loop": "Cabin Row",
-   "name": "Lodge 9",
-   "notices": [
-    {
-     "text": "<p>This lodge has 2 queen size beds, 1 double futon, full kitchen and bathroom.</p>\n<p>\u00a0</p>\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>Enjoy the scenic view of Lake Tahoe out your front window.\u00a0</p>\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>This lodge is within walking distance to the beach, general store, and beach grille.</p>\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>NO PETS ALLOWED.</p>\n",
-     "type": "warning"
-    }
-   ],
-   "permitted_equipment": [
-    {
-     "equipment_name": "Vehicle",
-     "max_length": 0
-    }
-   ],
-   "type_of_use": "Overnight"
-  },
-  {
-   "asset_id": "10220612",
-   "asset_name": "Meeks Bay Resort",
-   "attributes": [
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Beds",
-     "attribute_value": "4"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Pets Allowed",
-     "attribute_value": "No"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Min Num of People",
-     "attribute_value": "1"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Campfire Allowed",
-     "attribute_value": "Yes"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Check-Out",
-     "attribute_value": "11:00 AM"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Rooms",
-     "attribute_value": "5"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Bed Type",
-     "attribute_value": "Queen"
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Single"
     },
     {
      "attribute_category": "site_details",
      "attribute_id": 0,
      "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
      "attribute_value": "No"
     },
     {
      "attribute_category": "site_details",
      "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "30"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Beach Access",
+     "attribute_value": "Beach Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Coin Showers",
+     "attribute_value": "Coin Showers"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Drinking Water",
+     "attribute_value": "Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Electric Hookups",
+     "attribute_value": "Electric Hookups"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Flush Toilets",
+     "attribute_value": "Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Roads",
+     "attribute_value": "Paved Roads"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Parking Area",
+     "attribute_value": "Parking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Sites",
+     "attribute_value": "Paved Sites"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Shade ",
+     "attribute_value": "Shade "
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookups",
+     "attribute_value": "Water Hookups"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Flush Toilets",
+     "attribute_value": "Accessible Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Parking",
+     "attribute_value": "Accessible Parking"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Showers",
+     "attribute_value": "Accessible Showers"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Day Use Area",
+     "attribute_value": "Day Use Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Fire Pit",
+     "attribute_value": "Fire Pit"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "General Store",
+     "attribute_value": "General Store"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Tables",
+     "attribute_value": "Tables"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Picnic Area",
+     "attribute_value": "Accessible Picnic Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Cooking Area",
+     "attribute_value": "Cooking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Kayak Rentals",
+     "attribute_value": "Kayak Rentals"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Area",
+     "attribute_value": "Picnic Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Sewer Hookup",
+     "attribute_value": "Sewer Hookup"
+    }
+   ],
+   "campsite_id": "10220635",
+   "campsite_status": "Open",
+   "loop": "Outer Camp Loop",
+   "name": "RV 1",
+   "notices": [
+    {
+     "text": "<p>NO PETS ALLOWED.</p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p><strong>RV sites in the sholder season are $65 per night.  In the peak season the rate is $75 per night.</strong> The billing on Recreation.gov is different--When making your reservation more than 30 days ahead of your stay, you will be billed for 50% at the time of reservation and then the other 50% before the 30 day deadline.  Recreation.gov will send two reminder emails.\u00a0\u00a0\u00a0</p>\n",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "RV",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Trailer",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Vehicle",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Fifth Wheel",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Caravan/Camper Van",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10220612",
+   "asset_name": "Meeks Bay Resort",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": "30"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
      "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Proximity to Water",
      "attribute_value": ""
     },
     {
      "attribute_category": "site_details",
      "attribute_id": 0,
      "attribute_name": "Check-In",
-     "attribute_value": "3:00 PM"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Proximity to Water",
-     "attribute_value": "Lakefront"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Shower/Bath Type",
-     "attribute_value": "Bathtub with Shower"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Num of Bedrooms",
-     "attribute_value": "3"
-    },
-    {
-     "attribute_category": "site_details",
-     "attribute_id": 0,
-     "attribute_name": "Max Num of People",
-     "attribute_value": "7"
+     "attribute_value": "1:00 PM"
     },
     {
      "attribute_category": "equipment_details",
      "attribute_id": 0,
-     "attribute_name": "Is Equipment Mandatory",
-     "attribute_value": ""
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "60"
     },
     {
      "attribute_category": "equipment_details",
      "attribute_id": 0,
      "attribute_name": "Max Num of Vehicles",
-     "attribute_value": "3"
+     "attribute_value": "2"
     },
     {
      "attribute_category": "equipment_details",
      "attribute_id": 0,
      "attribute_name": "Driveway Surface",
-     "attribute_value": "Gravel"
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Beach Access",
+     "attribute_value": "Beach Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Coin Showers",
+     "attribute_value": "Coin Showers"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Drinking Water",
+     "attribute_value": "Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Electric Hookups",
+     "attribute_value": "Electric Hookups"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Flush Toilets",
+     "attribute_value": "Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Roads",
+     "attribute_value": "Paved Roads"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Parking Area",
+     "attribute_value": "Parking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Sites",
+     "attribute_value": "Paved Sites"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Shade ",
+     "attribute_value": "Shade "
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookups",
+     "attribute_value": "Water Hookups"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Drinking Water",
+     "attribute_value": "Accessible Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Flush Toilets",
+     "attribute_value": "Accessible Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Parking",
+     "attribute_value": "Accessible Parking"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Fire Pit",
+     "attribute_value": "Fire Pit"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "General Store",
+     "attribute_value": "General Store"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Showers",
+     "attribute_value": "Showers"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Sites",
+     "attribute_value": "Accessible Sites"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Kayak Rentals",
+     "attribute_value": "Kayak Rentals"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Area",
+     "attribute_value": "Picnic Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Sewer Hookup",
+     "attribute_value": "Sewer Hookup"
+    }
+   ],
+   "campsite_id": "10220636",
+   "campsite_status": "Open",
+   "loop": "Outer Camp Loop",
+   "name": "RV 2",
+   "notices": [
+    {
+     "text": "<p>NO PETS ALLOWED.</p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p>RV sites in the sholder season are $65 per night.  In the peak season the rate is $75 per night. The billing on Recreation.gov is different--When making your reservation more than 30 days ahead of your stay, you will be billed for 50% at the time of reservation and then the other 50% before the 30 day deadline.  Recreation.gov will send two reminder emails.\u00a0\u00a0\u00a0</p>\n",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "RV",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Trailer",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Vehicle",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Fifth Wheel",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Caravan/Camper Van",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10220612",
+   "asset_name": "Meeks Bay Resort",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Proximity to Water",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": "30"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "60"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Beach Access",
+     "attribute_value": "Beach Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Coin Showers",
+     "attribute_value": "Coin Showers"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Drinking Water",
+     "attribute_value": "Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Electric Hookups",
+     "attribute_value": "Electric Hookups"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Flush Toilets",
+     "attribute_value": "Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Roads",
+     "attribute_value": "Paved Roads"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Parking Area",
+     "attribute_value": "Parking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Sites",
+     "attribute_value": "Paved Sites"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Shade ",
+     "attribute_value": "Shade "
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookups",
+     "attribute_value": "Water Hookups"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Flush Toilets",
+     "attribute_value": "Accessible Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Parking",
+     "attribute_value": "Accessible Parking"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Day Use Area",
+     "attribute_value": "Day Use Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "General Store",
+     "attribute_value": "General Store"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Showers",
+     "attribute_value": "Showers"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Tables",
+     "attribute_value": "Tables"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Picnic Area",
+     "attribute_value": "Accessible Picnic Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Kayak Rentals",
+     "attribute_value": "Kayak Rentals"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Area",
+     "attribute_value": "Picnic Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    }
+   ],
+   "campsite_id": "10220637",
+   "campsite_status": "Open",
+   "loop": "Outer Camp Loop",
+   "name": "RV 3",
+   "notices": [
+    {
+     "text": "<p>NO PETS ALLOWED.</p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p>RV sites in the sholder season are $65 per night.  In the peak season the rate is $75 per night. The billing on Recreation.gov is different--When making your reservation more than 30 days ahead of your stay, you will be billed for 50% at the time of reservation and then the other 50% before the 30 day deadline.  Recreation.gov will send two reminder emails.\u00a0\u00a0\u00a0</p>\n",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "RV",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Trailer",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Vehicle",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Fifth Wheel",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Caravan/Camper Van",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10220612",
+   "asset_name": "Meeks Bay Resort",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": "30"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Proximity to Water",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "60"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
     },
     {
      "attribute_category": "equipment_details",
@@ -4429,116 +5016,8 @@
     {
      "attribute_category": "amenities",
      "attribute_id": 0,
-     "attribute_name": "Cooking Utensils",
-     "attribute_value": "Cooking Utensils"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Drinking Water",
-     "attribute_value": "Drinking Water"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Electricity",
-     "attribute_value": "Electricity"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Electric Stove",
-     "attribute_value": "Electric Stove"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Flush Toilets",
-     "attribute_value": "Flush Toilets"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Futon(s)",
-     "attribute_value": "Futon(s)"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Kitchen",
-     "attribute_value": "Kitchen"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Refrigerator",
-     "attribute_value": "Refrigerator"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
      "attribute_name": "Beach Access",
      "attribute_value": "Beach Access"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Bed(s)",
-     "attribute_value": "Bed(s)"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Broom & Dust Pan",
-     "attribute_value": "Broom & Dust Pan"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Day Use Area",
-     "attribute_value": "Day Use Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Fire Extinguisher",
-     "attribute_value": "Fire Extinguisher"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "General Store",
-     "attribute_value": "General Store"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Mop",
-     "attribute_value": "Mop"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Parking Area",
-     "attribute_value": "Parking Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Accessible Picnic Area",
-     "attribute_value": "Accessible Picnic Area"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Bathtub",
-     "attribute_value": "Bathtub"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Bed(s) with mattress",
-     "attribute_value": "Bed(s) with mattress"
     },
     {
      "attribute_category": "amenities",
@@ -4549,14 +5028,104 @@
     {
      "attribute_category": "amenities",
      "attribute_id": 0,
-     "attribute_name": "Coffee Pot",
-     "attribute_value": "Coffee Pot"
+     "attribute_name": "Coin Showers",
+     "attribute_value": "Coin Showers"
     },
     {
      "attribute_category": "amenities",
      "attribute_id": 0,
-     "attribute_name": "Cooking Area",
-     "attribute_value": "Cooking Area"
+     "attribute_name": "Drinking Water",
+     "attribute_value": "Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Electric Hookups",
+     "attribute_value": "Electric Hookups"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Flush Toilets",
+     "attribute_value": "Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Roads",
+     "attribute_value": "Paved Roads"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Parking Area",
+     "attribute_value": "Parking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Sites",
+     "attribute_value": "Paved Sites"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Shade ",
+     "attribute_value": "Shade "
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookups",
+     "attribute_value": "Water Hookups"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Flush Toilets",
+     "attribute_value": "Accessible Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Parking",
+     "attribute_value": "Accessible Parking"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Day Use Area",
+     "attribute_value": "Day Use Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "General Store",
+     "attribute_value": "General Store"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Showers",
+     "attribute_value": "Showers"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Tables",
+     "attribute_value": "Tables"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Picnic Area",
+     "attribute_value": "Accessible Picnic Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
     },
     {
      "attribute_category": "amenities",
@@ -4567,14 +5136,8 @@
     {
      "attribute_category": "amenities",
      "attribute_id": 0,
-     "attribute_name": "Mattress Pad(s)",
-     "attribute_value": "Mattress Pad(s)"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Microwave",
-     "attribute_value": "Microwave"
+     "attribute_name": "Picnic Area",
+     "attribute_value": "Picnic Area"
     },
     {
      "attribute_category": "amenities",
@@ -4585,63 +5148,1266 @@
     {
      "attribute_category": "amenities",
      "attribute_id": 0,
-     "attribute_name": "Smoke Alarm",
-     "attribute_value": "Smoke Alarm"
+     "attribute_name": "Lake Access",
+     "attribute_value": "Lake Access"
     },
     {
      "attribute_category": "amenities",
      "attribute_id": 0,
-     "attribute_name": "Cooking Pots",
-     "attribute_value": "Cooking Pots"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Couches",
-     "attribute_value": "Couches"
-    },
-    {
-     "attribute_category": "amenities",
-     "attribute_id": 0,
-     "attribute_name": "Oven",
-     "attribute_value": "Oven"
+     "attribute_name": "Sewer Hookup",
+     "attribute_value": "Sewer Hookup"
     }
    ],
-   "campsite_id": "10220614",
+   "campsite_id": "10220638",
    "campsite_status": "Open",
-   "loop": "Resort Edge",
-   "name": "Washoe House",
+   "loop": "Outer Camp Loop",
+   "name": "RV 4",
    "notices": [
     {
-     "text": "<p><strong>NO PETS ALLOWED.</strong></p>\n",
+     "text": "<p>NO PETS ALLOWED.</p>\n",
      "type": "warning"
     },
     {
-     "text": "<p>The Washoe House is rented with a studio cabin.\u00a0</p>\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>\u00a0There is a twin bedroom, two queen bedrooms in the main house with one double futon and a double bed in the studio cabin.</p>\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>The main house has a full kitchen and full bathroom and the studio has a studio  bathroom.</p>\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>There is an enclosed porch for the dining area and you can enjoy the view of Lake Tahoe from its large windows.\u00a0</p>\n",
-     "type": "info"
-    },
-    {
-     "text": "<p>It has its own picnic area and secluded parking.\u00a0</p>\n",
+     "text": "<p>RV sites in the sholder season are $65 per night.  In the peak season the rate is $75 per night. The billing on Recreation.gov is different--When making your reservation more than 30 days ahead of your stay, you will be billed for 50% at the time of reservation and then the other 50% before the 30 day deadline.  Recreation.gov will send two reminder emails.\u00a0\u00a0\u00a0</p>\n",
      "type": "info"
     }
    ],
-   "permitted_equipment": [],
+   "permitted_equipment": [
+    {
+     "equipment_name": "RV",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Trailer",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Vehicle",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Fifth Wheel",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Caravan/Camper Van",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10220612",
+   "asset_name": "Meeks Bay Resort",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Rooms",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Location Rating",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Hike in Distance",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Proximity to Water",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Beds",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Rating",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Bed Type",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shower/Bath Type",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Bedrooms",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Condition Rating",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Beach Access",
+     "attribute_value": "Beach Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Drinking Water",
+     "attribute_value": "Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Lake Access",
+     "attribute_value": "Lake Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Roads",
+     "attribute_value": "Paved Roads"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Sites",
+     "attribute_value": "Paved Sites"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Coin Showers",
+     "attribute_value": "Coin Showers"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Parking Area",
+     "attribute_value": "Parking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Flush Toilets",
+     "attribute_value": "Accessible Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Showers",
+     "attribute_value": "Accessible Showers"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Day Use Area",
+     "attribute_value": "Day Use Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Drinking Water (hand pump)",
+     "attribute_value": "Drinking Water (hand pump)"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Shade ",
+     "attribute_value": "Shade "
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Kayak Rentals",
+     "attribute_value": "Kayak Rentals"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Area",
+     "attribute_value": "Picnic Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Drinking Water",
+     "attribute_value": "Accessible Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Water Spigot",
+     "attribute_value": "Water Spigot"
+    }
+   ],
+   "campsite_id": "10220658",
+   "campsite_status": "Open",
+   "loop": "Outer Camp Loop",
+   "name": "Tent N01",
+   "notices": [
+    {
+     "text": "<p>NO PETS ALLOWED.</p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p>Tent sites in the sholder season are $45 per night.  In the peak season the rate is $55 per night. The billing on Recreation.gov is different from some campsites--When making your reservation more than 30 days ahead of your stay, you will be billed a non-refundable down-payment for 50% at the time of reservation and then the other 50% before the 30 day deadline.  Recreation.gov will send two reminder emails.\u00a0\u00a0\u00a0</p>\n",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 20
+    },
+    {
+     "equipment_name": "Large Tent Over 9X12`",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Small Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Car",
+     "max_length": 22
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10220612",
+   "asset_name": "Meeks Bay Resort",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Hike in Distance",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Bedrooms",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shower/Bath Type",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Location Rating",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Rating",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Beds",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Rooms",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Proximity to Water",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Condition Rating",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Bed Type",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Beach Access",
+     "attribute_value": "Beach Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Drinking Water",
+     "attribute_value": "Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Lake Access",
+     "attribute_value": "Lake Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Roads",
+     "attribute_value": "Paved Roads"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Sites",
+     "attribute_value": "Paved Sites"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Coin Showers",
+     "attribute_value": "Coin Showers"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Parking Area",
+     "attribute_value": "Parking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Water Spigot",
+     "attribute_value": "Water Spigot"
+    }
+   ],
+   "campsite_id": "10220659",
+   "campsite_status": "Open",
+   "loop": "Outer Camp Loop",
+   "name": "Tent N02",
+   "notices": [
+    {
+     "text": "<p>NO PETS ALLOWED.</p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p>Tent sites in the sholder season are $45 per night.  In the peak season the rate is $55 per night. The billing on Recreation.gov is different from some campsites--When making your reservation more than 30 days ahead of your stay, you will be billed a non-refundable down-payment for 50% at the time of reservation and then the other 50% before the 30 day deadline.  Recreation.gov will send two reminder emails.\u00a0\u00a0\u00a0</p>\n",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 20
+    },
+    {
+     "equipment_name": "Large Tent Over 9X12`",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Small Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Car",
+     "max_length": 22
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10220612",
+   "asset_name": "Meeks Bay Resort",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Rating",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Proximity to Water",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Hike in Distance",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Rooms",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Location Rating",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Condition Rating",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Bed Type",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Bedrooms",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Beds",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shower/Bath Type",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Beach Access",
+     "attribute_value": "Beach Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Drinking Water",
+     "attribute_value": "Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Lake Access",
+     "attribute_value": "Lake Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Roads",
+     "attribute_value": "Paved Roads"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Sites",
+     "attribute_value": "Paved Sites"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Coin Showers",
+     "attribute_value": "Coin Showers"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Parking Area",
+     "attribute_value": "Parking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Drinking Water",
+     "attribute_value": "Accessible Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Flush Toilets",
+     "attribute_value": "Accessible Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Showers",
+     "attribute_value": "Accessible Showers"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Day Use Area",
+     "attribute_value": "Day Use Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Drinking Water (hand pump)",
+     "attribute_value": "Drinking Water (hand pump)"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "General Store",
+     "attribute_value": "General Store"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Kayak Rentals",
+     "attribute_value": "Kayak Rentals"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Area",
+     "attribute_value": "Picnic Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Water Spigot",
+     "attribute_value": "Water Spigot"
+    }
+   ],
+   "campsite_id": "10220660",
+   "campsite_status": "Open",
+   "loop": "Outer Camp Loop",
+   "name": "Tent N03",
+   "notices": [
+    {
+     "text": "<p>NO PETS ALLOWED.</p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p>Tent sites in the sholder season are $45 per night.  In the peak season the rate is $55 per night. The billing on Recreation.gov is different from some campsites--When making your reservation more than 30 days ahead of your stay, you will be billed a non-refundable down-payment for 50% at the time of reservation and then the other 50% before the 30 day deadline.  Recreation.gov will send two reminder emails.\u00a0\u00a0\u00a0</p>\n",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 20
+    },
+    {
+     "equipment_name": "Large Tent Over 9X12`",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Small Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Car",
+     "max_length": 22
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10220612",
+   "asset_name": "Meeks Bay Resort",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Bed Type",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Proximity to Water",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Hike in Distance",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Rating",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Bedrooms",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shower/Bath Type",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Condition Rating",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Location Rating",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Beds",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Num of Rooms",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Beach Access",
+     "attribute_value": "Beach Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Drinking Water",
+     "attribute_value": "Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Lake Access",
+     "attribute_value": "Lake Access"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Roads",
+     "attribute_value": "Paved Roads"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Paved Sites",
+     "attribute_value": "Paved Sites"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Coin Showers",
+     "attribute_value": "Coin Showers"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Parking Area",
+     "attribute_value": "Parking Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Drinking Water",
+     "attribute_value": "Accessible Drinking Water"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Flush Toilets",
+     "attribute_value": "Accessible Flush Toilets"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Accessible Showers",
+     "attribute_value": "Accessible Showers"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Day Use Area",
+     "attribute_value": "Day Use Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Drinking Water (hand pump)",
+     "attribute_value": "Drinking Water (hand pump)"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "General Store",
+     "attribute_value": "General Store"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Kayak Rentals",
+     "attribute_value": "Kayak Rentals"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Area",
+     "attribute_value": "Picnic Area"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Water Spigot",
+     "attribute_value": "Water Spigot"
+    }
+   ],
+   "campsite_id": "10220661",
+   "campsite_status": "Open",
+   "loop": "Outer Camp Loop",
+   "name": "Tent N04",
+   "notices": [
+    {
+     "text": "<p>NO PETS ALLOWED.</p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p>Tent sites in the sholder season are $45 per night.  In the peak season the rate is $55 per night. The billing on Recreation.gov is different from some campsites--When making your reservation more than 30 days ahead of your stay, you will be billed a non-refundable down-payment for 50% at the time of reservation and then the other 50% before the 30 day deadline.  Recreation.gov will send two reminder emails.\u00a0\u00a0\u00a0</p>\n",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 20
+    },
+    {
+     "equipment_name": "Large Tent Over 9X12`",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Small Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Car",
+     "max_length": 22
+    }
+   ],
    "type_of_use": "Overnight"
   }
  ],
- "size": 14,
+ "size": 20,
  "start": "0",
- "total": 14
+ "total": 20
 }

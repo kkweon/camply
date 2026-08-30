@@ -94,13 +94,19 @@ type SearchRequest struct {
 	// MinVehicleLength filters UseDirect results on the VehicleLength its grid
 	// response reports per unit. It has no recreation.gov equivalent.
 	MinVehicleLength int
-	// ExcludeNoVehicleAccess drops sites proven to need a walk from the car, or
-	// to have no car access at all. Sites whose access the provider did not
-	// report are kept, not dropped — see Parking.RequiresWalk.
-	ExcludeNoVehicleAccess bool
-	Equipment              []Equipment
-	Query                  string
-	State                  string
+	// Shelter is the kind of camping this search is for: one choice, not a
+	// list. It also decides what "water" means in Hookups — for an RV a pipe at
+	// the site, for a tent somewhere to fill a jug.
+	Shelter Shelter
+	// Parking keeps only sites whose parking is one of these. A site whose
+	// parking the provider never reported is kept regardless: missing data is
+	// surfaced, never acted on.
+	Parking []Parking
+	// Hookups is additive: naming two requires both.
+	Hookups   []Hookup
+	Equipment []Equipment
+	Query     string
+	State     string
 }
 
 type CampgroundFacility struct {
