@@ -1,6 +1,6 @@
 <div align="center">
 <a href="https://github.com/kkweon/camply">
-  <img src="https://raw.githubusercontent.com/kkweon/camply/develop/.github/assets/camply.svg"
+  <img src="https://raw.githubusercontent.com/kkweon/camply/main/.github/assets/camply.svg"
     width="400" height="400" alt="camply">
 </a>
 </div>
@@ -21,8 +21,8 @@ book your spot.
 ---
 
 <p align="center">
-  <a href="https://github.com/kkweon/camply/blob/develop/LICENSE"><img src="https://img.shields.io/github/license/kkweon/camply?color=blue&label=License" alt="GitHub License"></a>
-  <a href="https://github.com/kkweon/camply/actions/workflows/ci.yaml?query=branch%3Adevelop"><img src="https://github.com/kkweon/camply/actions/workflows/ci.yaml/badge.svg?branch=develop" alt="CI Status"></a>
+  <a href="https://github.com/kkweon/camply/blob/main/LICENSE"><img src="https://img.shields.io/github/license/kkweon/camply?color=blue&label=License" alt="GitHub License"></a>
+  <a href="https://github.com/kkweon/camply/actions/workflows/ci.yaml?query=branch%3Amain"><img src="https://github.com/kkweon/camply/actions/workflows/ci.yaml/badge.svg?branch=main" alt="CI Status"></a>
   <a href="https://go.dev"><img src="https://img.shields.io/github/go-mod/go-version/kkweon/camply?logo=go&label=Go" alt="Go Version"></a>
   <a href="https://github.com/go-task/task"><img src="https://img.shields.io/badge/task---?message=task&logo=task&color=teal&labelColor=grey" alt="task"></a>
   <a href="https://github.com/pre-commit/pre-commit"><img src="https://img.shields.io/badge/pre--commit-enabled-lightgreen?logo=pre-commit" alt="pre-commit"></a>

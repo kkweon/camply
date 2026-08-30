@@ -10,8 +10,11 @@ repos:
       - id: check-yaml
       - id: check-merge-conflict
       - id: mixed-line-ending
+      # main is this project's working and release branch, so it is not
+      # guarded. master is kept in the list only to catch a stray checkout of
+      # the upstream layout this repository no longer follows.
       - id: no-commit-to-branch
-        args: [--branch, main, --branch, master]
+        args: [--branch, master]
 
   - repo: https://github.com/golangci/golangci-lint
     rev: v2.13.2
