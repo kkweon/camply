@@ -21,19 +21,16 @@ jobs:
       - name: checkout
         uses: actions/checkout@v7
 
-      # Python comes from .python-version, Go from the go.mod `go` directive -
-      # the same sources uv and go read locally. Nothing here is CI-specific.
-      - name: setup-uv
-        uses: astral-sh/setup-uv@v10.0.1
-        with:
-          enable-cache: true
-          cache-dependency-glob: 'uv.lock'
-
       - name: setup-go
         uses: actions/setup-go@v7
         with:
-          # `go 1.26` carries no patch, so this resolves the newest 1.26.x
+          # `go 1.27` carries no patch, so this resolves the newest 1.27.x
           go-version-file: go.mod
+
+      # uv is only the runner for pre-commit here; `uv tool run --isolated`
+      # needs no project files, so there is nothing to cache against.
+      - name: setup-uv
+        uses: astral-sh/setup-uv@v10.0.1
 
       - name: setup-task
         uses: arduino/setup-task@v3.0.0
@@ -64,16 +61,12 @@ jobs:
       issues: write
       pull-requests: write
       packages: write
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: checkout
         uses: actions/checkout@v7
         with:
-          # semantic-release pushes the version bump and needs full history
+          # semantic-release pushes the tag itself, and needs the full history
+          # to work out the next version from the existing tags.
           persist-credentials: true
           fetch-depth: 0
 
@@ -82,11 +75,12 @@ jobs:
         with:
           node-version: lts/*
 
-      - name: setup-uv
-        uses: astral-sh/setup-uv@v10.0.1
+      # `task dist` cross-compiles on the host, so Go is needed here too - not
+      # just inside the Docker build.
+      - name: setup-go
+        uses: actions/setup-go@v7
         with:
-          enable-cache: true
-          cache-dependency-glob: 'uv.lock'
+          go-version-file: go.mod
 
       - name: setup-task
         uses: arduino/setup-task@v3.0.0
@@ -112,18 +106,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          npm install -g semantic-release @semantic-release/exec @semantic-release/git @semantic-release/github
+          npm install -g semantic-release @semantic-release/exec @semantic-release/github
           npx semantic-release
-
-      # Rebuilds outside of a release too, so docs deploy on every push
-      - name: build-docs
-        run: task docs
-
-      - name: upload-pages-artifact
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: site
-
-      - name: deploy-pages
-        uses: actions/deploy-pages@v5
-        id: deployment

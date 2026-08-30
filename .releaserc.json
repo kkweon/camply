@@ -21,15 +21,8 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "uv version ${nextRelease.version} && uv build && task docs -- build",
+        "prepareCmd": "task dist RELEASE_VERSION=${nextRelease.version}",
         "publishCmd": "task publish RELEASE_VERSION=${nextRelease.version} CI=true"
-      }
-    ],
-    [
-      "@semantic-release/git",
-      {
-        "assets": ["pyproject.toml", "uv.lock"],
-        "message": "🔖 camply ${nextRelease.version}\n\n${nextRelease.notes}\n[skip ci]"
       }
     ],
     [
@@ -37,10 +30,10 @@
       {
         "assets": [
           {
-            "path": "dist/*.whl"
+            "path": "dist/camply_*"
           },
           {
-            "path": "dist/*.tar.gz"
+            "path": "dist/checksums.txt"
           }
         ]
       }
