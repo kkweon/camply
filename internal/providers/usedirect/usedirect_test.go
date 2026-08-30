@@ -82,17 +82,17 @@ func TestProvider_FindCampsites_WithEquipmentAndURL(t *testing.T) {
 
 	for _, c := range results {
 		expectedURL := "https://www.reservecalifornia.com/park/691/616"
-		if c.BookingURL != expectedURL {
-			t.Errorf("expected BookingURL %q, got %q", expectedURL, c.BookingURL)
+		if c.Site.BookingURL != expectedURL {
+			t.Errorf("expected BookingURL %q, got %q", expectedURL, c.Site.BookingURL)
 		}
-		if c.RecreationArea != "Pismo SB" {
-			t.Errorf("expected RecreationArea %q, got %q", "Pismo SB", c.RecreationArea)
+		if c.Site.Facility.RecreationArea != "Pismo SB" {
+			t.Errorf("expected RecreationArea %q, got %q", "Pismo SB", c.Site.Facility.RecreationArea)
 		}
-		if c.RecreationAreaID != "691" {
-			t.Errorf("expected RecreationAreaID %q, got %q", "691", c.RecreationAreaID)
+		if c.Site.Facility.RecreationAreaID != "691" {
+			t.Errorf("expected RecreationAreaID %q, got %q", "691", c.Site.Facility.RecreationAreaID)
 		}
-		if c.MinOccupancy != 2 || c.MaxOccupancy != 6 {
-			t.Errorf("expected occupancy 2-6, got %d-%d", c.MinOccupancy, c.MaxOccupancy)
+		if c.Site.MinOccupancy != 2 || c.Site.MaxOccupancy != 6 {
+			t.Errorf("expected occupancy 2-6, got %d-%d", c.Site.MinOccupancy, c.Site.MaxOccupancy)
 		}
 	}
 }
@@ -179,10 +179,10 @@ func TestEmittedEquipmentStaysWithinTheDeclaredVocabulary(t *testing.T) {
 		known[n] = true
 	}
 	for _, s := range sites {
-		for _, e := range s.PermittedEquipment {
+		for _, e := range s.Site.Equipment {
 			if !known[e.EquipmentName] {
 				t.Errorf("campsite %s reports %q, which is not in SynthesizedEquipment",
-					s.CampsiteID, e.EquipmentName)
+					s.Site.ID, e.EquipmentName)
 			}
 		}
 	}

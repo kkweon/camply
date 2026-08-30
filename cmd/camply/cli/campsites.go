@@ -226,8 +226,8 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 		// 6c. Measure vehicle access before the filter acts on it, for the same
 		// reason as the equipment coverage above: a filter that removes sites
 		// without saying so is indistinguishable from a campground being full.
-		if err := reportSiteAccessCoverage(
-			core.AnalyzeSiteAccess(rawCampsites), r.excludeNoVeh, r.allowPartial,
+		if err := reportParkingCoverage(
+			core.AnalyzeParking(rawCampsites), r.excludeNoVeh, r.allowPartial,
 		); err != nil {
 			return err
 		}
@@ -254,19 +254,19 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 	}
 }
 
-func printTable(campsites []core.AvailableCampsite) {
-	if len(campsites) == 0 {
+func printTable(bookings []core.Availability) {
+	if len(bookings) == 0 {
 		logger.Info("0 New Campsites Found.")
 		return
 	}
 
-	logger.Info("Found %d Campsites", len(campsites))
+	logger.Info("Found %d Campsites", len(bookings))
 
 	// Group by booking date
-	groupedByDate := make(map[string][]core.AvailableCampsite)
-	for _, c := range campsites {
-		dateStr := c.BookingDate.Format("Mon, January 02")
-		groupedByDate[dateStr] = append(groupedByDate[dateStr], c)
+	groupedByDate := make(map[string][]core.Availability)
+	for _, b := range bookings {
+		dateStr := b.Start.Format("Mon, January 02")
+		groupedByDate[dateStr] = append(groupedByDate[dateStr], b)
 	}
 
 	// Sort dates for printing
@@ -281,10 +281,10 @@ func printTable(campsites []core.AvailableCampsite) {
 		logger.Info("📅 %s 🏕  %d sites", dateStr, len(sitesForDate))
 
 		// Group by Location (Rec Area + Facility)
-		groupedByLocation := make(map[string][]core.AvailableCampsite)
-		for _, c := range sitesForDate {
-			locStr := fmt.Sprintf("⛰️  %s  🏕  %s", c.RecreationArea, c.FacilityName)
-			groupedByLocation[locStr] = append(groupedByLocation[locStr], c)
+		groupedByLocation := make(map[string][]core.Availability)
+		for _, b := range sitesForDate {
+			locStr := fmt.Sprintf("⛰️  %s  🏕  %s", b.Site.Facility.RecreationArea, b.Site.Facility.Name)
+			groupedByLocation[locStr] = append(groupedByLocation[locStr], b)
 		}
 
 		locations := make([]string, 0, len(groupedByLocation))
@@ -296,17 +296,17 @@ func printTable(campsites []core.AvailableCampsite) {
 		for _, locStr := range locations {
 			sitesForLoc := groupedByLocation[locStr]
 			logger.Info("\t%s: ⛺ %d sites", locStr, len(sitesForLoc))
-			for _, c := range sitesForLoc {
+			for _, b := range sitesForLoc {
 				nightsStr := "night"
-				if c.BookingNights > 1 {
+				if b.Nights > 1 {
 					nightsStr = "nights"
 				}
 				// Same markers the notification title carries, so the
 				// terminal and the phone never tell different stories.
-				if prefix := c.WarningPrefix(); prefix != "" {
-					logger.Info("\t\t🔗 %s (%d %s) %s", c.BookingURL, c.BookingNights, nightsStr, prefix)
+				if prefix := b.WarningPrefix(); prefix != "" {
+					logger.Info("\t\t🔗 %s (%d %s) %s", b.Site.BookingURL, b.Nights, nightsStr, prefix)
 				} else {
-					logger.Info("\t\t🔗 %s (%d %s)", c.BookingURL, c.BookingNights, nightsStr)
+					logger.Info("\t\t🔗 %s (%d %s)", b.Site.BookingURL, b.Nights, nightsStr)
 				}
 			}
 		}

@@ -14,70 +14,75 @@ import (
 
 // Notifier defines the interface for all notification providers
 type Notifier interface {
-	SendCampsites(campsites []core.AvailableCampsite) error
+	SendCampsites(bookings []core.Availability) error
 }
 
-func getExampleCampsite() core.AvailableCampsite {
-	return core.AvailableCampsite{
-		CampsiteID:       "100",
-		BookingDate:      time.Date(2023, 9, 1, 0, 0, 0, 0, time.UTC),
-		BookingEndDate:   time.Date(2023, 9, 2, 0, 0, 0, 0, time.UTC),
-		BookingNights:    1,
-		CampsiteSiteName: "Test Campsite Name",
-		CampsiteLoopName: "A1",
-		CampsiteType:     "Test",
-		// Deliberately a walk-in example: test-notifications is what proves the
-		// warning path renders, and a drive-in sample would exercise the one
-		// case that needs no warning.
-		SiteAccess:         core.SiteAccessWalkIn,
-		SiteAccessRaw:      "Walk-In",
-		MaxVehicles:        new(int),
-		MinOccupancy:       1,
-		MaxOccupancy:       5,
-		CampsiteUseType:    "Test",
-		AvailabilityStatus: "Available",
-		RecreationArea:     "Test Recreation Area",
-		RecreationAreaID:   "20",
-		FacilityName:       "Test Campground",
-		FacilityID:         "50",
-		BookingURL:         "https://youtu.be/eBGIQ7ZuuiU", // Keep the easter egg
+func getExampleCampsite() core.Availability {
+	zero := 0
+	return core.Availability{
+		Site: &core.Site{
+			ID:   "100",
+			Name: "Test Campsite Name",
+			Loop: "A1",
+			Facility: core.Facility{
+				ID:               "50",
+				Name:             "Test Campground",
+				RecreationArea:   "Test Recreation Area",
+				RecreationAreaID: "20",
+			},
+			// Deliberately a walk-in example: test-notifications is what proves
+			// the warning path renders, and a drive-in sample would exercise the
+			// one case that needs no warning.
+			Parking:      core.ParkingWalk,
+			AccessLabel:  "Walk-In",
+			MaxVehicles:  &zero,
+			RawType:      "Test",
+			UseType:      "Test",
+			MinOccupancy: 1,
+			MaxOccupancy: 5,
+			BookingURL:   "https://youtu.be/eBGIQ7ZuuiU", // Keep the easter egg
+		},
+		Start:  time.Date(2023, 9, 1, 0, 0, 0, 0, time.UTC),
+		End:    time.Date(2023, 9, 2, 0, 0, 0, 0, time.UTC),
+		Nights: 1,
+		Status: "Available",
 	}
 }
 
 // formatMessage creates a standard HTML-formatted string for the campsite
-func formatMessage(c core.AvailableCampsite) (string, string) {
-	title := fmt.Sprintf("%s | %s | %s", c.RecreationArea, c.FacilityName, c.BookingDate.Format("2006-01-02"))
+func formatMessage(a core.Availability) (string, string) {
+	title := fmt.Sprintf("%s | %s | %s", a.Site.Facility.RecreationArea, a.Site.Facility.Name, a.Start.Format("2006-01-02"))
 	// The title leads, and on a phone it is often all that is read before the
 	// booking link is tapped. Everything about this site that needs checking
 	// says so there, not only in the body.
-	if prefix := c.WarningPrefix(); prefix != "" {
+	if prefix := a.WarningPrefix(); prefix != "" {
 		title = prefix + " | " + title
 	}
 
 	var buf bytes.Buffer
-	fmt.Fprintf(&buf, "<b>Campsite ID:</b> %s\n", c.CampsiteID)
-	fmt.Fprintf(&buf, "<b>Booking Date:</b> %s\n", c.BookingDate.Format("2006-01-02"))
-	fmt.Fprintf(&buf, "<b>Booking End Date:</b> %s\n", c.BookingEndDate.Format("2006-01-02"))
-	fmt.Fprintf(&buf, "<b>Booking Nights:</b> %d\n", c.BookingNights)
-	fmt.Fprintf(&buf, "<b>Campsite Site Name:</b> %s\n", c.CampsiteSiteName)
-	fmt.Fprintf(&buf, "<b>Campsite Loop Name:</b> %s\n", c.CampsiteLoopName)
-	fmt.Fprintf(&buf, "<b>Campsite Type:</b> %s\n", c.CampsiteType)
+	fmt.Fprintf(&buf, "<b>Campsite ID:</b> %s\n", a.Site.ID)
+	fmt.Fprintf(&buf, "<b>Booking Date:</b> %s\n", a.Start.Format("2006-01-02"))
+	fmt.Fprintf(&buf, "<b>Booking End Date:</b> %s\n", a.End.Format("2006-01-02"))
+	fmt.Fprintf(&buf, "<b>Booking Nights:</b> %d\n", a.Nights)
+	fmt.Fprintf(&buf, "<b>Campsite Site Name:</b> %s\n", a.Site.Name)
+	fmt.Fprintf(&buf, "<b>Campsite Loop Name:</b> %s\n", a.Site.Loop)
+	fmt.Fprintf(&buf, "<b>Campsite Type:</b> %s\n", a.Site.RawType)
 	// Unconditional, including the unknown case. Campsite Type alone caused the
 	// incident: Zephyr Cove's hike-in sites are typed TENT ONLY NONELECTRIC,
 	// exactly like its drive-in tent sites.
-	fmt.Fprintf(&buf, "<b>Site Access:</b> %s\n", c.SiteAccessSummary())
+	fmt.Fprintf(&buf, "<b>Site Access:</b> %s\n", a.SiteAccessSummary())
 	// Unconditional for the same reason as Site Access: an equipment filter can
 	// let a site through without ever matching it, and the body is where that
 	// has to be admitted.
-	fmt.Fprintf(&buf, "<b>Equipment:</b> %s\n", c.EquipmentSummary())
-	fmt.Fprintf(&buf, "<b>Campsite Occupancy:</b> %d-%d\n", c.MinOccupancy, c.MaxOccupancy)
-	fmt.Fprintf(&buf, "<b>Campsite Use Type:</b> %s\n", c.CampsiteUseType)
-	fmt.Fprintf(&buf, "<b>Availability Status:</b> %s\n", c.AvailabilityStatus)
-	fmt.Fprintf(&buf, "<b>Recreation Area:</b> %s\n", c.RecreationArea)
-	fmt.Fprintf(&buf, "<b>Recreation Area Id:</b> %s\n", c.RecreationAreaID)
-	fmt.Fprintf(&buf, "<b>Facility Name:</b> %s\n", c.FacilityName)
-	fmt.Fprintf(&buf, "<b>Facility Id:</b> %s\n", c.FacilityID)
-	fmt.Fprintf(&buf, "<b>Booking Link:</b> <a href='%s'>%s</a>\n", c.BookingURL, c.BookingURL)
+	fmt.Fprintf(&buf, "<b>Equipment:</b> %s\n", a.EquipmentSummary())
+	fmt.Fprintf(&buf, "<b>Campsite Occupancy:</b> %d-%d\n", a.Site.MinOccupancy, a.Site.MaxOccupancy)
+	fmt.Fprintf(&buf, "<b>Campsite Use Type:</b> %s\n", a.Site.UseType)
+	fmt.Fprintf(&buf, "<b>Availability Status:</b> %s\n", a.Status)
+	fmt.Fprintf(&buf, "<b>Recreation Area:</b> %s\n", a.Site.Facility.RecreationArea)
+	fmt.Fprintf(&buf, "<b>Recreation Area Id:</b> %s\n", a.Site.Facility.RecreationAreaID)
+	fmt.Fprintf(&buf, "<b>Facility Name:</b> %s\n", a.Site.Facility.Name)
+	fmt.Fprintf(&buf, "<b>Facility Id:</b> %s\n", a.Site.Facility.ID)
+	fmt.Fprintf(&buf, "<b>Booking Link:</b> <a href='%s'>%s</a>\n", a.Site.BookingURL, a.Site.BookingURL)
 
 	return title, buf.String()
 }
@@ -120,9 +125,9 @@ func NewPushover(cfg *config.AppConfig) (Notifier, error) {
 	}, nil
 }
 
-func (p *pushoverNotifier) SendCampsites(campsites []core.AvailableCampsite) error {
-	for _, c := range campsites {
-		title, message := formatMessage(c)
+func (p *pushoverNotifier) SendCampsites(bookings []core.Availability) error {
+	for _, b := range bookings {
+		title, message := formatMessage(b)
 
 		payload := map[string]interface{}{
 			"token":   p.token,
@@ -166,10 +171,10 @@ func NewTelegram(cfg *config.AppConfig) (Notifier, error) {
 	}, nil
 }
 
-func (t *telegramNotifier) SendCampsites(campsites []core.AvailableCampsite) error {
-	for _, c := range campsites {
+func (t *telegramNotifier) SendCampsites(bookings []core.Availability) error {
+	for _, b := range bookings {
 		// Telegram doesn't use the title variable like Pushover, it just gets appended to the body
-		_, message := formatMessage(c)
+		_, message := formatMessage(b)
 
 		payload := map[string]interface{}{
 			"chat_id":    t.config.TelegramChatID,
@@ -239,7 +244,7 @@ func RunTestNotifications(providers []string, cfg *config.AppConfig) error {
 
 	for i, n := range notifiers {
 		fmt.Printf("Testing notification provider: %s\n", providers[i])
-		if err := n.SendCampsites([]core.AvailableCampsite{exampleSite}); err != nil {
+		if err := n.SendCampsites([]core.Availability{exampleSite}); err != nil {
 			return fmt.Errorf("❌ Failed to send notification via %s: %w", providers[i], err)
 		}
 	}

@@ -9,13 +9,15 @@ import (
 // Filter handles the fast, native Go filtering that replaces Pandas
 type Filter struct{}
 
-// Apply executes all business logic constraints against raw campsites
-func (f *Filter) Apply(campsites []AvailableCampsite, req SearchRequest) []AvailableCampsite {
+// Apply executes all business logic constraints against raw availabilities.
+func (f *Filter) Apply(availabilities []Availability, req SearchRequest) []Availability {
 	// 1. Consolidate consecutive nights natively
-	consolidated := consolidateNights(campsites, req.Nights)
+	consolidated := consolidateNights(availabilities, req.Nights)
 
-	var filtered []AvailableCampsite
-	for _, site := range consolidated {
+	var filtered []Availability
+	for _, booking := range consolidated {
+		site := booking.Site
+
 		// 2. Restrict to the campsite IDs the user named.
 		//
 		// Validation that those IDs exist lives in the providers, which hold the
@@ -26,31 +28,31 @@ func (f *Filter) Apply(campsites []AvailableCampsite, req SearchRequest) []Avail
 		}
 
 		// 3. Check if the site meets the consecutive nights requirement
-		if site.BookingNights < req.Nights {
+		if booking.Nights < req.Nights {
 			continue
 		}
 
 		// 4. Check if weekends only is requested
-		if req.WeekendsOnly && !isWeekend(site.BookingDate) {
+		if req.WeekendsOnly && !isWeekend(booking.Start) {
 			continue
 		}
 
 		// 5. Ensure it falls within requested search windows
-		if !isInSearchWindow(site, req) {
+		if !isInSearchWindow(booking, req) {
 			continue
 		}
 
 		// 6. Check Equipment filtering.
 		//
 		// A site the provider reported no equipment for is kept, not dropped.
-		// Deciding on absent evidence is what made this filter discard 257
+		// Deciding on absent evidence is what made this filter discard 242
 		// nights of real availability at Meeks Bay, where 17 of 88 campsites
 		// carry no equipment data at all. It survives marked instead, and the
 		// mark is what the alert shows.
 		if len(req.Equipment) > 0 {
 			switch {
-			case len(site.PermittedEquipment) == 0:
-				site.EquipmentUnverified = true
+			case len(site.Equipment) == 0:
+				booking.EquipmentUnverified = true
 			case !hasMatchingEquipment(site, req.Equipment):
 				continue
 			}
@@ -64,45 +66,45 @@ func (f *Filter) Apply(campsites []AvailableCampsite, req SearchRequest) []Avail
 			continue
 		}
 
-		// 8. Drop sites proven unreachable by car.
+		// 8. Drop sites that need a walk from the car, or have no car access.
 		//
-		// NoVehicleAccess, not !HasVehicleAccess: a site whose access the
-		// provider never reported is kept and flagged in the alert instead. The
-		// filter is opt-in and easy to forget, so it is not allowed to be the
-		// thing that silently discards a site — that job belongs to the alert,
-		// which always says what it knows.
-		if req.ExcludeNoVehicleAccess && site.SiteAccess.NoVehicleAccess() {
+		// RequiresWalk, not !ReachableByCar: a site whose access the provider
+		// never reported is kept and flagged in the alert instead. The filter is
+		// opt-in and easy to forget, so it is not allowed to be the thing that
+		// silently discards a site — that job belongs to the alert, which always
+		// says what it knows.
+		if req.ExcludeNoVehicleAccess && site.Parking.RequiresWalk() {
 			continue
 		}
 
-		filtered = append(filtered, site)
+		filtered = append(filtered, booking)
 	}
 
 	return filtered
 }
 
-// consolidateNights stitches per-night availability slices into bookings of exactly
+// consolidateNights stitches per-night availability into bookings of exactly
 // requiredNights consecutive nights, mirroring the Python implementation
 // (camply/search/base_search.py _consecutive_subseq / _find_consecutive_nights).
 //
 // For a maximal run of N consecutive free nights it emits every sliding window of
 // length requiredNights — i.e. N-requiredNights+1 records, each spanning exactly
 // requiredNights nights. Runs shorter than requiredNights emit nothing.
-func consolidateNights(campsites []AvailableCampsite, requiredNights int) []AvailableCampsite {
+func consolidateNights(availabilities []Availability, requiredNights int) []Availability {
 	if requiredNights < 1 {
 		requiredNights = 1
 	}
-	if len(campsites) == 0 {
-		return campsites
+	if len(availabilities) == 0 {
+		return availabilities
 	}
 
 	// Group by campsite within a facility. The composite key matches Python's
 	// (campsite_id, campground_id) grouping and avoids merging units from different
 	// facilities that happen to share a numeric ID.
-	groups := make(map[string][]AvailableCampsite)
-	for _, site := range campsites {
-		key := site.CampsiteID + "|" + site.FacilityID
-		groups[key] = append(groups[key], site)
+	groups := make(map[string][]Availability)
+	for _, a := range availabilities {
+		key := a.Site.ID + "|" + a.Site.Facility.ID
+		groups[key] = append(groups[key], a)
 	}
 
 	// Iterate in a stable order. Ranging over the map directly made two
@@ -115,13 +117,13 @@ func consolidateNights(campsites []AvailableCampsite, requiredNights int) []Avai
 	}
 	sort.Strings(keys)
 
-	var consolidated []AvailableCampsite
+	var consolidated []Availability
 
 	for _, key := range keys {
 		group := groups[key]
 		// Sort the group by booking date
 		sort.Slice(group, func(i, j int) bool {
-			return group[i].BookingDate.Before(group[j].BookingDate)
+			return group[i].Start.Before(group[j].Start)
 		})
 
 		// Walk maximal consecutive runs, then emit every sliding window of exactly
@@ -129,21 +131,18 @@ func consolidateNights(campsites []AvailableCampsite, requiredNights int) []Avai
 		runStart := 0
 		for i := 1; i <= len(group); i++ {
 			isConsecutive := i < len(group) &&
-				truncDay(group[i].BookingDate).Equal(truncDay(group[i-1].BookingDate).AddDate(0, 0, 1))
+				truncDay(group[i].Start).Equal(truncDay(group[i-1].Start).AddDate(0, 0, 1))
 			if isConsecutive {
 				continue
 			}
 
 			run := group[runStart:i]
 			for s := 0; s+requiredNights <= len(run); s++ {
-				startSite := run[s]
-				endSite := run[s+requiredNights-1]
+				merged := run[s]
+				merged.End = run[s+requiredNights-1].End
+				merged.Nights = requiredNights
 
-				mergedSite := startSite
-				mergedSite.BookingEndDate = endSite.BookingEndDate
-				mergedSite.BookingNights = requiredNights
-
-				consolidated = append(consolidated, mergedSite)
+				consolidated = append(consolidated, merged)
 			}
 			runStart = i
 		}
@@ -161,9 +160,9 @@ func truncDay(t time.Time) time.Time {
 //
 // A site with no equipment data is not "no": it is unknown, and the caller must
 // handle that before asking. This function only answers where there is evidence.
-func hasMatchingEquipment(site AvailableCampsite, requested []Equipment) bool {
+func hasMatchingEquipment(site *Site, requested []Equipment) bool {
 	for _, reqEq := range requested {
-		for _, siteEq := range site.PermittedEquipment {
+		for _, siteEq := range site.Equipment {
 			if strings.EqualFold(siteEq.EquipmentName, reqEq.EquipmentName) {
 				// If length doesn't matter, or if it fits
 				if reqEq.MaxLength == 0 || reqEq.MaxLength <= siteEq.MaxLength {
@@ -180,31 +179,31 @@ func isWeekend(t time.Time) bool {
 	return day == time.Friday || day == time.Saturday
 }
 
-func isInSearchWindow(site AvailableCampsite, req SearchRequest) bool {
+func isInSearchWindow(booking Availability, req SearchRequest) bool {
 	// If no windows provided, assume valid
 	if len(req.StartDates) == 0 || len(req.EndDates) == 0 {
 		return true
 	}
 
-	siteStart := site.BookingDate.Truncate(24 * time.Hour)
-	siteEnd := site.BookingEndDate.Truncate(24 * time.Hour)
+	bookingStart := booking.Start.Truncate(24 * time.Hour)
+	bookingEnd := booking.End.Truncate(24 * time.Hour)
 
 	for i := range req.StartDates {
 		start := req.StartDates[i].Truncate(24 * time.Hour)
 		end := req.EndDates[i].Truncate(24 * time.Hour)
 
 		// Must start on or after requested start, and end on or before requested end
-		if (siteStart.Equal(start) || siteStart.After(start)) &&
-			(siteEnd.Equal(end) || siteEnd.Before(end)) {
+		if (bookingStart.Equal(start) || bookingStart.After(start)) &&
+			(bookingEnd.Equal(end) || bookingEnd.Before(end)) {
 			return true
 		}
 	}
 	return false
 }
 
-func hasMatchingCampsiteType(site AvailableCampsite, wanted []string) bool {
+func hasMatchingCampsiteType(site *Site, wanted []string) bool {
 	for _, w := range wanted {
-		if strings.EqualFold(strings.TrimSpace(w), strings.TrimSpace(site.CampsiteType)) {
+		if strings.EqualFold(strings.TrimSpace(w), strings.TrimSpace(site.RawType)) {
 			return true
 		}
 	}

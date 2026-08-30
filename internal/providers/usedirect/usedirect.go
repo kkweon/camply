@@ -78,8 +78,8 @@ type gridResponse struct {
 	} `json:"Facility"`
 }
 
-func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([]core.AvailableCampsite, error) {
-	var allCampsites []core.AvailableCampsite
+func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([]core.Availability, error) {
+	var all []core.Availability
 
 	if len(req.StartDates) == 0 || len(req.EndDates) == 0 {
 		return nil, fmt.Errorf("UseDirect requires both start and end dates")
@@ -91,8 +91,8 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 		return nil, fmt.Errorf("failed to warmup usedirect session: %w", err)
 	}
 
-	// Every unit at every facility searched, free or not — the roster the
-	// --campsites check needs in order to tell a typo from a booked-out site.
+	// Every unit at every facility searched — the roster the --campsites check
+	// needs in order to tell a typo from a booked-out site.
 	var roster []core.KnownCampsite
 
 	for _, campgroundID := range req.Campgrounds {
@@ -159,13 +159,8 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 				_ = grid.Message // no-op to satisfy staticcheck empty branch
 			}
 
-			for _, unit := range grid.Facility.Units {
-				roster = append(roster, core.KnownCampsite{
-					CampsiteID:   strconv.Itoa(unit.UnitId),
-					SiteName:     unit.Name,
-					FacilityName: grid.Facility.FacilityName,
-				})
-			}
+			// One Site per unit, shared by every night it is free.
+			sites := map[string]*core.Site{}
 
 			// Pre-fetch occupancy concurrently for any unit with a free slice
 			var wg sync.WaitGroup
@@ -220,50 +215,25 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 						// Fetch occupancy lazily (cached per unit)
 						p.fetchUnitOccupancy(ctx, unit.UnitId)
 
-						// TylerTech maps Tent sites to Group 5 and Equipment mapping
-						var permittedEquipment []core.Equipment
+						logger.Debug("Evaluating campsite: %s (Type: %s, UseType: %s, VehicleLength: %d)",
+							unit.Name, campsiteType, campsiteUseType, unit.VehicleLength)
 
-						lowerUseType := strings.ToLower(campsiteUseType)
+						parking, parkingBasis := classifyParking(campsiteType, campsiteUseType, unit.VehicleLength)
+						permits, permitsBasis := classifyPermits(campsiteType, campsiteUseType, unit.VehicleLength, parking)
 
-						// If it's explicitly a "Tent Site" or "Tent and RV" category, or VehicleLength is 0 (primitive)
-						// We also include generic campsites, sites, and hook ups as they are typically tent friendly.
-						logger.Debug("Evaluating campsite: %s (Type: %s, UseType: %s, VehicleLength: %d)", unit.Name, campsiteType, campsiteUseType, unit.VehicleLength)
-						if strings.Contains(lowerUseType, "tent") || strings.Contains(lowerUseType, "camp") || strings.Contains(lowerUseType, "site") || strings.Contains(lowerUseType, "hook up") || strings.Contains(lowerUseType, "primitive") || unit.VehicleLength == 0 {
-							permittedEquipment = append(permittedEquipment, core.Equipment{
-								EquipmentName: EquipmentTent,
-								MaxLength:     0,
-							})
+						// UseDirect grids carry no equipment, so camply
+						// synthesises it from what the unit permits. A unit no
+						// car reaches must not advertise vehicle equipment even
+						// when the API reports a length for it.
+						var equipment []core.Equipment
+						if permits.Has(core.PermitsTent) {
+							equipment = append(equipment, core.Equipment{EquipmentName: EquipmentTent})
 						}
-						// Remote Camping units (Hike & Bike, Bike In, Boat In, Walk In) are
-						// not drive-in sites even when the API reports a vehicle length, so
-						// they must not advertise vehicle equipment.
-						lowerType := strings.ToLower(campsiteType)
-						driveIn := !strings.Contains(lowerType, "remote") &&
-							!strings.Contains(lowerUseType, "hike") &&
-							!strings.Contains(lowerUseType, "bike") &&
-							!strings.Contains(lowerUseType, "walk") &&
-							!strings.Contains(lowerUseType, "boat")
-
-						// Reuse that same verdict for the reported access, so
-						// the alert cannot disagree with the equipment the
-						// provider advertises. UseDirect always resolves to a
-						// definite answer: if it reported Unknown here, every
-						// ReserveCalifornia alert would carry the warning label
-						// and the label would stop meaning anything.
-						siteAccess := classifySiteAccess(driveIn, campsiteType, campsiteUseType)
-
-						// Map raw Vehicle Lengths natively into the struct
-						if unit.VehicleLength > 0 && driveIn {
-							permittedEquipment = append(permittedEquipment, core.Equipment{
-								EquipmentName: EquipmentRV,
-								MaxLength:     unit.VehicleLength,
-							}, core.Equipment{
-								EquipmentName: EquipmentTrailer,
-								MaxLength:     unit.VehicleLength,
-							}, core.Equipment{
-								EquipmentName: EquipmentVehicle,
-								MaxLength:     unit.VehicleLength,
-							})
+						if permits.Has(core.PermitsRV) {
+							equipment = append(equipment,
+								core.Equipment{EquipmentName: EquipmentRV, MaxLength: unit.VehicleLength},
+								core.Equipment{EquipmentName: EquipmentTrailer, MaxLength: unit.VehicleLength},
+								core.Equipment{EquipmentName: EquipmentVehicle, MaxLength: unit.VehicleLength})
 						}
 
 						var recreationAreaName string
@@ -278,25 +248,45 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 							maxOcc = occ.MaxOccupancy
 						}
 
-						allCampsites = append(allCampsites, core.AvailableCampsite{
-							CampsiteID:         strconv.Itoa(unit.UnitId),
-							CampsiteSiteName:   unit.Name,
-							BookingDate:        bookingDate,
-							BookingEndDate:     bookingDate.AddDate(0, 0, 1), // Default 1 night, Filter merges them
-							BookingNights:      1,
-							CampsiteType:       campsiteType,
-							CampsiteUseType:    campsiteUseType,
-							SiteAccess:         siteAccess,
-							SiteAccessRaw:      siteAccess.String(),
-							MinOccupancy:       minOcc,
-							MaxOccupancy:       maxOcc,
-							AvailabilityStatus: "Available",
-							RecreationArea:     recreationAreaName,
-							RecreationAreaID:   strconv.Itoa(placeID),
-							FacilityID:         strconv.Itoa(facilityID),
-							FacilityName:       grid.Facility.FacilityName,
-							PermittedEquipment: permittedEquipment,
-							BookingURL:         bookingURL,
+						unitID := strconv.Itoa(unit.UnitId)
+						site, ok := sites[unitID]
+						if !ok {
+							site = &core.Site{
+								ID:   unitID,
+								Name: unit.Name,
+								Facility: core.Facility{
+									ID:               strconv.Itoa(facilityID),
+									Name:             grid.Facility.FacilityName,
+									RecreationArea:   recreationAreaName,
+									RecreationAreaID: strconv.Itoa(placeID),
+								},
+								Permits:      permits,
+								Parking:      parking,
+								Hookups:      classifyHookups(campsiteType),
+								Equipment:    equipment,
+								PermitsBasis: permitsBasis,
+								ParkingBasis: parkingBasis,
+								AccessLabel:  parkingLabel(parking),
+								RawType:      campsiteType,
+								UseType:      campsiteUseType,
+								MinOccupancy: minOcc,
+								MaxOccupancy: maxOcc,
+								BookingURL:   bookingURL,
+							}
+							sites[unitID] = site
+							roster = append(roster, core.KnownCampsite{
+								CampsiteID:   unitID,
+								SiteName:     unit.Name,
+								FacilityName: grid.Facility.FacilityName,
+							})
+						}
+
+						all = append(all, core.Availability{
+							Site:   site,
+							Start:  bookingDate,
+							End:    bookingDate.AddDate(0, 0, 1), // one night; Filter merges consecutive ones
+							Nights: 1,
+							Status: "Available",
 						})
 					}
 				}
@@ -310,7 +300,22 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 		return nil, err
 	}
 
-	return allCampsites, nil
+	return all, nil
+}
+
+// parkingLabel is camply's own word for how a unit is reached. UseDirect has no
+// label of its own, unlike recreation.gov's Site Access.
+func parkingLabel(p core.Parking) string {
+	switch p {
+	case core.ParkingAtSite:
+		return "Drive-In"
+	case core.ParkingWalk:
+		return "Walk-In"
+	case core.ParkingNone:
+		return "No Vehicle Access"
+	default:
+		return ""
+	}
 }
 
 type unitDetailResponse struct {

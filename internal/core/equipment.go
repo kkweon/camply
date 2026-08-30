@@ -34,7 +34,7 @@ type Coverage struct {
 //
 // Counting is per distinct campsite, not per availability row: a site free for
 // five nights is one site, and counting rows would inflate every number.
-func AnalyzeEquipment(sites []AvailableCampsite, requested []Equipment) Coverage {
+func AnalyzeEquipment(availabilities []Availability, requested []Equipment) Coverage {
 	c := Coverage{
 		MatchesByName:  map[string]int{},
 		ObservedByName: map[string]int{},
@@ -45,18 +45,19 @@ func AnalyzeEquipment(sites []AvailableCampsite, requested []Equipment) Coverage
 	}
 
 	seen := map[string]bool{}
-	for _, s := range sites {
-		key := s.CampsiteID + "|" + s.FacilityID
+	for _, a := range availabilities {
+		s := a.Site
+		key := s.ID + "|" + s.Facility.ID
 		if seen[key] {
 			continue
 		}
 		seen[key] = true
 
-		fac, ok := c.PerFacility[s.FacilityID]
+		fac, ok := c.PerFacility[s.Facility.ID]
 		if !ok {
 			fac = FacilityCoverage{
-				FacilityID:     s.FacilityID,
-				FacilityName:   s.FacilityName,
+				FacilityID:     s.Facility.ID,
+				FacilityName:   s.Facility.Name,
 				MatchesByName:  map[string]int{},
 				ObservedByName: map[string]int{},
 			}
@@ -68,11 +69,11 @@ func AnalyzeEquipment(sites []AvailableCampsite, requested []Equipment) Coverage
 		c.TotalSites++
 		fac.TotalSites++
 
-		if len(s.PermittedEquipment) == 0 {
+		if len(s.Equipment) == 0 {
 			c.MissingData++
 			fac.MissingData++
 		}
-		for _, e := range s.PermittedEquipment {
+		for _, e := range s.Equipment {
 			c.ObservedByName[e.EquipmentName]++
 			fac.ObservedByName[e.EquipmentName]++
 		}
@@ -83,7 +84,7 @@ func AnalyzeEquipment(sites []AvailableCampsite, requested []Equipment) Coverage
 			}
 		}
 
-		c.PerFacility[s.FacilityID] = fac
+		c.PerFacility[s.Facility.ID] = fac
 	}
 
 	return c
@@ -91,8 +92,8 @@ func AnalyzeEquipment(sites []AvailableCampsite, requested []Equipment) Coverage
 
 // equipmentMatches mirrors Filter.hasMatchingEquipment for a single term, so
 // the diagnosis cannot disagree with the filter it explains.
-func equipmentMatches(site AvailableCampsite, req Equipment) bool {
-	for _, have := range site.PermittedEquipment {
+func equipmentMatches(site *Site, req Equipment) bool {
+	for _, have := range site.Equipment {
 		if !strings.EqualFold(have.EquipmentName, req.EquipmentName) {
 			continue
 		}

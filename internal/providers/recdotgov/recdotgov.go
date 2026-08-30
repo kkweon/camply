@@ -53,9 +53,14 @@ func NewProviderAt(scheme, netLoc string) *Provider {
 	return p
 }
 
-// FindCampsites queries Recreation.gov for availability
-func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([]core.AvailableCampsite, error) {
-	var allCampsites []core.AvailableCampsite
+// FindCampsites queries Recreation.gov for availability.
+//
+// Classification happens here rather than in either fetch, because the two
+// endpoints each hold half the evidence: attributes and notices come from the
+// campsite search, campsite_type from the month availability, and the rules in
+// adapter.go need both.
+func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([]core.Availability, error) {
+	var all []core.Availability
 
 	// Recreation.gov availability is queried by campground ID and month.
 	// For each campground and each month spanning the search dates, we make a request.
@@ -67,7 +72,7 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 	var roster []core.KnownCampsite
 
 	for _, campgroundID := range req.Campgrounds {
-		// 1. Fetch Metadata (for equipment & facility names)
+		// 1. Fetch Metadata (for equipment, attributes & facility names)
 		metadata, err := p.fetchMetadata(ctx, campgroundID)
 		if err != nil {
 			return nil, fmt.Errorf("failed to fetch metadata for %s: %w", campgroundID, err)
@@ -85,43 +90,48 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 		for id, meta := range metadata {
 			roster = append(roster, core.KnownCampsite{
 				CampsiteID:   id,
-				SiteName:     meta.CampsiteSiteName,
+				SiteName:     meta.Name,
 				FacilityName: facilityName,
 			})
 		}
 
 		fmt.Printf("🏕  Fetched metadata for %s (#%s) - %d total campsites\n", facilityName, campgroundID, len(metadata))
+
+		facility := core.Facility{ID: campgroundID, Name: facilityName}
+
 		// 2. Fetch Availabilities
 		for _, month := range months {
-			campsites, err := p.getAvailability(ctx, campgroundID, month)
+			raw, err := p.getAvailability(ctx, campgroundID, month)
 			if err != nil {
 				return nil, fmt.Errorf("failed to get availability for campground %s: %w", campgroundID, err)
 			}
 
-			// 3. Hydrate with metadata
-			for i := range campsites {
-				meta, ok := metadata[campsites[i].CampsiteID]
-				if ok {
-					campsites[i].PermittedEquipment = meta.PermittedEquipment
-					if meta.FacilityName != "" {
-						campsites[i].FacilityName = meta.FacilityName
-					}
-					campsites[i].SiteAccessRaw = meta.SiteAccessRaw
-					campsites[i].MaxVehicles = meta.MaxVehicles
-				}
-				// Classified here rather than in either fetch: the attributes
-				// come from the metadata endpoint and campsite_type from the
-				// availability endpoint, and the rule needs both. A campsite
-				// missing from the metadata map keeps the zero value, which is
-				// SiteAccessUnknown — reported, never assumed drive-in.
-				campsites[i].SiteAccess = classifySiteAccess(
-					campsites[i].SiteAccessRaw,
-					campsites[i].MaxVehicles,
-					campsites[i].CampsiteType,
-				)
+			// 3. Build one Site per campsite, shared by every night it is free.
+			sites := make(map[string]*core.Site, len(raw.Campsites))
+			for id, data := range raw.Campsites {
+				sites[id] = p.buildSite(id, data, facility, metadata[id])
 			}
 
-			allCampsites = append(allCampsites, campsites...)
+			for id, data := range raw.Campsites {
+				for dateStr, status := range data.Availabilities {
+					// Recreation.gov uses "Available" for open slots
+					if status != "Available" {
+						continue
+					}
+					// Date comes in as 2006-01-02T00:00:00Z
+					start, err := time.Parse(time.RFC3339, dateStr)
+					if err != nil {
+						continue
+					}
+					all = append(all, core.Availability{
+						Site:   sites[id],
+						Start:  start,
+						End:    start.AddDate(0, 0, 1), // one night; Filter merges consecutive ones
+						Nights: 1,
+						Status: status,
+					})
+				}
+			}
 		}
 	}
 
@@ -131,7 +141,42 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 		return nil, err
 	}
 
-	return allCampsites, nil
+	return all, nil
+}
+
+// buildSite is the whole adapter boundary for one campsite: raw API shapes in,
+// camply's domain out.
+func (p *Provider) buildSite(id string, data campsiteData, facility core.Facility, meta siteMetadata) *core.Site {
+	parking, parkingBasis := classifyParking(meta.Attributes, data.Type, meta.Notices)
+	permits, permitsBasis := classifyPermits(meta.Equipment, data.Type)
+
+	if meta.FacilityName != "" {
+		facility.Name = meta.FacilityName
+	}
+
+	return &core.Site{
+		ID:           id,
+		Name:         data.Site,
+		Loop:         data.Loop,
+		Facility:     facility,
+		Permits:      permits,
+		Parking:      parking,
+		Hookups:      classifyHookups(meta.Attributes, data.Type),
+		SharedWater:  meta.Attributes.yesNo(sharedWaterAttrs),
+		Equipment:    meta.Equipment,
+		WalkFeet:     meta.Attributes.firstNumber(hikeDistanceAttrs),
+		Waterfront:   meta.Attributes.text("Proximity to Water"),
+		Amps:         meta.Attributes.number("Electricity Hookup"),
+		MaxVehicles:  meta.Attributes.number(attrMaxNumVehicles),
+		PermitsBasis: permitsBasis,
+		ParkingBasis: parkingBasis,
+		AccessLabel:  meta.Attributes.text(attrSiteAccess),
+		RawType:      data.Type,
+		UseType:      data.TypeOfUse,
+		MinOccupancy: data.MinNumPeople,
+		MaxOccupancy: data.MaxNumPeople,
+		BookingURL:   fmt.Sprintf("https://www.recreation.gov/camping/campsites/%s", id),
+	}
 }
 
 type ridbFacilitiesResponse struct {
@@ -278,16 +323,15 @@ func (p *Provider) FindRecreationAreas(ctx context.Context, req core.SearchReque
 }
 
 // getAvailability calls the /api/camps/availability/campground/{id}/month endpoint
-func (p *Provider) getAvailability(ctx context.Context, campgroundID string, month time.Time) ([]core.AvailableCampsite, error) {
+func (p *Provider) getAvailability(ctx context.Context, campgroundID string, month time.Time) (monthAvailabilityResponse, error) {
 	urlStr := fmt.Sprintf("%s://%s/%s/%s/month?start_date=%s",
 		p.apiScheme, p.apiNetLoc, p.apiBasePath, campgroundID, url.QueryEscape(month.Format("2006-01-02T00:00:00.000Z")))
 
 	var apiResp monthAvailabilityResponse
 	if err := p.getJSON(ctx, urlStr, recdotgovHeaders, &apiResp); err != nil {
-		return nil, err
+		return monthAvailabilityResponse{}, err
 	}
-
-	return parseAvailability(apiResp, campgroundID)
+	return apiResp, nil
 }
 
 // getSearchMonths extracts the unique YYYY-MM-01 times to query
@@ -330,40 +374,4 @@ type campsiteData struct {
 	MinNumPeople   int               `json:"min_num_people"`
 	MaxNumPeople   int               `json:"max_num_people"`
 	Availabilities map[string]string `json:"availabilities"`
-}
-
-func parseAvailability(apiResp monthAvailabilityResponse, campgroundID string) ([]core.AvailableCampsite, error) {
-	var available []core.AvailableCampsite
-
-	for id, data := range apiResp.Campsites {
-		for dateStr, status := range data.Availabilities {
-			// Recreation.gov uses "Available" for open slots
-			if status != "Available" {
-				continue
-			}
-
-			// Date comes in as 2006-01-02T00:00:00Z
-			bookingDate, err := time.Parse(time.RFC3339, dateStr)
-			if err != nil {
-				continue
-			}
-
-			available = append(available, core.AvailableCampsite{
-				CampsiteID:         id,
-				BookingDate:        bookingDate,
-				BookingEndDate:     bookingDate.AddDate(0, 0, 1), // Default 1 night, Filter handles consecutive merging
-				BookingNights:      1,
-				CampsiteSiteName:   data.Site,
-				CampsiteLoopName:   data.Loop,
-				CampsiteType:       data.Type,
-				MinOccupancy:       data.MinNumPeople,
-				MaxOccupancy:       data.MaxNumPeople,
-				CampsiteUseType:    data.TypeOfUse,
-				AvailabilityStatus: status,
-				FacilityID:         campgroundID,
-				BookingURL:         fmt.Sprintf("https://www.recreation.gov/camping/campsites/%s", id),
-			})
-		}
-	}
-	return available, nil
 }

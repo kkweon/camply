@@ -5,14 +5,16 @@ import (
 	"time"
 )
 
-// night builds a single-night availability slice for a campsite on the given day.
-func night(campsiteID, facilityID string, day time.Time) AvailableCampsite {
-	return AvailableCampsite{
-		CampsiteID:     campsiteID,
-		FacilityID:     facilityID,
-		BookingDate:    day,
-		BookingEndDate: day.AddDate(0, 0, 1),
-		BookingNights:  1,
+// night builds a single-night availability for a campsite on the given day.
+func night(campsiteID, facilityID string, day time.Time) Availability {
+	return Availability{
+		Site: &Site{
+			ID:       campsiteID,
+			Facility: Facility{ID: facilityID},
+		},
+		Start:  day,
+		End:    day.AddDate(0, 0, 1),
+		Nights: 1,
 	}
 }
 
@@ -21,8 +23,8 @@ func day(y int, m time.Month, d int) time.Time {
 }
 
 // run returns single-night slices for `count` consecutive days starting at `start`.
-func run(campsiteID, facilityID string, start time.Time, count int) []AvailableCampsite {
-	out := make([]AvailableCampsite, 0, count)
+func run(campsiteID, facilityID string, start time.Time, count int) []Availability {
+	out := make([]Availability, 0, count)
 	for i := 0; i < count; i++ {
 		out = append(out, night(campsiteID, facilityID, start.AddDate(0, 0, i)))
 	}
@@ -34,7 +36,7 @@ func TestConsolidateNights(t *testing.T) {
 
 	tests := []struct {
 		name     string
-		input    []AvailableCampsite
+		input    []Availability
 		nights   int
 		wantLen  int
 		wantEach int // expected BookingNights on every record (0 = don't check)
@@ -108,12 +110,12 @@ func TestConsolidateNights(t *testing.T) {
 			}
 			if tt.wantEach > 0 {
 				for _, c := range got {
-					if c.BookingNights != tt.wantEach {
-						t.Errorf("got BookingNights=%d, want %d for %+v", c.BookingNights, tt.wantEach, c)
+					if c.Nights != tt.wantEach {
+						t.Errorf("got BookingNights=%d, want %d for %+v", c.Nights, tt.wantEach, c)
 					}
 					// The span must equal the recorded nights.
-					if spanDays := int(c.BookingEndDate.Sub(c.BookingDate).Hours() / 24); spanDays != c.BookingNights {
-						t.Errorf("span of %d days != BookingNights %d for %+v", spanDays, c.BookingNights, c)
+					if spanDays := int(c.End.Sub(c.Start).Hours() / 24); spanDays != c.Nights {
+						t.Errorf("span of %d days != BookingNights %d for %+v", spanDays, c.Nights, c)
 					}
 				}
 			}
@@ -131,8 +133,8 @@ func TestConsolidateNightsWindowsAreExact(t *testing.T) {
 		t.Fatalf("got %d records, want 2: %+v", len(got), got)
 	}
 	for _, c := range got {
-		if c.BookingNights != 2 {
-			t.Errorf("expected only 2-night windows, got %d-night block %+v", c.BookingNights, c)
+		if c.Nights != 2 {
+			t.Errorf("expected only 2-night windows, got %d-night block %+v", c.Nights, c)
 		}
 	}
 }
@@ -157,11 +159,11 @@ func TestFilterApplyConsolidates(t *testing.T) {
 // Equipment cannot express drive-in: a WALK TO site still permits a tent, so
 // only campsite_type separates sites reachable by car from those that are not.
 func TestFilterByCampsiteType(t *testing.T) {
-	sites := []AvailableCampsite{
-		{CampsiteID: "1", CampsiteType: "STANDARD NONELECTRIC", BookingDate: day(2026, 9, 4), BookingEndDate: day(2026, 9, 5)},
-		{CampsiteID: "2", CampsiteType: "TENT ONLY NONELECTRIC", BookingDate: day(2026, 9, 4), BookingEndDate: day(2026, 9, 5)},
-		{CampsiteID: "3", CampsiteType: "WALK TO", BookingDate: day(2026, 9, 4), BookingEndDate: day(2026, 9, 5)},
-		{CampsiteID: "4", CampsiteType: "RV NONELECTRIC", BookingDate: day(2026, 9, 4), BookingEndDate: day(2026, 9, 5)},
+	sites := []Availability{
+		{Site: &Site{ID: "1", RawType: "STANDARD NONELECTRIC"}, Start: day(2026, 9, 4), End: day(2026, 9, 5)},
+		{Site: &Site{ID: "2", RawType: "TENT ONLY NONELECTRIC"}, Start: day(2026, 9, 4), End: day(2026, 9, 5)},
+		{Site: &Site{ID: "3", RawType: "WALK TO"}, Start: day(2026, 9, 4), End: day(2026, 9, 5)},
+		{Site: &Site{ID: "4", RawType: "RV NONELECTRIC"}, Start: day(2026, 9, 4), End: day(2026, 9, 5)},
 	}
 	req := SearchRequest{
 		Nights:        1,
@@ -175,15 +177,15 @@ func TestFilterByCampsiteType(t *testing.T) {
 		t.Fatalf("got %d sites, want 2 (WALK TO and RV NONELECTRIC excluded)", len(got))
 	}
 	for _, s := range got {
-		if s.CampsiteType == "WALK TO" || s.CampsiteType == "RV NONELECTRIC" {
-			t.Errorf("%s should have been filtered out", s.CampsiteType)
+		if s.Site.RawType == "WALK TO" || s.Site.RawType == "RV NONELECTRIC" {
+			t.Errorf("%s should have been filtered out", s.Site.RawType)
 		}
 	}
 }
 
 func TestCampsiteTypeMatchIgnoresCaseAndPadding(t *testing.T) {
-	sites := []AvailableCampsite{
-		{CampsiteID: "1", CampsiteType: "WALK TO", BookingDate: day(2026, 9, 4), BookingEndDate: day(2026, 9, 5)},
+	sites := []Availability{
+		{Site: &Site{ID: "1", RawType: "WALK TO"}, Start: day(2026, 9, 4), End: day(2026, 9, 5)},
 	}
 	req := SearchRequest{
 		Nights:        1,
@@ -198,9 +200,9 @@ func TestCampsiteTypeMatchIgnoresCaseAndPadding(t *testing.T) {
 
 // No campsite-type filter must mean no filtering, not "match nothing".
 func TestNoCampsiteTypeFilterKeepsEverything(t *testing.T) {
-	sites := []AvailableCampsite{
-		{CampsiteID: "1", CampsiteType: "WALK TO", BookingDate: day(2026, 9, 4), BookingEndDate: day(2026, 9, 5)},
-		{CampsiteID: "2", CampsiteType: "", BookingDate: day(2026, 9, 4), BookingEndDate: day(2026, 9, 5)},
+	sites := []Availability{
+		{Site: &Site{ID: "1", RawType: "WALK TO"}, Start: day(2026, 9, 4), End: day(2026, 9, 5)},
+		{Site: &Site{ID: "2"}, Start: day(2026, 9, 4), End: day(2026, 9, 5)},
 	}
 	req := SearchRequest{Nights: 1, StartDates: []time.Time{day(2026, 9, 1)}, EndDates: []time.Time{day(2026, 9, 30)}}
 	if got := (&Filter{}).Apply(sites, req); len(got) != 2 {

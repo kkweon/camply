@@ -2,45 +2,76 @@ package core
 
 import "time"
 
-// AvailableCampsite represents a single available booking slot
-type AvailableCampsite struct {
-	CampsiteID         string
-	BookingDate        time.Time
-	BookingEndDate     time.Time
-	BookingNights      int
-	CampsiteSiteName   string
-	CampsiteLoopName   string
-	CampsiteType       string
-	MinOccupancy       int
-	MaxOccupancy       int
-	CampsiteUseType    string
-	AvailabilityStatus string
-	RecreationArea     string
-	RecreationAreaID   string
-	FacilityName       string
-	FacilityID         string
-	BookingURL         string
-	PermittedEquipment []Equipment
+// Facility is the campground a site belongs to.
+type Facility struct {
+	ID               string
+	Name             string
+	RecreationArea   string
+	RecreationAreaID string
+}
 
-	// SiteAccess is how the site is reached. The zero value is
-	// SiteAccessUnknown, so a provider that leaves it alone cannot be read as
-	// drive-in.
-	SiteAccess SiteAccess
-	// SiteAccessRaw is the provider's own label, kept verbatim so a value
-	// outside the known vocabulary still reaches the reader intact.
-	SiteAccessRaw string
-	// MaxVehicles is how many vehicles the site parks. It is a pointer because
-	// "zero vehicles" and "not reported" are different answers and only the
-	// first one means anything.
+// Site is everything true of a campsite regardless of when you book it.
+//
+// It is separate from Availability because these facts do not vary by night.
+// Zephyr Cove's 47 sites over a 30-day search used to mean 1410 copies of the
+// same shelter, parking and equipment data, copied again for every sliding
+// window of consecutive nights.
+type Site struct {
+	ID       string
+	Name     string // the number on the post, e.g. "36"
+	Loop     string
+	Facility Facility
+
+	// The three axes. See domain.go.
+	Permits     Permitted
+	Parking     Parking
+	Hookups     Hookups
+	SharedWater Tri // a spigot or tap somewhere in the campground
+
+	Equipment  []Equipment
+	WalkFeet   *int   // distance from parking, when the provider reports it
+	Waterfront string // "Riverfront"/"Lakefront" — a location, not a water source
+	Amps       *int   // electrical service, when reported (30/50)
+	// MaxVehicles is how many vehicles the site parks. A pointer because "zero
+	// vehicles" and "not reported" are different answers.
 	MaxVehicles *int
+
+	// Basis records which provider field decided each axis, so an alert can
+	// explain itself and a misclassification is traceable to its source rather
+	// than to the classifier as a whole.
+	PermitsBasis string
+	ParkingBasis string
+
+	// AccessLabel is the provider's own word for how the site is reached
+	// ("Hike-In", "Walk-In"). It is kept verbatim so a label outside the known
+	// vocabulary still reaches the reader intact.
+	AccessLabel string
+
+	// RawType is the provider's campsite type, retained for --campsite-types,
+	// which stays available as a raw escape hatch.
+	RawType string
+	UseType string
+
+	MinOccupancy int
+	MaxOccupancy int
+	BookingURL   string
+}
+
+// Availability is one bookable window at a Site.
+type Availability struct {
+	Site   *Site
+	Start  time.Time
+	End    time.Time
+	Nights int
+	Status string
+
 	// EquipmentUnverified is set when an equipment filter was active and the
 	// provider reported no equipment for this site, so it survived the filter
 	// without ever being shown to match it.
 	//
-	// Set by Filter.Apply rather than by a provider: the doubt is created by
-	// the filter. With no filter, absent equipment data misleads nobody, and
-	// flagging it there would mark 18% of Meeks Bay's sites for no actionable
-	// reason — noise that erodes the warnings that do matter.
+	// It lives here rather than on Site because Sites are shared by pointer
+	// across every night, and because the doubt is created by the filter: with
+	// no filter, absent equipment data misleads nobody.
 	EquipmentUnverified bool
 }
 
@@ -63,9 +94,9 @@ type SearchRequest struct {
 	// MinVehicleLength filters UseDirect results on the VehicleLength its grid
 	// response reports per unit. It has no recreation.gov equivalent.
 	MinVehicleLength int
-	// ExcludeNoVehicleAccess drops sites proven unreachable by car. Sites whose
-	// access the provider did not report are kept, not dropped — see
-	// SiteAccess.NoVehicleAccess.
+	// ExcludeNoVehicleAccess drops sites proven to need a walk from the car, or
+	// to have no car access at all. Sites whose access the provider did not
+	// report are kept, not dropped — see Parking.RequiresWalk.
 	ExcludeNoVehicleAccess bool
 	Equipment              []Equipment
 	Query                  string

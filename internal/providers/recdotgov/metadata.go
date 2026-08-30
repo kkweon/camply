@@ -3,14 +3,26 @@ package recdotgov
 import (
 	"context"
 	"fmt"
+	"regexp"
+	"strings"
 
 	"github.com/kkweon/camply/internal/core"
 )
 
-// fetchMetadata paginates through the api/search/campsites endpoint to gather equipment and location data
-func (p *Provider) fetchMetadata(ctx context.Context, campgroundID string) (map[string]core.AvailableCampsite, error) {
-	// 1. Fetch metadata
-	campsiteMap := make(map[string]core.AvailableCampsite)
+// siteMetadata is one campsite as the search endpoint describes it, before the
+// availability endpoint adds its campsite_type.
+type siteMetadata struct {
+	Name         string
+	FacilityName string
+	Equipment    []core.Equipment
+	Attributes   attributes
+	Notices      string
+}
+
+// fetchMetadata paginates through the api/search/campsites endpoint to gather equipment,
+// attributes and location data.
+func (p *Provider) fetchMetadata(ctx context.Context, campgroundID string) (map[string]siteMetadata, error) {
+	campsiteMap := make(map[string]siteMetadata)
 
 	start := 0
 	size := 1000
@@ -37,18 +49,12 @@ func (p *Provider) fetchMetadata(ctx context.Context, campgroundID string) (map[
 				})
 			}
 
-			// Access is not classified here: the rule also consults
-			// campsite_type, which only the availability response carries. The
-			// raw attributes travel to the hydrate step in recdotgov.go, where
-			// both halves are finally on one struct.
-			siteAccessRaw, maxVehicles := site.accessAttributes()
-
-			campsiteMap[site.CampsiteID] = core.AvailableCampsite{
-				PermittedEquipment: equipment,
-				FacilityName:       site.ParentName, // RecDotGov metadata sometimes brings back parent names
-				SiteAccessRaw:      siteAccessRaw,
-				MaxVehicles:        maxVehicles,
-				CampsiteSiteName:   site.SiteName,
+			campsiteMap[site.CampsiteID] = siteMetadata{
+				Name:         site.SiteName,
+				FacilityName: site.ParentName, // RecDotGov metadata sometimes brings back parent names
+				Equipment:    equipment,
+				Attributes:   newAttributes(site.Attributes),
+				Notices:      site.noticeText(),
 			}
 		}
 	}
@@ -69,6 +75,12 @@ type campsiteSearchItem struct {
 	ParentName         string               `json:"asset_name"`
 	PermittedEquipment []recdotgovEquipment `json:"permitted_equipment"`
 	Attributes         []recdotgovAttribute `json:"attributes"`
+	Notices            []recdotgovNotice    `json:"notices"`
+}
+
+type recdotgovEquipment struct {
+	EquipmentName string  `json:"equipment_name"`
+	MaxLength     float64 `json:"max_length"`
 }
 
 type recdotgovAttribute struct {
@@ -76,21 +88,20 @@ type recdotgovAttribute struct {
 	AttributeValue string `json:"attribute_value"`
 }
 
-// accessAttributes pulls the two attributes that bear on vehicle access out of
-// the flat, per-campground attribute list.
-func (c campsiteSearchItem) accessAttributes() (siteAccess string, maxVehicles *int) {
-	for _, attr := range c.Attributes {
-		switch attr.AttributeName {
-		case attrSiteAccess:
-			siteAccess = attr.AttributeValue
-		case attrMaxNumVehicles:
-			maxVehicles = parseMaxVehicles(attr.AttributeValue)
-		}
-	}
-	return siteAccess, maxVehicles
+type recdotgovNotice struct {
+	Text string `json:"text"`
+	Type string `json:"type"`
 }
 
-type recdotgovEquipment struct {
-	EquipmentName string  `json:"equipment_name"`
-	MaxLength     float64 `json:"max_length"`
+var noticeMarkup = regexp.MustCompile(`<[^>]*>`)
+
+// noticeText flattens the notices into one searchable string. Some facts live
+// only here: Zephyr Cove records "NO VEHICLE ACCESS" and a half-mile hike
+// distance in prose, with no corresponding attribute.
+func (c campsiteSearchItem) noticeText() string {
+	parts := make([]string, 0, len(c.Notices))
+	for _, n := range c.Notices {
+		parts = append(parts, noticeMarkup.ReplaceAllString(n.Text, " "))
+	}
+	return strings.Join(parts, " ")
 }

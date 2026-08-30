@@ -5,24 +5,25 @@ import (
 	"time"
 )
 
-func eqSite(id, facility string, day int, equipment ...string) AvailableCampsite {
+func eqSite(id, facility string, day int, equipment ...string) Availability {
 	var eq []Equipment
 	for _, e := range equipment {
 		eq = append(eq, Equipment{EquipmentName: e, MaxLength: 30})
 	}
-	return AvailableCampsite{
-		CampsiteID:         id,
-		FacilityID:         facility,
-		FacilityName:       "Facility " + facility,
-		BookingDate:        time.Date(2026, 9, day, 0, 0, 0, 0, time.UTC),
-		PermittedEquipment: eq,
+	return Availability{
+		Site: &Site{
+			ID:        id,
+			Facility:  Facility{ID: facility, Name: "Facility " + facility},
+			Equipment: eq,
+		},
+		Start: time.Date(2026, 9, day, 0, 0, 0, 0, time.UTC),
 	}
 }
 
 // A site free for several nights is one site. Counting availability rows would
 // inflate every number in the report.
 func TestAnalyzeCountsDistinctSitesNotRows(t *testing.T) {
-	sites := []AvailableCampsite{
+	sites := []Availability{
 		eqSite("A", "1", 4, "Tent"),
 		eqSite("A", "1", 5, "Tent"),
 		eqSite("A", "1", 6, "Tent"),
@@ -40,7 +41,7 @@ func TestAnalyzeCountsDistinctSitesNotRows(t *testing.T) {
 
 // The reported incident: a valid name that matches nothing at some campgrounds.
 func TestAnalyzeFindsPerFacilityMisses(t *testing.T) {
-	sites := []AvailableCampsite{
+	sites := []Availability{
 		eqSite("A", "big", 4, "Tent", "RV"),
 		eqSite("B", "big", 4, "Tent"),
 		eqSite("C", "small", 4, "Small Tent"), // no plain "Tent" here
@@ -67,7 +68,7 @@ func TestAnalyzeFindsPerFacilityMisses(t *testing.T) {
 // documented way to handle per-campground vocabulary differences, and must not
 // be reported as a problem. The running CronJobs are configured exactly this way.
 func TestUnionCoverageIsNotAMiss(t *testing.T) {
-	sites := []AvailableCampsite{
+	sites := []Availability{
 		eqSite("A", "big", 4, "Tent"),
 		eqSite("C", "small", 4, "Small Tent"),
 	}
@@ -86,7 +87,7 @@ func TestUnionCoverageIsNotAMiss(t *testing.T) {
 }
 
 func TestAnalyzeReportsTotalMiss(t *testing.T) {
-	sites := []AvailableCampsite{eqSite("A", "1", 4, "Tent", "RV")}
+	sites := []Availability{eqSite("A", "1", 4, "Tent", "RV")}
 	c := AnalyzeEquipment(sites, []Equipment{{EquipmentName: "Vehicle"}})
 
 	if got := c.UnmatchedNames(); len(got) != 1 || got[0] != "Vehicle" {
@@ -100,7 +101,7 @@ func TestAnalyzeReportsTotalMiss(t *testing.T) {
 // Filter.hasMatchingEquipment treats absent metadata as no-match, so a filter
 // silently drops those sites. Counting them is how that becomes visible.
 func TestAnalyzeCountsSitesWithNoEquipmentData(t *testing.T) {
-	sites := []AvailableCampsite{
+	sites := []Availability{
 		eqSite("A", "1", 4, "Tent"),
 		eqSite("B", "1", 4), // no permitted_equipment
 	}
@@ -113,7 +114,7 @@ func TestAnalyzeCountsSitesWithNoEquipmentData(t *testing.T) {
 
 // The diagnosis must agree with the filter it explains.
 func TestAnalyzeHonoursLengthLikeTheFilter(t *testing.T) {
-	sites := []AvailableCampsite{eqSite("A", "1", 4, "RV")} // MaxLength 30
+	sites := []Availability{eqSite("A", "1", 4, "RV")} // MaxLength 30
 	if c := AnalyzeEquipment(sites, []Equipment{{EquipmentName: "RV", MaxLength: 25}}); c.MatchesByName["RV"] != 1 {
 		t.Error("a 25 ft requirement should match a 30 ft site")
 	}
@@ -123,7 +124,7 @@ func TestAnalyzeHonoursLengthLikeTheFilter(t *testing.T) {
 }
 
 func TestAnalyzeMatchesCaseInsensitively(t *testing.T) {
-	sites := []AvailableCampsite{eqSite("A", "1", 4, "Small Tent")}
+	sites := []Availability{eqSite("A", "1", 4, "Small Tent")}
 	c := AnalyzeEquipment(sites, []Equipment{{EquipmentName: "small tent"}})
 	if c.MatchesByName["small tent"] != 1 {
 		t.Error("matching should ignore case, as the filter does")

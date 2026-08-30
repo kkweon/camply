@@ -125,7 +125,7 @@ func dedupe(values []string) []string {
 	return out
 }
 
-// reportSiteAccessCoverage narrates what vehicle access did to the results.
+// reportParkingCoverage narrates what parking did to the results.
 //
 // It follows reportEquipmentCoverage's contract: counts are always reported, and
 // only one condition is fatal — a campground where every site is unreachable by
@@ -134,22 +134,22 @@ func dedupe(values []string) []string {
 // It also speaks when the flag is off. A search that returns walk-in sites and
 // says nothing about them is exactly the state that let a hike-in site half a
 // mile from the road arrive looking like a drive-in one.
-func reportSiteAccessCoverage(c core.SiteAccessCoverage, excludeNoVehicle, allowPartial bool) error {
+func reportParkingCoverage(c core.ParkingCoverage, excludeNoVehicle, allowPartial bool) error {
 	if c.TotalSites == 0 {
 		return nil
 	}
 
 	if !excludeNoVehicle {
-		if c.NoVehicle > 0 {
+		if c.RequiresWalk > 0 {
 			logger.Info("%d of the %d campsites searched have no vehicle access. --%s would "+
 				"exclude them; %s.",
-				c.NoVehicle, c.TotalSites, flagExcludeNoVehicleAccess, flaggedInResults)
+				c.RequiresWalk, c.TotalSites, flagExcludeNoVehicleAccess, flaggedInResults)
 		}
 		return nil
 	}
 
 	logger.Info("--%s excluded %d campsites with no vehicle access (of %d searched).",
-		flagExcludeNoVehicleAccess, c.NoVehicle, c.TotalSites)
+		flagExcludeNoVehicleAccess, c.RequiresWalk, c.TotalSites)
 	if c.Unknown > 0 {
 		// Stated positively and every run: these are kept on purpose. Silently
 		// dropping them would be the same silent-loss bug this flag exists to

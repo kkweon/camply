@@ -16,9 +16,9 @@ type KnownCampsite struct {
 
 // matchesRequestedCampsite reports whether a site is one of the IDs --campsites
 // named.
-func matchesRequestedCampsite(site AvailableCampsite, requested []string) bool {
+func matchesRequestedCampsite(site *Site, requested []string) bool {
 	for _, want := range requested {
-		if strings.TrimSpace(want) == strings.TrimSpace(site.CampsiteID) {
+		if strings.TrimSpace(want) == strings.TrimSpace(site.ID) {
 			return true
 		}
 	}

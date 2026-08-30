@@ -9,7 +9,7 @@ import (
 // was declared, accepted, documented — and read by nothing. Passing an ID that
 // matched no site left the result set completely unchanged.
 func TestFilterRestrictsToRequestedCampsites(t *testing.T) {
-	sites := []AvailableCampsite{
+	sites := []Availability{
 		night("10300345", "10300216", day(2026, 9, 4)),
 		night("10300346", "10300216", day(2026, 9, 4)),
 		night("10300347", "10300216", day(2026, 9, 4)),
@@ -25,8 +25,8 @@ func TestFilterRestrictsToRequestedCampsites(t *testing.T) {
 		t.Fatalf("got %d results, want 2", len(got))
 	}
 	for _, c := range got {
-		if c.CampsiteID == "10300346" {
-			t.Errorf("campsite %s was not requested but survived the filter", c.CampsiteID)
+		if c.Site.ID == "10300346" {
+			t.Errorf("campsite %s was not requested but survived the filter", c.Site.ID)
 		}
 	}
 

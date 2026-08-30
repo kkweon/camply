@@ -18,7 +18,7 @@ import (
 // fakeProvider stands in for a real API so command wiring can be exercised
 // without network access.
 type fakeProvider struct {
-	sites    []core.AvailableCampsite
+	sites    []core.Availability
 	camps    []core.CampgroundFacility
 	areas    []core.RecreationArea
 	err      error
@@ -26,7 +26,7 @@ type fakeProvider struct {
 	campsite int // times FindCampsites was called
 }
 
-func (f *fakeProvider) FindCampsites(_ context.Context, req core.SearchRequest) ([]core.AvailableCampsite, error) {
+func (f *fakeProvider) FindCampsites(_ context.Context, req core.SearchRequest) ([]core.Availability, error) {
 	f.campsite++
 	f.lastReq = req
 	return f.sites, f.err
@@ -144,16 +144,17 @@ func runCLI(t *testing.T, descs []providers.Descriptor, args ...string) cliResul
 	return cliResult{Stdout: out.String(), Stderr: errOut.String(), Err: err}
 }
 
-func site(id string, day int) core.AvailableCampsite {
+func site(id string, day int) core.Availability {
 	d := time.Date(2026, 9, day, 0, 0, 0, 0, time.UTC)
-	return core.AvailableCampsite{
-		CampsiteID:     id,
-		BookingDate:    d,
-		BookingEndDate: d.AddDate(0, 0, 1),
-		BookingNights:  1,
-		FacilityID:     "1",
-		FacilityName:   "Test Campground",
-		BookingURL:     "https://example.test/campsites/" + id,
+	return core.Availability{
+		Site: &core.Site{
+			ID:         id,
+			Facility:   core.Facility{ID: "1", Name: "Test Campground"},
+			BookingURL: "https://example.test/campsites/" + id,
+		},
+		Start:  d,
+		End:    d.AddDate(0, 0, 1),
+		Nights: 1,
 	}
 }
 
@@ -223,7 +224,7 @@ func TestPlannedProviderIsRejectedNotSilentlyUsed(t *testing.T) {
 }
 
 func TestProviderNameIsCaseInsensitive(t *testing.T) {
-	fake := &fakeProvider{sites: []core.AvailableCampsite{site("A", 4)}}
+	fake := &fakeProvider{sites: []core.Availability{site("A", 4)}}
 	res := runCLI(t, fakeRegistry(fake),
 		"campsites", "--provider", "fakeprovider", "--campground", "1",
 		"--start-date", "2026-09-04", "--end-date", "2026-09-07")
@@ -238,7 +239,7 @@ func TestProviderNameIsCaseInsensitive(t *testing.T) {
 
 // Results are printed at INFO on stdout; anyone piping stdout gets results only.
 func TestResultsGoToStdout(t *testing.T) {
-	fake := &fakeProvider{sites: []core.AvailableCampsite{site("A", 4), site("A", 5)}}
+	fake := &fakeProvider{sites: []core.Availability{site("A", 4), site("A", 5)}}
 	res := runCLI(t, fakeRegistry(fake),
 		"campsites", "--provider", "fake", "--campground", "1", "--nights", "2",
 		"--start-date", "2026-09-04", "--end-date", "2026-09-07")
@@ -289,7 +290,7 @@ func TestRepeatedStartDateIsRejectedAndPointsAtDateRanges(t *testing.T) {
 // imagePullPolicy Always, so an image update reaches them before anyone can
 // edit a manifest.
 func TestOldSingularFlagNamesStillWorkAndWarn(t *testing.T) {
-	fake := &fakeProvider{sites: []core.AvailableCampsite{site("A", 4)}}
+	fake := &fakeProvider{sites: []core.Availability{site("A", 4)}}
 	res := runCLI(t, fakeRegistry(fake),
 		"campsites", "--provider", "fake", "--campground", "232461",
 		"--start-date", "2026-09-04", "--end-date", "2026-09-07")
@@ -455,7 +456,7 @@ func TestDeprecatedCommandsAreHiddenButStillRun(t *testing.T) {
 // Telling someone their command is deprecated without showing the replacement
 // leaves them to work it out. The hint must be pasteable into a manifest.
 func TestLegacyCommandPrintsAPasteableReplacement(t *testing.T) {
-	fake := &fakeProvider{sites: []core.AvailableCampsite{equippedSite("A", "1", 4, "Tent")}}
+	fake := &fakeProvider{sites: []core.Availability{equippedSite("A", "1", 4, "Tent")}}
 	res := runCLI(t, fakeRegistry(fake),
 		"campsites", "--provider", "FakeProvider",
 		"--campground", "232461", "--campground", "234039",
@@ -526,12 +527,11 @@ func TestLegacyCommandWarnsAboutIgnoredFlags(t *testing.T) {
 	}
 }
 
-func equippedSite(id, facility string, day int, equipment ...string) core.AvailableCampsite {
+func equippedSite(id, facility string, day int, equipment ...string) core.Availability {
 	s := site(id, day)
-	s.FacilityID = facility
-	s.FacilityName = "Facility " + facility
+	s.Site.Facility = core.Facility{ID: facility, Name: "Facility " + facility}
 	for _, e := range equipment {
-		s.PermittedEquipment = append(s.PermittedEquipment, core.Equipment{EquipmentName: e, MaxLength: 30})
+		s.Site.Equipment = append(s.Site.Equipment, core.Equipment{EquipmentName: e, MaxLength: 30})
 	}
 	return s
 }
@@ -540,7 +540,7 @@ func equippedSite(id, facility string, day int, equipment ...string) core.Availa
 // matches nothing at some of the campgrounds searched. This used to print
 // "0 New Campsites Found" and read as a full campground.
 func TestEquipmentThatMatchesNothingFailsInsteadOfReportingZero(t *testing.T) {
-	fake := &fakeProvider{sites: []core.AvailableCampsite{
+	fake := &fakeProvider{sites: []core.Availability{
 		equippedSite("A", "big", 4, "Tent", "RV"),
 		equippedSite("B", "big", 4, "Tent"),
 		equippedSite("C", "small", 4, "Small Tent"),
@@ -570,7 +570,7 @@ func TestEquipmentThatMatchesNothingFailsInsteadOfReportingZero(t *testing.T) {
 }
 
 func TestTotalMissNamesTheProviderTheValueBelongsTo(t *testing.T) {
-	fake := &fakeProvider{sites: []core.AvailableCampsite{
+	fake := &fakeProvider{sites: []core.Availability{
 		equippedSite("A", "1", 4, "Tent"),
 	}}
 
@@ -594,7 +594,7 @@ func TestTotalMissNamesTheProviderTheValueBelongsTo(t *testing.T) {
 }
 
 func TestAllowPartialMatchDowngradesToAWarning(t *testing.T) {
-	fake := &fakeProvider{sites: []core.AvailableCampsite{
+	fake := &fakeProvider{sites: []core.Availability{
 		equippedSite("A", "big", 4, "Tent"),
 		equippedSite("C", "small", 4, "Small Tent"),
 	}}
@@ -650,7 +650,7 @@ func TestValueFromAnotherProviderIsRejectedWithBothOptions(t *testing.T) {
 // The embedded Name,Length syntax never worked: the flag is a slice, so pflag
 // split on the comma and "25" arrived as an equipment name.
 func TestEquipmentLengthIsItsOwnFlag(t *testing.T) {
-	fake := &fakeProvider{sites: []core.AvailableCampsite{
+	fake := &fakeProvider{sites: []core.Availability{
 		equippedSite("A", "1", 4, "RV"), // MaxLength 30
 	}}
 
@@ -711,13 +711,13 @@ func TestEmptyEquipmentValueIsRejected(t *testing.T) {
 // sites TENT ONLY NONELECTRIC — so this test only pins that an unlisted type is
 // excluded. --exclude-no-vehicle-access is what answers the access question.
 func TestCampsiteTypesExcludeUnlistedTypes(t *testing.T) {
-	mk := func(id, campsiteType string) core.AvailableCampsite {
+	mk := func(id, campsiteType string) core.Availability {
 		s := site(id, 4)
-		s.CampsiteType = campsiteType
-		s.PermittedEquipment = []core.Equipment{{EquipmentName: "Tent", MaxLength: 30}}
+		s.Site.RawType = campsiteType
+		s.Site.Equipment = []core.Equipment{{EquipmentName: "Tent", MaxLength: 30}}
 		return s
 	}
-	fake := &fakeProvider{sites: []core.AvailableCampsite{
+	fake := &fakeProvider{sites: []core.Availability{
 		mk("drive", "STANDARD NONELECTRIC"),
 		mk("tent", "TENT ONLY NONELECTRIC"),
 		mk("walk", "WALK TO"),
@@ -742,7 +742,7 @@ func TestCampsiteTypesExcludeUnlistedTypes(t *testing.T) {
 }
 
 func TestUnknownCampsiteTypeWarnsOnAnOpenVocabulary(t *testing.T) {
-	fake := &fakeProvider{sites: []core.AvailableCampsite{site("A", 4)}}
+	fake := &fakeProvider{sites: []core.Availability{site("A", 4)}}
 	res := runCLI(t, fakeRegistry(fake),
 		"fake", "campsites", "--campgrounds", "1",
 		"--date-ranges", "2026-09-04:2026-09-07",
@@ -766,12 +766,12 @@ func TestUnknownCampsiteTypeWarnsOnAnOpenVocabulary(t *testing.T) {
 // campsites carry no equipment data at all.
 func TestEquipmentFilterKeepsSitesWithNoEquipmentData(t *testing.T) {
 	withEquipment := site("has-data", 4)
-	withEquipment.PermittedEquipment = []core.Equipment{{EquipmentName: "Tent", MaxLength: 30}}
+	withEquipment.Site.Equipment = []core.Equipment{{EquipmentName: "Tent", MaxLength: 30}}
 	wrongEquipment := site("wrong-data", 4)
-	wrongEquipment.PermittedEquipment = []core.Equipment{{EquipmentName: "Boat", MaxLength: 30}}
-	noData := site("no-data", 4) // PermittedEquipment deliberately empty
+	wrongEquipment.Site.Equipment = []core.Equipment{{EquipmentName: "Boat", MaxLength: 30}}
+	noData := site("no-data", 4) // Site.Equipment deliberately empty
 
-	fake := &fakeProvider{sites: []core.AvailableCampsite{withEquipment, wrongEquipment, noData}}
+	fake := &fakeProvider{sites: []core.Availability{withEquipment, wrongEquipment, noData}}
 	res := runCLI(t, fakeRegistry(fake),
 		"fake", "campsites", "--campgrounds", "1",
 		"--date-ranges", "2026-09-04:2026-09-07",
@@ -804,7 +804,7 @@ func TestEquipmentFilterKeepsSitesWithNoEquipmentData(t *testing.T) {
 // sites — failing the search there would be a new false alarm invented by the
 // fix.
 func TestFacilityOfOnlyMissingEquipmentDataIsNotFatal(t *testing.T) {
-	fake := &fakeProvider{sites: []core.AvailableCampsite{site("a", 4), site("b", 4)}}
+	fake := &fakeProvider{sites: []core.Availability{site("a", 4), site("b", 4)}}
 	res := runCLI(t, fakeRegistry(fake),
 		"fake", "campsites", "--campgrounds", "1",
 		"--date-ranges", "2026-09-04:2026-09-07",
@@ -829,16 +829,16 @@ func TestFacilityOfOnlyMissingEquipmentDataIsNotFatal(t *testing.T) {
 // lines contained none of them.
 func TestCoverageNeverClaimsSitesReachTheResults(t *testing.T) {
 	drivable := site("drive", 4)
-	drivable.CampsiteType = "STANDARD NONELECTRIC"
-	drivable.SiteAccess = core.SiteAccessDriveIn
+	drivable.Site.RawType = "STANDARD NONELECTRIC"
+	drivable.Site.Parking = core.ParkingAtSite
 
 	// Not drivable, and also excluded by --campsite-types before results print.
 	hikeIn := site("hike", 4)
-	hikeIn.CampsiteType = "TENT ONLY NONELECTRIC"
-	hikeIn.SiteAccess = core.SiteAccessHikeIn
-	hikeIn.SiteAccessRaw = "Hike-In"
+	hikeIn.Site.RawType = "TENT ONLY NONELECTRIC"
+	hikeIn.Site.Parking = core.ParkingWalk
+	hikeIn.Site.AccessLabel = "Hike-In"
 
-	fake := &fakeProvider{sites: []core.AvailableCampsite{drivable, hikeIn}}
+	fake := &fakeProvider{sites: []core.Availability{drivable, hikeIn}}
 	res := runCLI(t, fakeRegistry(fake),
 		"fake", "campsites", "--campgrounds", "1",
 		"--date-ranges", "2026-09-04:2026-09-07",
@@ -865,13 +865,13 @@ func TestCoverageNeverClaimsSitesReachTheResults(t *testing.T) {
 // about the result set. Each of these sentences is scoped to one filter.
 func TestCoverageMessagesArePinned(t *testing.T) {
 	noVehicle := site("hike", 4)
-	noVehicle.SiteAccess = core.SiteAccessHikeIn
-	noVehicle.SiteAccessRaw = "Hike-In"
-	unknown := site("unknown", 4) // SiteAccess zero value is Unknown
+	noVehicle.Site.Parking = core.ParkingWalk
+	noVehicle.Site.AccessLabel = "Hike-In"
+	unknown := site("unknown", 4) // Parking zero value is Unknown
 	noEquipment := site("no-equip", 4)
 
 	t.Run("flag off describes what the flag would do", func(t *testing.T) {
-		fake := &fakeProvider{sites: []core.AvailableCampsite{noVehicle}}
+		fake := &fakeProvider{sites: []core.Availability{noVehicle}}
 		res := runCLI(t, fakeRegistry(fake), "fake", "campsites", "--campgrounds", "1",
 			"--date-ranges", "2026-09-04:2026-09-07")
 		want := "1 of the 1 campsites searched have no vehicle access. " +
@@ -882,7 +882,7 @@ func TestCoverageMessagesArePinned(t *testing.T) {
 	})
 
 	t.Run("flag on names the denominator it counted", func(t *testing.T) {
-		fake := &fakeProvider{sites: []core.AvailableCampsite{noVehicle, unknown}}
+		fake := &fakeProvider{sites: []core.Availability{noVehicle, unknown}}
 		res := runCLI(t, fakeRegistry(fake), "fake", "campsites", "--campgrounds", "1",
 			"--date-ranges", "2026-09-04:2026-09-07", "--exclude-no-vehicle-access")
 		for _, want := range []string{
@@ -898,8 +898,8 @@ func TestCoverageMessagesArePinned(t *testing.T) {
 
 	t.Run("missing equipment data reports keeping, not excluding", func(t *testing.T) {
 		matching := site("ok", 4)
-		matching.PermittedEquipment = []core.Equipment{{EquipmentName: "Tent", MaxLength: 30}}
-		fake := &fakeProvider{sites: []core.AvailableCampsite{matching, noEquipment}}
+		matching.Site.Equipment = []core.Equipment{{EquipmentName: "Tent", MaxLength: 30}}
+		fake := &fakeProvider{sites: []core.Availability{matching, noEquipment}}
 		res := runCLI(t, fakeRegistry(fake), "fake", "campsites", "--campgrounds", "1",
 			"--date-ranges", "2026-09-04:2026-09-07", "--equipment-types", "Tent")
 		want := "1 of the 2 campsites searched report no equipment data. --equipment-types " +

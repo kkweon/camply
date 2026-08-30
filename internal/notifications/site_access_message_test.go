@@ -16,15 +16,14 @@ import (
 // convenience; this line is the guarantee, and it has to hold for every value
 // including the one that means "we don't know".
 func TestFormatMessageAlwaysReportsSiteAccess(t *testing.T) {
-	all := []core.SiteAccess{
-		core.SiteAccessUnknown, core.SiteAccessDriveIn, core.SiteAccessWalkIn,
-		core.SiteAccessHikeIn, core.SiteAccessBoatIn, core.SiteAccessNoVehicle,
+	all := []core.Parking{
+		core.ParkingUnknown, core.ParkingAtSite, core.ParkingWalk, core.ParkingNone,
 	}
 
 	for _, access := range all {
 		c := getExampleCampsite()
-		c.SiteAccess = access
-		c.SiteAccessRaw = access.String()
+		c.Site.Parking = access
+		c.Site.AccessLabel = access.String()
 
 		_, body := formatMessage(c)
 		if !strings.Contains(body, "<b>Site Access:</b>") {
@@ -35,21 +34,21 @@ func TestFormatMessageAlwaysReportsSiteAccess(t *testing.T) {
 
 func TestFormatMessageTitleWarnsUnlessDriveIn(t *testing.T) {
 	tests := []struct {
-		access    core.SiteAccess
+		access    core.Parking
 		raw       string
 		wantTitle string
 	}{
-		{core.SiteAccessDriveIn, "Drive-In", ""},
-		{core.SiteAccessWalkIn, "Walk-In", "⚠️ WALK-IN"},
-		{core.SiteAccessHikeIn, "Hike-In", "⚠️ HIKE-IN"},
-		{core.SiteAccessBoatIn, "Boat-In", "⚠️ BOAT-IN"},
-		{core.SiteAccessUnknown, "", "⚠️ UNKNOWN ACCESS"},
+		{core.ParkingAtSite, "Drive-In", ""},
+		{core.ParkingWalk, "Walk-In", "⚠️ WALK-IN"},
+		{core.ParkingWalk, "Hike-In", "⚠️ HIKE-IN"},
+		{core.ParkingNone, "Boat-In", "⚠️ BOAT-IN"},
+		{core.ParkingUnknown, "", "⚠️ UNKNOWN ACCESS"},
 	}
 
 	for _, tt := range tests {
 		c := getExampleCampsite()
-		c.SiteAccess = tt.access
-		c.SiteAccessRaw = tt.raw
+		c.Site.Parking = tt.access
+		c.Site.AccessLabel = tt.raw
 
 		title, _ := formatMessage(c)
 		if tt.wantTitle == "" {
