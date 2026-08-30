@@ -93,28 +93,47 @@ camply recdotgov campsites \
   provider reported nothing about it — the site reaches the results flagged ⚠️ so you can
   check it, and the run says how many it flagged.
 
-Notable filters: `--exclude-no-vehicle-access`, `--campsite-types`,
-`--equipment-types`, `--max-equipment-length`, `--campsites` (watch individual sites by
-ID), `--nights`, `--weekends`, and — for ReserveCalifornia — `--min-vehicle-length`.
+Notable filters: `--shelter`, `--parking`, `--hookups`, `--campsites` (watch individual
+sites by ID), `--equipment-types`, `--max-equipment-length`, `--nights`, `--weekends`,
+and — for ReserveCalifornia — `--min-vehicle-length`.
 
-### Vehicle access and equipment
+### The three axes
 
-Every result reports how the site is reached, and anything that is not a confirmed
-drive-in site is flagged ⚠️ in the terminal and in the notification's title and body.
-This is not optional and needs no flag: `--campsite-types` cannot answer the question,
-because Zephyr Cove types all 47 of its hike-in sites `TENT ONLY NONELECTRIC` — the same
-type as its drive-in tent sites — while Lodgepole types 3 of its _drive-in_ sites
-`WALK TO`.
+A booking API's `campsite_type` is four orthogonal facts in one string slot, and each
+campground's operator picks a different one to put there. Zephyr Cove spends it on
+shelter, so all 47 of its hike-in sites are typed `TENT ONLY NONELECTRIC` — identical to
+its drive-in tent sites. Lodgepole spends it on access, so 3 of its drive-in tent sites
+are typed `WALK TO` and vanish from a tent search. camply reads the underlying fields
+instead and filters on three independent axes:
 
-`--exclude-no-vehicle-access` additionally drops sites **proven** unreachable by car
-(walk-in, hike-in, boat-in). Sites the provider reports no access data for are kept and
-flagged `⚠️ UNKNOWN`, never dropped: an alert you can verify with one click costs less
-than a site you never hear about.
+```bash
+camply recdotgov campsites --shelter tent --parking at-site,walk \
+  --campgrounds 232461 --date-ranges 2026-09-04:2026-09-07 --nights 2
+```
 
-`--equipment-types` follows the same rule. A site with no equipment data is not excluded —
-it reaches the results marked `⚠️ NO EQUIPMENT DATA`. Meeks Bay is why: it reports no
-equipment for 17 of its 88 campsites, and treating that silence as "does not match" threw
-away 242 nights of real availability from a single September search.
+- **`--shelter tent|rv|cabin`** — one value, because it is a choice rather than a list.
+  It matches against what the site _accepts_, so a site taking both a tent and an RV
+  answers yes to either camper. Someone bringing both runs the search twice.
+- **`--parking at-site,walk,none`** — how close a car gets. Three levels, not a
+  drive-in/not flag, because that flag put Kaspian's 30-foot stroll and Zephyr Cove's
+  half-mile haul in the same bucket.
+- **`--hookups electric,water,sewer`** — additive, so naming two requires both. `water`
+  means a pipe at the site for an RV and a shared tap for a tent; the alert always names
+  which one it found.
+
+### Missing data is never acted on
+
+No filter excludes a site because the provider reported nothing about it. The site reaches
+the results flagged ⚠️, and the run says how many it flagged and at which campgrounds.
+Every result also reports its access, what it accepts and its hookups whether or not you
+filtered on them — that part needs no flag, because the incident that prompted all of this
+was an alert that simply said nothing.
+
+Meeks Bay is why it matters: it reports no equipment for 17 of its 88 campsites, and
+treating that silence as "does not match" threw away 242 nights of real availability from
+a single September search.
+
+`--exclude-no-vehicle-access` still works and is equivalent to `--parking at-site`.
 
 ## Providers
 
