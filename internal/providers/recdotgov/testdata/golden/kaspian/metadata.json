@@ -1,0 +1,1240 @@
+{
+ "campsites": [
+  {
+   "asset_id": "232875",
+   "asset_name": "KASPIAN CAMPGROUND",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Full"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 10,
+     "attribute_name": "Capacity/Size Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "2:00 PM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 32,
+     "attribute_name": "Food Locker",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 4,
+     "attribute_name": "BBQ",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 301,
+     "attribute_name": "Map Y Coordinate",
+     "attribute_value": "332.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 2602,
+     "attribute_name": "Accessible Occupant Message",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 300,
+     "attribute_name": "Map X Coordinate",
+     "attribute_value": "928.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 314,
+     "attribute_name": "Placed on Map",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 31,
+     "attribute_name": "Fire Pit",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 1,
+     "attribute_name": "Accessibility",
+     "attribute_value": "Y"
+    }
+   ],
+   "campsite_id": "86883",
+   "campsite_status": "Open",
+   "loop": "AREA KASPIAN CAMPGROUND",
+   "name": "001",
+   "notices": [
+    {
+     "text": "Sites have paved walkways, but restroom is not fully accessible to the disabled.",
+     "type": "warning"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232875",
+   "asset_name": "KASPIAN CAMPGROUND",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Full"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 10,
+     "attribute_name": "Capacity/Size Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "2:00 PM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 4,
+     "attribute_name": "BBQ",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 314,
+     "attribute_name": "Placed on Map",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 300,
+     "attribute_name": "Map X Coordinate",
+     "attribute_value": "916.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 31,
+     "attribute_name": "Fire Pit",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 301,
+     "attribute_name": "Map Y Coordinate",
+     "attribute_value": "271.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 32,
+     "attribute_name": "Food Locker",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 1,
+     "attribute_name": "Accessibility",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 2602,
+     "attribute_name": "Accessible Occupant Message",
+     "attribute_value": "Y"
+    }
+   ],
+   "campsite_id": "86919",
+   "campsite_status": "Open",
+   "loop": "AREA KASPIAN CAMPGROUND",
+   "name": "002",
+   "notices": [
+    {
+     "text": "Sites have paved walkways, but restroom is not fully accessible to the disabled.",
+     "type": "warning"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232875",
+   "asset_name": "KASPIAN CAMPGROUND",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Full"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 10,
+     "attribute_name": "Capacity/Size Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "2:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 314,
+     "attribute_name": "Placed on Map",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 2602,
+     "attribute_name": "Accessible Occupant Message",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 32,
+     "attribute_name": "Food Locker",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 4,
+     "attribute_name": "BBQ",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 300,
+     "attribute_name": "Map X Coordinate",
+     "attribute_value": "910.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 31,
+     "attribute_name": "Fire Pit",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 301,
+     "attribute_name": "Map Y Coordinate",
+     "attribute_value": "217.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 1,
+     "attribute_name": "Accessibility",
+     "attribute_value": "Y"
+    }
+   ],
+   "campsite_id": "86820",
+   "campsite_status": "Open",
+   "loop": "AREA KASPIAN CAMPGROUND",
+   "name": "003",
+   "notices": [
+    {
+     "text": "Sites have paved walkways, but restroom is not fully accessible to the disabled.",
+     "type": "warning"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232875",
+   "asset_name": "KASPIAN CAMPGROUND",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Full"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 10,
+     "attribute_name": "Capacity/Size Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "2:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 32,
+     "attribute_name": "Food Locker",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 301,
+     "attribute_name": "Map Y Coordinate",
+     "attribute_value": "624.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 4,
+     "attribute_name": "BBQ",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 300,
+     "attribute_name": "Map X Coordinate",
+     "attribute_value": "625.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 31,
+     "attribute_name": "Fire Pit",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 314,
+     "attribute_name": "Placed on Map",
+     "attribute_value": "1"
+    }
+   ],
+   "campsite_id": "86905",
+   "campsite_status": "Open",
+   "loop": "AREA KASPIAN CAMPGROUND",
+   "name": "004",
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232875",
+   "asset_name": "KASPIAN CAMPGROUND",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 10,
+     "attribute_name": "Capacity/Size Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "2:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Full"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 314,
+     "attribute_name": "Placed on Map",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 4,
+     "attribute_name": "BBQ",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 31,
+     "attribute_name": "Fire Pit",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 301,
+     "attribute_name": "Map Y Coordinate",
+     "attribute_value": "615.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 300,
+     "attribute_name": "Map X Coordinate",
+     "attribute_value": "476.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 32,
+     "attribute_name": "Food Locker",
+     "attribute_value": "Y"
+    }
+   ],
+   "campsite_id": "86446",
+   "campsite_status": "Open",
+   "loop": "AREA KASPIAN CAMPGROUND",
+   "name": "005",
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232875",
+   "asset_name": "KASPIAN CAMPGROUND",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Full"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 10,
+     "attribute_name": "Capacity/Size Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "2:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 301,
+     "attribute_name": "Map Y Coordinate",
+     "attribute_value": "546.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 32,
+     "attribute_name": "Food Locker",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 31,
+     "attribute_name": "Fire Pit",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 300,
+     "attribute_name": "Map X Coordinate",
+     "attribute_value": "344.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 314,
+     "attribute_name": "Placed on Map",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 4,
+     "attribute_name": "BBQ",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    }
+   ],
+   "campsite_id": "86960",
+   "campsite_status": "Open",
+   "loop": "AREA KASPIAN CAMPGROUND",
+   "name": "006",
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232875",
+   "asset_name": "KASPIAN CAMPGROUND",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Full"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 10,
+     "attribute_name": "Capacity/Size Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "2:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 32,
+     "attribute_name": "Food Locker",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 301,
+     "attribute_name": "Map Y Coordinate",
+     "attribute_value": "456.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 314,
+     "attribute_name": "Placed on Map",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 4,
+     "attribute_name": "BBQ",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 31,
+     "attribute_name": "Fire Pit",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 300,
+     "attribute_name": "Map X Coordinate",
+     "attribute_value": "354.0"
+    }
+   ],
+   "campsite_id": "86775",
+   "campsite_status": "Open",
+   "loop": "AREA KASPIAN CAMPGROUND",
+   "name": "007",
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232875",
+   "asset_name": "KASPIAN CAMPGROUND",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Full"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 10,
+     "attribute_name": "Capacity/Size Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "2:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 31,
+     "attribute_name": "Fire Pit",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 314,
+     "attribute_name": "Placed on Map",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 300,
+     "attribute_name": "Map X Coordinate",
+     "attribute_value": "443.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 32,
+     "attribute_name": "Food Locker",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 301,
+     "attribute_name": "Map Y Coordinate",
+     "attribute_value": "433.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 4,
+     "attribute_name": "BBQ",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    }
+   ],
+   "campsite_id": "86903",
+   "campsite_status": "Open",
+   "loop": "AREA KASPIAN CAMPGROUND",
+   "name": "008",
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232875",
+   "asset_name": "KASPIAN CAMPGROUND",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Full"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 10,
+     "attribute_name": "Capacity/Size Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "2:00 PM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 31,
+     "attribute_name": "Fire Pit",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 300,
+     "attribute_name": "Map X Coordinate",
+     "attribute_value": "542.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 314,
+     "attribute_name": "Placed on Map",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 32,
+     "attribute_name": "Food Locker",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 301,
+     "attribute_name": "Map Y Coordinate",
+     "attribute_value": "427.0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 4,
+     "attribute_name": "BBQ",
+     "attribute_value": "Y"
+    }
+   ],
+   "campsite_id": "86995",
+   "campsite_status": "Open",
+   "loop": "AREA KASPIAN CAMPGROUND",
+   "name": "009",
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  }
+ ],
+ "size": 9,
+ "start": "0",
+ "total": 9
+}

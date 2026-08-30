@@ -1,0 +1,1801 @@
+{
+ "campsites": [
+  {
+   "asset_id": "10300216",
+   "asset_name": "Zephyr Cove RV & Campground",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Location Rating",
+     "attribute_value": "Poor"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Double"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Rating",
+     "attribute_value": "Basic"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Basic"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": "50"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "30"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    }
+   ],
+   "campsite_id": "10300217",
+   "campsite_status": "Open",
+   "loop": "1",
+   "name": "101",
+   "notices": [
+    {
+     "text": "<p>This site accommodates one 30-ft RV.</p><p>Highway site. Heavy traffic and road noise possible.</p>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "RV",
+     "max_length": 30
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10300216",
+   "asset_name": "Zephyr Cove RV & Campground",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Rating",
+     "attribute_value": "Basic"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Basic"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Location Rating",
+     "attribute_value": "Poor"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Double"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": "50"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "30"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    }
+   ],
+   "campsite_id": "10300218",
+   "campsite_status": "Open",
+   "loop": "1",
+   "name": "102",
+   "notices": [
+    {
+     "text": "<p>This site accommodates one 30-ft RV.</p><p>Highway site. Heavy traffic and road noise possible.</p>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "RV",
+     "max_length": 30
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10300216",
+   "asset_name": "Zephyr Cove RV & Campground",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Basic"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Double"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Location Rating",
+     "attribute_value": "Poor"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": "50"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Rating",
+     "attribute_value": "Basic"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "30"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    }
+   ],
+   "campsite_id": "10300219",
+   "campsite_status": "Open",
+   "loop": "1",
+   "name": "103",
+   "notices": [
+    {
+     "text": "<p>This site accommodates one 30-ft RV.</p><p>Highway site. Heavy traffic and road noise possible.</p>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "RV",
+     "max_length": 30
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10300216",
+   "asset_name": "Zephyr Cove RV & Campground",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Location Rating",
+     "attribute_value": "Poor"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Basic"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": "50"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Double"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Rating",
+     "attribute_value": "Basic"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "40"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    }
+   ],
+   "campsite_id": "10300220",
+   "campsite_status": "Open",
+   "loop": "1",
+   "name": "104",
+   "notices": [
+    {
+     "text": "<p>This site accommodates one 40-ft RV.</p><p>Highway site. Heavy traffic and road noise possible.</p>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "RV",
+     "max_length": 40
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10300216",
+   "asset_name": "Zephyr Cove RV & Campground",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Basic"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Double"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Rating",
+     "attribute_value": "Basic"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": "50"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Location Rating",
+     "attribute_value": "Poor"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "40"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    }
+   ],
+   "campsite_id": "10300221",
+   "campsite_status": "Open",
+   "loop": "1",
+   "name": "105",
+   "notices": [
+    {
+     "text": "<p>This site accommodates one 40-ft RV.</p><p>Highway site. Heavy traffic and road noise possible.</p>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "RV",
+     "max_length": 40
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10300216",
+   "asset_name": "Zephyr Cove RV & Campground",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Double"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": "50"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "40"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    }
+   ],
+   "campsite_id": "10300222",
+   "campsite_status": "Open",
+   "loop": "1",
+   "name": "106",
+   "notices": [
+    {
+     "text": "<p>This site accommodates one 40-ft RV.</p>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "RV",
+     "max_length": 40
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10300216",
+   "asset_name": "Zephyr Cove RV & Campground",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": "50"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Double"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "35"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    }
+   ],
+   "campsite_id": "10300223",
+   "campsite_status": "Open",
+   "loop": "1",
+   "name": "107",
+   "notices": [
+    {
+     "text": "<p>This site accommodates one 35-ft RV</p>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "RV",
+     "max_length": 35
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10300216",
+   "asset_name": "Zephyr Cove RV & Campground",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": "50"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "30"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    }
+   ],
+   "campsite_id": "10300224",
+   "campsite_status": "Open",
+   "loop": "1",
+   "name": "108",
+   "notices": [
+    {
+     "text": "<p>This site accommodates one 30-ft RV.</p>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "RV",
+     "max_length": 30
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10300216",
+   "asset_name": "Zephyr Cove RV & Campground",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Double"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": "50"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "30"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    }
+   ],
+   "campsite_id": "10300225",
+   "campsite_status": "Open",
+   "loop": "1",
+   "name": "109",
+   "notices": [
+    {
+     "text": "<p>This site accommodates one 30-ft RV.</p>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "RV",
+     "max_length": 30
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10300216",
+   "asset_name": "Zephyr Cove RV & Campground",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Hike-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Grills",
+     "attribute_value": "Grills"
+    }
+   ],
+   "campsite_id": "10300320",
+   "campsite_status": "Open",
+   "loop": "4",
+   "name": "11",
+   "notices": [
+    {
+     "text": "<p>NO VEHICLE ACCESS</p>",
+     "type": "warning"
+    },
+    {
+     "text": "<p>Hike in distance is .25 miles</p><p>This site accommodates up to 2 tents and/or up to 6 people. It is graded for one tent, so a second tent may be on a slope.</p><p>No vehicles allowed. This site is not vehicle accessible.</p>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Small Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10300216",
+   "asset_name": "Zephyr Cove RV & Campground",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": "50"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Double"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "25"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    }
+   ],
+   "campsite_id": "10300226",
+   "campsite_status": "Open",
+   "loop": "1",
+   "name": "110",
+   "notices": [
+    {
+     "text": "<p>This site accommodates one 25-ft RV.</p>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "RV",
+     "max_length": 25
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10300216",
+   "asset_name": "Zephyr Cove RV & Campground",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Double"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": "50"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Rating",
+     "attribute_value": "Standard"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "40"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    }
+   ],
+   "campsite_id": "10300227",
+   "campsite_status": "Open",
+   "loop": "1",
+   "name": "111",
+   "notices": [
+    {
+     "text": "<p>This site accommodates one 40-ft RV.</p>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "RV",
+     "max_length": 40
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10300216",
+   "asset_name": "Zephyr Cove RV & Campground",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Electricity Hookup",
+     "attribute_value": "50"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Double"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Rating",
+     "attribute_value": "Standard"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "40"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    }
+   ],
+   "campsite_id": "10300228",
+   "campsite_status": "Open",
+   "loop": "1",
+   "name": "112",
+   "notices": [
+    {
+     "text": "<p>This site accommodates one 40-ft RV.</p>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "RV",
+     "max_length": 40
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10300216",
+   "asset_name": "Zephyr Cove RV & Campground",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Hike-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "",
+     "attribute_value": ""
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Grills",
+     "attribute_value": "Grills"
+    }
+   ],
+   "campsite_id": "10300323",
+   "campsite_status": "Open",
+   "loop": "4",
+   "name": "14",
+   "notices": [
+    {
+     "text": "<p>NO VEHICLE ACCESS</p>",
+     "type": "warning"
+    },
+    {
+     "text": "<p>Hike in distance is .25 miles.</p><p>This site accommodates up to 2 tents and/or up to 6 people. It is graded for one tent, so a second tent may be on a slope.</p><p>No vehicles allowed. This site is not vehicle accessible.</p>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "10300216",
+   "asset_name": "Zephyr Cove RV & Campground",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-Out",
+     "attribute_value": "11:00 AM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Capacity Rating",
+     "attribute_value": "Single"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Site Access",
+     "attribute_value": "Hike-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Check-In",
+     "attribute_value": "1:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Picnic Tables",
+     "attribute_value": "Picnic Tables"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Grills",
+     "attribute_value": "Grills"
+    }
+   ],
+   "campsite_id": "10300345",
+   "campsite_status": "Open",
+   "loop": "4",
+   "name": "36",
+   "notices": [
+    {
+     "text": "<p>NO VEHICLE ACCESS</p>",
+     "type": "warning"
+    },
+    {
+     "text": "<p>Hike in distance is .5 miles.</p><p>This site accommodates up to 2 tents and/or up to 6 people. It is graded for one tent, so a second tent may be on a slope.</p><p>No vehicles allowed. This site is not vehicle accessible.</p>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Small Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  }
+ ],
+ "size": 15,
+ "start": "0",
+ "total": 15
+}

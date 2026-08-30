@@ -287,7 +287,14 @@ func printTable(campsites []core.AvailableCampsite) {
 			groupedByLocation[locStr] = append(groupedByLocation[locStr], c)
 		}
 
-		for locStr, sitesForLoc := range groupedByLocation {
+		locations := make([]string, 0, len(groupedByLocation))
+		for loc := range groupedByLocation {
+			locations = append(locations, loc)
+		}
+		sort.Strings(locations)
+
+		for _, locStr := range locations {
+			sitesForLoc := groupedByLocation[locStr]
 			logger.Info("\t%s: ⛺ %d sites", locStr, len(sitesForLoc))
 			for _, c := range sitesForLoc {
 				nightsStr := "night"

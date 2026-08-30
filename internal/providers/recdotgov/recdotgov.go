@@ -40,6 +40,19 @@ func NewProvider() *Provider {
 	}
 }
 
+// NewProviderAt points a Provider at a different host.
+//
+// It exists so tests can replay recorded API responses through the real
+// provider, adapter and filter rather than through a stand-in. Production
+// always uses NewProvider.
+func NewProviderAt(scheme, netLoc string) *Provider {
+	p := NewProvider()
+	p.apiScheme = scheme
+	p.apiNetLoc = netLoc
+	p.ridbBaseURL = scheme + "://" + netLoc
+	return p
+}
+
 // FindCampsites queries Recreation.gov for availability
 func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([]core.AvailableCampsite, error) {
 	var allCampsites []core.AvailableCampsite

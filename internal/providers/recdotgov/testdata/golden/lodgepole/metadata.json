@@ -1,0 +1,3115 @@
+{
+ "campsites": [
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "12"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "10"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "26"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "26"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    }
+   ],
+   "campsite_id": "10343223",
+   "campsite_status": "Open",
+   "loop": "1-22",
+   "name": "003",
+   "notices": [
+    {
+     "text": "<p><strong>Parking Capacity 26'L X 10'W - </strong> Sunny, Open, Near Market and Road</p>\n",
+     "type": "info"
+    },
+    {
+     "text": "maximum 6 people for site",
+     "type": "warning"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "RV",
+     "max_length": 26
+    },
+    {
+     "equipment_name": "Trailer",
+     "max_length": 26
+    },
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 26
+    },
+    {
+     "equipment_name": "Pop up",
+     "max_length": 26
+    },
+    {
+     "equipment_name": "Caravan/Camper Van",
+     "max_length": 26
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Hike-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 72,
+     "attribute_name": "Proximity to Water",
+     "attribute_value": "Riverfront"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 39,
+     "attribute_name": "Hike In Distance to Site",
+     "attribute_value": "210 feet"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "N/A"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "9"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "0"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "N/A"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "9"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-In"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 73,
+     "attribute_name": "Quiet Area",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "2427",
+   "campsite_status": "Open",
+   "loop": "36-60",
+   "name": "038",
+   "notices": [
+    {
+     "text": "<p><strong>Parking Capacity 19'L - Tent Size 9' x 9'</strong> - Near River</p>\n",
+     "type": "info"
+    },
+    {
+     "text": "<p>WALK-IN CAMPSITE\u00a0</p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "No Generator Area",
+     "type": "warning"
+    },
+    {
+     "text": "maximum 6 people for site",
+     "type": "warning"
+    },
+    {
+     "text": "<p><strong>Parking provided for 1 vehicle </strong></p>\n<ul>\n<li>Additional vehicles will need to park in overflow areas provided at the campground</li>\n</ul>\n",
+     "type": "warning"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Small Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Hike in Distance",
+     "attribute_value": "40"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Walk-In"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "12"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-In"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "9"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "19"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 73,
+     "attribute_name": "Quiet Area",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "2455",
+   "campsite_status": "Open",
+   "loop": "Upper Lodgepole 69-104",
+   "name": "085",
+   "notices": [
+    {
+     "text": "<p>WALK-IN CAMPSITE</p>",
+     "type": "warning"
+    },
+    {
+     "text": "<p>Parking provided for one vehicle at or near site. Additional vehicles must park in overflow areas. All vehicles must be parked with all wheels on asphalt pavement. </p>",
+     "type": "warning"
+    },
+    {
+     "text": "Maximum 6 people for site",
+     "type": "warning"
+    },
+    {
+     "text": "<p>No Generator Area</p>",
+     "type": "warning"
+    },
+    {
+     "text": "<ul><li><p><strong>TENT ONLY AREA. Ground tents only. Tent(s) must fit on tent pad. </strong></p></li><li><p><strong>Tent Pad 9' x 12'</strong> - Near Restrooms</p></li><li><p><strong>No RVs, trailers, or oversize vehicles.</strong> </p></li></ul>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Full"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "10"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-In"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Moderate"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "13"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "19"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 73,
+     "attribute_name": "Quiet Area",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "2514",
+   "campsite_status": "Open",
+   "loop": "Upper Lodgepole 69-104",
+   "name": "086",
+   "notices": [
+    {
+     "text": "<p>Parking provided for one vehicle at or near site. Additional vehicles must park in overflow areas. All vehicles must be parked with all wheels on asphalt pavement. </p>",
+     "type": "warning"
+    },
+    {
+     "text": " No Generator Area ",
+     "type": "warning"
+    },
+    {
+     "text": "<p>Maximum 6 people for site</p>",
+     "type": "warning"
+    },
+    {
+     "text": "<ul><li><p><strong>TENT ONLY AREA. Ground tents only. Tent(s) must fit on tent pad. </strong></p></li><li><p><strong>Tent Size 13' x 10'</strong> - Wooded, Near Restrooms</p></li><li><p><strong>No RVs, trailers, or oversize vehicles. </strong></p></li></ul>",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Full"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "9"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "19"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "13"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-In"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 73,
+     "attribute_name": "Quiet Area",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "10204847",
+   "campsite_status": "Open",
+   "loop": "Upper Lodgepole 69-104",
+   "name": "092",
+   "notices": [
+    {
+     "text": "<ul><li><p><strong>TENT ONLY AREA. Ground tents only. Tent(s) must fit on tent pad</strong>. </p></li><li><p><strong>Parking Capacity 19'L - Tent Size 12' x 10'</strong> - Wooded, No Privacy</p></li></ul>",
+     "type": "info"
+    },
+    {
+     "text": "<p><strong>No Generator Area</strong></p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p><strong>Parking provided at site for 1 vehicle.  </strong></p>\n<ul>\n<li>Additional vehicles will need to park in overflow areas provided at the campground.</li>\n</ul>\n\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p><strong>Maximum 6 people for site</strong></p>\n",
+     "type": "warning"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Large Tent Over 9X12`",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 39,
+     "attribute_name": "Hike In Distance to Site",
+     "attribute_value": "20"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Hike-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-In"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "12"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "16"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "13"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 73,
+     "attribute_name": "Quiet Area",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "1418",
+   "campsite_status": "Open",
+   "loop": "Upper Lodgepole 105-144",
+   "name": "123",
+   "notices": [
+    {
+     "text": "<ul><li><p><strong>TENT ONLY AREA. Ground tents only. Tent(s) must fit on tent pad.\u00a0</strong></p></li><li><p><strong>Parking Capacity 16'L - Tent Size 12' x 13'</strong> - No Privacy, Wooded, Near Road</p></li><li><p><strong>No RVs, trailers, or oversize vehicles.\u00a0</strong></p></li></ul>",
+     "type": "info"
+    },
+    {
+     "text": " WALK-IN CAMPSITE",
+     "type": "warning"
+    },
+    {
+     "text": "NO GENERATOR AREA",
+     "type": "warning"
+    },
+    {
+     "text": "ONE VEHICLE",
+     "type": "warning"
+    },
+    {
+     "text": "MAXIMUM 6 PEOPLE FOR SITE",
+     "type": "warning"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Large Tent Over 9X12`",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 39,
+     "attribute_name": "Hike In Distance to Site",
+     "attribute_value": "39 feet"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "11"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "19"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "14"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-In"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 38,
+     "attribute_name": "Grills/Fire Ring",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 32,
+     "attribute_name": "Food Locker",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 73,
+     "attribute_name": "Quiet Area",
+     "attribute_value": "Y"
+    }
+   ],
+   "campsite_id": "2524",
+   "campsite_status": "Open",
+   "loop": "Upper Lodgepole 105-144",
+   "name": "131",
+   "notices": [
+    {
+     "text": "<ul><li><p><strong>TENT ONLY AREA. Ground tents only. Tent(s) must fit on tent pad.\u00a0</strong></p></li><li><p><strong>Parking Capacity 16'L - Tent Size 11' x 13'</strong> - Near Restrooms, Short walk up to site</p></li><li><p><strong>No RVs, trailers, or oversize vehicles.\u00a0</strong></p></li></ul>",
+     "type": "info"
+    },
+    {
+     "text": "NO GENERATOR AREA",
+     "type": "warning"
+    },
+    {
+     "text": "ONE VEHICLE",
+     "type": "warning"
+    },
+    {
+     "text": "MAXIMUM 6 PEOPLE FOR SITE",
+     "type": "warning"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Large Tent Over 9X12`",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 39,
+     "attribute_name": "Hike In Distance to Site",
+     "attribute_value": "54 feet"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "13"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-In"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "10"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "16"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 73,
+     "attribute_name": "Quiet Area",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "2526",
+   "campsite_status": "Open",
+   "loop": "Upper Lodgepole 105-144",
+   "name": "135",
+   "notices": [
+    {
+     "text": "<ul><li><p><strong>TENT ONLY AREA. Ground tents only. Tent(s) must fit on tent pad.\u00a0</strong></p></li><li><p><strong>Parking Capacity 16'L - Tent Size 10' x 13'</strong> - Near River, Wooded, Short walk downhill to site, Good view</p></li><li><p><strong>No RVs, trailers, or oversize vehicles.\u00a0</strong></p></li></ul>",
+     "type": "info"
+    },
+    {
+     "text": "NO GENERATOR",
+     "type": "warning"
+    },
+    {
+     "text": "ONE VEHICLE",
+     "type": "warning"
+    },
+    {
+     "text": "MAXIMUM 6 PEOPLE FOR SITE",
+     "type": "warning"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Large Tent Over 9X12`",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "21"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "10"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "8"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "21"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "10204848",
+   "campsite_status": "Open",
+   "loop": "151-214",
+   "name": "168",
+   "notices": [
+    {
+     "text": "<p><strong>Maximum 6 people for site.</strong></p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p><strong>Parking provided at site for 1 vehicle.  </strong></p>\n<ul>\n<li>Additional vehicles will need to park in overflow areas provided at the campground.</li>\n<li>Vehicles must be parked with all wheels on asphalt pavement.</li>\n</ul>\n\n",
+     "type": "warning"
+    },
+    {
+     "text": " Parking Capacity 21'L - Tent Size 9' x 15' - Open, Some Shade, No Privacy",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "RV",
+     "max_length": 21
+    },
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 21
+    },
+    {
+     "equipment_name": "Vehicle",
+     "max_length": 21
+    },
+    {
+     "equipment_name": "Caravan/Camper Van",
+     "max_length": 21
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 0,
+     "attribute_name": "Water Hookup",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "No"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "21"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "17"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "11"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "21"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "10204849",
+   "campsite_status": "Open",
+   "loop": "151-214",
+   "name": "178",
+   "notices": [
+    {
+     "text": "<p><strong>Maximum 6 people for site.</strong></p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p><strong>Parking provided at site for 1 vehicle.  </strong></p>\n<ul>\n<li>Additional vehicles will need to park in overflow areas provided at the campground.</li>\n<li>Vehicles must be parked with all wheels on asphalt pavement.</li>\n</ul>\n\n",
+     "type": "warning"
+    },
+    {
+     "text": " Parking Capacity 21'L - Tent Size 9' x 15' - Open, Some Shade, No Privacy",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "RV",
+     "max_length": 18
+    },
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 18
+    },
+    {
+     "equipment_name": "Vehicle",
+     "max_length": 18
+    },
+    {
+     "equipment_name": "Caravan/Camper Van",
+     "max_length": 18
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "18"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "15"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "10"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "18"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "10204854",
+   "campsite_status": "Open",
+   "loop": "151-214",
+   "name": "179",
+   "notices": [
+    {
+     "text": "<p>Parking Capacity 18'L - Tent Size 9' x 15' - Open, Some Shade, No Privacy</p>",
+     "type": "info"
+    },
+    {
+     "text": "<p><strong>Maximum 6 people for site.</strong></p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p><strong>Parking provided at site for 1 vehicle.  </strong></p>\n<ul>\n<li>Additional vehicles will need to park in overflow areas provided at the campground.</li>\n<li>Vehicles must be parked with all wheels on asphalt pavement.</li>\n</ul>\n\n",
+     "type": "warning"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 18
+    },
+    {
+     "equipment_name": "Vehicle",
+     "max_length": 18
+    },
+    {
+     "equipment_name": "Caravan/Camper Van",
+     "max_length": 18
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "23"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "10"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "14"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "23"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "10346611",
+   "campsite_status": "Open",
+   "loop": "151-214",
+   "name": "181",
+   "notices": [
+    {
+     "text": "<p>Tent Size 10' x 14' - Shady, Near Restrooms</p>\n",
+     "type": "info"
+    },
+    {
+     "text": "maximum 6 people for site",
+     "type": "warning"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 20
+    },
+    {
+     "equipment_name": "RV",
+     "max_length": 23
+    },
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 23
+    },
+    {
+     "equipment_name": "Large Tent Over 9X12`",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Caravan/Camper Van",
+     "max_length": 23
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "15"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "7"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "18"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "18"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "10204850",
+   "campsite_status": "Open",
+   "loop": "151-214",
+   "name": "191",
+   "notices": [
+    {
+     "text": "<p>Parking Capacity 18'L - Tent Size 9' x 15' - Open, Some Shade, No Privacy</p>",
+     "type": "info"
+    },
+    {
+     "text": "<p><strong>Maximum 6 people for site.</strong></p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p><strong>Parking provided at site for 1 vehicle.  </strong></p>\n<ul>\n<li>Additional vehicles will need to park in overflow areas provided at the campground.</li>\n<li>Vehicles must be parked with all wheels on asphalt pavement.</li>\n</ul>\n\n",
+     "type": "warning"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "18"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "18"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "9"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "2"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "12"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "10204851",
+   "campsite_status": "Open",
+   "loop": "151-214",
+   "name": "192",
+   "notices": [
+    {
+     "text": "<p><strong>Maximum 6 people for site.</strong></p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p><strong>Parking provided at site for 1 vehicle.  </strong></p>\n<ul>\n<li>Additional vehicles will need to park in overflow areas provided at the campground.</li>\n<li>Vehicles must be parked with all wheels on asphalt pavement.</li>\n</ul>\n\n",
+     "type": "warning"
+    },
+    {
+     "text": " Parking Capacity 21'L - Tent Size 9' x 15' - Open, Some Shade, No Privacy",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "9"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "12"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Parallel"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "15"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "15"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "10204852",
+   "campsite_status": "Open",
+   "loop": "151-214",
+   "name": "200",
+   "notices": [
+    {
+     "text": "<p><strong>Maximum 6 people for site.</strong></p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p><strong>Parking provided at site for 1 small vehicle.  </strong></p>\n<ul>\n<li>Additional or large vehicles will need to park in overflow areas provided at the campground.</li>\n<li>Vehicles must be parked with all wheels on asphalt pavement.</li>\n</ul>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p>Parking Capacity 16'L - Tent Size 9' x 15' - Open, Some Shade, No Privacy, Parallel Park</p>\n",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "12"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "21"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "23"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "9"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "10204853",
+   "campsite_status": "Open",
+   "loop": "151-214",
+   "name": "201",
+   "notices": [
+    {
+     "text": "<p><strong>Maximum 6 people for site.</strong></p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p><strong>Parking provided at site for 1 vehicle.  </strong></p>\n<ul>\n<li>Additional vehicles will need to park in overflow areas provided at the campground.</li>\n<li>Vehicles must be parked with all wheels on asphalt pavement.</li>\n</ul>\n\n",
+     "type": "warning"
+    },
+    {
+     "text": " Parking Capacity 21'L - Tent Size 9' x 15' - Open, Some Shade, No Privacy",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 21
+    },
+    {
+     "equipment_name": "Vehicle",
+     "max_length": 21
+    },
+    {
+     "equipment_name": "Caravan/Camper Van",
+     "max_length": 21
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "21"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "20"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "21"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "13"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "10204856",
+   "campsite_status": "Open",
+   "loop": "151-214",
+   "name": "209",
+   "notices": [
+    {
+     "text": "<p><strong>Maximum 6 people for site.</strong></p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p><strong>Parking provided at site for 1 vehicle.  </strong></p>\n<ul>\n<li>Additional vehicles will need to park in overflow areas provided at the campground.</li>\n<li>Vehicles must be parked with all wheels on asphalt pavement.</li>\n</ul>\n\n",
+     "type": "warning"
+    },
+    {
+     "text": " Parking Capacity 21'L - Tent Size 9' x 15' - Open, Some Shade, No Privacy",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "RV",
+     "max_length": 21
+    },
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 21
+    },
+    {
+     "equipment_name": "Caravan/Camper Van",
+     "max_length": 21
+    }
+   ],
+   "type_of_use": "Overnight"
+  },
+  {
+   "asset_id": "232461",
+   "asset_name": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+   "attributes": [
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 52,
+     "attribute_name": "Max Num of People",
+     "attribute_value": "6"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 9,
+     "attribute_name": "Campfire Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 56,
+     "attribute_name": "Min Num of People",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 12,
+     "attribute_name": "Checkout Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 65,
+     "attribute_name": "Pets Allowed",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 79,
+     "attribute_name": "Site Access",
+     "attribute_value": "Drive-In"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 16,
+     "attribute_name": "Condition Rating",
+     "attribute_value": "Good"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 77,
+     "attribute_name": "Shade",
+     "attribute_value": "Yes"
+    },
+    {
+     "attribute_category": "site_details",
+     "attribute_id": 11,
+     "attribute_name": "Checkin Time",
+     "attribute_value": "12:00 PM"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 24,
+     "attribute_name": "Driveway Grade",
+     "attribute_value": "Slight"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 54,
+     "attribute_name": "Max Vehicle Length",
+     "attribute_value": "21"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 93,
+     "attribute_name": "Tent Pad Width",
+     "attribute_value": "20"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 53,
+     "attribute_name": "Max Num of Vehicles",
+     "attribute_value": "1"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 25,
+     "attribute_name": "Driveway Length",
+     "attribute_value": "21"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 23,
+     "attribute_name": "Driveway Entry",
+     "attribute_value": "Back-in"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 0,
+     "attribute_name": "Is Equipment Mandatory",
+     "attribute_value": "true"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 92,
+     "attribute_name": "Tent Pad Length",
+     "attribute_value": "16"
+    },
+    {
+     "attribute_category": "equipment_details",
+     "attribute_id": 26,
+     "attribute_name": "Driveway Surface",
+     "attribute_value": "Paved"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 91,
+     "attribute_name": "Tent Pad",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 67,
+     "attribute_name": "Picnic Table",
+     "attribute_value": "Y"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Campfire Rings",
+     "attribute_value": "Campfire Rings"
+    },
+    {
+     "attribute_category": "amenities",
+     "attribute_id": 0,
+     "attribute_name": "Food Storage Locker",
+     "attribute_value": "Food Storage Locker"
+    }
+   ],
+   "campsite_id": "10204855",
+   "campsite_status": "Open",
+   "loop": "151-214",
+   "name": "213",
+   "notices": [
+    {
+     "text": "<p><strong>Maximum 6 people for site.</strong></p>\n",
+     "type": "warning"
+    },
+    {
+     "text": "<p><strong>Parking provided at site for 1 vehicle.  </strong></p>\n<ul>\n<li>Additional vehicles will need to park in overflow areas provided at the campground.</li>\n<li>Vehicles must be parked with all wheels on asphalt pavement.</li>\n</ul>\n\n",
+     "type": "warning"
+    },
+    {
+     "text": " Parking Capacity 21'L - Tent Size 9' x 15' - Open, Some Shade, No Privacy",
+     "type": "info"
+    }
+   ],
+   "permitted_equipment": [
+    {
+     "equipment_name": "Tent",
+     "max_length": 0
+    },
+    {
+     "equipment_name": "RV",
+     "max_length": 21
+    },
+    {
+     "equipment_name": "Pickup Camper",
+     "max_length": 21
+    },
+    {
+     "equipment_name": "Caravan/Camper Van",
+     "max_length": 21
+    }
+   ],
+   "type_of_use": "Overnight"
+  }
+ ],
+ "size": 18,
+ "start": "0",
+ "total": 18
+}

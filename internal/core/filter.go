@@ -105,9 +105,20 @@ func consolidateNights(campsites []AvailableCampsite, requiredNights int) []Avai
 		groups[key] = append(groups[key], site)
 	}
 
+	// Iterate in a stable order. Ranging over the map directly made two
+	// identical searches print their results in different orders, which is
+	// noise for a human diffing runs and makes the output impossible to pin in
+	// a test.
+	keys := make([]string, 0, len(groups))
+	for k := range groups {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+
 	var consolidated []AvailableCampsite
 
-	for _, group := range groups {
+	for _, key := range keys {
+		group := groups[key]
 		// Sort the group by booking date
 		sort.Slice(group, func(i, j int) bool {
 			return group[i].BookingDate.Before(group[j].BookingDate)

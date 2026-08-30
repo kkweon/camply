@@ -6,6 +6,7 @@ repos:
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
+        exclude: ^internal/providers/.*/testdata/
       - id: check-yaml
       - id: check-merge-conflict
       - id: mixed-line-ending
@@ -52,5 +53,6 @@ repos:
         exclude: |
           (?x)(
             PULL_REQUEST_TEMPLATE.md|
-            .github/semantic_release/release_notes.hbs
+            .github/semantic_release/release_notes.hbs|
+            internal/providers/.*/testdata/
           )
