@@ -20,10 +20,15 @@ func TestClassifyParkingPrecedence(t *testing.T) {
 		vehicleLength int
 		want          core.Parking
 	}{
-		{"bike in reporting a vehicle length", "Remote Camping", "Bike In", 21, core.ParkingNone},
-		{"hike & bike", "Remote Camping", "Hike & Bike", 0, core.ParkingNone},
-		{"boat in", "Remote Camping", "Boat In", 0, core.ParkingNone},
+		// Park-and-carry, not backpacking. These sit near a lot — Bike In even
+		// quotes a vehicle length — so a car gets you close and you carry the
+		// gear in. Calling them "none" put them in Zephyr Cove's half-mile
+		// bucket, which is the conflation three levels exist to undo.
+		{"bike in reporting a vehicle length", "Remote Camping", "Bike In", 21, core.ParkingWalk},
+		{"hike & bike", "Remote Camping", "Hike & Bike", 0, core.ParkingWalk},
 		{"walk in", "Remote Camping", "Walk In", 0, core.ParkingWalk},
+		// Arriving by boat is the one case with no car involved at all.
+		{"boat in", "Remote Camping", "Boat In", 0, core.ParkingNone},
 		{"remote with no mode named", "Remote Camping", "", 0, core.ParkingWalk},
 		{"a hook-up site parks a car at the unit", "Hook Up Camping", "Hook Up (E/W)", 36, core.ParkingAtSite},
 		{"a tent site with a vehicle length", "Camping", "Tent Site", 18, core.ParkingAtSite},
@@ -63,17 +68,14 @@ func TestClassifyPermits(t *testing.T) {
 			want: core.PermitsTent | core.PermitsRV,
 		},
 		{
-			// No car reaches it, so no RV may be advertised even though the API
-			// quotes a length of 21.
-			//
-			// It resolves to Unknown rather than Tent, which is what this
-			// provider has always done: the type group "Bike In" matches none of
-			// the tent tokens and a length is quoted, so nothing is claimed. A
-			// bike-in site plainly takes a tent, so this is a gap worth closing
-			// — but closing it changes results, which R1 does not do.
+			// No car reaches the unit, so no RV may be advertised even though
+			// the API quotes a length of 21 — and whatever you sleep in you
+			// carried, which is a tent. This used to resolve to "nothing known":
+			// "Bike In" matches none of the tent tokens and a length is quoted,
+			// so camply could not say a bike-in site took a tent.
 			name: "bike in with a quoted length", category: "Remote Camping", typeGroup: "Bike In",
-			vehicleLength: 21, parking: core.ParkingNone,
-			want: core.PermittedUnknown,
+			vehicleLength: 21, parking: core.ParkingWalk,
+			want: core.PermitsTent,
 		},
 		{
 			name: "lodging", category: "Lodging", typeGroup: "Cabin",

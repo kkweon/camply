@@ -266,7 +266,7 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 								Equipment:    equipment,
 								PermitsBasis: permitsBasis,
 								ParkingBasis: parkingBasis,
-								AccessLabel:  parkingLabel(parking),
+								AccessLabel:  accessLabel(parking, campsiteUseType),
 								RawType:      campsiteType,
 								UseType:      campsiteUseType,
 								MinOccupancy: minOcc,
@@ -303,9 +303,17 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 	return all, nil
 }
 
-// parkingLabel is camply's own word for how a unit is reached. UseDirect has no
-// label of its own, unlike recreation.gov's Site Access.
-func parkingLabel(p core.Parking) string {
+// accessLabel is the word an alert uses for how a unit is reached.
+//
+// UseDirect has no Site Access field, but its type group is the provider's own
+// word for the same thing — "Hike & Bike", "Bike In", "Boat In" — and it is more
+// use to a reader than camply's generic one. A walk of some kind is where that
+// detail matters, so the type group is preferred there and camply's own word
+// fills in elsewhere.
+func accessLabel(p core.Parking, campsiteUseType string) string {
+	if p.RequiresWalk() && strings.TrimSpace(campsiteUseType) != "" {
+		return campsiteUseType
+	}
 	switch p {
 	case core.ParkingAtSite:
 		return "Drive-In"

@@ -24,10 +24,15 @@ func classifyParking(campsiteType, campsiteUseType string, vehicleLength int) (c
 
 	switch {
 	case strings.Contains(haystack, "boat"):
+		// Arriving by boat is the one case where no car is involved at all.
 		return core.ParkingNone, "unit type: " + campsiteUseType
-	case strings.Contains(haystack, "hike"), strings.Contains(haystack, "bike"):
-		return core.ParkingNone, "unit type: " + campsiteUseType
-	case strings.Contains(haystack, "walk"):
+	case strings.Contains(haystack, "hike"), strings.Contains(haystack, "bike"),
+		strings.Contains(haystack, "walk"):
+		// Hike In, Bike In and Hike & Bike are park-and-carry, not backpacking:
+		// these units sit near a lot and report a vehicle length, so a car gets
+		// you close and you carry the gear the rest of the way. Calling them
+		// ParkingNone put them in the same bucket as Zephyr Cove's half-mile
+		// haul, which is the conflation the three levels exist to undo.
 		return core.ParkingWalk, "unit type: " + campsiteUseType
 	case strings.Contains(haystack, "remote"):
 		return core.ParkingWalk, "unit category: " + campsiteType
@@ -65,6 +70,13 @@ func classifyPermits(campsiteType, campsiteUseType string, vehicleLength int, pa
 		}
 	}
 	if vehicleLength == 0 {
+		permits |= core.PermitsTent
+	}
+	// If no car reaches the unit, whatever you sleep in you carried, and that is
+	// a tent. Bike In quotes a vehicle length of 21 and matches none of the tent
+	// tokens, so without this it resolved to "nothing known" — a bike-in site
+	// that camply could not say took a tent.
+	if parking.RequiresWalk() {
 		permits |= core.PermitsTent
 	}
 	if vehicleLength > 0 && parking == core.ParkingAtSite {
