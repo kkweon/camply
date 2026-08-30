@@ -390,3 +390,54 @@ func TestNormalizeValueFoldsTheTypo(t *testing.T) {
 		t.Error("normalization must not merge distinct values")
 	}
 }
+
+// TestHookupCoverageIsPerCampgroundAndPerHookup pins the two ways this report
+// refuses to average.
+//
+// Recording is a campground practice, not a site fact, and a campground can
+// answer about one utility while saying nothing about another: Lodgepole types
+// every site NONELECTRIC — a real answer about electricity — and records a water
+// hookup on 1 of its 201 sites.
+func TestHookupCoverageIsPerCampgroundAndPerHookup(t *testing.T) {
+	mk := func(id, facility string, h Hookups) Availability {
+		a := night(id, facility, day(2026, 9, 4))
+		a.Site.Facility.Name = "Facility " + facility
+		a.Site.Hookups = h
+		return a
+	}
+	sites := []Availability{
+		// Says no to electricity, nothing about water.
+		mk("1", "public", Hookups{Electric: TriNo}),
+		mk("2", "public", Hookups{Electric: TriNo}),
+		// Records both.
+		mk("3", "resort", Hookups{Electric: TriYes, Water: TriYes}),
+	}
+
+	c := AnalyzeHookups(sites, []Hookup{HookupElectric, HookupWater}, ShelterRV)
+
+	if got := c.PerHookup[HookupElectric]; len(got) != 0 {
+		t.Errorf("every site answers about electricity; reported %v", got)
+	}
+
+	water := c.PerHookup[HookupWater]
+	if len(water) != 1 || water[0].FacilityID != "public" || water[0].Silent != 2 {
+		t.Fatalf("water silence = %+v, want 2 sites at the public campground", water)
+	}
+
+	// No threshold: one recorded site does not make a campground eloquent.
+	sites = append(sites, mk("4", "public", Hookups{Electric: TriNo, Water: TriYes}))
+	c = AnalyzeHookups(sites, []Hookup{HookupWater}, ShelterRV)
+	if got := c.PerHookup[HookupWater]; len(got) != 1 || got[0].Silent != 2 || got[0].TotalSites != 3 {
+		t.Errorf("want 2 of 3 silent at the public campground, got %+v", got)
+	}
+
+	// A tent camper is served by a shared tap, so that counts as an answer.
+	tap := []Availability{mk("5", "public", Hookups{})}
+	tap[0].Site.SharedWater = TriYes
+	if got := AnalyzeHookups(tap, []Hookup{HookupWater}, ShelterTent).PerHookup[HookupWater]; len(got) != 0 {
+		t.Errorf("a shared tap answers a tent camper's water question, got %+v", got)
+	}
+	if got := AnalyzeHookups(tap, []Hookup{HookupWater}, ShelterRV).PerHookup[HookupWater]; len(got) != 1 {
+		t.Error("a shared tap does not answer an RV camper's hookup question")
+	}
+}

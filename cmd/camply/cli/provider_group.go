@@ -24,6 +24,7 @@ func newProviderGroupCmd(d providers.Descriptor, registry []providers.Descriptor
 
 	cmd.AddCommand(
 		newProviderCampsitesCmd(d, registry),
+		newVocabularyCmd(d, registry),
 		newProviderCampgroundsCmd(d),
 		newProviderRecreationAreasCmd(d),
 	)

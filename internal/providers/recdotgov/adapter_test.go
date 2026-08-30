@@ -1,6 +1,9 @@
 package recdotgov
 
 import (
+	"encoding/json"
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -304,5 +307,110 @@ func TestUnmappedLabelIsStillNonDrivable(t *testing.T) {
 	TakeDrift()
 	if got != core.ParkingWalk {
 		t.Errorf("classifyParking() = %v, want ParkingWalk", got)
+	}
+}
+
+// TestCampsiteTypeTokensArePartitioned restores the build-time exhaustiveness
+// check that an earlier refactor of this package dropped.
+//
+// campsite_type is compound, so it is read by token. Every word of every value
+// recreation.gov is known to return must be claimed by some token table, or
+// explicitly listed as carrying no axis. Adding a value to KnownCampsiteTypes
+// with a word nothing recognises fails here rather than quietly classifying it
+// Unknown in production.
+func TestCampsiteTypeTokensArePartitioned(t *testing.T) {
+	claimed := map[string]bool{}
+	for _, tok := range accessTokens {
+		for _, w := range strings.Fields(tok.token) {
+			claimed[w] = true
+		}
+	}
+	for _, tok := range shelterTokens {
+		claimed[tok.token] = true
+	}
+	for _, tok := range hookupTokens {
+		claimed[tok.token] = true
+	}
+	for _, w := range unclassifiedTypeTokens {
+		claimed[w] = true
+	}
+
+	for _, value := range KnownCampsiteTypes {
+		for _, word := range strings.Fields(strings.ToUpper(value)) {
+			if !claimed[word] {
+				t.Errorf("campsite type %q contains %q, which no token table claims. "+
+					"Add it to a token table, or to unclassifiedTypeTokens if it carries no axis.",
+					value, word)
+			}
+		}
+	}
+}
+
+// TestCompoundTypesFeedEveryAxis is the property that makes the token tables
+// worth having: a value that does not exist yet still reads correctly.
+//
+// Matching whole strings dropped "TENT ONLY NONELECTRIC WALK TO" to Unknown even
+// though it names both a shelter and an arrival mode.
+func TestCompoundTypesFeedEveryAxis(t *testing.T) {
+	tests := []struct {
+		campsiteType string
+		wantParking  core.Parking
+		wantPermits  core.Permitted
+		wantElectric core.Tri
+	}{
+		{"TENT ONLY NONELECTRIC", core.ParkingUnknown, core.PermitsTent, core.TriNo},
+		{"WALK TO", core.ParkingWalk, core.PermittedUnknown, core.TriUnknown},
+		// None of these three exist today.
+		{"TENT ONLY NONELECTRIC WALK TO", core.ParkingWalk, core.PermitsTent, core.TriNo},
+		{"GROUP RV ELECTRIC", core.ParkingUnknown, core.PermitsRV, core.TriYes},
+		{"TENT ONLY ELECTRIC WITH SEWER", core.ParkingUnknown, core.PermitsTent, core.TriYes},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.campsiteType, func(t *testing.T) {
+			if got, _ := classifyParking(attrs(), tt.campsiteType, ""); got != tt.wantParking {
+				t.Errorf("parking = %v, want %v", got, tt.wantParking)
+			}
+			if got, _ := classifyPermits(nil, tt.campsiteType); got != tt.wantPermits {
+				t.Errorf("permits = %b, want %b", got, tt.wantPermits)
+			}
+			if got := classifyHookups(attrs(), tt.campsiteType); got.Electric != tt.wantElectric {
+				t.Errorf("electric = %v, want %v", got.Electric, tt.wantElectric)
+			}
+		})
+	}
+}
+
+// TestCorpusIsFullyRecognised walks the recorded responses and asserts the
+// adapter understands every distinct value in them.
+//
+// Refreshing a fixture with a value camply does not map fails here, which is the
+// point: it turns a silent decay into a build failure at the moment the new
+// vocabulary enters the repository.
+func TestCorpusIsFullyRecognised(t *testing.T) {
+	dirs, err := filepath.Glob(filepath.Join("testdata", "golden", "*"))
+	if err != nil || len(dirs) == 0 {
+		t.Fatalf("no fixture corpus found: %v", err)
+	}
+
+	for _, dir := range dirs {
+		raw, err := os.ReadFile(filepath.Join(dir, "metadata.json"))
+		if err != nil {
+			t.Fatalf("%s: %v", dir, err)
+		}
+		var resp campsiteSearchResponse
+		if err := json.Unmarshal(raw, &resp); err != nil {
+			t.Fatalf("%s: %v", dir, err)
+		}
+
+		TakeDrift()
+		for _, item := range resp.Campsites {
+			a := newAttributes(item.Attributes)
+			classifyParking(a, "", item.noticeText())
+		}
+		if report := TakeDrift(); len(report) > 0 {
+			t.Errorf("%s holds values the adapter does not map:\n%s",
+				filepath.Base(dir), strings.Join(report, "\n"))
+		}
 	}
 }

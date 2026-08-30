@@ -48,13 +48,34 @@ var siteAccessLabels = map[string]core.Parking{
 	"boat in":  core.ParkingNone,
 }
 
-// noVehicleCampsiteTypes name their own arrival mode, so the fallback can say
-// which one rather than a bare "no vehicle".
-var noVehicleCampsiteTypes = map[string]core.Parking{
-	"WALK TO":       core.ParkingWalk,
-	"HIKE TO":       core.ParkingWalk,
-	"GROUP HIKE TO": core.ParkingWalk,
-	"BOAT IN":       core.ParkingNone,
+// accessTokens are the campsite_type fragments that name an arrival mode.
+//
+// campsite_type is compound — shelter, hookups, access and group-ness share one
+// slot — so it is read by token rather than matched whole. 12 tokens cover all
+// 15 values recreation.gov is known to return, and combinations grow
+// multiplicatively while tokens grow slowly: a value that does not exist yet,
+// like "TENT ONLY NONELECTRIC WALK TO", feeds both the shelter axis and this one
+// with no code change. Matching whole strings would drop it to Unknown.
+//
+// Ordered, because the first token found wins and BOAT IN must not be shadowed
+// by a substring of another.
+var accessTokens = []struct {
+	token   string
+	parking core.Parking
+}{
+	{"BOAT IN", core.ParkingNone},
+	{"HIKE TO", core.ParkingWalk},
+	{"WALK TO", core.ParkingWalk},
+}
+
+// campsiteTypeAccess reads the access token out of a compound type, if any.
+func campsiteTypeAccess(upperType string) (core.Parking, string, bool) {
+	for _, t := range accessTokens {
+		if strings.Contains(upperType, t.token) {
+			return t.parking, "campsite_type token " + t.token, true
+		}
+	}
+	return core.ParkingUnknown, "", false
 }
 
 // classifyParking decides how close a car gets.
@@ -82,8 +103,8 @@ func classifyParking(a attributes, campsiteType, notices string) (core.Parking, 
 	if strings.Contains(strings.ToUpper(notices), "NO VEHICLE ACCESS") {
 		return core.ParkingNone, "notice: NO VEHICLE ACCESS"
 	}
-	if upperType == "BOAT IN" {
-		return core.ParkingNone, "campsite_type=BOAT IN"
+	if p, basis, ok := campsiteTypeAccess(upperType); ok && p == core.ParkingNone {
+		return p, basis
 	}
 
 	// Meeks Bay returns an empty string where it has no answer, which is
@@ -98,8 +119,8 @@ func classifyParking(a attributes, campsiteType, notices string) (core.Parking, 
 		drift.record(attrSiteAccess, raw)
 		return core.ParkingWalk, attrSiteAccess + "=" + raw
 	}
-	if p, ok := noVehicleCampsiteTypes[upperType]; ok {
-		return p, "campsite_type=" + upperType
+	if p, basis, ok := campsiteTypeAccess(upperType); ok {
+		return p, basis
 	}
 	for _, name := range hikeDistanceAttrs {
 		if a.text(name) != "" {
@@ -131,6 +152,34 @@ var (
 	}
 )
 
+// shelterTokens are the campsite_type fragments that name what a site accepts.
+// Like accessTokens, read by token so a new combination needs no code.
+var shelterTokens = []struct {
+	token   string
+	permits core.Permitted
+}{
+	{"CABIN", core.PermitsCabin},
+	{"TENT", core.PermitsTent},
+	{"RV", core.PermitsRV},
+	{"STANDARD", core.PermitsTent | core.PermitsRV},
+}
+
+// hookupTokens are the campsite_type fragments that speak to electricity.
+// NONELECTRIC must be tested before ELECTRIC, which it contains.
+var hookupTokens = []struct {
+	token    string
+	electric core.Tri
+}{
+	{"NONELECTRIC", core.TriNo},
+	{"ELECTRIC", core.TriYes},
+}
+
+// unclassifiedTypeTokens carry no axis at all, and say so explicitly rather than
+// by omission. TestCampsiteTypeTokensArePartitioned asserts every known type is
+// covered by some token, so a value added to KnownCampsiteTypes cannot slip
+// through unconsidered.
+var unclassifiedTypeTokens = []string{"MANAGEMENT", "GROUP", "AREA", "ONLY", "TO", "IN"}
+
 // classifyPermits decides what the site accepts.
 //
 // permitted_equipment is the authority and the type token only the fallback,
@@ -161,13 +210,10 @@ func classifyPermits(equipment []core.Equipment, campsiteType string) (core.Perm
 		return permits, "campsite_type=" + upperType
 	}
 
-	switch {
-	case strings.Contains(upperType, "TENT"):
-		return core.PermitsTent, "campsite_type=" + upperType
-	case strings.Contains(upperType, "RV"):
-		return core.PermitsRV, "campsite_type=" + upperType
-	case strings.Contains(upperType, "STANDARD"):
-		return core.PermitsTent | core.PermitsRV, "campsite_type=" + upperType
+	for _, t := range shelterTokens {
+		if strings.Contains(upperType, t.token) {
+			return t.permits, "campsite_type token " + t.token
+		}
 	}
 	return core.PermittedUnknown, ""
 }
@@ -196,12 +242,13 @@ func classifyHookups(a attributes, campsiteType string) core.Hookups {
 	upperType := strings.ToUpper(campsiteType)
 
 	h := core.Hookups{}
-	switch {
-	case strings.Contains(upperType, "NONELECTRIC"):
-		h.Electric = core.TriNo
-	case strings.Contains(upperType, "ELECTRIC"):
-		h.Electric = core.TriYes
-	case a.anyPresent(electricHookupAttrs):
+	for _, t := range hookupTokens {
+		if strings.Contains(upperType, t.token) {
+			h.Electric = t.electric
+			break
+		}
+	}
+	if h.Electric == core.TriUnknown && a.anyPresent(electricHookupAttrs) {
 		h.Electric = core.TriYes
 	}
 	h.Water = a.yesNo(waterHookupAttrs)

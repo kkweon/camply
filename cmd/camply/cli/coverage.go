@@ -206,3 +206,32 @@ func joinParking(wanted []core.Parking) string {
 	}
 	return strings.Join(parts, ",")
 }
+
+// reportHookupCoverage names the campgrounds a hookup filter cannot speak for.
+//
+// By campground and by hookup, never as a percentage: recording is a campground
+// practice, and a campground can answer about electricity while saying nothing
+// about water.
+func reportHookupCoverage(c core.HookupCoverage, wanted []core.Hookup) {
+	if c.TotalSites == 0 {
+		return
+	}
+	for _, h := range wanted {
+		silent := c.PerHookup[h]
+		if len(silent) == 0 {
+			continue
+		}
+		parts := make([]string, 0, len(silent))
+		total := 0
+		for _, f := range silent {
+			label := f.FacilityName
+			if label == "" {
+				label = "campground"
+			}
+			parts = append(parts, fmt.Sprintf("%s (#%s) %d of %d", label, f.FacilityID, f.Silent, f.TotalSites))
+			total += f.Silent
+		}
+		logger.Info("%d campsites report no %s data: %s. --%s does not exclude them; %s.",
+			total, h, strings.Join(parts, ", "), flagHookups, flaggedInResults)
+	}
+}

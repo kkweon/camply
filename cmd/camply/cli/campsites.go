@@ -279,6 +279,8 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 			return err
 		}
 
+		reportHookupCoverage(core.AnalyzeHookups(rawCampsites, hookups, shelter), hookups)
+
 		// 7. Apply Fast Native Filter (Consolidates consecutive nights & filters bounds, weekends, equipment, campsites)
 		filter := core.Filter{}
 		filteredCampsites := filter.Apply(rawCampsites, req)
