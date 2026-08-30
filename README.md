@@ -1,34 +1,20 @@
 <div align="center">
 <a href="https://github.com/kkweon/camply">
-  <img src="https://raw.githubusercontent.com/kkweon/camply/develop/docs/_static/camply.svg"
+  <img src="https://raw.githubusercontent.com/kkweon/camply/develop/.github/assets/camply.svg"
     width="400" height="400" alt="camply">
 </a>
 </div>
 
 > [!NOTE]
-> **Fork Notice:** This is an independently maintained fork of the original [juftin/camply](https://github.com/juftin/camply) project. It features multi-architecture Docker builds (ARM64/Raspberry Pi) and deploys exclusively to GHCR. PyPI releases are not supported.
-
-> [!TIP]
-> **Go Rewrite in Progress:** `camply` is actively being rewritten from Python into Go for enhanced concurrency, a massive speed boost, and standalone binary distribution! Providers like `RecreationDotGov` and `ReserveCalifornia` are currently functional.
+> **Fork Notice:** This is an independently maintained fork of the original [juftin/camply](https://github.com/juftin/camply) project, rewritten in Go. It ships a standalone binary and multi-architecture Docker images (including ARM64/Raspberry Pi) to GHCR. PyPI releases are not supported.
 >
-> Try out the blisteringly fast Go prototype natively:
->
-> ```bash
-> go run cmd/camply/main.go --help
-> go run cmd/camply/main.go reservecalifornia recreation-areas --search "Yosemite"
-> go run cmd/camply/main.go recdotgov campsites --campgrounds 232447 \
->     --date-ranges 2026-06-01:2026-06-10 --nights 3
-> ```
->
-> The Go CLI puts the provider first, so every flag it offers is one that
-> provider's API can act on. `camply <provider> <command> --help` lists them.
+> The Python implementation this fork started from was removed once the Go rewrite took over. It is still readable at the [`python-final`](https://github.com/kkweon/camply/tree/python-final) tag.
 
 **`camply`**, the campsite finder ⛺️, is a tool to help you book a campsite online. Finding
 reservations at sold out campgrounds can be tough. That's where camply comes in. It searches
-thousands of campgrounds across the ~~USA~~ world via the APIs of booking services like
-[recreation.gov](https://recreation.gov). It continuously checks for cancellations and
-availabilities to pop up - once a campsite becomes available, camply sends you a notification
-to book your spot!
+the APIs of booking services like [recreation.gov](https://recreation.gov) for cancellations
+and availabilities — once a campsite becomes available, camply sends you a notification to
+book your spot.
 
 ---
 
@@ -36,158 +22,147 @@ to book your spot!
 
 <p align="center">
   <a href="https://github.com/kkweon/camply/blob/develop/LICENSE"><img src="https://img.shields.io/github/license/kkweon/camply?color=blue&label=License" alt="GitHub License"></a>
-  <a href="https://github.com/kkweon/camply/actions/workflows/test.yaml?query=branch%3Adevelop"><img src="https://github.com/kkweon/camply/actions/workflows/test.yaml/badge.svg?branch=develop" alt="Testing Status"></a>
+  <a href="https://github.com/kkweon/camply/actions/workflows/ci.yaml?query=branch%3Adevelop"><img src="https://github.com/kkweon/camply/actions/workflows/ci.yaml/badge.svg?branch=develop" alt="CI Status"></a>
+  <a href="https://go.dev"><img src="https://img.shields.io/github/go-mod/go-version/kkweon/camply?logo=go&label=Go" alt="Go Version"></a>
   <a href="https://github.com/go-task/task"><img src="https://img.shields.io/badge/task---?message=task&logo=task&color=teal&labelColor=grey" alt="task"></a>
-  <a href="https://github.com/astral-sh/uv"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json" alt="uv"></a>
   <a href="https://github.com/pre-commit/pre-commit"><img src="https://img.shields.io/badge/pre--commit-enabled-lightgreen?logo=pre-commit" alt="pre-commit"></a>
-  <a href="https://kkweon.github.io/camply/"><img src="https://img.shields.io/static/v1?message=docs&color=526CFE&logo=Material+for+MkDocs&logoColor=FFFFFF&label=" alt="docs"></a>
   <a href="https://github.com/semantic-release/semantic-release"><img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release"></a>
   <a href="https://gitmoji.dev"><img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg" alt="Gitmoji"></a>
 </p>
 
-## [Check Out The Docs](https://kkweon.github.io/camply/)
-
 ## Installing
 
-Install camply via `pip` or [pipx](https://github.com/pypa/pipx):
+Download a binary from the [latest release](https://github.com/kkweon/camply/releases/latest) —
+`linux` and `darwin`, `amd64` and `arm64` are published, with a `checksums.txt` alongside them:
 
 ```commandline
-pipx install camply
+curl -sSfL -o camply \
+  https://github.com/kkweon/camply/releases/latest/download/camply_<version>_linux_amd64
+chmod +x camply && sudo mv camply /usr/local/bin/
 ```
+
+Or build it yourself:
+
+```commandline
+go install github.com/kkweon/camply/cmd/camply@latest
+```
+
+Or use the Docker image — see [Docker Usage](#docker-usage).
 
 ## Usage
 
-Search for a specific recreation area (recreation areas contain campgrounds):
+The provider comes first, then the command. Every flag a command offers is one that
+provider's API can actually act on, so `--state` exists on `recdotgov` and not on
+`reservecalifornia`.
+
+Search for a recreation area (recreation areas contain campgrounds):
 
 ```commandline
-camply recreation-areas --search "Glacier National Park"
+camply recdotgov recreation-areas --search "Glacier National Park"
 ```
 
 Search for campgrounds (campgrounds contain campsites):
 
 ```commandline
-camply campgrounds --search "Fire Lookout Towers" --state CA
+camply recdotgov campgrounds --search "Fire Lookout Towers" --state CA
 ```
 
-Search for available campsites, get a notification whenever one becomes
-available, and continue searching after the first one is found. The below command
-is using `silent` notifications as an example but camply also supports `Email`,
-`Slack`, `Twilio` (SMS), `Pushover`, `Pushbullet`, `Ntfy`, `Apprise`, `Telegram`,
-and `Webhook`.
+Search for available campsites and get a Pushover notification for each one found:
 
 ```commandline
-camply campsites \
-    --rec-area 2725 \
-    --start-date 2023-07-10 \
-    --end-date 2023-07-18 \
-    --notifications silent \
-    --search-forever
+camply recdotgov campsites \
+    --rec-areas 2725 \
+    --date-ranges 2026-07-10:2026-07-18 \
+    --nights 3 \
+    --notifications pushover
 ```
+
+`camply <provider> <command> --help` lists everything a provider accepts.
+
+### Flag conventions
+
+- **Multi-value flags are plural** and take either a comma-separated list or repetition:
+  `--campgrounds 232461,234039` is the same as `--campgrounds 232461 --campgrounds 234039`.
+- **Date windows are one value**, not a start/end pair: `--date-ranges 2026-09-04:2026-09-07`.
+  Repeat it to search several windows at once. `--start-date`/`--end-date` still work for a
+  single window.
+- **A filter that matches nothing is an error**, not a silent empty result. Pass
+  `--allow-partial-match` to continue when an equipment filter matches at some campgrounds
+  but not others.
+
+Notable filters: `--campsite-types` (what separates drive-in from walk-in),
+`--equipment-types`, `--max-equipment-length`, `--nights`, `--weekends`, and — for
+ReserveCalifornia — `--min-vehicle-length`.
 
 ## Providers
 
-camply works with a number of providers. A "provider" is an online booking
-service that lists camping and recreation inventory.
+Run **`camply providers`** to list them:
 
-- **`RecreationDotGov`**: Searches on [Recreation.gov](https://recreation.gov) for Campsites (default provider)
-- **`Yellowstone`**: Searches on [YellowstoneNationalParkLodges.com](https://yellowstonenationalparklodges.com) for
-  Campsites
-- **`ReserveCalifornia`**: Searches on [ReserveCalifornia.com](https://reservecalifornia.com) for Campsites (California
-  State Parks)
-- **`GoingToCamp`**: Searches on [GoingToCamp](https://goingtocamp.com) for Campsites
-  - Parks Canada - Canada National Parks - [reservation.pc.gc.ca](https://reservation.pc.gc.ca/)
-  - Washington State Parks - Washington, USA - [washington.goingtocamp.com](https://washington.goingtocamp.com)
-  - Wisconsin State Parks - Wisconsin, USA - [wisconsin.goingtocamp.com](https://wisconsin.goingtocamp.com)
-  - Michigan State Parks - Michigan, USA - [midnrreservations.com](https://midnrreservations.com/)
-  - BC Parks - British Columbia, CA - [camping.bcparks.ca](https://camping.bcparks.ca)
-  - Maryland State Parks - Maryland, USA - [parkreservations.maryland.gov](https://parkreservations.maryland.gov)
-  - Nova Scotia Parks - Nova Scotia, CA - [novascotia.goingtocamp.com](https://novascotia.goingtocamp.com)
-  - Manitoba Parks - Manitoba, CA - [manitoba.goingtocamp.com](https://manitoba.goingtocamp.com)
-  - New Brunswick Provincial Parks - New Brunswick, CA - [parcsnbparks.info](https://www.parcsnbparks.info/)
-  - Newfoundland & Labrador Provincial Parks - Newfoundland and Labrador, CA - [nlcamping.ca](https://nlcamping.ca)
-  - Long Point Region - Ontario, CA - [longpoint.goingtocamp.com](https://longpoint.goingtocamp.com)
-  - Algonquin Highlands - Ontario, CA - [ahtrails.ca](https://ahtrails.ca)
-  - Maitland Valley, Ontario, CA - [maitlandvalley.goingtocamp.com](https://maitlandvalley.goingtocamp.com)
-  - Saugeen Valley - Ontario, CA - [saugeen.goingtocamp.com](https://saugeen.goingtocamp.com)
-  - St. Clair Region - Ontario, CA - [stclair.goingtocamp.com](https://stclair.goingtocamp.com)
-  - Tacoma Power Parks, Washington, USA - [tacomapower.goingtocamp.com](https://tacomapower.goingtocamp.com)
-  - Gatineau Park - Ontario-Quebec, CA - [reservations.ncc-ccn.gc.ca](https://reservations.ncc-ccn.gc.ca)
-- **`AlabamaStateParks`**: Searches on [ReserveAlaPark.com](https://reservealapark.com) for Campsites
-- **`ArizonaStateParks`**: Searches on [AZStateParks.com](https://azstateparks.com) for Campsites
-- **`FloridaStateParks`**: Searches on [FloridaStateParks.org](https://www.reserve.floridastateparks.org) for Campsites
-- **`MinnesotaStateParks`**: Searches on [ReserveMN.usedirect.com](https://reservemn.usedirect.com) for Campsites
-- **`MissouriStateParks`**: Searches on [icampmo1.usedirect.com](https://icampmo1.usedirect.com) for Campsites
-- **`OhioStateParks`**: Searches on [ReserveOhio.com](https://reserveohio.com) for Campsites
-- **`VirginiaStateParks`**: Searches on [ReserveVAParks.com](https://reservevaparks.com) for Campsites
-- **`NorthernTerritory`**: Searches the [Australian Northern Territory](https://parkbookings.nt.gov.au) for Campsites
-- **`FairfaxCountyParks`**: Searches on [fairfax.usedirect.com](https://fairfax.usedirect.com) for Campsites (Virginia)
-- **`MaricopaCountyParks`**: Searches on [MaricopaCountyParks.org](https://maricopacountyparks.org) for Campsites (Arizona)
-- **`OregonMetro`**: Searches on [OregonMetro.gov](https://oregonmetro.gov) for Campsites (Portland Metro)
-- **`RecreationDotGovTicket`**: Searches on [Recreation.gov](https://recreation.gov) for Tickets and Tours
-- **`RecreationDotGovTimedEntry`**: Searches on [Recreation.gov](https://recreation.gov) for Timed Entries
+| Provider            | Service                                                                       | Status              |
+| ------------------- | ----------------------------------------------------------------------------- | ------------------- |
+| `recdotgov`         | [Recreation.gov](https://recreation.gov) (US Federal)                         | available           |
+| `reservecalifornia` | [ReserveCalifornia.com](https://reservecalifornia.com) (CA State Parks)       | available           |
+| `goingtocamp`       | [GoingToCamp](https://goingtocamp.com) (Canada & US)                          | not implemented yet |
+| `yellowstone`       | [Yellowstone National Park Lodges](https://yellowstonenationalparklodges.com) | not implemented yet |
 
-Run **`camply providers`** to list current providers and visit the [Providers](https://kkweon.github.io/camply/providers/)
-section in the docs to learn more.
+Each provider name has aliases — `recdotgov` also answers to `RecreationDotGov`,
+`recreation-dot-gov`, and `recgov`.
 
-## Documentation
+## Configuration
 
-Head over to the [camply documentation](https://kkweon.github.io/camply/) to see what you can do!
+camply reads `~/.camply`, a `KEY=value` file. Every key can also be supplied through the
+environment, which is how it is configured under Kubernetes:
 
-```console
-❯ camply --help
+```shell
+# Pushover
+PUSHOVER_PUSH_USER=your_pushover_user_key
+PUSHOVER_PUSH_TOKEN=your_pushover_app_token
 
- Usage: camply [OPTIONS] COMMAND [ARGS]...
+# Telegram
+TELEGRAM_BOT_TOKEN=your_telegram_bot_token
+TELEGRAM_CHAT_ID=your_telegram_chat_id
+```
 
- Welcome to camply, the campsite finder.
- Finding reservations at sold out campgrounds can be tough. That's where camply comes in. It searches the
- APIs of booking services like https://recreation.gov (which indexes thousands of campgrounds across the
- USA) to continuously check for cancellations and availabilities to pop up. Once a campsite becomes
- available, camply sends you a notification to book your spot!
+`PUSHOVER_PUSH_TOKEN` is optional — without it camply falls back to its own registered
+Pushover application. Check your setup with:
 
-
- visit the camply documentation at https://kkweon.github.io/camply
-
-╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────────╮
-│                                                                                                        │
-│  --debug/--no-debug             Enable extra debugging output                                          │
-│  --provider              TEXT   Camping Search Provider. Defaults to 'RecreationDotGov'                │
-│  --version                      Show the version and exit.                                             │
-│  --help                         Show this message and exit.                                            │
-│                                                                                                        │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────────╮
-│                                                                                                        │
-│  campgrounds              Search for Campgrounds (inside of Recreation Areas) and list them            │
-│  campsites                Find Available Campsites with Custom Search Criteria                         │
-│  configure                Set up camply configuration file with an interactive console                 │
-│  equipment-types          Get a list of supported equipment                                            │
-│  list-campsites           List campsite IDs for a given campground or recreation area                  │
-│  providers                List the different camply providers                                          │
-│  recreation-areas         Search for Recreation Areas and list them                                    │
-│  test-notifications       Test your notification provider setup                                        │
-│  tui                      Open Textual TUI.                                                            │
-│                                                                                                        │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+```commandline
+camply test-notifications --notifications pushover
 ```
 
 ## Docker Usage
 
-`camply` provides an official Docker image published to `ghcr.io/kkweon/camply:latest`. The image provides the `camply` CLI directly as its entrypoint, meaning you can pass arguments just like the local executable.
-
-You can mount your personal `.camply` configuration file into the container (so it picks up your Pushover or Telegram credentials) using a volume mount:
+`camply` publishes a multi-architecture image to `ghcr.io/kkweon/camply:latest`, with the
+CLI as its entrypoint. Mount your `~/.camply` to pick up notification credentials:
 
 ```bash
 docker run --rm -it \
-  -v ~/.camply:/home/camply/.camply \
-  ghcr.io/kkweon/camply:latest campsites --campground 232450 --start-date 2026-06-01 --end-date 2026-06-14 --notifications pushover
+  -v ~/.camply:/root/.camply \
+  ghcr.io/kkweon/camply:latest recdotgov campsites \
+    --campgrounds 232450 \
+    --date-ranges 2026-06-01:2026-06-14 \
+    --notifications pushover
 ```
 
-**Note on Image Size**: The image size sits around ~300MB. This is completely expected! `camply` leverages `pandas` and `numpy` under the hood to perform complex continuous availability groupings, scheduling slices, and tabular dataframe merging to handle the massive JSON payloads returned by Recreation.gov efficiently.
+camply searches once and exits — there is no daemon mode. To poll continuously, run it on a
+schedule (a Kubernetes `CronJob`, a systemd timer, or plain `cron`).
 
 ## Contributing
 
-Camply doesn't support your favorite campsite booking provider yet? Consider
-[contributing](https://kkweon.github.io/camply/contributing/) 😉.
+Development uses [Task](https://taskfile.dev):
+
+```commandline
+task install    # install the pre-commit hooks
+task test       # go test ./...
+task lint       # golangci-lint, gofumpt, goimports, prettier
+task run -- recdotgov campsites --help
+```
+
+Commits follow [Conventional Commits](https://www.conventionalcommits.org); releases are cut
+automatically by semantic-release from the commit history.
+
+`PRD.md` records the CLI contract and the places the Go CLI deliberately diverges from the
+original Python one. `TODO.md` tracks the remaining work.
 
 <br/>
 
@@ -198,5 +173,3 @@ Recreation data provided by [**Recreation.gov**](https://ridb.recreation.gov/)
 ---
 
 <br/>
-
-[<p align="center" ><img src="https://raw.githubusercontent.com/juftin/juftin/main/static/juftin.png" width="120" height="120"  alt="juftin logo"> </p>](https://github.com/juftin)

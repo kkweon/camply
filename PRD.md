@@ -1,6 +1,8 @@
 # Camply CLI Product Requirements Document (PRD)
 
-This document describes the exact behavior, commands, and flags of the original Python `camply` CLI. The Go rewrite must strive to match these behaviors perfectly to ensure a seamless transition for users.
+This document records the exact behavior, commands, and flags of the original Python `camply` CLI, and the places where the Go CLI deliberately departs from it.
+
+The Python implementation itself has been removed — it is readable at the `python-final` tag (`git show python-final:camply/cli.py`). That makes this document the only written record of the contract the Go CLI inherited, so it stays: where Go does not match, the difference below should say why.
 
 ## Global Options
 

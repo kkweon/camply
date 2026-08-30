@@ -4,6 +4,9 @@ Review of the `recdotgov` and `reservecalifornia` (usedirect) provider migration
 shared `core`. Items are ordered **most-critical-first** within each tier — reorder freely,
 there are no numbers to renumber. References use `file:line`.
 
+`*.py` references point into the removed Python implementation, which lives at the
+`python-final` tag — `git show python-final:camply/providers/usedirect/usedirect.py`.
+
 ---
 
 ## 🔴 Critical
@@ -167,7 +170,7 @@ there are no numbers to renumber. References use `file:line`.
 
 ## 🗓 Deprecation timeline
 
-Kept working so the CronJobs — which run `:latest-go` with `imagePullPolicy: Always` — are
+Kept working so the CronJobs — which run `:latest` with `imagePullPolicy: Always` — are
 not taken down by an unrelated release. Remove once the manifests have moved:
 
 - [ ] Top-level `campsites` / `campgrounds` / `recreation-areas` (see `cmd/camply/cli/legacy.go`).
