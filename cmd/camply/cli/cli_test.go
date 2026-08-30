@@ -909,3 +909,106 @@ func TestCoverageMessagesArePinned(t *testing.T) {
 		}
 	})
 }
+
+// TestShelterRejectsAListWithADirection pins that --shelter takes one value and
+// says what to do instead.
+//
+// It is a choice, not a filter list: accepting a list would re-merge the
+// camper's choice with the site's permitted set, which is the confusion the
+// domain model exists to prevent.
+func TestShelterRejectsAListWithADirection(t *testing.T) {
+	fake := &fakeProvider{sites: []core.Availability{site("A", 4)}}
+	res := runCLI(t, fakeRegistry(fake),
+		"fake", "campsites", "--campgrounds", "1",
+		"--date-ranges", "2026-09-04:2026-09-07",
+		"--shelter", "tent,rv")
+
+	if res.Err == nil {
+		t.Fatal("expected --shelter to reject two values")
+	}
+	for _, want := range []string{"one value", "Run the search once per kind", "tent"} {
+		if !strings.Contains(res.Err.Error(), want) {
+			t.Errorf("error is missing %q:\n%v", want, res.Err)
+		}
+	}
+	if fake.campsite != 0 {
+		t.Error("a closed vocabulary must be rejected before any request is made")
+	}
+}
+
+func TestShelterRejectsAnUnknownKind(t *testing.T) {
+	fake := &fakeProvider{sites: []core.Availability{site("A", 4)}}
+	res := runCLI(t, fakeRegistry(fake),
+		"fake", "campsites", "--campgrounds", "1",
+		"--date-ranges", "2026-09-04:2026-09-07",
+		"--shelter", "yurt")
+
+	if res.Err == nil || !strings.Contains(res.Err.Error(), "cabin, rv, tent") {
+		t.Errorf("an unknown kind should be rejected with the valid ones listed, got %v", res.Err)
+	}
+}
+
+// TestAModeAppliesNoFilterTheUserDidNotType is the guard against convenience
+// turning into silent loss.
+//
+// Every RV site measured already parks a car at the unit, so making --shelter rv
+// imply --parking at-site would look harmless — and would quietly drop the
+// handful whose parking the provider never reported. A filter the user did not
+// ask for is the failure class this session removed.
+func TestAModeAppliesNoFilterTheUserDidNotType(t *testing.T) {
+	rvKnown := site("known", 4)
+	rvKnown.Site.Permits = core.PermitsRV
+	rvKnown.Site.Parking = core.ParkingAtSite
+	rvUnknown := site("unrecorded", 4)
+	rvUnknown.Site.Permits = core.PermitsRV // Parking left at ParkingUnknown
+
+	fake := &fakeProvider{sites: []core.Availability{rvKnown, rvUnknown}}
+	res := runCLI(t, fakeRegistry(fake),
+		"fake", "campsites", "--campgrounds", "1",
+		"--date-ranges", "2026-09-04:2026-09-07",
+		"--shelter", "rv")
+
+	if res.Err != nil {
+		t.Fatalf("unexpected error: %v", res.Err)
+	}
+	if !strings.Contains(res.Stdout, "campsites/unrecorded") {
+		t.Errorf("--shelter rv must not imply a parking filter:\n%s", res.Stdout)
+	}
+}
+
+// TestAxesAreIndependent: no axis may be inferred from another.
+//
+// Each is read from separate evidence, and 61 sites typed NONELECTRIC carry a
+// water hookup — proof that one field's answer says nothing about the next.
+func TestAxesAreIndependent(t *testing.T) {
+	// Permitted, parking and hookups vary freely against each other.
+	s := site("A", 4)
+	s.Site.Permits = core.PermitsTent
+	s.Site.Parking = core.ParkingAtSite
+	s.Site.Hookups = core.Hookups{Electric: core.TriNo, Water: core.TriYes}
+
+	fake := &fakeProvider{sites: []core.Availability{s}}
+	for _, args := range [][]string{
+		{"--shelter", "tent"},
+		{"--parking", "at-site"},
+		{"--hookups", "water"},
+		{"--shelter", "tent", "--parking", "at-site", "--hookups", "water"},
+	} {
+		full := append([]string{
+			"fake", "campsites", "--campgrounds", "1",
+			"--date-ranges", "2026-09-04:2026-09-07",
+		}, args...)
+		res := runCLI(t, fakeRegistry(fake), full...)
+		if !strings.Contains(res.Stdout, "campsites/A") {
+			t.Errorf("%v excluded a site that satisfies every axis:\n%s", args, res.Stdout)
+		}
+	}
+
+	// A tent site with no electricity must still be excluded by --hookups
+	// electric: independence is not permissiveness.
+	res := runCLI(t, fakeRegistry(fake), "fake", "campsites", "--campgrounds", "1",
+		"--date-ranges", "2026-09-04:2026-09-07", "--hookups", "electric")
+	if strings.Contains(res.Stdout, "campsites/A") {
+		t.Error("an explicit no on electricity must exclude")
+	}
+}
