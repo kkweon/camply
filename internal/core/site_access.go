@@ -1,10 +1,6 @@
 package core
 
-import (
-	"sort"
-	"strconv"
-	"strings"
-)
+import "sort"
 
 // SiteAccess is how a camper reaches a campsite.
 //
@@ -72,54 +68,6 @@ func (a SiteAccess) String() string {
 	default:
 		return "Unknown"
 	}
-}
-
-// SiteAccessSummary is the line an alert always carries.
-//
-// It is never empty. The incident this field exists for was an alert that said
-// nothing at all about vehicle access for a site half a mile from the nearest
-// road, so "we don't know" has to be as visible as "you can't drive there" —
-// an omitted line reads as reassurance.
-func (c AvailableCampsite) SiteAccessSummary() string {
-	label := strings.TrimSpace(c.SiteAccessRaw)
-	if label == "" {
-		label = c.SiteAccess.String()
-	}
-
-	switch {
-	case c.SiteAccess.NoVehicleAccess():
-		return "⚠️ " + strings.ToUpper(label) + " — no vehicle access" + c.maxVehiclesSuffix()
-	case c.SiteAccess.HasVehicleAccess():
-		return label + c.maxVehiclesSuffix()
-	default:
-		return "⚠️ UNKNOWN — the provider reports no vehicle access data; " +
-			"verify on the booking page before reserving"
-	}
-}
-
-// SiteAccessAlert is the short marker for a notification title or a terminal
-// line. It is empty only for a site confirmed reachable by car, so anything
-// that is not a plain drive-in site is flagged wherever it is shown.
-func (c AvailableCampsite) SiteAccessAlert() string {
-	if c.SiteAccess.HasVehicleAccess() {
-		return ""
-	}
-	if !c.SiteAccess.NoVehicleAccess() {
-		return "⚠️ UNKNOWN ACCESS"
-	}
-
-	label := strings.TrimSpace(c.SiteAccessRaw)
-	if label == "" {
-		label = c.SiteAccess.String()
-	}
-	return "⚠️ " + strings.ToUpper(label)
-}
-
-func (c AvailableCampsite) maxVehiclesSuffix() string {
-	if c.MaxVehicles == nil {
-		return ""
-	}
-	return " (Max Vehicles: " + strconv.Itoa(*c.MaxVehicles) + ")"
 }
 
 // FacilitySiteAccess is how vehicle access landed at one campground.

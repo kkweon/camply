@@ -89,12 +89,15 @@ camply recdotgov campsites \
 - **A filter that matches nothing is an error**, not a silent empty result. Pass
   `--allow-partial-match` to continue when an equipment filter matches at some campgrounds
   but not others.
+- **Missing data is surfaced, never acted on.** No filter excludes a site because the
+  provider reported nothing about it — the site reaches the results flagged ⚠️ so you can
+  check it, and the run says how many it flagged.
 
 Notable filters: `--exclude-no-vehicle-access`, `--campsite-types`,
 `--equipment-types`, `--max-equipment-length`, `--campsites` (watch individual sites by
 ID), `--nights`, `--weekends`, and — for ReserveCalifornia — `--min-vehicle-length`.
 
-### Vehicle access
+### Vehicle access and equipment
 
 Every result reports how the site is reached, and anything that is not a confirmed
 drive-in site is flagged ⚠️ in the terminal and in the notification's title and body.
@@ -107,6 +110,11 @@ type as its drive-in tent sites — while Lodgepole types 3 of its _drive-in_ si
 (walk-in, hike-in, boat-in). Sites the provider reports no access data for are kept and
 flagged `⚠️ UNKNOWN`, never dropped: an alert you can verify with one click costs less
 than a site you never hear about.
+
+`--equipment-types` follows the same rule. A site with no equipment data is not excluded —
+it reaches the results marked `⚠️ NO EQUIPMENT DATA`. Meeks Bay is why: it reports no
+equipment for 17 of its 88 campsites, and treating that silence as "does not match" threw
+away 242 nights of real availability from a single September search.
 
 ## Providers
 

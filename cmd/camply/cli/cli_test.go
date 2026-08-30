@@ -706,7 +706,11 @@ func TestEmptyEquipmentValueIsRejected(t *testing.T) {
 // The original request that started this work: drive-in tent sites. Equipment
 // cannot express it — a WALK TO site permits a tent — so only the campsite type
 // separates them.
-func TestCampsiteTypesExcludeWalkInSites(t *testing.T) {
+// Campsite type is the coarse cut between tent, RV and cabin. It is NOT what
+// separates drive-in from walk-in — Zephyr Cove types all 47 of its hike-in
+// sites TENT ONLY NONELECTRIC — so this test only pins that an unlisted type is
+// excluded. --exclude-no-vehicle-access is what answers the access question.
+func TestCampsiteTypesExcludeUnlistedTypes(t *testing.T) {
 	mk := func(id, campsiteType string) core.AvailableCampsite {
 		s := site(id, 4)
 		s.CampsiteType = campsiteType
@@ -733,7 +737,7 @@ func TestCampsiteTypesExcludeWalkInSites(t *testing.T) {
 		}
 	}
 	if strings.Contains(res.Stdout, "campsites/walk") {
-		t.Error("a WALK TO site is not drive-in and must be excluded")
+		t.Error("a type that was not requested must be excluded")
 	}
 }
 
@@ -752,4 +756,156 @@ func TestUnknownCampsiteTypeWarnsOnAnOpenVocabulary(t *testing.T) {
 	if !strings.Contains(res.Stderr, "Did you mean") {
 		t.Errorf("the warning should suggest a correction, got:\n%s", res.Stderr)
 	}
+}
+
+// TestEquipmentFilterKeepsSitesWithNoEquipmentData pins the rule this project
+// arrived at the hard way: missing data is surfaced, never acted on.
+//
+// The filter used to answer "no" when the provider said nothing, which threw
+// away 242 nights of real September availability at Meeks Bay, where 17 of 88
+// campsites carry no equipment data at all.
+func TestEquipmentFilterKeepsSitesWithNoEquipmentData(t *testing.T) {
+	withEquipment := site("has-data", 4)
+	withEquipment.PermittedEquipment = []core.Equipment{{EquipmentName: "Tent", MaxLength: 30}}
+	wrongEquipment := site("wrong-data", 4)
+	wrongEquipment.PermittedEquipment = []core.Equipment{{EquipmentName: "Boat", MaxLength: 30}}
+	noData := site("no-data", 4) // PermittedEquipment deliberately empty
+
+	fake := &fakeProvider{sites: []core.AvailableCampsite{withEquipment, wrongEquipment, noData}}
+	res := runCLI(t, fakeRegistry(fake),
+		"fake", "campsites", "--campgrounds", "1",
+		"--date-ranges", "2026-09-04:2026-09-07",
+		"--equipment-types", "Tent")
+
+	if res.Err != nil {
+		t.Fatalf("unexpected error: %v", res.Err)
+	}
+	if !strings.Contains(res.Stdout, "campsites/no-data") {
+		t.Error("a site with no equipment data must survive the filter, not be discarded")
+	}
+	if !strings.Contains(res.Stdout, "NO EQUIPMENT DATA") {
+		t.Errorf("the surviving site must be flagged, got:\n%s", res.Stdout)
+	}
+	// Evidence still decides where there is evidence.
+	if strings.Contains(res.Stdout, "campsites/wrong-data") {
+		t.Error("a site whose equipment does not match must still be excluded")
+	}
+	if !strings.Contains(res.Stdout, "campsites/has-data") {
+		t.Error("a matching site must be in the results")
+	}
+}
+
+// TestFacilityOfOnlyMissingEquipmentDataIsNotFatal guards the consequence of the
+// change above.
+//
+// "Nothing matched at this campground" is a fatal error, on the reasoning that
+// the campground was dropped with nothing to show for it. Once missing-data
+// sites survive, a campground made entirely of them returns every one of its
+// sites — failing the search there would be a new false alarm invented by the
+// fix.
+func TestFacilityOfOnlyMissingEquipmentDataIsNotFatal(t *testing.T) {
+	fake := &fakeProvider{sites: []core.AvailableCampsite{site("a", 4), site("b", 4)}}
+	res := runCLI(t, fakeRegistry(fake),
+		"fake", "campsites", "--campgrounds", "1",
+		"--date-ranges", "2026-09-04:2026-09-07",
+		"--equipment-types", "Tent")
+
+	if res.Err != nil {
+		t.Fatalf("a campground of only missing-data sites must not fail the search: %v", res.Err)
+	}
+	for _, want := range []string{"campsites/a", "campsites/b"} {
+		if !strings.Contains(res.Stdout, want) {
+			t.Errorf("%s should be in the results", want)
+		}
+	}
+}
+
+// TestCoverageNeverClaimsSitesReachTheResults is the regression test for output
+// that contradicted itself.
+//
+// The old message named sites as "included and flagged ⚠️ in results" while a
+// different filter had already removed every one of them. Verified live: at
+// Zephyr Cove that line reported 47 sites as included in a run whose 623 result
+// lines contained none of them.
+func TestCoverageNeverClaimsSitesReachTheResults(t *testing.T) {
+	drivable := site("drive", 4)
+	drivable.CampsiteType = "STANDARD NONELECTRIC"
+	drivable.SiteAccess = core.SiteAccessDriveIn
+
+	// Not drivable, and also excluded by --campsite-types before results print.
+	hikeIn := site("hike", 4)
+	hikeIn.CampsiteType = "TENT ONLY NONELECTRIC"
+	hikeIn.SiteAccess = core.SiteAccessHikeIn
+	hikeIn.SiteAccessRaw = "Hike-In"
+
+	fake := &fakeProvider{sites: []core.AvailableCampsite{drivable, hikeIn}}
+	res := runCLI(t, fakeRegistry(fake),
+		"fake", "campsites", "--campgrounds", "1",
+		"--date-ranges", "2026-09-04:2026-09-07",
+		"--campsite-types", "STANDARD NONELECTRIC")
+
+	if res.Err != nil {
+		t.Fatalf("unexpected error: %v", res.Err)
+	}
+
+	out := res.Stdout + res.Stderr
+	// Both halves of the contradiction, asserted together.
+	if strings.Contains(out, "are included") {
+		t.Errorf("a coverage message must not claim what reaches the results:\n%s", out)
+	}
+	if strings.Contains(res.Stdout, "campsites/hike") {
+		t.Fatal("the hike-in site should have been removed by --campsite-types")
+	}
+	if !strings.Contains(out, "would exclude them") {
+		t.Errorf("the message should describe what the flag would do, got:\n%s", out)
+	}
+}
+
+// TestCoverageMessagesArePinned keeps the wording from sliding back into a claim
+// about the result set. Each of these sentences is scoped to one filter.
+func TestCoverageMessagesArePinned(t *testing.T) {
+	noVehicle := site("hike", 4)
+	noVehicle.SiteAccess = core.SiteAccessHikeIn
+	noVehicle.SiteAccessRaw = "Hike-In"
+	unknown := site("unknown", 4) // SiteAccess zero value is Unknown
+	noEquipment := site("no-equip", 4)
+
+	t.Run("flag off describes what the flag would do", func(t *testing.T) {
+		fake := &fakeProvider{sites: []core.AvailableCampsite{noVehicle}}
+		res := runCLI(t, fakeRegistry(fake), "fake", "campsites", "--campgrounds", "1",
+			"--date-ranges", "2026-09-04:2026-09-07")
+		want := "1 of the 1 campsites searched have no vehicle access. " +
+			"--exclude-no-vehicle-access would exclude them; any that reach the results are flagged ⚠️."
+		if !strings.Contains(res.Stdout, want) {
+			t.Errorf("want:\n%s\ngot:\n%s", want, res.Stdout)
+		}
+	})
+
+	t.Run("flag on names the denominator it counted", func(t *testing.T) {
+		fake := &fakeProvider{sites: []core.AvailableCampsite{noVehicle, unknown}}
+		res := runCLI(t, fakeRegistry(fake), "fake", "campsites", "--campgrounds", "1",
+			"--date-ranges", "2026-09-04:2026-09-07", "--exclude-no-vehicle-access")
+		for _, want := range []string{
+			"--exclude-no-vehicle-access excluded 1 campsites with no vehicle access (of 2 searched).",
+			"1 campsites searched report no vehicle access data. --exclude-no-vehicle-access " +
+				"does not exclude them; any that reach the results are flagged ⚠️ UNKNOWN",
+		} {
+			if !strings.Contains(res.Stdout, want) {
+				t.Errorf("want:\n%s\ngot:\n%s", want, res.Stdout)
+			}
+		}
+	})
+
+	t.Run("missing equipment data reports keeping, not excluding", func(t *testing.T) {
+		matching := site("ok", 4)
+		matching.PermittedEquipment = []core.Equipment{{EquipmentName: "Tent", MaxLength: 30}}
+		fake := &fakeProvider{sites: []core.AvailableCampsite{matching, noEquipment}}
+		res := runCLI(t, fakeRegistry(fake), "fake", "campsites", "--campgrounds", "1",
+			"--date-ranges", "2026-09-04:2026-09-07", "--equipment-types", "Tent")
+		want := "1 of the 2 campsites searched report no equipment data. --equipment-types " +
+			"does not exclude them; any that reach the results are flagged ⚠️."
+		if !strings.Contains(res.Stderr, want) {
+			t.Errorf("want:\n%s\ngot:\n%s", want, res.Stderr)
+		}
+	})
 }

@@ -134,7 +134,11 @@ func (c Coverage) FacilitiesWithNoMatch() []FacilityCoverage {
 				break
 			}
 		}
-		if !matched {
+		// MissingData sites survive the filter now, so a facility that has any
+		// of them still returns results and must not be reported as emptied.
+		// Without this guard a campground whose sites all lack equipment data
+		// would fail the search outright while in fact returning every one.
+		if !matched && f.MissingData == 0 {
 			out = append(out, f)
 		}
 	}

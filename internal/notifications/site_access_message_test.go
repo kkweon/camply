@@ -78,3 +78,22 @@ func TestExampleCampsiteExercisesTheWarning(t *testing.T) {
 		t.Errorf("example body does not exercise the no-vehicle wording:\n%s", body)
 	}
 }
+
+// TestFormatMessageAlwaysReportsEquipment mirrors the Site Access guarantee.
+//
+// An equipment filter can let a site through without ever matching it, and the
+// body is the only place that can be admitted.
+func TestFormatMessageAlwaysReportsEquipment(t *testing.T) {
+	for _, unverified := range []bool{false, true} {
+		c := getExampleCampsite()
+		c.EquipmentUnverified = unverified
+
+		title, body := formatMessage(c)
+		if !strings.Contains(body, "<b>Equipment:</b>") {
+			t.Errorf("unverified=%v: message has no Equipment line:\n%s", unverified, body)
+		}
+		if unverified && !strings.Contains(title, "⚠️ NO EQUIPMENT DATA") {
+			t.Errorf("an unverified equipment match must reach the title, got %q", title)
+		}
+	}
+}

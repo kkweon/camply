@@ -40,9 +40,20 @@ func (f *Filter) Apply(campsites []AvailableCampsite, req SearchRequest) []Avail
 			continue
 		}
 
-		// 6. Check Equipment filtering
-		if len(req.Equipment) > 0 && !hasMatchingEquipment(site, req.Equipment) {
-			continue
+		// 6. Check Equipment filtering.
+		//
+		// A site the provider reported no equipment for is kept, not dropped.
+		// Deciding on absent evidence is what made this filter discard 257
+		// nights of real availability at Meeks Bay, where 17 of 88 campsites
+		// carry no equipment data at all. It survives marked instead, and the
+		// mark is what the alert shows.
+		if len(req.Equipment) > 0 {
+			switch {
+			case len(site.PermittedEquipment) == 0:
+				site.EquipmentUnverified = true
+			case !hasMatchingEquipment(site, req.Equipment):
+				continue
+			}
 		}
 
 		// 7. Check campsite type. This is the coarse cut between tent, RV and
@@ -134,12 +145,12 @@ func truncDay(t time.Time) time.Time {
 	return t.Truncate(24 * time.Hour)
 }
 
+// hasMatchingEquipment reports whether a site is shown to permit one of the
+// requested types.
+//
+// A site with no equipment data is not "no": it is unknown, and the caller must
+// handle that before asking. This function only answers where there is evidence.
 func hasMatchingEquipment(site AvailableCampsite, requested []Equipment) bool {
-	// If the API didn't return any equipment data but we requested some, assume it doesn't match
-	if len(site.PermittedEquipment) == 0 {
-		return false
-	}
-
 	for _, reqEq := range requested {
 		for _, siteEq := range site.PermittedEquipment {
 			if strings.EqualFold(siteEq.EquipmentName, reqEq.EquipmentName) {

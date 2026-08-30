@@ -33,6 +33,15 @@ type AvailableCampsite struct {
 	// "zero vehicles" and "not reported" are different answers and only the
 	// first one means anything.
 	MaxVehicles *int
+	// EquipmentUnverified is set when an equipment filter was active and the
+	// provider reported no equipment for this site, so it survived the filter
+	// without ever being shown to match it.
+	//
+	// Set by Filter.Apply rather than by a provider: the doubt is created by
+	// the filter. With no filter, absent equipment data misleads nobody, and
+	// flagging it there would mark 18% of Meeks Bay's sites for no actionable
+	// reason — noise that erodes the warnings that do matter.
+	EquipmentUnverified bool
 }
 
 type Equipment struct {

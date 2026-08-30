@@ -108,7 +108,7 @@ func addSearchFlags(cmd *cobra.Command, r *campsitesRunner, d *providers.Descrip
 	// place.
 	f.BoolVar(&r.excludeNoVeh, flagExcludeNoVehicleAccess, false,
 		"Drop sites proven unreachable by car (walk-in, hike-in, boat-in). "+
-			"Sites the provider reports no access data for are kept and flagged (one value)")
+			"Sites with no access data are not excluded; results always flag them ⚠️")
 	f.BoolVar(&r.allowPartial, "allow-partial-match", false,
 		"Continue when an equipment filter matches nothing at some campgrounds, instead of failing")
 	f.StringSliceVar(&r.notifications, "notifications", []string{},
@@ -294,10 +294,10 @@ func printTable(campsites []core.AvailableCampsite) {
 				if c.BookingNights > 1 {
 					nightsStr = "nights"
 				}
-				// Same marker the notification title carries, so the
+				// Same markers the notification title carries, so the
 				// terminal and the phone never tell different stories.
-				if alert := c.SiteAccessAlert(); alert != "" {
-					logger.Info("\t\t🔗 %s (%d %s) %s", c.BookingURL, c.BookingNights, nightsStr, alert)
+				if prefix := c.WarningPrefix(); prefix != "" {
+					logger.Info("\t\t🔗 %s (%d %s) %s", c.BookingURL, c.BookingNights, nightsStr, prefix)
 				} else {
 					logger.Info("\t\t🔗 %s (%d %s)", c.BookingURL, c.BookingNights, nightsStr)
 				}

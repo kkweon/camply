@@ -48,10 +48,10 @@ func getExampleCampsite() core.AvailableCampsite {
 func formatMessage(c core.AvailableCampsite) (string, string) {
 	title := fmt.Sprintf("%s | %s | %s", c.RecreationArea, c.FacilityName, c.BookingDate.Format("2006-01-02"))
 	// The title leads, and on a phone it is often all that is read before the
-	// booking link is tapped. A site that is not confirmed drive-in says so
-	// there, not only in the body.
-	if alert := c.SiteAccessAlert(); alert != "" {
-		title = alert + " | " + title
+	// booking link is tapped. Everything about this site that needs checking
+	// says so there, not only in the body.
+	if prefix := c.WarningPrefix(); prefix != "" {
+		title = prefix + " | " + title
 	}
 
 	var buf bytes.Buffer
@@ -66,6 +66,10 @@ func formatMessage(c core.AvailableCampsite) (string, string) {
 	// incident: Zephyr Cove's hike-in sites are typed TENT ONLY NONELECTRIC,
 	// exactly like its drive-in tent sites.
 	fmt.Fprintf(&buf, "<b>Site Access:</b> %s\n", c.SiteAccessSummary())
+	// Unconditional for the same reason as Site Access: an equipment filter can
+	// let a site through without ever matching it, and the body is where that
+	// has to be admitted.
+	fmt.Fprintf(&buf, "<b>Equipment:</b> %s\n", c.EquipmentSummary())
 	fmt.Fprintf(&buf, "<b>Campsite Occupancy:</b> %d-%d\n", c.MinOccupancy, c.MaxOccupancy)
 	fmt.Fprintf(&buf, "<b>Campsite Use Type:</b> %s\n", c.CampsiteUseType)
 	fmt.Fprintf(&buf, "<b>Availability Status:</b> %s\n", c.AvailabilityStatus)

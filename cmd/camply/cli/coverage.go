@@ -9,6 +9,16 @@ import (
 	"github.com/kkweon/camply/internal/providers"
 )
 
+// flaggedInResults is the one claim a coverage message may safely make.
+//
+// The Site Access and Equipment lines and their ⚠️ markers are unconditional, so
+// a site that survives every filter is always labelled. What no coverage message
+// may claim is that a site WILL survive them: each message measures one filter,
+// and another can remove the same site after this one has counted it. Saying
+// otherwise produced two lines of output that contradicted each other — one
+// reporting sites as "included", the next reporting them excluded.
+const flaggedInResults = "any that reach the results are flagged ⚠️"
+
 // reportEquipmentCoverage turns the measured coverage into an actionable error,
 // or warnings under --allow-partial-match.
 //
@@ -40,9 +50,9 @@ func reportEquipmentCoverage(c core.Coverage, requested []core.Equipment, d prov
 		logger.Warn("%s", msg)
 	}
 	if c.MissingData > 0 {
-		logger.Warn("%d of %d campsites report no equipment data, so --%s excluded them. "+
-			"Searching without the filter would include them.",
-			c.MissingData, c.TotalSites, providers.FlagEquipmentTypes)
+		logger.Warn("%d of the %d campsites searched report no equipment data. --%s does not "+
+			"exclude them; %s.",
+			c.MissingData, c.TotalSites, providers.FlagEquipmentTypes, flaggedInResults)
 	}
 
 	dropped := c.FacilitiesWithNoMatch()
@@ -131,20 +141,22 @@ func reportSiteAccessCoverage(c core.SiteAccessCoverage, excludeNoVehicle, allow
 
 	if !excludeNoVehicle {
 		if c.NoVehicle > 0 {
-			logger.Info("%d of %d campsites have no vehicle access; they are included and flagged ⚠️ in results. "+
-				"Pass --%s to drop them.", c.NoVehicle, c.TotalSites, flagExcludeNoVehicleAccess)
+			logger.Info("%d of the %d campsites searched have no vehicle access. --%s would "+
+				"exclude them; %s.",
+				c.NoVehicle, c.TotalSites, flagExcludeNoVehicleAccess, flaggedInResults)
 		}
 		return nil
 	}
 
-	logger.Info("--%s dropped %d of %d campsites with no vehicle access.",
+	logger.Info("--%s excluded %d campsites with no vehicle access (of %d searched).",
 		flagExcludeNoVehicleAccess, c.NoVehicle, c.TotalSites)
 	if c.Unknown > 0 {
 		// Stated positively and every run: these are kept on purpose. Silently
 		// dropping them would be the same silent-loss bug this flag exists to
 		// fix, one level down.
-		logger.Info("%d campsites report no vehicle access data. They are kept and flagged ⚠️ UNKNOWN — "+
-			"verify those on the booking page.", c.Unknown)
+		logger.Info("%d campsites searched report no vehicle access data. --%s does not exclude "+
+			"them; %s UNKNOWN — verify those on the booking page.",
+			c.Unknown, flagExcludeNoVehicleAccess, flaggedInResults)
 	}
 
 	dropped := c.FacilitiesFullyDropped()
