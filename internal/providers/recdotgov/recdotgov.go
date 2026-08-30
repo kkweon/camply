@@ -48,6 +48,11 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 	// For each campground and each month spanning the search dates, we make a request.
 	months := getSearchMonths(req.StartDates, req.EndDates)
 
+	// Every campsite at every campground searched, availability aside. It backs
+	// the --campsites check below, which must not confuse "no such campsite"
+	// with "that campsite is booked".
+	var roster []core.KnownCampsite
+
 	for _, campgroundID := range req.Campgrounds {
 		// 1. Fetch Metadata (for equipment & facility names)
 		metadata, err := p.fetchMetadata(ctx, campgroundID)
@@ -62,6 +67,14 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 				facilityName = v.FacilityName
 				break
 			}
+		}
+
+		for id, meta := range metadata {
+			roster = append(roster, core.KnownCampsite{
+				CampsiteID:   id,
+				SiteName:     meta.CampsiteSiteName,
+				FacilityName: facilityName,
+			})
 		}
 
 		fmt.Printf("🏕  Fetched metadata for %s (#%s) - %d total campsites\n", facilityName, campgroundID, len(metadata))
@@ -97,6 +110,12 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 
 			allCampsites = append(allCampsites, campsites...)
 		}
+	}
+
+	// Checked after every campground is known: an ID absent from one campground
+	// may well belong to another in the same search.
+	if err := core.ValidateRequestedCampsites(req.Campsites, roster); err != nil {
+		return nil, err
 	}
 
 	return allCampsites, nil

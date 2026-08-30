@@ -91,8 +91,8 @@ camply recdotgov campsites \
   but not others.
 
 Notable filters: `--exclude-no-vehicle-access`, `--campsite-types`,
-`--equipment-types`, `--max-equipment-length`, `--nights`, `--weekends`, and — for
-ReserveCalifornia — `--min-vehicle-length`.
+`--equipment-types`, `--max-equipment-length`, `--campsites` (watch individual sites by
+ID), `--nights`, `--weekends`, and — for ReserveCalifornia — `--min-vehicle-length`.
 
 ### Vehicle access
 

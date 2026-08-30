@@ -50,7 +50,6 @@ type SearchRequest struct {
 	RecreationArea string
 	Campsites      []string
 	CampsiteTypes  []string
-	EquipmentID    string
 
 	// MinVehicleLength filters UseDirect results on the VehicleLength its grid
 	// response reports per unit. It has no recreation.gov equivalent.

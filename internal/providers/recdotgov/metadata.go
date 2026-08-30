@@ -48,6 +48,7 @@ func (p *Provider) fetchMetadata(ctx context.Context, campgroundID string) (map[
 				FacilityName:       site.ParentName, // RecDotGov metadata sometimes brings back parent names
 				SiteAccessRaw:      siteAccessRaw,
 				MaxVehicles:        maxVehicles,
+				CampsiteSiteName:   site.SiteName,
 			}
 		}
 	}
@@ -64,6 +65,7 @@ type campsiteSearchResponse struct {
 
 type campsiteSearchItem struct {
 	CampsiteID         string               `json:"campsite_id"`
+	SiteName           string               `json:"name"`
 	ParentName         string               `json:"asset_name"`
 	PermittedEquipment []recdotgovEquipment `json:"permitted_equipment"`
 	Attributes         []recdotgovAttribute `json:"attributes"`

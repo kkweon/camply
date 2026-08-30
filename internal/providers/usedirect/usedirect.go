@@ -91,6 +91,10 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 		return nil, fmt.Errorf("failed to warmup usedirect session: %w", err)
 	}
 
+	// Every unit at every facility searched, free or not — the roster the
+	// --campsites check needs in order to tell a typo from a booked-out site.
+	var roster []core.KnownCampsite
+
 	for _, campgroundID := range req.Campgrounds {
 		facilityID, err := strconv.Atoi(campgroundID)
 		if err != nil {
@@ -153,6 +157,14 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 				// TylerTech sometimes returns a debug message here even on 200 OK. Don't fail the request.
 				// e.g. "Built in 3.5325 ms size 11737 bytes on rdr-cali-prod-..."
 				_ = grid.Message // no-op to satisfy staticcheck empty branch
+			}
+
+			for _, unit := range grid.Facility.Units {
+				roster = append(roster, core.KnownCampsite{
+					CampsiteID:   strconv.Itoa(unit.UnitId),
+					SiteName:     unit.Name,
+					FacilityName: grid.Facility.FacilityName,
+				})
 			}
 
 			// Pre-fetch occupancy concurrently for any unit with a free slice
@@ -290,6 +302,12 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 				}
 			}
 		}
+	}
+
+	// Checked after every facility is known: an ID absent from one may belong
+	// to another in the same search.
+	if err := core.ValidateRequestedCampsites(req.Campsites, roster); err != nil {
+		return nil, err
 	}
 
 	return allCampsites, nil

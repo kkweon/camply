@@ -16,27 +16,36 @@ func (f *Filter) Apply(campsites []AvailableCampsite, req SearchRequest) []Avail
 
 	var filtered []AvailableCampsite
 	for _, site := range consolidated {
-		// 2. Check if the site meets the consecutive nights requirement
+		// 2. Restrict to the campsite IDs the user named.
+		//
+		// Validation that those IDs exist lives in the providers, which hold the
+		// campground roster; here they only narrow. A booked-solid campsite is
+		// an empty result, not an error.
+		if len(req.Campsites) > 0 && !matchesRequestedCampsite(site, req.Campsites) {
+			continue
+		}
+
+		// 3. Check if the site meets the consecutive nights requirement
 		if site.BookingNights < req.Nights {
 			continue
 		}
 
-		// 3. Check if weekends only is requested
+		// 4. Check if weekends only is requested
 		if req.WeekendsOnly && !isWeekend(site.BookingDate) {
 			continue
 		}
 
-		// 4. Ensure it falls within requested search windows
+		// 5. Ensure it falls within requested search windows
 		if !isInSearchWindow(site, req) {
 			continue
 		}
 
-		// 5. Check Equipment filtering
+		// 6. Check Equipment filtering
 		if len(req.Equipment) > 0 && !hasMatchingEquipment(site, req.Equipment) {
 			continue
 		}
 
-		// 6. Check campsite type. This is the coarse cut between tent, RV and
+		// 7. Check campsite type. This is the coarse cut between tent, RV and
 		// cabin. It does NOT separate drive-in from walk-in, though it was once
 		// used that way: Zephyr Cove types its hike-in sites TENT ONLY
 		// NONELECTRIC and Lodgepole types 3 drive-in sites WALK TO.
@@ -44,7 +53,7 @@ func (f *Filter) Apply(campsites []AvailableCampsite, req SearchRequest) []Avail
 			continue
 		}
 
-		// 7. Drop sites proven unreachable by car.
+		// 8. Drop sites proven unreachable by car.
 		//
 		// NoVehicleAccess, not !HasVehicleAccess: a site whose access the
 		// provider never reported is kept and flagged in the alert instead. The
