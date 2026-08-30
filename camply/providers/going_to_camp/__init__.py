@@ -1,3 +1,0 @@
-"""
-GoingToCamp __init__
-"""

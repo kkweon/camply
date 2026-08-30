@@ -1,51 +1,37 @@
-ARG PYTHON_VERSION=3.12
-
 # ---------------------------------------------------------
 # Builder Stage
 # ---------------------------------------------------------
-FROM python:${PYTHON_VERSION}-slim-bookworm AS builder
+FROM --platform=$BUILDPLATFORM golang:1.27-alpine AS builder
 
 WORKDIR /app
 
-ENV UV_LINK_MODE=copy \
-    UV_LOCKED=1 \
-    UV_COMPILE_BYTECODE=1
+# Copy go.mod and go.sum and download dependencies
+COPY go.mod go.sum ./
+RUN go mod download
 
-# Install dependencies first (for layer caching)
-RUN --mount=from=ghcr.io/astral-sh/uv,source=/uv,target=/bin/uv \
-    --mount=type=cache,target=/root/.cache/uv \
-    --mount=type=bind,source=uv.lock,target=uv.lock \
-    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv sync --no-install-project --no-dev
+# Copy source code
+COPY cmd/ cmd/
+COPY internal/ internal/
 
-# Copy source code and install project
-COPY README.md pyproject.toml uv.lock ./
-COPY camply /app/camply
+# Build arguments for cross-compilation
+ARG TARGETOS
+ARG TARGETARCH
 
-RUN --mount=from=ghcr.io/astral-sh/uv,source=/uv,target=/bin/uv \
-    --mount=type=cache,target=/root/.cache/uv \
-    uv sync --no-dev --extra all --no-editable
+# Release version, reported by `camply --version`
+ARG VERSION=dev
+
+# Build static binary
+RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH \
+    go build -ldflags="-s -w -X main.version=$VERSION" -o camply ./cmd/camply
 
 # ---------------------------------------------------------
 # Final Runtime Stage
 # ---------------------------------------------------------
-FROM python:${PYTHON_VERSION}-slim-bookworm
+FROM alpine:3.21
 
-# Copy ONLY the compiled virtual environment from the builder
-COPY --from=builder /app/.venv /app/.venv
+RUN apk add --no-cache ca-certificates tzdata
 
-# Set up path so the virtual environment is used automatically
-ENV PATH="/app/.venv/bin:${PATH}"
-ENV HOME=/home/camply
-
-RUN mkdir -p ${HOME}
-WORKDIR ${HOME}
-
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-# Generate bash completion
-RUN _CAMPLY_COMPLETE=bash_source camply > ${HOME}/.camply-complete.bash && \
-    echo "[[ ! -f ${HOME}/.camply-complete.bash ]] || source ${HOME}/.camply-complete.bash" >> ${HOME}/.bashrc
+COPY --from=builder /app/camply /usr/local/bin/camply
 
 ENTRYPOINT ["camply"]
 CMD ["--help"]

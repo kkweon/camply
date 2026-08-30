@@ -1,10 +1,5 @@
 # yaml-language-server: $schema=https://schemastore.org/pre-commit-config.json
 
-exclude: |
-  (?x)(
-    docs/yaml_search.json
-  )
-
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
@@ -12,19 +7,10 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
-      - id: check-ast
-      - id: check-docstring-first
       - id: check-merge-conflict
       - id: mixed-line-ending
       - id: no-commit-to-branch
         args: [--branch, main, --branch, master]
-
-  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-    rev: v2.15.0
-    hooks:
-      - id: pretty-format-toml
-        args: [--autofix, --no-sort]
-        exclude: ^uv\.lock$
 
   - repo: https://github.com/golangci/golangci-lint
     rev: v2.13.2
@@ -54,37 +40,6 @@ repos:
         language: system
         types:
           - go
-      - id: ruff-format
-        name: format
-        description: Runs Code Auto-Formatters
-        entry: uv run ruff format
-        language: system
-        types:
-          - python
-      - id: ruff-check
-        name: lint
-        description: Runs Code Linters
-        entry: uv run ruff check --fix
-        language: system
-        types:
-          - python
-      - id: uv-lock
-        name: uv-lock
-        description: Runs uv lock when pyproject.toml changes
-        entry: uv lock
-        language: system
-        pass_filenames: false
-        files: pyproject.toml
-      - id: mypy
-        name: mypy
-        description: Runs Static Type Checker
-        entry: uv run -- mypy
-        language: system
-        types:
-          - python
-        pass_filenames: false
-        args: [camply]
-        require_serial: true
       - id: prettier
         name: prettier
         description: Runs Prettier Code Formatter
@@ -96,7 +51,6 @@ repos:
           - prettier@3.6.2
         exclude: |
           (?x)(
-            docs/cli.md|
             PULL_REQUEST_TEMPLATE.md|
             .github/semantic_release/release_notes.hbs
           )
