@@ -14,7 +14,7 @@ import (
 // The top-level campsites/campgrounds/recreation-areas commands stay for now,
 // deprecated in favour of `camply <provider> <command>`.
 //
-// They cannot simply be deleted: the CronJobs run ghcr.io/kkweon/camply:latest-go
+// They cannot simply be deleted: the CronJobs run ghcr.io/kkweon/camply:latest
 // with imagePullPolicy Always, so a new image reaches them before anyone can
 // edit a manifest. Removing the old surface would take every scheduled search
 // down at the moment of an unrelated release.

@@ -285,7 +285,7 @@ func TestRepeatedStartDateIsRejectedAndPointsAtDateRanges(t *testing.T) {
 	}
 }
 
-// The old singular spellings must keep working: CronJobs run :latest-go with
+// The old singular spellings must keep working: CronJobs run :latest with
 // imagePullPolicy Always, so an image update reaches them before anyone can
 // edit a manifest.
 func TestOldSingularFlagNamesStillWorkAndWarn(t *testing.T) {
