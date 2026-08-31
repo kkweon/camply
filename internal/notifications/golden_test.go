@@ -82,6 +82,15 @@ func TestMessageGolden(t *testing.T) {
 		{"non-drivable with an unrecognised label", func(a *core.Availability) {
 			a.Site.Parking, a.Site.AccessLabel = core.ParkingWalk, "Ferry-In"
 		}},
+		{"walk-in the user asked for", func(a *core.Availability) {
+			// Same site as the walk-in case, but --parking walk named it:
+			// the access facts stay, the ⚠️ and the alarm caps go.
+			feet := 39
+			a.Site.Parking, a.Site.AccessLabel, a.Site.MaxVehicles = core.ParkingWalk, "Walk-In", vehicles(0)
+			a.Site.Permits = core.PermitsTent
+			a.Site.WalkFeet = &feet
+			a.ParkingRequested = true
+		}},
 		{"equipment unverified", func(a *core.Availability) {
 			a.Site.Parking, a.Site.AccessLabel, a.Site.MaxVehicles = core.ParkingAtSite, "Drive-In", vehicles(1)
 			a.EquipmentUnverified = true

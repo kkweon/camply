@@ -21,13 +21,19 @@ func TestFormatMessageAlwaysReportsSiteAccess(t *testing.T) {
 	}
 
 	for _, access := range all {
-		c := getExampleCampsite()
-		c.Site.Parking = access
-		c.Site.AccessLabel = access.String()
+		for _, requested := range []bool{false, true} {
+			c := getExampleCampsite()
+			c.Site.Parking = access
+			c.Site.AccessLabel = access.String()
+			c.ParkingRequested = requested
 
-		_, body := formatMessage(c)
-		if !strings.Contains(body, "<b>Site Access:</b>") {
-			t.Errorf("%v: message has no Site Access line:\n%s", access, body)
+			// Exactly once: either as a warning above the fold or inline on
+			// the site line — never omitted, and never both.
+			_, body := formatMessage(c)
+			if got := strings.Count(body, c.SiteAccessSummary()); got != 1 {
+				t.Errorf("%v/requested=%v: access summary appears %d times, want 1:\n%s",
+					access, requested, got, body)
+			}
 		}
 	}
 }
@@ -36,19 +42,26 @@ func TestFormatMessageTitleWarnsUnlessDriveIn(t *testing.T) {
 	tests := []struct {
 		access    core.Parking
 		raw       string
+		requested bool
 		wantTitle string
 	}{
-		{core.ParkingAtSite, "Drive-In", ""},
-		{core.ParkingWalk, "Walk-In", "⚠️ WALK-IN"},
-		{core.ParkingWalk, "Hike-In", "⚠️ HIKE-IN"},
-		{core.ParkingNone, "Boat-In", "⚠️ BOAT-IN"},
-		{core.ParkingUnknown, "", "⚠️ UNKNOWN ACCESS"},
+		{core.ParkingAtSite, "Drive-In", false, ""},
+		{core.ParkingWalk, "Walk-In", false, "⚠️ WALK-IN"},
+		{core.ParkingWalk, "Hike-In", false, "⚠️ HIKE-IN"},
+		{core.ParkingNone, "Boat-In", false, "⚠️ BOAT-IN"},
+		{core.ParkingUnknown, "", false, "⚠️ UNKNOWN ACCESS"},
+		// A walk the user's --parking filter named is a confirmation, not a
+		// warning — but not knowing stays a warning no matter what was asked.
+		{core.ParkingWalk, "Walk-In", true, ""},
+		{core.ParkingNone, "Hike-In", true, ""},
+		{core.ParkingUnknown, "", true, "⚠️ UNKNOWN ACCESS"},
 	}
 
 	for _, tt := range tests {
 		c := getExampleCampsite()
 		c.Site.Parking = tt.access
 		c.Site.AccessLabel = tt.raw
+		c.ParkingRequested = tt.requested
 
 		title, _ := formatMessage(c)
 		if tt.wantTitle == "" {

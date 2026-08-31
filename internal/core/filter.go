@@ -78,8 +78,13 @@ func (f *Filter) Apply(availabilities []Availability, req SearchRequest) []Avail
 		// is opt-in and easy to forget, so it is not allowed to be the thing
 		// that silently discards a site — that job belongs to the alert, which
 		// always says what it knows.
-		if len(req.Parking) > 0 && site.Parking != ParkingUnknown && !hasParking(site, req.Parking) {
-			continue
+		if len(req.Parking) > 0 && site.Parking != ParkingUnknown {
+			if !hasParking(site, req.Parking) {
+				continue
+			}
+			// The user named this proven parking level, so the alert treats
+			// it as a confirmation rather than a warning.
+			booking.ParkingRequested = true
 		}
 
 		// 10. Hookups are additive: naming two requires both.

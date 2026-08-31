@@ -41,8 +41,13 @@ func (a Availability) accessLabel() string {
 func (a Availability) SiteAccessSummary() string {
 	switch {
 	case a.Site.Parking.RequiresWalk():
-		return "⚠️ " + strings.ToUpper(a.accessLabel()) + " — no vehicle access" +
-			a.walkSuffix() + a.maxVehiclesSuffix()
+		detail := " — no vehicle access" + a.walkSuffix() + a.maxVehiclesSuffix()
+		if a.ParkingRequested {
+			// The upper-casing is alarm styling, so it is downgraded along
+			// with the ⚠️: a walk the user asked for is a confirmation.
+			return a.accessLabel() + detail
+		}
+		return "⚠️ " + strings.ToUpper(a.accessLabel()) + detail
 	case a.Site.Parking.ReachableByCar():
 		return a.accessLabel() + a.maxVehiclesSuffix()
 	default:
@@ -59,7 +64,12 @@ func (a Availability) SiteAccessAlert() string {
 		return ""
 	}
 	if !a.Site.Parking.RequiresWalk() {
+		// Unknown outranks ParkingRequested: the filter never sets the flag
+		// on an unknown site, and even if it did, "we don't know" must warn.
 		return "⚠️ UNKNOWN ACCESS"
+	}
+	if a.ParkingRequested {
+		return "" // a proven walk the user explicitly asked for
 	}
 	return "⚠️ " + strings.ToUpper(a.accessLabel())
 }
@@ -155,26 +165,51 @@ func (a Availability) PermitsSummary() string {
 	return strings.Join(parts, ", ")
 }
 
-// HookupsSummary reports the utilities, naming which fact was found for water so
-// a shared tap is never reported as a hookup at the site.
+// HookupsSummary reports the utilities the provider actually spoke about,
+// naming which fact was found for water so a shared tap is never reported as
+// a hookup at the site. Unreported utilities are rolled into a single tail
+// rather than listed one by one: three "not reported"s bury the one fact.
 func (a Availability) HookupsSummary() string {
-	tri := func(t Tri) string {
-		switch t {
-		case TriYes:
-			return "yes"
-		case TriNo:
-			return "no"
-		default:
-			return "not reported"
+	var known []string
+	unreported := 0
+
+	switch a.Site.Hookups.Electric {
+	case TriYes:
+		if a.Site.Amps != nil {
+			known = append(known, fmt.Sprintf("electric %dA", *a.Site.Amps))
+		} else {
+			known = append(known, "electric yes")
 		}
+	case TriNo:
+		known = append(known, "electric no")
+	default:
+		unreported++
 	}
 
-	parts := []string{"electric: " + tri(a.Site.Hookups.Electric)}
-	if a.Site.Amps != nil {
-		parts[0] += fmt.Sprintf(" (%dA)", *a.Site.Amps)
+	if ws := a.Site.WaterSource(); ws == "not reported" {
+		unreported++
+	} else {
+		if ws == "hookup at site" {
+			ws = "at site"
+		}
+		known = append(known, "water "+ws)
 	}
-	parts = append(parts,
-		"water: "+a.Site.WaterSource(),
-		"sewer: "+tri(a.Site.Hookups.Sewer))
-	return strings.Join(parts, ", ")
+
+	switch a.Site.Hookups.Sewer {
+	case TriYes:
+		known = append(known, "sewer yes")
+	case TriNo:
+		known = append(known, "sewer no")
+	default:
+		unreported++
+	}
+
+	if len(known) == 0 {
+		return "not reported"
+	}
+	out := strings.Join(known, " · ")
+	if unreported > 0 {
+		out += " · (others not reported)"
+	}
+	return out
 }

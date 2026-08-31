@@ -73,6 +73,12 @@ type Availability struct {
 	// across every night, and because the doubt is created by the filter: with
 	// no filter, absent equipment data misleads nobody.
 	EquipmentUnverified bool
+
+	// ParkingRequested is set when a --parking filter was active and this
+	// site's known parking level was one the user named. A proven walk the
+	// user asked for is information, not an alarm: it downgrades the access
+	// warning. ParkingUnknown never earns it — unknown stays flagged.
+	ParkingRequested bool
 }
 
 type Equipment struct {

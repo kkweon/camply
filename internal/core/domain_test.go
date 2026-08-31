@@ -137,6 +137,25 @@ func TestSummaryAndAlertWording(t *testing.T) {
 			wantAlert:   "⚠️ UNKNOWN ACCESS",
 			wantContain: "verify on the booking page",
 		},
+		{
+			// The same facts as the incident, but the user asked for them:
+			// no ⚠️, no alarm caps, the information itself intact.
+			name: "a hike the user asked for is information, not an alarm",
+			booking: Availability{
+				Site:             &Site{Parking: ParkingNone, AccessLabel: "Hike-In", MaxVehicles: vehicles(0)},
+				ParkingRequested: true,
+			},
+			wantSummary: "Hike-In — no vehicle access (Max Vehicles: 0)",
+			wantAlert:   "",
+		},
+		{
+			// The filter never sets the flag on an unknown site, but even a
+			// stray flag must not silence "we don't know".
+			name:        "unknown outranks the requested flag",
+			booking:     Availability{Site: &Site{}, ParkingRequested: true},
+			wantAlert:   "⚠️ UNKNOWN ACCESS",
+			wantContain: "verify on the booking page",
+		},
 	}
 
 	for _, tt := range tests {
@@ -175,6 +194,21 @@ func TestWarningsCarryEveryDoubt(t *testing.T) {
 	if clean.WarningPrefix() != "" {
 		t.Errorf("a site a car reaches, with equipment data, should carry no warning, got %q",
 			clean.WarningPrefix())
+	}
+
+	// A requested walk drops its own marker but must not take the equipment
+	// doubt down with it.
+	requested := Availability{
+		Site:                &Site{Parking: ParkingWalk, AccessLabel: "Hike-In"},
+		EquipmentUnverified: true,
+		ParkingRequested:    true,
+	}
+	got = requested.WarningPrefix()
+	if strings.Contains(got, "⚠️ HIKE-IN") {
+		t.Errorf("WarningPrefix() = %q; a requested walk should not warn about access", got)
+	}
+	if !strings.Contains(got, "⚠️ NO EQUIPMENT DATA") {
+		t.Errorf("WarningPrefix() = %q, want the equipment doubt to survive the downgrade", got)
 	}
 }
 
@@ -238,6 +272,33 @@ func TestFilterParking(t *testing.T) {
 				t.Errorf("filter on: kept = %v, want %v", got, tt.wantKeptOn)
 			}
 		})
+	}
+}
+
+// TestFilterMarksRequestedParking pins where ParkingRequested comes from: only
+// an active --parking filter matching a site's proven level sets it. Unknown
+// survives the filter (as always) but stays unflagged, so it keeps warning.
+func TestFilterMarksRequestedParking(t *testing.T) {
+	mk := func(p Parking) Availability {
+		booking := night("1", "f1", day(2026, 9, 4))
+		booking.Site.Parking = p
+		return booking
+	}
+	f := Filter{}
+
+	walkReq := SearchRequest{Nights: 1, Parking: []Parking{ParkingWalk}}
+	if got := f.Apply([]Availability{mk(ParkingWalk)}, walkReq); len(got) != 1 || !got[0].ParkingRequested {
+		t.Errorf("a walk site under --parking walk should be kept and flagged as requested, got %+v", got)
+	}
+	if got := f.Apply([]Availability{mk(ParkingUnknown)}, walkReq); len(got) != 1 || got[0].ParkingRequested {
+		t.Errorf("an unknown site survives --parking walk but must never be marked requested, got %+v", got)
+	}
+	if got := f.Apply([]Availability{mk(ParkingAtSite)}, walkReq); len(got) != 0 {
+		t.Errorf("an at-site site should be dropped by --parking walk, got %+v", got)
+	}
+
+	if got := f.Apply([]Availability{mk(ParkingWalk)}, SearchRequest{Nights: 1}); len(got) != 1 || got[0].ParkingRequested {
+		t.Errorf("with no --parking filter nothing is requested, got %+v", got)
 	}
 }
 

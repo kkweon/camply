@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/kkweon/camply/internal/config"
@@ -49,7 +50,9 @@ func getExampleCampsite() core.Availability {
 	}
 }
 
-// formatMessage creates a standard HTML-formatted string for the campsite
+// formatMessage creates the title and HTML body for one availability, ordered
+// by what the reader decides with it: warnings first, then when and what the
+// site is, then the booking URL, then the spec lines, debug ids last.
 func formatMessage(a core.Availability) (string, string) {
 	title := fmt.Sprintf("%s | %s | %s", a.Site.Facility.RecreationArea, a.Site.Facility.Name, a.Start.Format("2006-01-02"))
 	// The title leads, and on a phone it is often all that is read before the
@@ -59,36 +62,69 @@ func formatMessage(a core.Availability) (string, string) {
 		title = prefix + " | " + title
 	}
 
-	var buf bytes.Buffer
-	fmt.Fprintf(&buf, "<b>Campsite ID:</b> %s\n", a.Site.ID)
-	fmt.Fprintf(&buf, "<b>Booking Date:</b> %s\n", a.Start.Format("2006-01-02"))
-	fmt.Fprintf(&buf, "<b>Booking End Date:</b> %s\n", a.End.Format("2006-01-02"))
-	fmt.Fprintf(&buf, "<b>Booking Nights:</b> %d\n", a.Nights)
-	fmt.Fprintf(&buf, "<b>Campsite Site Name:</b> %s\n", a.Site.Name)
-	fmt.Fprintf(&buf, "<b>Campsite Loop Name:</b> %s\n", a.Site.Loop)
-	fmt.Fprintf(&buf, "<b>Campsite Type:</b> %s\n", a.Site.RawType)
-	// Unconditional, including the unknown case. Campsite Type alone caused the
-	// incident: Zephyr Cove's hike-in sites are typed TENT ONLY NONELECTRIC,
-	// exactly like its drive-in tent sites.
-	fmt.Fprintf(&buf, "<b>Site Access:</b> %s\n", a.SiteAccessSummary())
-	// Unconditional for the same reason as Site Access: an equipment filter can
-	// let a site through without ever matching it, and the body is where that
-	// has to be admitted.
-	fmt.Fprintf(&buf, "<b>Equipment:</b> %s\n", a.EquipmentSummary())
-	// The three axes a camper actually chooses between, which the provider's
-	// own campsite type cannot express: it has one slot and four things to say.
-	fmt.Fprintf(&buf, "<b>Accepts:</b> %s\n", a.PermitsSummary())
-	fmt.Fprintf(&buf, "<b>Hookups:</b> %s\n", a.HookupsSummary())
-	fmt.Fprintf(&buf, "<b>Campsite Occupancy:</b> %d-%d\n", a.Site.MinOccupancy, a.Site.MaxOccupancy)
-	fmt.Fprintf(&buf, "<b>Campsite Use Type:</b> %s\n", a.Site.UseType)
-	fmt.Fprintf(&buf, "<b>Availability Status:</b> %s\n", a.Status)
-	fmt.Fprintf(&buf, "<b>Recreation Area:</b> %s\n", a.Site.Facility.RecreationArea)
-	fmt.Fprintf(&buf, "<b>Recreation Area Id:</b> %s\n", a.Site.Facility.RecreationAreaID)
-	fmt.Fprintf(&buf, "<b>Facility Name:</b> %s\n", a.Site.Facility.Name)
-	fmt.Fprintf(&buf, "<b>Facility Id:</b> %s\n", a.Site.Facility.ID)
-	fmt.Fprintf(&buf, "<b>Booking Link:</b> <a href='%s'>%s</a>\n", a.Site.BookingURL, a.Site.BookingURL)
+	var sections []string
+	if w := warningBlock(a); len(w) > 0 {
+		sections = append(sections, strings.Join(w, "\n"))
+	}
+	sections = append(sections,
+		strings.Join(summaryLines(a), "\n"),
+		// A bare URL, not an anchor: notification shades strip HTML, and the
+		// visible URL is what lets Android offer its open-link quick action.
+		"👉 "+a.Site.BookingURL,
+		// Equipment stays unconditional, unknown case included: an equipment
+		// filter can let a site through without ever matching it, and the
+		// body is where that has to be admitted.
+		"<b>Equipment:</b> "+a.EquipmentSummary()+"\n<b>Hookups:</b> "+a.HookupsSummary(),
+		fmt.Sprintf("<i>🔧 ids: campsite %s · facility %s · rec area %s</i>",
+			a.Site.ID, a.Site.Facility.ID, a.Site.Facility.RecreationAreaID),
+	)
 
-	return title, buf.String()
+	return title, strings.Join(sections, "\n\n") + "\n"
+}
+
+// warningBlock is every line that belongs above the fold: doubts the reader
+// must resolve before tapping the booking URL below them.
+func warningBlock(a core.Availability) []string {
+	var lines []string
+	// The same predicate decides warning-block versus inline on the site line,
+	// so access appears exactly once for every input — the incident rule is
+	// that it is never omitted, not that it always alarms.
+	if a.SiteAccessAlert() != "" {
+		lines = append(lines, a.SiteAccessSummary())
+	}
+	if a.EquipmentUnverified {
+		lines = append(lines, "⚠️ NO EQUIPMENT DATA — verify on the booking page")
+	}
+	if u := strings.TrimSpace(a.Site.UseType); u != "" && !strings.EqualFold(u, "Overnight") {
+		lines = append(lines, "⚠️ "+u)
+	}
+	return lines
+}
+
+// summaryLines is the when-and-what block: dates, the site itself, and what it
+// takes — the facts a camper scans before deciding the URL is worth tapping.
+func summaryLines(a core.Availability) []string {
+	nights := "nights"
+	if a.Nights == 1 {
+		nights = "night"
+	}
+	lines := []string{fmt.Sprintf("📅 %s → %s · %d %s",
+		a.Start.Format("2006-01-02"), a.End.Format("2006-01-02"), a.Nights, nights)}
+
+	site := "🏕️ Site " + a.Site.Name
+	if a.Site.Loop != "" {
+		site += " · Loop " + a.Site.Loop
+	}
+	site += fmt.Sprintf(" · %d–%d people", a.Site.MinOccupancy, a.Site.MaxOccupancy)
+	if a.SiteAccessAlert() == "" {
+		site += " · " + a.SiteAccessSummary()
+	}
+	lines = append(lines, site)
+
+	// The provider's type plus the three axes it cannot express: a STANDARD
+	// site takes a tent and an RV both, and its type says neither.
+	lines = append(lines, "⛺ "+a.Site.RawType+" · accepts: "+a.PermitsSummary())
+	return lines
 }
 
 type pushoverNotifier struct {
@@ -177,12 +213,13 @@ func NewTelegram(cfg *config.AppConfig) (Notifier, error) {
 
 func (t *telegramNotifier) SendCampsites(bookings []core.Availability) error {
 	for _, b := range bookings {
-		// Telegram doesn't use the title variable like Pushover, it just gets appended to the body
-		_, message := formatMessage(b)
+		// Telegram has no separate title field, and the body alone no longer
+		// carries the location — the title is where it lives now.
+		title, message := formatMessage(b)
 
 		payload := map[string]interface{}{
 			"chat_id":    t.config.TelegramChatID,
-			"text":       message,
+			"text":       "<b>" + title + "</b>\n\n" + message,
 			"parse_mode": "HTML",
 		}
 
