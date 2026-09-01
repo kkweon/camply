@@ -2,9 +2,12 @@ $ camply recdotgov campsites --campgrounds 10300216 --campsite-types STANDARD NO
 
 --- stdout ---
 [TIME] CAMPLY   camply, the campsite finder ⛺️
-[TIME] INFO     Searching across 1 campgrounds
+[TIME] INFO     Search: 2026-09-04 → 2026-09-07, --nights 2, --campsite-types 'STANDARD NONELECTRIC','TENT ONLY NONELECTRIC', --parking at-site
+[TIME] INFO     Searching 1 campgrounds on RecreationDotGov
+[TIME] INFO     🏕  Zephyr Cove RV & Campground (#10300216, Lake Tahoe Basin Management Unit): 15 of 15 sites have at least one open night
 [TIME] INFO     --parking at-site excluded 3 campsites that need a walk from the car (of 15 searched).
-[TIME] INFO     0 New Campsites Found.
+[TIME] INFO     Filter: 15 sites with 195 open nights → 136 stays of 2 consecutive nights → 1 inside the requested dates → 1 after --campsite-types → 0 after --parking at-site
+[TIME] INFO     0 campsites found.
 [TIME] CAMPLY   Exiting camply 👋
 
 --- stderr ---

@@ -97,9 +97,18 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 			})
 		}
 
-		fmt.Printf("🏕  Fetched metadata for %s (#%s) - %d total campsites\n", facilityName, campgroundID, len(metadata))
-
 		facility := p.describeFacility(ctx, campgroundID, facilityName)
+
+		// One INFO line per campground, emitted after its result is known — the
+		// same shape usedirect prints, so both providers' logs read alike.
+		label := fmt.Sprintf("%s (#%s)", facilityName, campgroundID)
+		if facility.RecreationArea != "" {
+			label = fmt.Sprintf("%s (#%s, %s)", facilityName, campgroundID, facility.RecreationArea)
+		}
+		logger.Debug("Searching %s...", label)
+
+		// Distinct campsites with at least one open night, across every month.
+		sitesFree := map[string]bool{}
 
 		// 2. Fetch Availabilities
 		for _, month := range months {
@@ -125,6 +134,7 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 					if err != nil {
 						continue
 					}
+					sitesFree[id] = true
 					all = append(all, core.Availability{
 						Site:   sites[id],
 						Start:  start,
@@ -135,6 +145,9 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 				}
 			}
 		}
+
+		logger.Info("🏕  %s: %d of %d sites have at least one open night",
+			label, len(sitesFree), len(metadata))
 	}
 
 	// Checked after every campground is known: an ID absent from one campground

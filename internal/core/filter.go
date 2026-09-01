@@ -8,10 +8,47 @@ import (
 // Filter handles the fast, native Go filtering that replaces Pandas
 type Filter struct{}
 
+// FilterStats counts what survived each stage of Apply, in the order the stages
+// run. It exists so the log can explain a raw grid full of open nights becoming
+// an empty result — without it, "campground is full" and "a filter removed
+// everything" print the same nothing.
+//
+// A stage that was not requested carries the previous stage's count through, so
+// every field is always meaningful.
+type FilterStats struct {
+	RawNights int // availability rows in: one per free site-night
+	RawSites  int // distinct sites among them
+	Stays     int // stays of exactly req.Nights consecutive nights
+
+	AfterCampsites     int
+	AfterWeekends      int
+	AfterWindow        int
+	AfterEquipment     int
+	AfterCampsiteTypes int
+	AfterShelter       int
+	AfterParking       int
+	AfterHookups       int // == len(result)
+}
+
 // Apply executes all business logic constraints against raw availabilities.
 func (f *Filter) Apply(availabilities []Availability, req SearchRequest) []Availability {
+	filtered, _ := f.ApplyWithStats(availabilities, req)
+	return filtered
+}
+
+// ApplyWithStats is Apply, also reporting how many bookings survived each stage.
+func (f *Filter) ApplyWithStats(availabilities []Availability, req SearchRequest) ([]Availability, FilterStats) {
+	var stats FilterStats
+	stats.RawNights = len(availabilities)
+	rawSites := map[string]bool{}
+	for _, a := range availabilities {
+		rawSites[a.Site.ID+"|"+a.Site.Facility.ID] = true
+	}
+	stats.RawSites = len(rawSites)
+
 	// 1. Consolidate consecutive nights natively
 	consolidated := consolidateNights(availabilities, req.Nights)
+	stats.Stays = len(consolidated)
 
 	var filtered []Availability
 	for _, booking := range consolidated {
@@ -25,6 +62,7 @@ func (f *Filter) Apply(availabilities []Availability, req SearchRequest) []Avail
 		if len(req.Campsites) > 0 && !matchesRequestedCampsite(site, req.Campsites) {
 			continue
 		}
+		stats.AfterCampsites++
 
 		// 3. Check if the site meets the consecutive nights requirement
 		if booking.Nights < req.Nights {
@@ -35,11 +73,13 @@ func (f *Filter) Apply(availabilities []Availability, req SearchRequest) []Avail
 		if req.WeekendsOnly && !isWeekend(booking.Start) {
 			continue
 		}
+		stats.AfterWeekends++
 
 		// 5. Ensure it falls within requested search windows
 		if !isInSearchWindow(booking, req) {
 			continue
 		}
+		stats.AfterWindow++
 
 		// 6. Check Equipment filtering.
 		//
@@ -56,6 +96,7 @@ func (f *Filter) Apply(availabilities []Availability, req SearchRequest) []Avail
 				continue
 			}
 		}
+		stats.AfterEquipment++
 
 		// 7. Check campsite type. This is the coarse cut between tent, RV and
 		// cabin. It does NOT separate drive-in from walk-in, though it was once
@@ -64,6 +105,7 @@ func (f *Filter) Apply(availabilities []Availability, req SearchRequest) []Avail
 		if len(req.CampsiteTypes) > 0 && !hasMatchingCampsiteType(site, req.CampsiteTypes) {
 			continue
 		}
+		stats.AfterCampsiteTypes++
 
 		// 8. The shelter this trip is for: does the site take what I am
 		// bringing? CouldAllow, not Allows — a site whose permitted set is
@@ -71,6 +113,7 @@ func (f *Filter) Apply(availabilities []Availability, req SearchRequest) []Avail
 		if req.Shelter != ShelterUnknown && !site.Permits.CouldAllow(req.Shelter) {
 			continue
 		}
+		stats.AfterShelter++
 
 		// 9. Keep only the parkings asked for.
 		//
@@ -86,16 +129,18 @@ func (f *Filter) Apply(availabilities []Availability, req SearchRequest) []Avail
 			// it as a confirmation rather than a warning.
 			booking.ParkingRequested = true
 		}
+		stats.AfterParking++
 
 		// 10. Hookups are additive: naming two requires both.
 		if !satisfiesHookups(site, req) {
 			continue
 		}
+		stats.AfterHookups++
 
 		filtered = append(filtered, booking)
 	}
 
-	return filtered
+	return filtered, stats
 }
 
 // consolidateNights stitches per-night availability into bookings of exactly

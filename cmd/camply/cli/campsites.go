@@ -246,7 +246,10 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 			Hookups:          hookups,
 		}
 
-		logger.Info("Searching across %d campgrounds", len(r.campgrounds))
+		// The log is what remains of a CronJob run: it must say what was asked
+		// before it says what was found, or the run cannot be reproduced from it.
+		logger.Info("Search: %s", describeSearch(req))
+		logger.Info("Searching %d campgrounds on %s", len(r.campgrounds), desc.DisplayName)
 
 		// 6. Fetch Raw Campsites
 		rawCampsites, err := provider.FindCampsites(ctx, req)
@@ -283,7 +286,16 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 
 		// 7. Apply Fast Native Filter (Consolidates consecutive nights & filters bounds, weekends, equipment, campsites)
 		filter := core.Filter{}
-		filteredCampsites := filter.Apply(rawCampsites, req)
+		filteredCampsites, filterStats := filter.ApplyWithStats(rawCampsites, req)
+
+		// The funnel is the answer to "full, or broken?". Raw availability that
+		// dwindles to nothing must say which stage took it; no raw availability
+		// at all is the provider's answer, and says so in its own words.
+		if filterStats.RawNights == 0 {
+			logger.Info("The provider returned no open nights at these campgrounds for these dates.")
+		} else {
+			logger.Info("Filter: %s", describeFunnel(filterStats, req))
+		}
 
 		// 8. Print Results
 		printTable(filteredCampsites)
@@ -304,8 +316,10 @@ func (r *campsitesRunner) run(cmd *cobra.Command, _ []string) error {
 }
 
 func printTable(bookings []core.Availability) {
+	// Not "New": this binary keeps no state between runs, so every result is
+	// simply what this search found.
 	if len(bookings) == 0 {
-		logger.Info("0 New Campsites Found.")
+		logger.Info("0 campsites found.")
 		return
 	}
 

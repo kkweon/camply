@@ -101,7 +101,24 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 			return nil, fmt.Errorf("invalid campground ID %s: %w", campgroundID, err)
 		}
 
-		fmt.Printf("🏕  Searching %s (#%s) for availability...\n", p.providerName, campgroundID)
+		// One INFO line per campground, emitted after its result is known: the
+		// facility's own name and the open/total counts are what let a reader
+		// tell a full campground from a broken search. The provider name would
+		// repeat on every line, so the CLI logs it once instead.
+		label := fmt.Sprintf("%s #%s", p.providerName, campgroundID)
+		if fac, ok := p.facilities[facilityID]; ok {
+			if fac.RecreationArea != "" {
+				label = fmt.Sprintf("%s (#%s, %s)", fac.FacilityName, campgroundID, fac.RecreationArea)
+			} else {
+				label = fmt.Sprintf("%s (#%s)", fac.FacilityName, campgroundID)
+			}
+		}
+		logger.Debug("Searching %s...", label)
+
+		// Distinct units the grid returned, and those with a free night, across
+		// every date window.
+		unitsSeen := map[int]bool{}
+		unitsFree := map[int]bool{}
 
 		for i := range req.StartDates {
 			start := req.StartDates[i]
@@ -167,9 +184,11 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 			sem := make(chan struct{}, 5) // limit concurrency to 5
 			uniqueUnitsToFetch := make(map[int]bool)
 			for _, unit := range grid.Facility.Units {
+				unitsSeen[unit.UnitId] = true
 				for _, slice := range unit.Slices {
 					if slice.IsFree {
 						uniqueUnitsToFetch[unit.UnitId] = true
+						unitsFree[unit.UnitId] = true
 						break
 					}
 				}
@@ -215,9 +234,6 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 						// Fetch occupancy lazily (cached per unit)
 						p.fetchUnitOccupancy(ctx, unit.UnitId)
 
-						logger.Debug("Evaluating campsite: %s (Type: %s, UseType: %s, VehicleLength: %d)",
-							unit.Name, campsiteType, campsiteUseType, unit.VehicleLength)
-
 						parking, parkingBasis := classifyParking(campsiteType, campsiteUseType, unit.VehicleLength)
 						permits, permitsBasis := classifyPermits(campsiteType, campsiteUseType, unit.VehicleLength, parking)
 
@@ -256,6 +272,10 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 						unitID := strconv.Itoa(unit.UnitId)
 						site, ok := sites[unitID]
 						if !ok {
+							// Once per unit, not once per free night: the same
+							// line repeated thirty times is noise, not detail.
+							logger.Debug("Evaluating campsite: %s (Type: %s, UseType: %s, VehicleLength: %d)",
+								unit.Name, campsiteType, campsiteUseType, unit.VehicleLength)
 							site = &core.Site{
 								ID:   unitID,
 								Name: unit.Name,
@@ -297,6 +317,15 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 					}
 				}
 			}
+		}
+
+		// An empty grid usually means out of season, and is a different fact
+		// from every unit being booked — say which one happened.
+		if len(unitsSeen) == 0 {
+			logger.Info("🏕  %s: the grid returned no units for these dates", label)
+		} else {
+			logger.Info("🏕  %s: %d of %d sites have at least one open night",
+				label, len(unitsFree), len(unitsSeen))
 		}
 	}
 

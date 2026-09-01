@@ -495,7 +495,7 @@ func TestLegacyCommandPrintsAPasteableReplacement(t *testing.T) {
 	if strings.Contains(res.Stdout, "camply fake campsites --campgrounds") {
 		t.Errorf("migration hint leaked into the results stream: %q", res.Stdout)
 	}
-	if !strings.Contains(res.Stdout, "0 New Campsites Found") {
+	if !strings.Contains(res.Stdout, "0 campsites found") {
 		t.Errorf("results missing from stdout: %q", res.Stdout)
 	}
 }
@@ -564,7 +564,7 @@ func TestEquipmentThatMatchesNothingFailsInsteadOfReportingZero(t *testing.T) {
 			t.Errorf("error should contain %q, got:\n%s", want, msg)
 		}
 	}
-	if strings.Contains(res.Stdout, "0 New Campsites Found") {
+	if strings.Contains(res.Stdout, "0 campsites found") {
 		t.Error("the run must not present this as an empty result")
 	}
 }

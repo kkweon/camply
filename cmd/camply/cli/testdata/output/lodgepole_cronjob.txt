@@ -2,9 +2,12 @@ $ camply recdotgov campsites --campgrounds 232461 --campsite-types STANDARD NONE
 
 --- stdout ---
 [TIME] CAMPLY   camply, the campsite finder ⛺️
-[TIME] INFO     Searching across 1 campgrounds
+[TIME] INFO     Search: 2026-09-04 → 2026-09-07, --nights 2, --campsite-types 'STANDARD NONELECTRIC','TENT ONLY NONELECTRIC', --parking at-site
+[TIME] INFO     Searching 1 campgrounds on RecreationDotGov
+[TIME] INFO     🏕  Lodgepole Campground-Sequoia and Kings Canyon National Park (#232461, Sequoia & Kings Canyon National Parks): 16 of 18 sites have at least one open night
 [TIME] INFO     --parking at-site excluded 3 campsites that need a walk from the car (of 16 searched).
-[TIME] INFO     0 New Campsites Found.
+[TIME] INFO     Filter: 16 sites with 42 open nights → 3 stays of 2 consecutive nights → 0 inside the requested dates → 0 after --campsite-types → 0 after --parking at-site
+[TIME] INFO     0 campsites found.
 [TIME] CAMPLY   Exiting camply 👋
 
 --- stderr ---

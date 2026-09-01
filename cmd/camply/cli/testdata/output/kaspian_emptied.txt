@@ -2,7 +2,9 @@ $ camply recdotgov campsites --campgrounds 232875 --parking at-site --date-range
 
 --- stdout ---
 [TIME] CAMPLY   camply, the campsite finder ⛺️
-[TIME] INFO     Searching across 1 campgrounds
+[TIME] INFO     Search: 2026-09-04 → 2026-09-07, --nights 1, --parking at-site
+[TIME] INFO     Searching 1 campgrounds on RecreationDotGov
+[TIME] INFO     🏕  KASPIAN CAMPGROUND (#232875, Lake Tahoe Basin Management Unit): 9 of 9 sites have at least one open night
 [TIME] INFO     --parking at-site excluded 9 campsites that need a walk from the car (of 9 searched).
 
 --- stderr ---

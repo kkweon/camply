@@ -3,7 +3,10 @@ $ camply recdotgov campsites --campgrounds 10220612 --equipment-types Tent --dat
 --- stdout ---
 [TIME] CAMPLY   camply, the campsite finder ⛺️
 [TIME] INFO     Equipment filter: Tent
-[TIME] INFO     Searching across 1 campgrounds
+[TIME] INFO     Search: 2026-09-01 → 2026-09-30, --nights 1
+[TIME] INFO     Searching 1 campgrounds on RecreationDotGov
+[TIME] INFO     🏕  Meeks Bay Resort (#10220612, Lake Tahoe Basin Management Unit): 19 of 20 sites have at least one open night
+[TIME] INFO     Filter: 19 sites with 250 open nights → 234 inside the requested dates → 107 after --equipment-types
 [TIME] INFO     Found 107 Campsites
 [TIME] INFO     📅 Mon, September 07 🏕  7 sites
 [TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 7 sites
