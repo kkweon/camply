@@ -117,6 +117,12 @@ func printCampgroundsTable(facilities []core.CampgroundFacility) {
 	for recAreaName, camps := range grouped {
 		// Assuming all camps in the group share the same RecAreaID
 		recAreaID := camps[0].RecreationAreaID
+		// Said outright rather than printed as a gap. The provider reports no
+		// recreation area for some campgrounds, and a blank between the icon
+		// and the id reads as a rendering fault instead of as the fact it is.
+		if recAreaName == "" {
+			recAreaName = "(no recreation area reported)"
+		}
 		fmt.Printf("🏞  %s - (#%s)\n", recAreaName, recAreaID)
 		for _, f := range camps {
 			fmt.Printf("    🏕  %s - (#%s)\n", f.FacilityName, f.FacilityID)

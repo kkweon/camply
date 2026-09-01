@@ -1,0 +1,253 @@
+{
+ "ACTIVITY": [
+  {
+   "ActivityID": 9,
+   "ActivityName": "CAMPING",
+   "FacilityActivityDescription": "Camping",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "232461"
+  },
+  {
+   "ActivityID": 10,
+   "ActivityName": "INTERPRETIVE PROGRAMS",
+   "FacilityActivityDescription": "Interpretive Programs",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "232461"
+  },
+  {
+   "ActivityID": 14,
+   "ActivityName": "HIKING",
+   "FacilityActivityDescription": "Hiking",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "232461"
+  },
+  {
+   "ActivityID": 38,
+   "ActivityName": "OTHER RECREATION CONCESSION SITE",
+   "FacilityActivityDescription": "Other Recreation Concession Site",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "232461"
+  }
+ ],
+ "CAMPSITE": [],
+ "EVENT": [],
+ "Enabled": true,
+ "FACILITYADDRESS": [
+  {
+   "AddressCountryCode": "USA",
+   "AddressStateCode": "CA",
+   "City": "Three Rivers",
+   "FacilityAddressID": "20437821",
+   "FacilityAddressType": "Default",
+   "FacilityID": "232461",
+   "FacilityStreetAddress1": "SEQUOIA AND KINGS CANYON NATIONAL PARKS ",
+   "FacilityStreetAddress2": "47050 GENERALS HIGHWAY",
+   "FacilityStreetAddress3": "",
+   "LastUpdatedDate": "2026-07-18",
+   "PostalCode": "93271"
+  }
+ ],
+ "FacilityAccessibilityText": "",
+ "FacilityAdaAccess": "N",
+ "FacilityDescription": "<h2>Overview</h2>\nLodgepole Campground  is located in the breathtaking Sequoia and Kings Canyon National Parks in central California's rugged Sierra Nevada range. Lodgepole is perched on the banks of the scenic and lengthy Marble Fork of the Kaweah River, at an elevation of 6,700 ft. The inspiring Giant Forest Grove and the mighty General Sherman Tree - the world's largest tree in volume - are just two miles from the campground.<h2>Recreation</h2>\n<p><strong>Forty miles of trails</strong>, including the paved <strong>Big Trees Trail</strong>, invite visitors to immerse themselves in the majesty of the ancient grove. Several additional popular hiking and wilderness trailheads are close by, including the trail to <strong>Moro Rock</strong>, a granite dome with spectacular views of the Great Western Divide and western half of the park. <strong>Tokopah Falls Trail</strong> is an easy walk along the <strong>Marble Fork of the Kaweah River</strong>, leading to an impressive 1200 ft. waterfall. Fly-fishing is also a popular activity on the Marble Fork.</p>\n<h2>Facilities</h2>\n<p>Lodgepole Campground is very popular with tent and RV campers alike.  It has paved roads, flush toilets, and drinking water. Picnic tables, fire rings, and bear food storage boxes are provided at each site. Lodgepole Village is a quick, 1/4-mile away, offering, a Visitor Center, market and gift shop and coin-operated showers and laundry facilities.</p>\n<h2>Natural Features</h2>\n<p>Lodgepole pine, Red fir, and shrubs forest the campground, while towering groves of giant sequoias and craggy granite peaks dot the landscape. The Marble Fork of the Kaweah River is fed by snowmelt and flows seasonally through the site. This region is characterized by warm days and cool nights in the summer and deep snow and cold days in the winter.</p>\n\n<h2>Contact Info</h2>\nFor facility specific information, please call (559) 565-4404.\n<h2>Nearby Attractions</h2>\n<p><strong>The General Sherman Tree, General Grant Tree, Moro Rock and Tunnel Log </strong>are nearby, as is the informative<strong> Giant Forest Museum and the Lodgepole Visitor Center.  </strong></p><p>Colorful <strong>Crescent Meadow</strong> offers views of vivid summer wildflowers and access to Tharp's Log, a cabin in a fallen sequoia. </p><p><strong>Tours into Crystal Cave</strong>, one of hundreds of marble caves in the park, give visitors an interesting view of rock formations, fossils, rare minerals, and unique wildlife. Tickets are required, but are not sold at the cave entrance. <strong>Reserve in advance at: </strong><a href=\"https://sequoiaparksconservancy.org/crystal-cave/\" rel=\"nofollow\">Crystal Cave - Sequoia Parks Conservancy</a></p><p><strong>Crystal Cave</strong> is about a 45 minute drive (13 miles/21 km) from the campground. Vehicles longer than 22 feet long are prohibited on the narrow, winding Crystal Cave Road.</p><h2>Charges & Cancellations</h2>\n<ul><li><p>Payment in full will be charged to your credit card upon completion of the reservation. A $10.00 service fee will apply if you change or cancel your reservation. Additional fees will apply for late cancellations.</p></li><li><p>All cancellations made between midnight on the day before arrival and check out time on the day after arrival are considered late cancellations and will incur a $10.00 cancellation fee and will also forfeit the first night’s use fee. Cancellations for a single night’s reservation will forfeit the entire use fee but no cancellation fee will apply.</p></li><li><p><strong>If your campsite remains vacant for 24 hours after your arrival date it will be cancelled and made available on rec.gov.</strong> You will be charged for the first night's campsite fee and a $20 cancellation fee, all other fees after that will be refunded. Recreation.gov policies apply to all reservations, cancellations, refunds and date changes. Call (559) 565-4404 if you will be arriving 24 hours after your arrival date so your site won't be cancelled.</p></li></ul>",
+ "FacilityDirections": "<p><strong>Both roads leading to Sequoia and Kings Canyon National Parks approach from the west. </strong>They are open all day, every day, depending on weather.  <strong>From the east, no roads reach the park boundary.</strong><br> <br><strong>The Main park road, The Generals Highway, connects the north and south entrances.  Winter storms may cause temporary  closures from Grant Grove to Lodgepole.</strong></p>\n<ul>\n<li>It takes about 1 hour to drive to the campground from the south park entrance (198E) or about a 1 hour from the north park entrance (180E).</li>\n<li><strong>Notice: Vehicles longer than 22 feet (including trailers) are not advised between Potwisha Campground and the Giant Forest Museum. </strong>Visitors with vehicles over 22 feet in total length hoping to visit the Giant Forest or camp at Lodgepole and Dorst Creek Campgrounds are advised to enter via the northern, Highway 180, entrance to these parks.</li>\n</ul>\n\n<p><strong>Arriving from the south (Highway 198):</strong></p>\n<ul>\n<li>From Highways 65 or 99:  Go east on Hwy 198 E and follow signs for Sequoia National Park to the park entrance.  </li>\n<li>Highway 180 E may be reached from Highway 198 E using Hwy 63 N from Visalia.  </li>\n</ul>\n<p><br><strong>Arriving from the north (Highway 180):</strong></p>\n<ul>\n<li>From Fresno: take Highway 180E, following signs for Kings Canyon National Park to the park entrance.  </li>\n<li>Once in the park, follow signs to Sequoia National Park and Lodgepole.</li>\n</ul>\n",
+ "FacilityEmail": "Ed_Huston@nps.gov",
+ "FacilityID": "232461",
+ "FacilityLatitude": 36.6067111,
+ "FacilityLongitude": -118.7258,
+ "FacilityMapURL": "",
+ "FacilityName": "Lodgepole Campground-Sequoia and Kings Canyon National Park",
+ "FacilityPhone": "559-565-3341",
+ "FacilityReservationURL": "",
+ "FacilityTypeDescription": "Campground",
+ "FacilityUseFeeDescription": "<ul><li><p><strong>ENTRANCE FEES APPLY</strong>: Check <a href=\"https://www.nps.gov/seki/planyourvisit/fees.htm\" rel=\"nofollow\">Entrance Fees & Passes - Sequoia & Kings Canyon National Parks (U.S. National Park Service)</a> for details.</p></li><li><p><strong>Camping fees </strong>are $32 per night for regular camping and $16 per night for valid lifetime Access Pass, lifetime Senior Pass, and annual Senior Pass. No other passes receive reduced rates.</p></li><li><p><strong>If your campsite remains vacant for 24 hours after your arrival date it will be cancelled and made available on rec.gov. </strong>You will be charged for the first night's campsite fee and a $20 cancellation fee, all other fees after that will be refunded. Recreation.gov policies apply to all reservations, cancellations, refunds and date changes. Call (559) 565-4404 if you will be arriving 24 hours after your arrival date so your site won't be cancelled.</p></li></ul>",
+ "GEOJSON": {
+  "COORDINATES": [
+   -118.7258,
+   36.6067111
+  ],
+  "TYPE": "Point"
+ },
+ "Keywords": "CG49,Sequoia and Kings Canyon National Park,Sequoia & Kings,Sequoia NP",
+ "LINK": [
+  {
+   "Description": "Print Facility Map",
+   "EntityID": "232461",
+   "EntityLinkID": "r1scglc6ef553c-ab66-405f-a15c-70b66b23ca67",
+   "EntityType": "Facility",
+   "LinkType": "Other",
+   "Title": "Print Facility Map",
+   "URL": "https://www.nps.gov/seki/planyourvisit/upload/Lodgepole_Summer_2012-508-_passed.pdf"
+  },
+  {
+   "Description": "Sequoia and Kings Canyon National Parks",
+   "EntityID": "232461",
+   "EntityLinkID": "r1scgl4400461e-f29f-4c34-8564-46f926ef26a7",
+   "EntityType": "Facility",
+   "LinkType": "Other",
+   "Title": "Sequoia and Kings Canyon National Parks",
+   "URL": "https://www.nps.gov/seki"
+  },
+  {
+   "Description": "Sequoia and Kings Canyon National Parks Campgrounds",
+   "EntityID": "232461",
+   "EntityLinkID": "r1scgl56bc5ec8-9b09-4233-b819-9e1ed3191354",
+   "EntityType": "Facility",
+   "LinkType": "Other",
+   "Title": "Sequoia and Kings Canyon National Parks Campgrounds",
+   "URL": "https://www.nps.gov/seki/planyourvisit/campgrounds.htm"
+  },
+  {
+   "Description": "California State Tourism",
+   "EntityID": "232461",
+   "EntityLinkID": "r1scglb4c6636e-782a-4622-870e-7212aba8dded",
+   "EntityType": "Facility",
+   "LinkType": "Other",
+   "Title": "California State Tourism",
+   "URL": "http://gocalif.ca.gov/AM/Template.cfm?Section=Home"
+  },
+  {
+   "Description": "California State Road Conditions",
+   "EntityID": "232461",
+   "EntityLinkID": "r1scgl8bc12ed3-8da5-47eb-9260-84f0418d10d3",
+   "EntityType": "Facility",
+   "LinkType": "Other",
+   "Title": "California State Road Conditions",
+   "URL": "http://www.dot.ca.gov"
+  }
+ ],
+ "LastUpdatedDate": "2026-07-18",
+ "LegacyFacilityID": "70941",
+ "MEDIA": [
+  {
+   "Credits": "NPS",
+   "Description": "Park visitors looking up at the General Sherman Tree",
+   "EmbedCode": "",
+   "EntityID": "232461",
+   "EntityMediaID": "2572380",
+   "EntityType": "Facility",
+   "Height": 935,
+   "IsGallery": true,
+   "IsPreview": false,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "General Sherman Tree",
+   "URL": "https://cdn.recreation.gov/public/images/65872_700.webp",
+   "Width": 700
+  },
+  {
+   "Credits": "NPS",
+   "Description": "Hikers walking through a rustic wooden shelter to access the trail to the world's largest tree",
+   "EmbedCode": "",
+   "EntityID": "232461",
+   "EntityMediaID": "2572410",
+   "EntityType": "Facility",
+   "Height": 526,
+   "IsGallery": true,
+   "IsPreview": false,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "Sherman Tree Trail from the upper parking area.",
+   "URL": "https://cdn.recreation.gov/public/images/65905_700.webp",
+   "Width": 700
+  },
+  {
+   "Credits": "NPS",
+   "Description": "View up Lodgepole Valley past the Watchtower ",
+   "EmbedCode": "",
+   "EntityID": "232461",
+   "EntityMediaID": "72081e8a-1c45-416c-a00c-1325fa16ed2e",
+   "EntityType": "Facility",
+   "Height": 525,
+   "IsGallery": false,
+   "IsPreview": true,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "View up Lodgepole Valley",
+   "URL": "https://cdn.recreation.gov/public/2019/10/07/23/31/232461_408014ff-2b43-4d07-a9ac-73a20f134566_700.webp",
+   "Width": 700
+  },
+  {
+   "Credits": "NPS",
+   "Description": "Sequoia trees covered with snow, winter in the Giant Forest",
+   "EmbedCode": "",
+   "EntityID": "232461",
+   "EntityMediaID": "2572441",
+   "EntityType": "Facility",
+   "Height": 935,
+   "IsGallery": true,
+   "IsPreview": false,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "Snow Covered Sequoias ",
+   "URL": "https://cdn.recreation.gov/public/images/65936_700.webp",
+   "Width": 700
+  },
+  {
+   "Credits": "NPS Photo",
+   "Description": "A vehicle bridge crossing a mountain stream in Lodgepole Campground",
+   "EmbedCode": "",
+   "EntityID": "232461",
+   "EntityMediaID": "3b52e315-e127-42da-8761-6a5219c7da0c",
+   "EntityType": "Facility",
+   "Height": 340,
+   "IsGallery": false,
+   "IsPreview": false,
+   "IsPrimary": true,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "Lodgepole Campground, Sequoia Kings Canyon National Parks",
+   "URL": "https://cdn.recreation.gov/public/2020/06/30/16/57/232461_dcb1f969-91e0-45c8-a18d-3314de8cc1fa_1440.webp",
+   "Width": 1440
+  },
+  {
+   "Credits": "NPS",
+   "Description": "Mountains with conifers and clouds at sunset.",
+   "EmbedCode": "",
+   "EntityID": "232461",
+   "EntityMediaID": "2572379",
+   "EntityType": "Facility",
+   "Height": 526,
+   "IsGallery": true,
+   "IsPreview": false,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "Sierra Nevada Wilderness ",
+   "URL": "https://cdn.recreation.gov/public/images/65871_700.webp",
+   "Width": 700
+  }
+ ],
+ "ORGANIZATION": [
+  {
+   "LastUpdatedDate": "2018-06-26",
+   "OrgAbbrevName": "NPS",
+   "OrgID": "128",
+   "OrgImageURL": "nps.gif",
+   "OrgJurisdictionType": "State",
+   "OrgName": "National Park Service",
+   "OrgParentID": "139",
+   "OrgType": "Federal Agency",
+   "OrgURLAddress": "http://www.nps.gov",
+   "OrgURLText": ""
+  }
+ ],
+ "OrgFacilityID": "AN370941",
+ "PERMITENTRANCE": [],
+ "ParentOrgID": "128",
+ "ParentRecAreaID": "2931",
+ "RECAREA": [
+  {
+   "RecAreaID": "2931",
+   "RecAreaName": "Sequoia & Kings Canyon National Parks",
+   "ResourceLink": "http://localhost:3000/api/v1/recareas/2931"
+  }
+ ],
+ "Reservable": true,
+ "StayLimit": "",
+ "TOUR": []
+}

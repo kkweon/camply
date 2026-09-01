@@ -6,7 +6,7 @@ $ camply recdotgov campsites --campgrounds 10220612 --equipment-types Tent --dat
 [TIME] INFO     Searching across 1 campgrounds
 [TIME] INFO     Found 107 Campsites
 [TIME] INFO     📅 Mon, September 07 🏕  7 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 7 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 7 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
@@ -15,13 +15,13 @@ $ camply recdotgov campsites --campgrounds 10220612 --equipment-types Tent --dat
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220636 (1 night)
 [TIME] INFO     📅 Mon, September 14 🏕  4 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 4 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 4 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Mon, September 21 🏕  6 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 6 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
@@ -29,32 +29,32 @@ $ camply recdotgov campsites --campgrounds 10220612 --equipment-types Tent --dat
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Mon, September 28 🏕  5 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 5 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 5 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Sun, September 13 🏕  5 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 5 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 5 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220636 (1 night)
 [TIME] INFO     📅 Sun, September 20 🏕  3 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 3 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Sun, September 27 🏕  4 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 4 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 4 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220620 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Thu, September 03 🏕  6 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 6 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
@@ -62,7 +62,7 @@ $ camply recdotgov campsites --campgrounds 10220612 --equipment-types Tent --dat
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Thu, September 10 🏕  8 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 8 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 8 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
@@ -72,41 +72,41 @@ $ camply recdotgov campsites --campgrounds 10220612 --equipment-types Tent --dat
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220636 (1 night)
 [TIME] INFO     📅 Thu, September 17 🏕  5 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 5 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 5 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Thu, September 24 🏕  5 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 5 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 5 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220613 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Tue, September 01 🏕  5 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 5 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 5 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Tue, September 08 🏕  5 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 5 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 5 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Tue, September 15 🏕  4 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 4 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 4 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220618 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Tue, September 22 🏕  6 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 6 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
@@ -114,7 +114,7 @@ $ camply recdotgov campsites --campgrounds 10220612 --equipment-types Tent --dat
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Tue, September 29 🏕  6 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 6 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
@@ -122,14 +122,14 @@ $ camply recdotgov campsites --campgrounds 10220612 --equipment-types Tent --dat
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Wed, September 02 🏕  5 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 5 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 5 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Wed, September 09 🏕  6 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 6 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
@@ -137,7 +137,7 @@ $ camply recdotgov campsites --campgrounds 10220612 --equipment-types Tent --dat
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Wed, September 16 🏕  6 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 6 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220613 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220616 (1 night) ⚠️ NO EQUIPMENT DATA
@@ -145,7 +145,7 @@ $ camply recdotgov campsites --campgrounds 10220612 --equipment-types Tent --dat
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220623 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220625 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     📅 Wed, September 23 🏕  6 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 6 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 6 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220613 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220614 (1 night) ⚠️ NO EQUIPMENT DATA
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220615 (1 night) ⚠️ NO EQUIPMENT DATA

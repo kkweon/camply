@@ -1,0 +1,289 @@
+{
+ "ACTIVITY": [
+  {
+   "ActivityID": 5,
+   "ActivityName": "BIKING",
+   "FacilityActivityDescription": "Biking",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "232875"
+  },
+  {
+   "ActivityID": 6,
+   "ActivityName": "BOATING",
+   "FacilityActivityDescription": "Boating",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "232875"
+  },
+  {
+   "ActivityID": 9,
+   "ActivityName": "CAMPING",
+   "FacilityActivityDescription": "Camping",
+   "FacilityActivityFeeDescription": "Camping",
+   "FacilityID": "232875"
+  },
+  {
+   "ActivityID": 10,
+   "ActivityName": "INTERPRETIVE PROGRAMS",
+   "FacilityActivityDescription": "Educational Programs",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "232875"
+  },
+  {
+   "ActivityID": 11,
+   "ActivityName": "FISHING",
+   "FacilityActivityDescription": "Fishing",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "232875"
+  },
+  {
+   "ActivityID": 14,
+   "ActivityName": "HIKING",
+   "FacilityActivityDescription": "Hiking",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "232875"
+  },
+  {
+   "ActivityID": 25,
+   "ActivityName": "WATER SPORTS",
+   "FacilityActivityDescription": "Water Skiing",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "232875"
+  },
+  {
+   "ActivityID": 34,
+   "ActivityName": "SWIMMING SITE",
+   "FacilityActivityDescription": "Swimming",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "232875"
+  }
+ ],
+ "CAMPSITE": [],
+ "EVENT": [],
+ "Enabled": true,
+ "FACILITYADDRESS": [
+  {
+   "AddressCountryCode": "USA",
+   "AddressStateCode": "CA",
+   "City": "South Lake Tahoe",
+   "FacilityAddressID": "20438223",
+   "FacilityAddressType": "Default",
+   "FacilityID": "232875",
+   "FacilityStreetAddress1": "P.O. Box 9047",
+   "FacilityStreetAddress2": "",
+   "FacilityStreetAddress3": "",
+   "LastUpdatedDate": "2026-06-13",
+   "PostalCode": "96158"
+  }
+ ],
+ "FacilityAccessibilityText": "",
+ "FacilityAdaAccess": "N",
+ "FacilityDescription": "<h2>Overview</h2>\nKaspian Campground is located in a mature forest of pine trees overlooking the beautiful Lake Tahoe. Campers will be nestled in a sparse forest of pine trees and evergreen shrubs, just minutes from the bright blue water of Tahoe. The lake and its sandy beaches provides ample recreation opportunities.\n<h2>Recreation</h2>\nKaspian Campground is ideal for visitors planning a full day of biking around Lake Tahoe. Bike trails that traverse the western shores of the lake begin near the campground.\n<br/> <br/>\nVisitors enjoy water sports on the lake and relaxing on its sandy beaches.<h2>Facilities</h2>\nThe campground offers multiple single-family sites for tent-only camping. Sites are equipped with tables and campfire rings with grills. Accessible flush toilets, drinking water and trash collection are provided. <h2>Natural Features</h2>\nThe campground is situated in a former picnic area, across the street from the lake. Campsites are spaced for privacy and surrounded by tall ponderosa pine and white fir trees. Some sites offer spectacular views of Lake Tahoe through the trees.\n\n<h2>Nearby Attractions</h2>\nKaspian Campground is less than 10 miles from the popular Meeks Bay.\n\n<h2>Contact Info</h2>\nThis location has limited staffing. Please call (530) 541-1537 for general information.",
+ "FacilityDirections": "The campground is located 4 miles south of Tahoe City, on California Highway 89.\n",
+ "FacilityEmail": "vista@vista-rec.com",
+ "FacilityID": "232875",
+ "FacilityLatitude": 39.113747,
+ "FacilityLongitude": -120.15866,
+ "FacilityMapURL": "",
+ "FacilityName": "KASPIAN CAMPGROUND",
+ "FacilityPhone": "530-583-3642",
+ "FacilityReservationURL": "",
+ "FacilityTypeDescription": "Campground",
+ "FacilityUseFeeDescription": "",
+ "GEOJSON": {
+  "COORDINATES": [
+   -120.15866,
+   39.113747
+  ],
+  "TYPE": "Point"
+ },
+ "Keywords": "KASP,LAKE TAHOE,WEST SHORE,LAKE TAHOE BASIN  - FS",
+ "LINK": [
+  {
+   "Description": "Print Facility Map",
+   "EntityID": "232875",
+   "EntityLinkID": "r1scgl8c74f129-0435-4eb9-afad-9fad26558e31",
+   "EntityType": "Facility",
+   "LinkType": "Other",
+   "Title": "Print Facility Map",
+   "URL": "http://cdn.recreation.gov/webphotos/facilitymaps/71663_KASP.pdf"
+  },
+  {
+   "Description": "California State Tourism",
+   "EntityID": "232875",
+   "EntityLinkID": "r1scgl0f3d38b5-052f-4ec1-a691-9db62acd7ef7",
+   "EntityType": "Facility",
+   "LinkType": "Other",
+   "Title": "California State Tourism",
+   "URL": "http://gocalif.ca.gov/AM/Template.cfm?Section=Home"
+  },
+  {
+   "Description": "California State Road Conditions",
+   "EntityID": "232875",
+   "EntityLinkID": "r1scglada0c445-0db6-421a-94c8-2b405a7e42de",
+   "EntityType": "Facility",
+   "LinkType": "Other",
+   "Title": "California State Road Conditions",
+   "URL": "http://www.dot.ca.gov"
+  },
+  {
+   "Description": "Tahoe Recreation/Vista Recreation",
+   "EntityID": "232875",
+   "EntityLinkID": "r1scgl86d5aa1e-c256-4e41-a270-977c348d6ddf",
+   "EntityType": "Facility",
+   "LinkType": "Other",
+   "Title": "Forest Service Concessionaire",
+   "URL": "http://www.camprrm.com"
+  }
+ ],
+ "LastUpdatedDate": "2026-06-13",
+ "LegacyFacilityID": "71663",
+ "MEDIA": [
+  {
+   "Credits": "USFS",
+   "Description": "Kaspian Campground",
+   "EmbedCode": "",
+   "EntityID": "232875",
+   "EntityMediaID": "4c0fd408-146b-4e34-93f0-5c53003b2461",
+   "EntityType": "Facility",
+   "Height": 809,
+   "IsGallery": false,
+   "IsPreview": false,
+   "IsPrimary": true,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "A rocky shoreline of a mountain lake",
+   "URL": "https://cdn.recreation.gov/public/2024/01/12/19/53/232875_162b1492-3de1-4332-a761-e6804dde0260_1440.webp",
+   "Width": 1440
+  },
+  {
+   "Credits": "USFS",
+   "Description": "Kaspian Campground",
+   "EmbedCode": "",
+   "EntityID": "232875",
+   "EntityMediaID": "6a284872-fc5f-4258-807e-fbd8ccc06ed6",
+   "EntityType": "Facility",
+   "Height": 526,
+   "IsGallery": false,
+   "IsPreview": true,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "The rocky shoreline of a mountain lake",
+   "URL": "https://cdn.recreation.gov/public/2024/01/12/19/53/232875_91d1ed23-a09c-4b75-a152-28f7a4f28b79_700.webp",
+   "Width": 700
+  },
+  {
+   "Credits": "",
+   "Description": "",
+   "EmbedCode": "",
+   "EntityID": "232875",
+   "EntityMediaID": "2573677",
+   "EntityType": "Facility",
+   "Height": 955,
+   "IsGallery": true,
+   "IsPreview": false,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "KASPIAN CAMPGROUND",
+   "URL": "https://cdn.recreation.gov/public/images/66953_1440.webp",
+   "Width": 1440
+  },
+  {
+   "Credits": "",
+   "Description": "",
+   "EmbedCode": "",
+   "EntityID": "232875",
+   "EntityMediaID": "2573645",
+   "EntityType": "Facility",
+   "Height": 1054,
+   "IsGallery": true,
+   "IsPreview": false,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "KASPIAN CAMPGROUND",
+   "URL": "https://cdn.recreation.gov/public/images/66918_700.webp",
+   "Width": 700
+  },
+  {
+   "Credits": "",
+   "Description": "",
+   "EmbedCode": "",
+   "EntityID": "232875",
+   "EntityMediaID": "2573696",
+   "EntityType": "Facility",
+   "Height": 955,
+   "IsGallery": true,
+   "IsPreview": false,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "KASPIAN CAMPGROUND",
+   "URL": "https://cdn.recreation.gov/public/images/66973_1440.webp",
+   "Width": 1440
+  },
+  {
+   "Credits": "",
+   "Description": "",
+   "EmbedCode": "",
+   "EntityID": "232875",
+   "EntityMediaID": "2573683",
+   "EntityType": "Facility",
+   "Height": 955,
+   "IsGallery": true,
+   "IsPreview": false,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "KASPIAN CAMPGROUND",
+   "URL": "https://cdn.recreation.gov/public/images/66959_1440.webp",
+   "Width": 1440
+  },
+  {
+   "Credits": "",
+   "Description": "",
+   "EmbedCode": "",
+   "EntityID": "232875",
+   "EntityMediaID": "2573668",
+   "EntityType": "Facility",
+   "Height": 955,
+   "IsGallery": true,
+   "IsPreview": false,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "KASPIAN CAMPGROUND",
+   "URL": "https://cdn.recreation.gov/public/images/66942_1440.webp",
+   "Width": 1440
+  }
+ ],
+ "ORGANIZATION": [
+  {
+   "LastUpdatedDate": "2018-06-26",
+   "OrgAbbrevName": "FS",
+   "OrgID": "131",
+   "OrgImageURL": "fs.jpg",
+   "OrgJurisdictionType": "State",
+   "OrgName": "USDA Forest Service",
+   "OrgParentID": "163",
+   "OrgType": "Federal Agency",
+   "OrgURLAddress": "http://www.fs.fed.us",
+   "OrgURLText": ""
+  }
+ ],
+ "OrgFacilityID": "AN371663",
+ "PERMITENTRANCE": [],
+ "ParentOrgID": "131",
+ "ParentRecAreaID": "2025",
+ "RECAREA": [
+  {
+   "RecAreaID": "2025",
+   "RecAreaName": "Lake Tahoe Basin Management Unit",
+   "ResourceLink": "http://localhost:3000/api/v1/recareas/2025"
+  }
+ ],
+ "Reservable": true,
+ "StayLimit": "",
+ "TOUR": []
+}

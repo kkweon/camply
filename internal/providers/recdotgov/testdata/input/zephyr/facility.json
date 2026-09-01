@@ -1,0 +1,314 @@
+{
+ "ACTIVITY": [
+  {
+   "ActivityID": 100023,
+   "ActivityName": "WATER SKIING",
+   "FacilityActivityDescription": "Water Skiing",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 6,
+   "ActivityName": "BOATING",
+   "FacilityActivityDescription": "Boating",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 100017,
+   "ActivityName": "BIRDING",
+   "FacilityActivityDescription": "Birding",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 9,
+   "ActivityName": "CAMPING",
+   "FacilityActivityDescription": "Camping",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 14,
+   "ActivityName": "HIKING",
+   "FacilityActivityDescription": "Hiking",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 15,
+   "ActivityName": "HORSEBACK RIDING",
+   "FacilityActivityDescription": "Horseback Riding",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 100079,
+   "ActivityName": "GOLF",
+   "FacilityActivityDescription": "Golf",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 100000,
+   "ActivityName": "MOTOR BOAT",
+   "FacilityActivityDescription": "Motor Boat",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 100022,
+   "ActivityName": "JET SKIING",
+   "FacilityActivityDescription": "Jet Skiing",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 100002,
+   "ActivityName": "MOUNTAIN BIKING",
+   "FacilityActivityDescription": "Mountain Biking",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 105,
+   "ActivityName": "PADDLING",
+   "FacilityActivityDescription": "Paddling",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 20,
+   "ActivityName": "PICNICKING",
+   "FacilityActivityDescription": "Picnicking",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 22,
+   "ActivityName": "WINTER SPORTS",
+   "FacilityActivityDescription": "Winter Sports",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 104,
+   "ActivityName": "PHOTOGRAPHY",
+   "FacilityActivityDescription": "Photography",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 100007,
+   "ActivityName": "KAYAKING",
+   "FacilityActivityDescription": "Kayaking",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 100055,
+   "ActivityName": "SKIING",
+   "FacilityActivityDescription": "Skiing",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 100068,
+   "ActivityName": "SNOW TUBING",
+   "FacilityActivityDescription": "Snow Tubing",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 100001,
+   "ActivityName": "SNOWMOBILE",
+   "FacilityActivityDescription": "Snowmobile",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 106,
+   "ActivityName": "SWIMMING",
+   "FacilityActivityDescription": "Swimming",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 100045,
+   "ActivityName": "TUBING",
+   "FacilityActivityDescription": "Tubing",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 100019,
+   "ActivityName": "WATER ACCESS",
+   "FacilityActivityDescription": "Water Access",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  },
+  {
+   "ActivityID": 100006,
+   "ActivityName": "WATER ACTIVITIES",
+   "FacilityActivityDescription": "Water Activities",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10300216"
+  }
+ ],
+ "CAMPSITE": [],
+ "EVENT": [],
+ "Enabled": true,
+ "FACILITYADDRESS": [
+  {
+   "AddressCountryCode": "",
+   "AddressStateCode": "NV",
+   "City": "Zephyr Cove",
+   "FacilityAddressID": "103002160",
+   "FacilityAddressType": "Mailing",
+   "FacilityID": "10300216",
+   "FacilityStreetAddress1": "760 U.S. Hwy 50",
+   "FacilityStreetAddress2": "",
+   "FacilityStreetAddress3": "",
+   "LastUpdatedDate": "2026-05-13",
+   "PostalCode": "89448"
+  },
+  {
+   "AddressCountryCode": "",
+   "AddressStateCode": "NV",
+   "City": "Zephyr Cove",
+   "FacilityAddressID": "103002161000",
+   "FacilityAddressType": "Physical",
+   "FacilityID": "10300216",
+   "FacilityStreetAddress1": "760 U.S. Hwy 50",
+   "FacilityStreetAddress2": "",
+   "FacilityStreetAddress3": "",
+   "LastUpdatedDate": "2026-05-13",
+   "PostalCode": "89448"
+  }
+ ],
+ "FacilityAccessibilityText": "",
+ "FacilityAdaAccess": "",
+ "FacilityDescription": "<h2>Overview</h2>\n<p>Lake Tahoe is one of the most stunning destinations on the planet, making it a top choice for outdoor enthusiasts who enjoy RV cruising and camping. Zephyr Cove Resort's award-winning RV Park & Campground provides the perfect balance of modern amenities and the peaceful charm of a beautiful wooded setting.</p>\n<p>A major advantage of staying at Zephyr Cove Resort's RV Park & Campground is its prime location on the southeast shore of Lake Tahoe, just a short stroll from the Zephyr Cove Restaurant, beach access, the M.S. Dixie II paddlewheeler, marina activities, horseback riding, and a general store.</p>\n<h2>Recreation</h2>\n<ul><li><p>Beach Activities - The mile-long sandy beach at Zephyr Cove Resort provides endless opportunities for fun in the sun.</p></li><li><p>Watercraft Rentals - We're here to help you find the perfect water toys, from ski boats to paddleboats, all available right on the shores of Zephyr Cove Resort.</p></li><li><p>Horseback Riding - At South Lake Tahoe, all trails lead to fun! Zephyr Cove Resort Stables guided horseback trail rides are a great way to experience the area’s serenity and beauty in summer.</p></li><li><p><a href=\"https://tahoeboatinspections.com/tahoe-keepers/\" rel=\"nofollow\">Non-Motorized/Tahoe Keepers | Tahoe Boat Inspections </a></p></li></ul><h2>Facilities</h2>\n<p>Zephyr Cove RV & Campground features 92 RV sites, 47 walk-in campsites, and10 drive-in campsites, all nestled beneath the shade of pine trees at scenic Lake Tahoe.</p><p><a href=\"https://bearwise.org/keep-bears-out/scare-the-bear/\" rel=\"nofollow\">when and how to safely haze a bear</a></p><p><a href=\"https://bearwise.org/bear-safety-tips/vacation-rental-bear-safety/\" rel=\"nofollow\">Your Vacation Rental and Bears- follow rules/secure food</a></p><h2>Natural Features</h2>\n<p>A major advantage of staying at Zephyr Cove Resort's RV Park & Campground is its prime location on the southeast shore of Lake Tahoe, just a short stroll from the Zephyr Cove Restaurant, beach access, the M.S. Dixie II paddlewheeler, marina activities, horseback riding, and a general store.</p>\n\n<h2>Nearby Attractions</h2>\n<p><strong>Year-Round Attractions</strong></p>\n<ul>\n<li>M.S. Dixie II Cruises - The award-winning M.S. Dixie II, South Lake Tahoe's largest cruising vessel, departs from Zephyr Cove Resort & Marina and offers daytime cruises, dinner cruises, and private charters.</li>\n<li>Zephyr Cove Marina - </li>\n<li>Zephur Cove Restaurant - Open year-round, Zephyr Cove Restaurant serves an array of American favorites for breakfast, lunch, and dinner, and features a full bar offering beer, wine, and cocktails throughout the day and evening.</li>\n<li>Lake Tahoe Adventures - Lake Tahoe Adventures offers year-round experiences, from exhilarating ATV and RZR tours through the backcountry during the summer to thrilling snowmobile tours in the winter, all designed to immerse you in the beauty of nature and awaken your adventurous spirit.</li>\n<li>Casinos - Located in Stateline, NV are a multitude of casinos featuring live entertainment, special events, and nightlife.</li>\n</ul>\n<p><strong>Winter Attractions</strong></p>\n<ul>\n<li>Zephyr Cove Snowmobiles - With a fleet of more than 100 snowmobiles, clothing rentals, and private group tours, Zephyr Cove Snowmobiles are Lake Tahoe's top snowmobile destination.</li>\n<li>Adventure Mountain - With a base elevation of 7,400 feet, Adventure Mountain is the highest tubing destination with the most amount of snowfall and the largest area of tubing terrain in the entire Tahoe Basin.</li>\n</ul>\n<h2>Charges & Cancellations</h2>\n<p>Cancellations and changes made outside 48 hours from check-in will be charged a $20.00 fee. Cancellations and changes made inside the 48 hours will be charged the first night room deposit. </p>\n",
+ "FacilityDirections": "<p><strong>From Reno Airport</strong></p>\n<ul>\n<li>U.S. 395 S/Interstate 580 S ramp to Carson City</li>\n<li>Merge onto I-580 S/US-395 S</li>\n<li>Continue onto US-50 W/Hwy 50</li>\n<li>Destination will be on the left</li>\n</ul>\n<p><strong>From Sacramento</strong></p>\n<ul>\n<li>CA-99 S/US-50 E</li>\n<li>Follow US-50 E to Pioneer Trail in El Dorado County (94.7 mi)</li>\n<li>Turn right on Pioneer Trail</li>\n<li>Drive to Hew 50 in Zephyr Cove</li>\n<li>Turn Right onto Lake Tahoe Blvd</li>\n<li>Continue onto Hwy 50</li>\n<li>Destination with be on the right</li>\n</ul>\n",
+ "FacilityEmail": "ZephyrCove-CustomerService@Aramark.com",
+ "FacilityID": "10300216",
+ "FacilityLatitude": 39.005593,
+ "FacilityLongitude": -119.945821,
+ "FacilityMapURL": "",
+ "FacilityName": "Zephyr Cove RV & Campground",
+ "FacilityPhone": "17755894906",
+ "FacilityReservationURL": "",
+ "FacilityTypeDescription": "Campground",
+ "FacilityUseFeeDescription": "\n",
+ "GEOJSON": {
+  "COORDINATES": [
+   -119.945821,
+   39.005593
+  ],
+  "TYPE": "Point"
+ },
+ "Keywords": "N/A",
+ "LINK": [
+  {
+   "Description": "Get 20% off Dixie Cruises",
+   "EntityID": "10300216",
+   "EntityLinkID": "r1scgle5bda530-9c36-45ea-8b63-42d4eeb9ea95",
+   "EntityType": "Facility",
+   "LinkType": "Other",
+   "Title": "Get 20% off Dixie Cruises",
+   "URL": "https://bit.ly/3R6vuVa"
+  },
+  {
+   "Description": "Leave No Trace & Zephyr Cove",
+   "EntityID": "10300216",
+   "EntityLinkID": "r1scglcd8ae385-6b79-44b4-b58b-1270d2047e38",
+   "EntityType": "Facility",
+   "LinkType": "Other",
+   "Title": "Leave No Trace & Zephyr Cove",
+   "URL": "https://www.zephyrcove.com/plan/environmental-sustainability/leave-no-trace"
+  }
+ ],
+ "LastUpdatedDate": "2026-05-13",
+ "LegacyFacilityID": "10300216",
+ "MEDIA": [
+  {
+   "Credits": "Aramark Destinations",
+   "Description": "A serene picnic area with tall pine trees and boulders, featuring picnic tables and a grill, under clear skies.",
+   "EmbedCode": "",
+   "EntityID": "10300216",
+   "EntityMediaID": "41784afb-de00-4a68-9497-d18b859916dd",
+   "EntityType": "Facility",
+   "Height": 525,
+   "IsGallery": false,
+   "IsPreview": true,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "Overview of Zephyr Cove RV and Campsite",
+   "URL": "https://cdn.recreation.gov/public/2024/10/23/18/50/10300216_2ea05289-7954-40d2-b923-5634c64458d2_700.webp",
+   "Width": 700
+  },
+  {
+   "Credits": "Aramark Destinations",
+   "Description": "Campgrounds are within walking distance of the Zephyr Cove Marina.",
+   "EmbedCode": "",
+   "EntityID": "10300216",
+   "EntityMediaID": "75509bb7-1f33-450e-9d98-545b3d8c3abd",
+   "EntityType": "Facility",
+   "Height": 810,
+   "IsGallery": false,
+   "IsPreview": false,
+   "IsPrimary": true,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "View of Zephyr Cove from the Lake",
+   "URL": "https://cdn.recreation.gov/public/2025/04/14/15/31/10300216_3b9ef0c2-af48-48c2-b0a1-72597ef26d4e_1440.webp",
+   "Width": 1440
+  },
+  {
+   "Credits": "Aramark Destinations",
+   "Description": "Scenic view of a campground in a forested area with several parked RVs and scattered picnic tables among tall pine trees, with sunlight filtering through the branches.",
+   "EmbedCode": "",
+   "EntityID": "10300216",
+   "EntityMediaID": "338fda67-a63c-43ed-9e09-85ac233f4a69",
+   "EntityType": "Facility",
+   "Height": 525,
+   "IsGallery": true,
+   "IsPreview": false,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "Zephyr Cove RV and Campsite overview",
+   "URL": "https://cdn.recreation.gov/public/2024/10/23/18/52/10300216_9365e67e-0b4c-4b4c-b7d6-24f0bb25d00a_700.webp",
+   "Width": 700
+  }
+ ],
+ "ORGANIZATION": [
+  {
+   "LastUpdatedDate": "2018-06-26",
+   "OrgAbbrevName": "FS",
+   "OrgID": "131",
+   "OrgImageURL": "fs.jpg",
+   "OrgJurisdictionType": "State",
+   "OrgName": "USDA Forest Service",
+   "OrgParentID": "163",
+   "OrgType": "Federal Agency",
+   "OrgURLAddress": "http://www.fs.fed.us",
+   "OrgURLText": ""
+  }
+ ],
+ "OrgFacilityID": "",
+ "PERMITENTRANCE": [],
+ "ParentOrgID": "131",
+ "ParentRecAreaID": "2025",
+ "RECAREA": [
+  {
+   "RecAreaID": "2025",
+   "RecAreaName": "Lake Tahoe Basin Management Unit",
+   "ResourceLink": "http://localhost:3000/api/v1/recareas/2025"
+  }
+ ],
+ "Reservable": true,
+ "StayLimit": "",
+ "TOUR": []
+}

@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"strings"
 	"time"
 
 	"github.com/kkweon/camply/internal/core"
+	"github.com/kkweon/camply/internal/logger"
 )
 
 const (
@@ -97,7 +99,7 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 
 		fmt.Printf("🏕  Fetched metadata for %s (#%s) - %d total campsites\n", facilityName, campgroundID, len(metadata))
 
-		facility := core.Facility{ID: campgroundID, Name: facilityName}
+		facility := p.describeFacility(ctx, campgroundID, facilityName)
 
 		// 2. Fetch Availabilities
 		for _, month := range months {
@@ -200,6 +202,77 @@ type ridbFacilitiesResponse struct {
 	} `json:"METADATA"`
 }
 
+// ridbFacilityResponse is RIDB's single-facility record. Unlike /facilities it
+// returns the object itself rather than a RECDATA envelope.
+type ridbFacilityResponse struct {
+	FacilityID      string `json:"FacilityID"`
+	FacilityName    string `json:"FacilityName"`
+	ParentRecAreaID string `json:"ParentRecAreaID"`
+	RecArea         []struct {
+		RecAreaID   string `json:"RecAreaID"`
+		RecAreaName string `json:"RecAreaName"`
+	} `json:"RECAREA"`
+	Address []struct {
+		City             string `json:"City"`
+		AddressStateCode string `json:"AddressStateCode"`
+	} `json:"FACILITYADDRESS"`
+}
+
+// describeFacility resolves where a campground actually is.
+//
+// The campsite search the availability path already fetches carries only
+// asset_id and asset_name -- no recreation area, no address -- so this is a
+// second request, to RIDB, and it is the only place the answer exists. Skipping
+// it is what left every recreation.gov alert titled with a bare campground name
+// and a leading empty field.
+//
+// It degrades instead of failing. An alert that names the campground is still
+// worth sending, and a search that did find availability must not be discarded
+// because a lookup that only improves the wording went unanswered.
+func (p *Provider) describeFacility(ctx context.Context, campgroundID, name string) core.Facility {
+	facility := core.Facility{ID: campgroundID, Name: name}
+
+	var resp ridbFacilityResponse
+	urlStr := fmt.Sprintf("%s/facilities/%s?full=true", p.ridbBaseURL, url.PathEscape(campgroundID))
+	if err := p.getJSON(ctx, urlStr, ridbHeaders, &resp); err != nil {
+		logger.Debug("could not resolve where campground %s is: %v", campgroundID, err)
+		return facility
+	}
+
+	// The nested RECAREA is the authority; ParentRecAreaID is the id alone, and
+	// is all some facilities carry. Neither is invented when both are absent --
+	// a blank field is a fact about the provider, and the notification says so.
+	facility.RecreationAreaID = resp.ParentRecAreaID
+	if len(resp.RecArea) > 0 {
+		facility.RecreationArea = resp.RecArea[0].RecAreaName
+		facility.RecreationAreaID = resp.RecArea[0].RecAreaID
+	}
+
+	// RIDB repeats the address once per type (physical, mailing). They agree on
+	// the town for every campground in the corpus, so the first usable one wins.
+	for _, a := range resp.Address {
+		if loc := joinLocation(a.City, a.AddressStateCode); loc != "" {
+			facility.Location = loc
+			break
+		}
+	}
+
+	return facility
+}
+
+// joinLocation renders a town as "City, ST", dropping whichever half is missing.
+func joinLocation(city, state string) string {
+	city, state = strings.TrimSpace(city), strings.TrimSpace(state)
+	switch {
+	case city != "" && state != "":
+		return city + ", " + state
+	case city != "":
+		return city
+	default:
+		return state
+	}
+}
+
 func (p *Provider) FindCampgrounds(ctx context.Context, req core.SearchRequest) ([]core.CampgroundFacility, error) {
 	var facilities []core.CampgroundFacility
 
@@ -245,8 +318,15 @@ func (p *Provider) FindCampgrounds(ctx context.Context, req core.SearchRequest) 
 				continue
 			}
 
-			// Some campgrounds are in Rec Areas, some are independent (National Parks)
-			recAreaName := "National Park"
+			// Some campgrounds sit in a recreation area and some report none.
+			// The blank stays blank. This branch used to guess "National Park",
+			// and in a 475-campground sample of RIDB the three facilities that
+			// reach it -- Joe T. Fallini Recreation Site, Sawtooth Canyon
+			// Campground, LOON LAKE RECREATION SITE -- are BLM and national
+			// forest land, so the guess was wrong every time it fired.
+			// describeFacility decides this the same way, and the two paths
+			// must not describe one campground differently.
+			recAreaName := ""
 			recAreaID := data.ParentRecAreaID
 			if len(data.RecArea) > 0 {
 				recAreaName = data.RecArea[0].RecAreaName

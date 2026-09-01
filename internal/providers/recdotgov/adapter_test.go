@@ -388,7 +388,7 @@ func TestCompoundTypesFeedEveryAxis(t *testing.T) {
 // point: it turns a silent decay into a build failure at the moment the new
 // vocabulary enters the repository.
 func TestCorpusIsFullyRecognised(t *testing.T) {
-	dirs, err := filepath.Glob(filepath.Join("testdata", "golden", "*"))
+	dirs, err := filepath.Glob(filepath.Join("testdata", "input", "*"))
 	if err != nil || len(dirs) == 0 {
 		t.Fatalf("no fixture corpus found: %v", err)
 	}

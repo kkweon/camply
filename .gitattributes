@@ -1,0 +1,5 @@
+# The golden tests compare byte for byte against files generated with "\n".
+# Without this, a Windows checkout rewrites testdata to CRLF and every one of
+# them fails locally while CI stays green — a failure that says nothing about
+# the code. Keep the working tree as the tests write it.
+* text=auto eol=lf

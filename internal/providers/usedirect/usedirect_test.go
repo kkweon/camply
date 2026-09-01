@@ -16,31 +16,31 @@ func TestProvider_FindCampsites_WithEquipmentAndURL(t *testing.T) {
 	// Arrange: Create a mock HTTP server to return our testdata
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if strings.Contains(r.URL.Path, "search/filters") {
-			data, _ := os.ReadFile("testdata/filters.json")
+			data, _ := os.ReadFile("testdata/input/filters.json")
 			w.WriteHeader(http.StatusOK)
 			_, _ = w.Write(data)
 			return
 		}
 		if strings.Contains(r.URL.Path, "fd/facilities") {
-			data, _ := os.ReadFile("testdata/facilities.json")
+			data, _ := os.ReadFile("testdata/input/facilities.json")
 			w.WriteHeader(http.StatusOK)
 			_, _ = w.Write(data)
 			return
 		}
 		if strings.Contains(r.URL.Path, "fd/places") {
-			data, _ := os.ReadFile("testdata/places.json")
+			data, _ := os.ReadFile("testdata/input/places.json")
 			w.WriteHeader(http.StatusOK)
 			_, _ = w.Write(data)
 			return
 		}
 		if strings.Contains(r.URL.Path, "search/grid") {
-			data, _ := os.ReadFile("testdata/grid.json")
+			data, _ := os.ReadFile("testdata/input/grid.json")
 			w.WriteHeader(http.StatusOK)
 			_, _ = w.Write(data)
 			return
 		}
 		if strings.Contains(r.URL.Path, "search/details") {
-			data, _ := os.ReadFile("testdata/details.json")
+			data, _ := os.ReadFile("testdata/input/details.json")
 			w.WriteHeader(http.StatusOK)
 			_, _ = w.Write(data)
 			return
@@ -102,11 +102,11 @@ func newTestProvider(t *testing.T) (*Provider, func()) {
 	t.Helper()
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		for path, file := range map[string]string{
-			"search/filters": "testdata/filters.json",
-			"fd/facilities":  "testdata/facilities.json",
-			"fd/places":      "testdata/places.json",
-			"search/grid":    "testdata/grid.json",
-			"search/details": "testdata/details.json",
+			"search/filters": "testdata/input/filters.json",
+			"fd/facilities":  "testdata/input/facilities.json",
+			"fd/places":      "testdata/input/places.json",
+			"search/grid":    "testdata/input/grid.json",
+			"search/details": "testdata/input/details.json",
 		} {
 			if strings.Contains(r.URL.Path, path) {
 				data, _ := os.ReadFile(file)

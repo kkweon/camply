@@ -30,6 +30,7 @@ func getExampleCampsite() core.Availability {
 				Name:             "Test Campground",
 				RecreationArea:   "Test Recreation Area",
 				RecreationAreaID: "20",
+				Location:         "Test Town, CA",
 			},
 			// Deliberately a walk-in example: test-notifications is what proves
 			// the warning path renders, and a drive-in sample would exercise the
@@ -54,7 +55,20 @@ func getExampleCampsite() core.Availability {
 // by what the reader decides with it: warnings first, then when and what the
 // site is, then the booking URL, then the spec lines, debug ids last.
 func formatMessage(a core.Availability) (string, string) {
-	title := fmt.Sprintf("%s | %s | %s", a.Site.Facility.RecreationArea, a.Site.Facility.Name, a.Start.Format("2006-01-02"))
+	// Joined from the parts that exist, never formatted positionally: a
+	// provider that reports no recreation area used to produce a title opening
+	// on an empty field and a bare pipe.
+	var parts []string
+	for _, part := range []string{
+		a.Site.Facility.RecreationArea,
+		a.Site.Facility.Name,
+		a.Start.Format("2006-01-02"),
+	} {
+		if part != "" {
+			parts = append(parts, part)
+		}
+	}
+	title := strings.Join(parts, " | ")
 	// The title leads, and on a phone it is often all that is read before the
 	// booking link is tapped. Everything about this site that needs checking
 	// says so there, not only in the body.
@@ -101,15 +115,22 @@ func warningBlock(a core.Availability) []string {
 	return lines
 }
 
-// summaryLines is the when-and-what block: dates, the site itself, and what it
-// takes — the facts a camper scans before deciding the URL is worth tapping.
+// summaryLines is the where-when-and-what block: the town, the dates, the site
+// itself, and what it takes — the facts a camper scans before deciding the URL
+// is worth tapping.
 func summaryLines(a core.Availability) []string {
 	nights := "nights"
 	if a.Nights == 1 {
 		nights = "night"
 	}
-	lines := []string{fmt.Sprintf("📅 %s → %s · %d %s",
-		a.Start.Format("2006-01-02"), a.End.Format("2006-01-02"), a.Nights, nights)}
+	var lines []string
+	// Where, before when. The title names the campground, and a reader watching
+	// a dozen of them does not carry a map of which town each sits in.
+	if loc := a.Site.Facility.Location; loc != "" {
+		lines = append(lines, "📍 "+loc)
+	}
+	lines = append(lines, fmt.Sprintf("📅 %s → %s · %d %s",
+		a.Start.Format("2006-01-02"), a.End.Format("2006-01-02"), a.Nights, nights))
 
 	site := "🏕️ Site " + a.Site.Name
 	if a.Site.Loop != "" {

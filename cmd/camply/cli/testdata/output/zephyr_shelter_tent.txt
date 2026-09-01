@@ -6,119 +6,119 @@ $ camply recdotgov campsites --campgrounds 10300216 --shelter tent --date-ranges
 [TIME] INFO     3 of the 15 campsites searched need a walk from the car. --parking at-site would exclude them; any that reach the results are flagged ⚠️.
 [TIME] INFO     Found 61 Campsites
 [TIME] INFO     📅 Fri, September 04 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Fri, September 11 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Fri, September 18 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Fri, September 25 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Mon, September 07 🏕  2 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 2 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 2 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Mon, September 14 🏕  3 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Mon, September 21 🏕  2 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 2 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 2 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Mon, September 28 🏕  3 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Sat, September 05 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Sat, September 12 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Sat, September 19 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Sat, September 26 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Sun, September 13 🏕  3 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Sun, September 20 🏕  2 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 2 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 2 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Sun, September 27 🏕  3 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Thu, September 03 🏕  3 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Thu, September 10 🏕  3 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Thu, September 17 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 1 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Thu, September 24 🏕  3 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Tue, September 01 🏕  3 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Tue, September 08 🏕  2 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 2 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 2 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Tue, September 15 🏕  3 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Tue, September 22 🏕  2 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 2 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 2 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Tue, September 29 🏕  3 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Wed, September 02 🏕  3 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Wed, September 09 🏕  3 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Wed, September 16 🏕  3 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     📅 Wed, September 23 🏕  3 sites
-[TIME] INFO     	⛰️    🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Zephyr Cove RV & Campground: ⛺ 3 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300320 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300323 (1 night) ⚠️ HIKE-IN
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10300345 (1 night) ⚠️ HIKE-IN

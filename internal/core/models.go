@@ -3,11 +3,18 @@ package core
 import "time"
 
 // Facility is the campground a site belongs to.
+//
+// Name alone does not locate a campground. A reader who is watching a dozen of
+// them cannot place "KIRK CREEK CAMPGROUND" from the name, so the recreation
+// area and the town it sits in travel with it and are what the alert leads on.
 type Facility struct {
 	ID               string
 	Name             string
 	RecreationArea   string
 	RecreationAreaID string
+	// Location is the campground's town as the provider gives it, e.g.
+	// "Zephyr Cove, NV". Empty when the provider does not report one.
+	Location string
 }
 
 // Site is everything true of a campsite regardless of when you book it.

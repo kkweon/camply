@@ -1,7 +1,8 @@
 ### the reported incident: hike-in, no vehicle access
-TITLE: ⚠️ HIKE-IN | Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
+TITLE: ⚠️ HIKE-IN | Lake Tahoe Basin Management Unit | Zephyr Cove RV & Campground | 2026-09-04
 ⚠️ HIKE-IN — no vehicle access (Max Vehicles: 0)
 
+📍 Zephyr Cove, NV
 📅 2026-09-04 → 2026-09-06 · 2 nights
 🏕️ Site 36 · Loop 4 · 1–6 people
 ⛺ TENT ONLY NONELECTRIC · accepts: tent
@@ -11,9 +12,10 @@ TITLE: ⚠️ HIKE-IN | Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
 <b>Equipment:</b> Tent, Small Tent
 <b>Hookups:</b> electric no · (others not reported)
 
-<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 20</i>
+<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 2025</i>
 ### drive-in RV site with hookups
-TITLE: Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
+TITLE: Lake Tahoe Basin Management Unit | Zephyr Cove RV & Campground | 2026-09-04
+📍 Zephyr Cove, NV
 📅 2026-09-04 → 2026-09-06 · 2 nights
 🏕️ Site 36 · Loop 4 · 1–6 people · Drive-In (Max Vehicles: 2)
 ⛺ TENT ONLY NONELECTRIC · accepts: tent, RV
@@ -23,11 +25,12 @@ TITLE: Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
 <b>Equipment:</b> Tent, RV (max 30ft)
 <b>Hookups:</b> electric 50A · water at site · sewer no
 
-<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 20</i>
+<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 2025</i>
 ### access unknown
-TITLE: ⚠️ UNKNOWN ACCESS | Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
+TITLE: ⚠️ UNKNOWN ACCESS | Lake Tahoe Basin Management Unit | Zephyr Cove RV & Campground | 2026-09-04
 ⚠️ UNKNOWN — the provider reports no vehicle access data; verify on the booking page before reserving
 
+📍 Zephyr Cove, NV
 📅 2026-09-04 → 2026-09-06 · 2 nights
 🏕️ Site 36 · Loop 4 · 1–6 people
 ⛺ TENT ONLY NONELECTRIC · accepts: ⚠️ UNKNOWN — the provider does not say what this site accepts
@@ -37,72 +40,77 @@ TITLE: ⚠️ UNKNOWN ACCESS | Lake Tahoe | Zephyr Cove RV & Campground | 2026-0
 <b>Equipment:</b> Not reported
 <b>Hookups:</b> not reported
 
-<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 20</i>
+<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 2025</i>
 ### walk-in tent site with a shared tap and a recorded distance
-TITLE: ⚠️ WALK-IN | Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
-⚠️ WALK-IN — no vehicle access, 39ft from parking
+TITLE: ⚠️ WALK-IN | Lake Tahoe Basin Management Unit | Zephyr Cove RV & Campground | 2026-09-04
+⚠️ WALK-IN — no vehicle access, 39ft from parking (Max Vehicles: 0)
 
+📍 Zephyr Cove, NV
 📅 2026-09-04 → 2026-09-06 · 2 nights
 🏕️ Site 36 · Loop 4 · 1–6 people
 ⛺ TENT ONLY NONELECTRIC · accepts: tent
 
 👉 https://www.recreation.gov/camping/campsites/10300345
 
-<b>Equipment:</b> Not reported
-<b>Hookups:</b> water shared source · (others not reported)
+<b>Equipment:</b> Tent, Small Tent
+<b>Hookups:</b> electric no · water shared source · (others not reported)
 
-<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 20</i>
+<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 2025</i>
 ### boat-in
-TITLE: ⚠️ BOAT-IN | Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
-⚠️ BOAT-IN — no vehicle access
+TITLE: ⚠️ BOAT-IN | Lake Tahoe Basin Management Unit | Zephyr Cove RV & Campground | 2026-09-04
+⚠️ BOAT-IN — no vehicle access (Max Vehicles: 0)
 
+📍 Zephyr Cove, NV
 📅 2026-09-04 → 2026-09-06 · 2 nights
 🏕️ Site 36 · Loop 4 · 1–6 people
-⛺ TENT ONLY NONELECTRIC · accepts: ⚠️ UNKNOWN — the provider does not say what this site accepts
+⛺ TENT ONLY NONELECTRIC · accepts: tent
 
 👉 https://www.recreation.gov/camping/campsites/10300345
 
-<b>Equipment:</b> Not reported
-<b>Hookups:</b> not reported
+<b>Equipment:</b> Tent, Small Tent
+<b>Hookups:</b> electric no · (others not reported)
 
-<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 20</i>
+<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 2025</i>
 ### non-drivable with an unrecognised label
-TITLE: ⚠️ FERRY-IN | Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
-⚠️ FERRY-IN — no vehicle access
+TITLE: ⚠️ FERRY-IN | Lake Tahoe Basin Management Unit | Zephyr Cove RV & Campground | 2026-09-04
+⚠️ FERRY-IN — no vehicle access (Max Vehicles: 0)
 
+📍 Zephyr Cove, NV
 📅 2026-09-04 → 2026-09-06 · 2 nights
 🏕️ Site 36 · Loop 4 · 1–6 people
-⛺ TENT ONLY NONELECTRIC · accepts: ⚠️ UNKNOWN — the provider does not say what this site accepts
+⛺ TENT ONLY NONELECTRIC · accepts: tent
 
 👉 https://www.recreation.gov/camping/campsites/10300345
 
-<b>Equipment:</b> Not reported
-<b>Hookups:</b> not reported
+<b>Equipment:</b> Tent, Small Tent
+<b>Hookups:</b> electric no · (others not reported)
 
-<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 20</i>
+<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 2025</i>
 ### walk-in the user asked for
-TITLE: Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
+TITLE: Lake Tahoe Basin Management Unit | Zephyr Cove RV & Campground | 2026-09-04
+📍 Zephyr Cove, NV
 📅 2026-09-04 → 2026-09-06 · 2 nights
 🏕️ Site 36 · Loop 4 · 1–6 people · Walk-In — no vehicle access, 39ft from parking (Max Vehicles: 0)
 ⛺ TENT ONLY NONELECTRIC · accepts: tent
 
 👉 https://www.recreation.gov/camping/campsites/10300345
 
-<b>Equipment:</b> Not reported
-<b>Hookups:</b> not reported
+<b>Equipment:</b> Tent, Small Tent
+<b>Hookups:</b> electric no · (others not reported)
 
-<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 20</i>
+<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 2025</i>
 ### equipment unverified
-TITLE: ⚠️ NO EQUIPMENT DATA | Lake Tahoe | Zephyr Cove RV & Campground | 2026-09-04
+TITLE: ⚠️ NO EQUIPMENT DATA | Lake Tahoe Basin Management Unit | Zephyr Cove RV & Campground | 2026-09-04
 ⚠️ NO EQUIPMENT DATA — verify on the booking page
 
+📍 Zephyr Cove, NV
 📅 2026-09-04 → 2026-09-06 · 2 nights
 🏕️ Site 36 · Loop 4 · 1–6 people · Drive-In (Max Vehicles: 1)
-⛺ TENT ONLY NONELECTRIC · accepts: ⚠️ UNKNOWN — the provider does not say what this site accepts
+⛺ TENT ONLY NONELECTRIC · accepts: tent
 
 👉 https://www.recreation.gov/camping/campsites/10300345
 
 <b>Equipment:</b> ⚠️ UNKNOWN — the provider reports no equipment data; verify on the booking page before reserving
-<b>Hookups:</b> not reported
+<b>Hookups:</b> electric no · (others not reported)
 
-<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 20</i>
+<i>🔧 ids: campsite 10300345 · facility 10300216 · rec area 2025</i>

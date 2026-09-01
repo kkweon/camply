@@ -236,9 +236,14 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 								core.Equipment{EquipmentName: EquipmentVehicle, MaxLength: unit.VehicleLength})
 						}
 
-						var recreationAreaName string
+						// The place record carries the town as well as the
+						// name. Both travel with the facility: a reader
+						// watching several parks cannot place a campground
+						// from its name alone.
+						var recreationAreaName, recreationAreaLocation string
 						if ra, ok := p.places[placeID]; ok {
 							recreationAreaName = ra.RecreationArea
+							recreationAreaLocation = ra.RecreationAreaLocation
 						}
 
 						minOcc := 0
@@ -259,6 +264,7 @@ func (p *Provider) FindCampsites(ctx context.Context, req core.SearchRequest) ([
 									Name:             grid.Facility.FacilityName,
 									RecreationArea:   recreationAreaName,
 									RecreationAreaID: strconv.Itoa(placeID),
+									Location:         recreationAreaLocation,
 								},
 								Permits:      permits,
 								Parking:      parking,

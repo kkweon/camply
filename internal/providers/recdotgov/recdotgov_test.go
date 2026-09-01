@@ -4,58 +4,97 @@ import (
 	"context"
 	"net/http"
 	"net/http/httptest"
-	"os"
 	"testing"
 	"time"
 
 	"github.com/kkweon/camply/internal/core"
+	"github.com/kkweon/camply/internal/providers/recdotgov/recdotgovtest"
 )
 
+// TestProvider_FindCampsites runs the provider against recreation.gov's own
+// recorded bytes rather than a hand-written stand-in.
+//
+// The stand-in it replaces described a "Test Campground" with campsite ids 100
+// and 101 and two equipment entries — a shape the live API never returns. A
+// fixture that small cannot fail the way production fails, so it certified the
+// adapter without exercising it.
 func TestProvider_FindCampsites(t *testing.T) {
-	// Arrange: Create a mock HTTP server to return our testdata
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/api/search/campsites" {
-			data, _ := os.ReadFile("testdata/metadata_response.json")
-			w.WriteHeader(http.StatusOK)
-			_, _ = w.Write(data)
-			return
-		}
-		if r.URL.Path == "/api/camps/availability/campground/232447/month" {
-			data, _ := os.ReadFile("testdata/availability_response.json")
-			w.WriteHeader(http.StatusOK)
-			_, _ = w.Write(data)
-			return
-		}
-		w.WriteHeader(http.StatusNotFound)
-	}))
-	defer server.Close()
-
-	// Inject the mock URL directly into the provider (we'll modify the provider to support this)
-	p := &Provider{
-		client:      server.Client(),
-		apiScheme:   "http",
-		apiNetLoc:   server.Listener.Addr().String(),
-		apiBasePath: "api/camps/availability/campground",
-	}
+	srv := recdotgovtest.NewServer(t)
+	p := NewProviderAt("http", srv.Listener.Addr().String())
 
 	req := core.SearchRequest{
-		StartDates:  []time.Time{time.Date(2026, 6, 1, 0, 0, 0, 0, time.UTC)},
-		EndDates:    []time.Time{time.Date(2026, 6, 10, 0, 0, 0, 0, time.UTC)},
-		Campgrounds: []string{"232447"},
-		Nights:      1,
+		StartDates:  []time.Time{time.Date(2026, 9, 4, 0, 0, 0, 0, time.UTC)},
+		EndDates:    []time.Time{time.Date(2026, 9, 7, 0, 0, 0, 0, time.UTC)},
+		Campgrounds: []string{"10300216"},
+		Nights:      2,
 	}
 
-	// Act
 	results, err := p.FindCampsites(context.Background(), req)
-	// Assert
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}
+	if len(results) == 0 {
+		t.Fatal("the recording holds availability; the provider found none")
+	}
 
-	// In the mock data, there are 2 campsites total, but only 1 is available (for 2 consecutive nights)
-	// Since we requested 1 night, it should return 2 AvailableCampsite records (June 1 and June 2).
-	if len(results) != 2 {
-		t.Errorf("expected 2 available campsite records, got %d", len(results))
+	for _, a := range results {
+		if a.Site == nil {
+			t.Fatal("availability with no site")
+		}
+		if a.Site.ID == "" || a.Site.Name == "" {
+			t.Errorf("site is unidentifiable: id=%q name=%q", a.Site.ID, a.Site.Name)
+		}
+		// Nights is the length of the stay found, not the length asked for:
+		// the request is a window the provider slides a stay through. What must
+		// hold is that the dates and the count describe the same stay.
+		if a.Nights < 1 {
+			t.Errorf("campsite %s: stay of %d nights", a.Site.ID, a.Nights)
+		}
+		if want := a.Start.AddDate(0, 0, a.Nights); !a.End.Equal(want) {
+			t.Errorf("campsite %s: %d nights from %s ends %s, want %s",
+				a.Site.ID, a.Nights, a.Start.Format("2006-01-02"),
+				a.End.Format("2006-01-02"), want.Format("2006-01-02"))
+		}
+	}
+}
+
+// TestProvider_FindCampsites_IdentifiesTheCampground is the assertion the
+// notification title depends on: a camper who does not memorise campground names
+// needs to be told where the site is, and the provider is the only layer that
+// knows.
+//
+// It reads the fields off replayed output on purpose. Asserting this against a
+// literal would prove nothing, since a literal can simply declare the recreation
+// area the adapter never sets.
+func TestProvider_FindCampsites_IdentifiesTheCampground(t *testing.T) {
+	srv := recdotgovtest.NewServer(t)
+	p := NewProviderAt("http", srv.Listener.Addr().String())
+
+	results, err := p.FindCampsites(context.Background(), core.SearchRequest{
+		StartDates:  []time.Time{time.Date(2026, 9, 4, 0, 0, 0, 0, time.UTC)},
+		EndDates:    []time.Time{time.Date(2026, 9, 7, 0, 0, 0, 0, time.UTC)},
+		Campgrounds: []string{"10300216"},
+		Nights:      2,
+	})
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+	if len(results) == 0 {
+		t.Fatal("the recording holds availability; the provider found none")
+	}
+
+	for _, a := range results {
+		f := a.Site.Facility
+		if f.ID == "" || f.Name == "" {
+			t.Errorf("campground unidentified: id=%q name=%q", f.ID, f.Name)
+		}
+		if f.RecreationArea == "" {
+			t.Errorf("campsite %s reports no recreation area: a notification titled "+
+				"%q tells the reader nothing about where the site is", a.Site.ID, f.Name)
+		}
+		if f.RecreationAreaID == "" {
+			t.Errorf("campsite %s reports no recreation area id", a.Site.ID)
+		}
 	}
 }
 

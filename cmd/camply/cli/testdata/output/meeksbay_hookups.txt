@@ -6,22 +6,22 @@ $ camply recdotgov campsites --campgrounds 10220612 --shelter rv --hookups elect
 [TIME] INFO     8 campsites report no water data: Meeks Bay Resort (#10220612) 8 of 19. --hookups does not exclude them; any that reach the results are flagged ⚠️.
 [TIME] INFO     Found 6 Campsites
 [TIME] INFO     📅 Mon, September 07 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 1 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 1 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220636 (1 night)
 [TIME] INFO     📅 Sun, September 13 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 1 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 1 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220636 (1 night)
 [TIME] INFO     📅 Thu, September 10 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 1 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 1 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220636 (1 night)
 [TIME] INFO     📅 Thu, September 24 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 1 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 1 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220635 (1 night)
 [TIME] INFO     📅 Tue, September 15 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 1 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 1 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220635 (1 night)
 [TIME] INFO     📅 Wed, September 16 🏕  1 sites
-[TIME] INFO     	⛰️    🏕  Meeks Bay Resort: ⛺ 1 sites
+[TIME] INFO     	⛰️  Lake Tahoe Basin Management Unit  🏕  Meeks Bay Resort: ⛺ 1 sites
 [TIME] INFO     		🔗 https://www.recreation.gov/camping/campsites/10220638 (1 night)
 [TIME] CAMPLY   Exiting camply 👋
 

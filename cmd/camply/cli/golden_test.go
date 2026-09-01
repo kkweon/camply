@@ -3,8 +3,6 @@ package cli
 import (
 	"flag"
 	"fmt"
-	"net/http"
-	"net/http/httptest"
 	"os"
 	"path/filepath"
 	"strings"
@@ -12,69 +10,28 @@ import (
 
 	"github.com/kkweon/camply/internal/providers"
 	"github.com/kkweon/camply/internal/providers/recdotgov"
+	"github.com/kkweon/camply/internal/providers/recdotgov/recdotgovtest"
 )
 
-// updateGolden regenerates the .golden files instead of asserting against them:
+// updateOutput regenerates testdata/output instead of asserting against it:
 //
 //	go test ./cmd/camply/cli -run TestGolden -update
 //
 // Regenerate deliberately and read the diff. These files are the record of what
 // camply prints today; a refactor that changes them has changed behaviour.
-var updateGolden = flag.Bool("update", false, "rewrite testdata/golden/*.golden")
-
-// goldenFixtures maps a scenario to the recorded responses it replays. Each
-// directory holds one campground's trimmed metadata and availability, cut from
-// the live API.
-var goldenFixtures = map[string]string{
-	"10300216": "zephyr",
-	"232461":   "lodgepole",
-	"232875":   "kaspian",
-	"10220612": "meeksbay",
-}
-
-// goldenServer replays recorded recreation.gov responses.
 //
-// Routing mirrors the two endpoints the provider calls: the campsite search
-// (metadata, keyed by asset_id) and the month availability (keyed by campground
-// in the path).
-func goldenServer(t *testing.T) *httptest.Server {
-	t.Helper()
+// The two halves of this test are kept apart on purpose. testdata/output is the
+// expectation, and it moves whenever camply's behaviour moves. The inputs live
+// under internal/providers/recdotgov/testdata/input and are the live API's own
+// bytes: they move only when recreation.gov's responses move. Never edit an
+// input to make an assertion pass — that is how a fixture starts describing a
+// campground the provider cannot actually produce.
+var updateOutput = flag.Bool("update", false, "rewrite testdata/output/*.txt")
 
-	root := filepath.Join("..", "..", "..", "internal", "providers", "recdotgov", "testdata", "golden")
-	serve := func(w http.ResponseWriter, campground, file string) {
-		dir, ok := goldenFixtures[campground]
-		if !ok {
-			http.Error(w, "no fixture for campground "+campground, http.StatusNotFound)
-			return
-		}
-		data, err := os.ReadFile(filepath.Join(root, dir, file))
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		w.Header().Set("Content-Type", "application/json")
-		_, _ = w.Write(data)
-	}
-
-	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		switch {
-		case r.URL.Path == "/api/search/campsites":
-			// fq=asset_id:232461
-			fq := r.URL.Query().Get("fq")
-			serve(w, strings.TrimPrefix(fq, "asset_id:"), "metadata.json")
-		case strings.HasPrefix(r.URL.Path, "/api/camps/availability/campground/"):
-			rest := strings.TrimPrefix(r.URL.Path, "/api/camps/availability/campground/")
-			serve(w, strings.TrimSuffix(rest, "/month"), "availability.json")
-		default:
-			http.Error(w, "unexpected path "+r.URL.Path, http.StatusNotFound)
-		}
-	}))
-}
-
-// goldenRegistry is the real provider registry with recdotgov pointed at the
+// replayRegistry is the real provider registry with recdotgov pointed at the
 // fixture server, so help text, vocabularies and flag wiring are exercised
 // exactly as in production.
-func goldenRegistry(addr string) []providers.Descriptor {
+func replayRegistry(addr string) []providers.Descriptor {
 	descs := providers.Descriptors()
 	for i := range descs {
 		if descs[i].Key == providers.KeyRecDotGov {
@@ -91,9 +48,8 @@ func goldenRegistry(addr string) []providers.Descriptor {
 // files byte for byte, because its whole promise is that nothing user-visible
 // changes. A diff here is a bug, not an improvement.
 func TestGolden(t *testing.T) {
-	srv := goldenServer(t)
-	defer srv.Close()
-	registry := goldenRegistry(srv.Listener.Addr().String())
+	srv := recdotgovtest.NewServer(t)
+	registry := replayRegistry(srv.Listener.Addr().String())
 
 	cases := []struct {
 		name string
@@ -197,8 +153,8 @@ func TestGolden(t *testing.T) {
 			}
 			got := scrubTimestamps(b.String())
 
-			path := filepath.Join("testdata", "golden", tc.name+".golden")
-			if *updateGolden {
+			path := filepath.Join("testdata", "output", tc.name+".txt")
+			if *updateOutput {
 				if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
 					t.Fatal(err)
 				}

@@ -1,0 +1,363 @@
+{
+ "ACTIVITY": [
+  {
+   "ActivityID": 100036,
+   "ActivityName": "BACKPACKING",
+   "FacilityActivityDescription": "Backpacking",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 5,
+   "ActivityName": "BIKING",
+   "FacilityActivityDescription": "Biking",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 100017,
+   "ActivityName": "BIRDING",
+   "FacilityActivityDescription": "Birding",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 9,
+   "ActivityName": "CAMPING",
+   "FacilityActivityDescription": "Camping",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 100008,
+   "ActivityName": "CANOEING",
+   "FacilityActivityDescription": "Canoeing",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 100025,
+   "ActivityName": "CULTURAL ACTIVITIES",
+   "FacilityActivityDescription": "Cultural Activities",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 32,
+   "ActivityName": "DAY USE AREA",
+   "FacilityActivityDescription": "Day Use Area",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 11,
+   "ActivityName": "FISHING",
+   "FacilityActivityDescription": "Fishing",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 14,
+   "ActivityName": "HIKING",
+   "FacilityActivityDescription": "Hiking",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 40,
+   "ActivityName": "HOTEL/LODGE/RESORT FS OWNED",
+   "FacilityActivityDescription": "Hotel/Lodge/Resort Fs Owned",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 8,
+   "ActivityName": "HISTORIC & CULTURAL SITE",
+   "FacilityActivityDescription": "Historic & Cultural Site",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 100007,
+   "ActivityName": "KAYAKING",
+   "FacilityActivityDescription": "Kayaking",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 100002,
+   "ActivityName": "MOUNTAIN BIKING",
+   "FacilityActivityDescription": "Mountain Biking",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 100005,
+   "ActivityName": "PADDLE BOATING",
+   "FacilityActivityDescription": "Paddle Boating",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 106,
+   "ActivityName": "SWIMMING",
+   "FacilityActivityDescription": "Swimming",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 100006,
+   "ActivityName": "WATER ACTIVITIES",
+   "FacilityActivityDescription": "Water Activities",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 25,
+   "ActivityName": "WATER SPORTS",
+   "FacilityActivityDescription": "Water Sports",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 28,
+   "ActivityName": "WILDERNESS",
+   "FacilityActivityDescription": "Wilderness",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 104,
+   "ActivityName": "PHOTOGRAPHY",
+   "FacilityActivityDescription": "Photography",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 20,
+   "ActivityName": "PICNICKING",
+   "FacilityActivityDescription": "Picnicking",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 108,
+   "ActivityName": "SNORKELING",
+   "FacilityActivityDescription": "Snorkeling",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  },
+  {
+   "ActivityID": 100015,
+   "ActivityName": "STAR GAZING",
+   "FacilityActivityDescription": "Star Gazing",
+   "FacilityActivityFeeDescription": "",
+   "FacilityID": "10220612"
+  }
+ ],
+ "CAMPSITE": [],
+ "EVENT": [],
+ "Enabled": true,
+ "FACILITYADDRESS": [
+  {
+   "AddressCountryCode": "",
+   "AddressStateCode": "CA",
+   "City": "Tahoma",
+   "FacilityAddressID": "102206120",
+   "FacilityAddressType": "Mailing",
+   "FacilityID": "10220612",
+   "FacilityStreetAddress1": "7941 Highway 89",
+   "FacilityStreetAddress2": "",
+   "FacilityStreetAddress3": "",
+   "LastUpdatedDate": "2026-07-14",
+   "PostalCode": "96142"
+  },
+  {
+   "AddressCountryCode": "",
+   "AddressStateCode": "CA",
+   "City": "Tahoma",
+   "FacilityAddressID": "102206121000",
+   "FacilityAddressType": "Physical",
+   "FacilityID": "10220612",
+   "FacilityStreetAddress1": "7941 Highway 89",
+   "FacilityStreetAddress2": "",
+   "FacilityStreetAddress3": "",
+   "LastUpdatedDate": "2026-07-14",
+   "PostalCode": "96142"
+  }
+ ],
+ "FacilityAccessibilityText": "",
+ "FacilityAdaAccess": "",
+ "FacilityDescription": "<h2>Overview</h2>\n<p><strong>NO PETS ARE ALLOWED ANYWHERE AT THE RESORT!</strong></p>\n<p>Meeks Bay Resort has a long tradition as a family vacation and holiday retreat. It is located on western shore of the famed Lake Tahoe (Da ow aga), far away from the hustle and bustle of city life. The Washoe Tribe has been a part of the Meeks Bay area of Lake Tahoe (Da ow aga) for many millenium. Their link to the land is an important part of the Meeks Bay Resort charm.  It is the perfect spot to recharge those drained reserves and immerse oneself in the spectacular rustic environment.   </p>\n<p>Enjoy the sandy Meeks Bay beach, or rent a kayak or paddle board and venture out onto blue waters. Explore the hiking trails that lead both north and south along the lake as well as the Meeks Bay Trail which climbs into the Sierra Nevada Desolation Wilderness Area to Phipps Pass and beyond.  For more details download the document  available from the US Forestry Service.  </p>\n<p>The Resort has abundant Day-Use parking and a grill for the hungry camper.  Stop by the main building for supplies, toys and clothes, and perhaps a chat with one of the Washoe Tribe members. </p>\n<p>The resort offers all levels of vacation facilities from the historic Kehlet Mansion and the Washoe House, several cabins and lodges, full hookup RV spots, and standard tent campsites.  Many couples have begun their wedded life together and families regularly hold their reunions at the Resort.  Group reservations can be made on Recreation.gov or by phone to the call center.  </p>\n<p><strong>Meeks Bay Campground is now an integral part of the Meeks Bay Resort. </strong></p>\n<p><strong>NO PETS ARE ALLOWED ANYWHERE AT THE RESORT!</strong></p>\n<h2>Recreation</h2>\n<p>When most people imagine what to do at Lake Tahoe, they think outdoor activities. Enthusiasts will find hundreds of miles of trails to hike, bike, and ride horseback. The Meeks Bay Resort provides sunbathing, beach play, swimming, and scuba diving.  </p>\n<p>Kayak and paddle boards can be rented onsite.  While motorized craft are not allowed in the bay, boating and water skiing are readily accessible elsewhere on Lake Tahoe. </p>\n<p>Anglers can land the big one at dozens of spots. Kokanee salmon and mackinaw, rainbow, Lahontan Cutthroat and brown trout are found throughout the area.  The Washoe Tribe has actively helped improve the population of the Lahontan Cutthroat Trout (Ɂímgi).  </p>\n<h2>Facilities</h2>\n<p><strong>Lodging:</strong></p><p>    The Kehlet Mansion provides seven bedrooms, three bathrooms and a full size kitchen. Enjoy the private deck, picture windows, and a full event area for weddings, reunions and special events.</p><p>    The Washoe House, also known as the Point House, offers three bedrooms, one bathroom, and a separate studio cabin. Located on the south shore of the bay, it offers unmatched privacy.</p><p>    12 Lodges with studio, one and two bedroom floorplans. All units have kitchens with utensils and cookware.</p><p>    7 standalone cabins with studio, one and two bedroom floorplans. All cabins have kitchens stocked with utensils and cookware. </p><p><strong>Camping:</strong></p><p>    14 Non-electric campsites for tents and small pop-up trailers found north of Meeks Creek.</p><p>     40 Non-electric campsites for tents and small pop-up trailers on the southern side of the Meeks Creek.</p><p>    23 RV sites with full hookups north on the northern side of Meeks Creek. Several are pull through and can accommodate up to 60 feet of tow vehicle and RV.  </p><p><strong>Food and shopping:</strong></p><p>    The Wa She Shu Grill offers a great selection of lunch meals and snacks from 11:00am to 3:30pm daily.</p><p>    The General Store offers an assortment of clothing, souvenirs, firewood, ice, snacks, beverages, coffee, ice cream and sundries. It is open every day from 8:00am to 8:00pm.</p><p><strong>Other offerings:</strong></p><p>    Kayaks and paddle boards are available for hourly, half day and full day rental.</p><p>    Hot private shower facilities are available with purchase of tokens from the general store.</p><p>    Several public restrooms with flush toilets are available.</p><h2>Natural Features</h2>\n<p>Meeks Bay (mayála wáťa) is located on the west shore of Lake Tahoe at a 6,225-foot elevation and is surrounded by many of Lake Tahoe’s most famous attractions. You won’t need to go far to experience the iconic views that travelers come from around the world to see. The abundant natural features include snow covered peaks of the Sierra Nevada, forested mountainsides, green meadows, miles of pristine shoreline, and impressive granite boulders. The azure lake is rimmed by footpaths, hiking and biking trails. Don’t miss the spectacular views of De ek Wadapush (Cave Rock) across the lake from the beach of mayála wáťa (Meeks Bay). The more adventurous hiker can traverse the Tahoe Rim Trail which offers panoramic views of the basin. Or one can venture deep into the Desolation Wilderness to Phipps Pass from the Meeks Bay Trailhead. </p>\n\n<h2>Contact Info</h2>\nFor facility specific information, please call (530) 214-9422.\n<h2>Nearby Attractions</h2>\n<ul>\n<li> South Lake Tahoe, CA</li>\n<li> Several Casinos and shops at Stateline, NV</li>\n<li> <a href=\"https://www.laketahoe.com/top-10-tahoe-boat-tours\" rel=\"nofollow\">Boat tours</a>  of the lake </li>\n<li> Emerald Bay State Park and the Vikingsholm Castle</li>\n<li> D.L. Bliss State Park</li>\n<li> Tahoe City to the north</li>\n<li> Several Hiking Trails </li>\n</ul>\n<h2>Charges & Cancellations</h2>\n<p><strong>If I book this reservation today, what are my options to change or cancel?</strong></p>\n<p>Please remember that reservations at these facilities prevent other visitors from using these sites. Planned changes to your stay should be made as far in advance as possible. You can make changes to your reservation ahead of your arrival date in Reservations. </p>\n<p><strong>Changes</strong></p>\n<p>If your new stay dates are completely different from your original stay dates, there is a $10 change fee (per reserved site). There are no additional fees for: </p>\n<p>    Adding or removing nights to your stay.</p>\n<p>    Changing to a different campsite. </p>\n<p>Balances will adjust based on your new stay's nightly rate.</p>\n<p>Changes on or after the arrival date are made at the discretion of Resort Management and may result in forfeit of rental fees. </p>\n<p><strong>Cancellations</strong></p>\n<p>Meeks Bay Resort will require a non-refundable down payment on all lodging, RV and Tent sites.  Reservations will require a down payment equal to 50% of the full daily rental rate.  The remaining balance must be paid no later than 30 days prior to check-in. The Recreation.gov site will send the guest up to two reminder emails with links to facilitate payment. Those emails are sent seven days and 24 hours before the 30 day deadline.  Down payments are non-refundable.  </p>\n<p>If you do not complete the payment by the 30 day deadline, your reservation will be cancelled and the down payment forfeited.  </p>\n<p>If you place a reservation 30 days or less prior to check-in, you must pay the down payment and the remaining rental fee at the time of reservation.  If you cancel after that point you will be responsible for the $10 cancellation fee and forfeit the down payment.   If you cancel within 14 days of the check-in date, you will forfeit the down payment and one day at the rental rate, as well as the $10 cancellation fee.</p>\n<p>This is an automated process and Meeks Bay Resort personnel cannot make changes. </p>\n<p><strong>Late Check-in and No Show</strong></p>\n<p>Meeks Bay Resort will hold any paid reservation until the following day at check-out time.  Your reservation will be cancelled with no refund. If you have not checked in by that time or contacted Meeks Bay Resort Management to request one additional day to arrive.</p>\n",
+ "FacilityDirections": "<p>From the south, take Highway 89 north out of South Lake Tahoe. </p>\n<p>From the northeast take Highway 28 to Highway 89 south. </p>\n<p>From Truckee take Highway 89 south.</p>\n",
+ "FacilityEmail": "meeksbay.reservations@wdcwashoe.org",
+ "FacilityID": "10220612",
+ "FacilityLatitude": 39.038191,
+ "FacilityLongitude": -120.123387,
+ "FacilityMapURL": "",
+ "FacilityName": "Meeks Bay Resort",
+ "FacilityPhone": "530-525-6946",
+ "FacilityReservationURL": "",
+ "FacilityTypeDescription": "Campground",
+ "FacilityUseFeeDescription": "<p>Meeks Bay Resort will require a<strong> non-refundable down payment</strong> equal to 50% of the full daily rental rate on all lodging, RV and Tent sites.  The remaining balance must be paid by no later than 30 days prior to check-in. The Recreation.gov site will send the guest up to two reminder emails with links to facilitate payment. Those emails are sent seven days and 24 hours before the 30 day deadline.   </p>\n<p>If you do not complete the payment by the 30 day deadline, your reservation will be cancelled and the down payment forfeit.  </p>\n<p>If you place a reservation 30 days or less prior to check-in, you must pay the down payment and the remaining rental fee at the time of reservation.  If you cancel after that point you will be responsible for the $10 cancellation fee and forfeit the down payment.   If you cancel within 14 days of the check-in date, you will forfeit the down payment and one day at the rental rate, as well as the $10 cancellation fee.</p>\n<p>This is an automated process and Meeks Bay Resort personnel cannot make changes.</p>\n",
+ "GEOJSON": {
+  "COORDINATES": [
+   -120.123387,
+   39.038191
+  ],
+  "TYPE": "Point"
+ },
+ "Keywords": "",
+ "LINK": [],
+ "LastUpdatedDate": "2026-07-14",
+ "LegacyFacilityID": "10220612",
+ "MEDIA": [
+  {
+   "Credits": "Meeks Bay Resort",
+   "Description": "Washoe Summer House, \"Gadu\"",
+   "EmbedCode": "",
+   "EntityID": "10220612",
+   "EntityMediaID": "eca0dbae-66b8-46c7-ad91-b7b618dff771",
+   "EntityType": "Facility",
+   "Height": 526,
+   "IsGallery": true,
+   "IsPreview": false,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "Gadu,  Washoe Summer House",
+   "URL": "https://cdn.recreation.gov/public/2023/01/19/22/52/10220612_37dd7b20-64d8-4f65-93ea-fb17dc367c64_700.webp",
+   "Width": 700
+  },
+  {
+   "Credits": "Meeks Bay Resort",
+   "Description": "Enjoy the view of Lake Tahoe from the deck of the Lodges",
+   "EmbedCode": "",
+   "EntityID": "10220612",
+   "EntityMediaID": "93ebe18b-cef1-4202-947e-19c0719484c3",
+   "EntityType": "Facility",
+   "Height": 810,
+   "IsGallery": false,
+   "IsPreview": false,
+   "IsPrimary": true,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "View of Lake Tahoe from the Lodges",
+   "URL": "https://cdn.recreation.gov/public/2023/01/19/22/57/10220612_a82ceebe-d44f-4509-b3a5-173018010f07_1440.webp",
+   "Width": 1440
+  },
+  {
+   "Credits": "Meeks Bay Resort",
+   "Description": "You have arrived!  Meeks Bay entry sign.",
+   "EmbedCode": "",
+   "EntityID": "10220612",
+   "EntityMediaID": "1e568ff2-21a6-4830-93fe-314622edc903",
+   "EntityType": "Facility",
+   "Height": 525,
+   "IsGallery": false,
+   "IsPreview": true,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "Meeks Bay Resort Entrance Sign",
+   "URL": "https://cdn.recreation.gov/public/2023/01/19/23/00/10220612_2b6a2329-b5a9-464d-b631-dddb0e20c04a_700.webp",
+   "Width": 700
+  },
+  {
+   "Credits": "Meeks Bay Resort",
+   "Description": "A lovely view of the lake and Wa She Shu (The peoples' place) Grill. ",
+   "EmbedCode": "",
+   "EntityID": "10220612",
+   "EntityMediaID": "9127f415-be1d-4767-ba56-2bb4371390c2",
+   "EntityType": "Facility",
+   "Height": 500,
+   "IsGallery": true,
+   "IsPreview": false,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "Grill and beach view",
+   "URL": "https://cdn.recreation.gov/public/2023/01/19/23/03/10220612_2c197067-d4b9-4dd5-afb2-453dd526d5b9_700.webp",
+   "Width": 700
+  },
+  {
+   "Credits": "Meeks Bay Resort",
+   "Description": "Hot showers for our campers!",
+   "EmbedCode": "",
+   "EntityID": "10220612",
+   "EntityMediaID": "72b23e78-f82b-4615-bc3d-a8f05927b93b",
+   "EntityType": "Facility",
+   "Height": 525,
+   "IsGallery": true,
+   "IsPreview": false,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "Showers building",
+   "URL": "https://cdn.recreation.gov/public/2023/01/19/23/07/10220612_4905590c-5cfa-498a-9d68-5d7fd6216496_700.webp",
+   "Width": 700
+  },
+  {
+   "Credits": "Meeks Bay Resort",
+   "Description": "Grab a meal at the Wa She Shu Grill!",
+   "EmbedCode": "",
+   "EntityID": "10220612",
+   "EntityMediaID": "a3a36648-5d32-4a2a-b560-eddfe8c922d5",
+   "EntityType": "Facility",
+   "Height": 563,
+   "IsGallery": true,
+   "IsPreview": false,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "Wa She Shu Grill",
+   "URL": "https://cdn.recreation.gov/public/2023/01/19/23/10/10220612_be1389ff-b8d0-4fe7-86e4-e59f42aa71fd_1440.webp",
+   "Width": 1440
+  },
+  {
+   "Credits": "Meeks Bay Resort",
+   "Description": "Welcome to Meeks Bay",
+   "EmbedCode": "",
+   "EntityID": "10220612",
+   "EntityMediaID": "3f935be4-ea12-408a-a7fb-f967fa4d6194",
+   "EntityType": "Facility",
+   "Height": 525,
+   "IsGallery": true,
+   "IsPreview": false,
+   "IsPrimary": false,
+   "MediaType": "Image",
+   "Subtitle": "",
+   "Title": "Entry sign for the Meeks Bay Resort.",
+   "URL": "https://cdn.recreation.gov/public/2023/01/19/22/51/10220612_5d310eeb-9e29-48be-9909-f32687e532cc_700.webp",
+   "Width": 700
+  }
+ ],
+ "ORGANIZATION": [
+  {
+   "LastUpdatedDate": "2018-06-26",
+   "OrgAbbrevName": "FS",
+   "OrgID": "131",
+   "OrgImageURL": "fs.jpg",
+   "OrgJurisdictionType": "State",
+   "OrgName": "USDA Forest Service",
+   "OrgParentID": "163",
+   "OrgType": "Federal Agency",
+   "OrgURLAddress": "http://www.fs.fed.us",
+   "OrgURLText": ""
+  }
+ ],
+ "OrgFacilityID": "",
+ "PERMITENTRANCE": [],
+ "ParentOrgID": "131",
+ "ParentRecAreaID": "2025",
+ "RECAREA": [
+  {
+   "RecAreaID": "2025",
+   "RecAreaName": "Lake Tahoe Basin Management Unit",
+   "ResourceLink": "http://localhost:3000/api/v1/recareas/2025"
+  }
+ ],
+ "Reservable": true,
+ "StayLimit": "",
+ "TOUR": []
+}
